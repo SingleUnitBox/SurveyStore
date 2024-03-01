@@ -35,7 +35,7 @@ namespace SurveyStore.Shared.Infrastructure.Services
             {
                 foreach (var dbContextType in dbContextTypes)
                 {
-                    var dbContext = _serviceProvider.GetRequiredService(dbContextType) as DbContext;
+                    var dbContext = scope.ServiceProvider.GetService(dbContextType) as DbContext;
                     if (dbContext is null)
                     {
                         continue;

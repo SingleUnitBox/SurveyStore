@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using SurveyStore.Modules.Stores.Core;
 using SurveyStore.Shared.Infrastructure;
 
 namespace SurveyStore.Bootstrapper
@@ -11,8 +12,9 @@ namespace SurveyStore.Bootstrapper
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCore();
             services.AddInfrastructure();
-            services.AddControllers();
+            services.AddControllers();            
         }
 
         public void Configure(IApplicationBuilder app)
