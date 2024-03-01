@@ -10,6 +10,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="Humanizer" Version="2.14.1" />
+	  <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\SurveyStore.Shared.Abstractions\SurveyStore.Shared.Abstractions.csproj" />
