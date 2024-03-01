@@ -13,7 +13,7 @@ namespace SurveyStore.Bootstrapper
             services.AddControllers();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
             app.UseEndpoints(endpoints =>

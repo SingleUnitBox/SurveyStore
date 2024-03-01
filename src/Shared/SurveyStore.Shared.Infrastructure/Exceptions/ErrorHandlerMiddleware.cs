@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace SurveyStore.Shared.Infrastructure.Exceptions
 {
     internal class ErrorHandlerMiddleware : IMiddleware
     {
+        private readonly IExceptionCompositionRoot _exceptionCompositionRoot;
         private readonly ILogger<ErrorHandlerMiddleware> _logger;
 
         public ErrorHandlerMiddleware(ILogger<ErrorHandlerMiddleware> logger)
@@ -32,7 +34,15 @@ namespace SurveyStore.Shared.Infrastructure.Exceptions
 
         private async Task HandleExceptionAsync(Exception exception, HttpContext context)
         {
+            var exceptionResponse = _exceptionCompositionRoot.Map(exception);
+            context.Response.StatusCode = (int)(exceptionResponse?.StatusCode ?? HttpStatusCode.InternalServerError);
+            var response = exceptionResponse?.Response;
+            if (response is null)
+            {
+                return;
+            }
 
+            await context.Response.WriteAsJsonAsync(response);
         }
     }
 }
