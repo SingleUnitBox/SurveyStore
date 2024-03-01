@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using SurveyStore.Shared.Abstractions.Time;
 using SurveyStore.Shared.Infrastructure.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SurveyStore.Shared.Infrastructure.Time;
 
 namespace SurveyStore.Shared.Infrastructure
 {
@@ -13,6 +10,7 @@ namespace SurveyStore.Shared.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
+            services.AddSingleton<IClock, ClockUtc>();
             services.AddErrorHandling();
 
             return services;
