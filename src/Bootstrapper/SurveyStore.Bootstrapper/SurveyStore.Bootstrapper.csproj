@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Modules\Stores\SurveyStore.Modules.Stores.Api\SurveyStore.Modules.Stores.Api.csproj" />
+    <ProjectReference Include="..\..\Shared\SurveyStore.Shared.Infrastructure\SurveyStore.Shared.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

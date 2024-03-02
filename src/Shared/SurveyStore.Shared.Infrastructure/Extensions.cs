@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SurveyStore.Shared.Abstractions.Time;
+using SurveyStore.Shared.Infrastructure.Api;
 using SurveyStore.Shared.Infrastructure.Exceptions;
 using SurveyStore.Shared.Infrastructure.Services;
 using SurveyStore.Shared.Infrastructure.Time;
@@ -17,6 +18,11 @@ namespace SurveyStore.Shared.Infrastructure
             services.AddHostedService<AppInitializer>();
             services.AddSingleton<IClock, ClockUtc>();
             services.AddErrorHandling();
+            services.AddControllers()
+                .ConfigureApplicationPartManager(manager =>
+                {
+                    manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
+                });
 
             return services;
         }
@@ -24,6 +30,7 @@ namespace SurveyStore.Shared.Infrastructure
         public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
         {
             app.UseErrorHandling();
+            app.UseRouting();
 
             return app;
         }
