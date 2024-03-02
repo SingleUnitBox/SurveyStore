@@ -3,9 +3,17 @@
 namespace SurveyStore.Modules.Stores.Api.Controllers
 {
     [ApiController]
-    [Route(Path + "/[controller]")]
+    [Route(StoresModule.BasePath + "/[controller]")]
     internal class BaseController : ControllerBase
     {
-        public const string Path = "stores-module";
+        public ActionResult<TResult> OkOrNotFound<TResult>(TResult result)
+        {
+            if (result is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
     }
 }

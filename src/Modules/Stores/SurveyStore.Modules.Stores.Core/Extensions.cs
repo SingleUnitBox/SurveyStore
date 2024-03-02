@@ -2,6 +2,7 @@
 using SurveyStore.Modules.Stores.Core.DAL;
 using SurveyStore.Modules.Stores.Core.DAL.Repositories;
 using SurveyStore.Modules.Stores.Core.Repositories;
+using SurveyStore.Modules.Stores.Core.Services;
 using SurveyStore.Shared.Infrastructure.Postgres;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace SurveyStore.Modules.Stores.Core
         {
             services.AddPostgres<StoresDbContext>();
             services.AddScoped<IStoreRepository, PostgresStoreRepository>();
+            services.AddScoped<IStoreService, StoreService>();
 
             return services;
         }

@@ -2,7 +2,7 @@
 
 namespace SurveyStore.Modules.Stores.Api.Controllers
 {
-    [Route("stores-module")]
+    [Route(StoresModule.BasePath)]
     internal class HomeController : BaseController
     {
         [HttpGet]
