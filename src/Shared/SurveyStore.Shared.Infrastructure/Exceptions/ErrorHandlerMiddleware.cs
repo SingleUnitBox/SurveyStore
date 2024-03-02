@@ -14,9 +14,11 @@ namespace SurveyStore.Shared.Infrastructure.Exceptions
         private readonly IExceptionCompositionRoot _exceptionCompositionRoot;
         private readonly ILogger<ErrorHandlerMiddleware> _logger;
 
-        public ErrorHandlerMiddleware(ILogger<ErrorHandlerMiddleware> logger)
+        public ErrorHandlerMiddleware(ILogger<ErrorHandlerMiddleware> logger,
+            IExceptionCompositionRoot exceptionCompositionRoot)
         {
             _logger = logger;
+            _exceptionCompositionRoot = exceptionCompositionRoot;
         }
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)

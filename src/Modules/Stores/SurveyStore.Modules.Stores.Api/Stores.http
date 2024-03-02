@@ -1,0 +1,35 @@
+@url = http://localhost:5000/stores-module
+
+@storeId = 7f1f8601-197e-484c-9f0e-074fa689fbb7
+
+###
+GET {{url}}
+
+###
+GET {{url}}/stores
+
+###
+GET {{url}}/stores/{{storeId}}
+
+###
+POST {{url}}/stores
+Content-Type: application/json
+
+{
+    "name": "TBH",
+    "location": "Nottingham",
+    "openingTime": "2020-01-01T07:00:00",
+    "closingTime": "2020-01-01T17:00:00"
+}
+
+###
+PUT {{url}}/stores/{{storeId}}
+Content-Type: application/json
+
+{
+    "openingTime": "2020-01-01T07:00:00",
+    "closingTime": "2020-01-01T18:00:00"
+}
+
+###
+DELETE {{url}}/stores/{{storeId}}
