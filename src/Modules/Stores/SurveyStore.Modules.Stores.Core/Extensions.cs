@@ -7,6 +7,7 @@ using SurveyStore.Shared.Infrastructure.Postgres;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Stores.Tests.Unit")]
+[assembly: InternalsVisibleTo("SurveyStore.Modules.Stores.Tests.Integration")]
 namespace SurveyStore.Modules.Stores.Core
 {
     public static class Extensions

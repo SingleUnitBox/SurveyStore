@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SurveyStore.Shared.Infrastructure.Exceptions
+namespace SurveyStore.Shared.Abstractions.Exceptions
 {
     public interface IExceptionToResponseMapper
     {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using SurveyStore.Shared.Abstractions.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

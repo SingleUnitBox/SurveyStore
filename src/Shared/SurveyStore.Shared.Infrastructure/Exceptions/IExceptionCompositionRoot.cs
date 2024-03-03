@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SurveyStore.Shared.Abstractions.Exceptions;
+using System;
 
 namespace SurveyStore.Shared.Infrastructure.Exceptions
 {

@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace SurveyStore.Shared.Infrastructure.Exceptions
+namespace SurveyStore.Shared.Abstractions.Exceptions
 {
     public record ExceptionResponse(object Response, HttpStatusCode StatusCode);
 }
