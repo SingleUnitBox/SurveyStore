@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
+using SurveyStore.Shared.Infrastructure.Modules;
 
 namespace SurveyStore.Bootstrapper
 {
@@ -10,6 +11,7 @@ namespace SurveyStore.Bootstrapper
             => CreateHostBuilder(args).Build().RunAsync();
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
+                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>())
+                .ConfigureModules();
     }
 }
