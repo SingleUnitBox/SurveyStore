@@ -4,12 +4,9 @@ using SurveyStore.Modules.Stores.Core.DAL.Repositories;
 using SurveyStore.Modules.Stores.Core.Repositories;
 using SurveyStore.Modules.Stores.Core.Services;
 using SurveyStore.Shared.Infrastructure.Postgres;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("SurveyStore.Modules.Stores.Tests.Unit")]
 namespace SurveyStore.Modules.Stores.Core
 {
     public static class Extensions

@@ -36,7 +36,7 @@ namespace SurveyStore.Bootstrapper
                 var enabled = configuration.GetValue<bool>($"{moduleName}:module:enabled");
                 if (!enabled)
                 {
-                    disabledModules.Add(moduleName);
+                    disabledModules.Add(file);
                 }
             }
 
