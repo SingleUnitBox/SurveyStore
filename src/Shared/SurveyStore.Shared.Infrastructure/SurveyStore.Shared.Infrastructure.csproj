@@ -13,8 +13,5 @@
 	<ItemGroup>
 		<ProjectReference Include="..\SurveyStore.Shared.Abstractions\SurveyStore.Shared.Abstractions.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Auth\" />
-	</ItemGroup>
 
 </Project>
