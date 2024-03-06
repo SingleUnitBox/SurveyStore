@@ -67,7 +67,9 @@ namespace SurveyStore.Shared.Infrastructure
         public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
         {
             app.UseErrorHandling();
+            app.UseAuthentication();
             app.UseRouting();
+            app.UseAuthorization();
 
             return app;
         }
