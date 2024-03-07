@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using SurveyStore.Shared.Infrastructure.Modules;
 
 namespace SurveyStore.Bootstrapper
 {
@@ -47,6 +48,7 @@ namespace SurveyStore.Bootstrapper
                 endpoints.MapControllers();
                 endpoints.MapGet("/", context
                     => context.Response.WriteAsync("SurveyStore API"));
+                endpoints.MapModuleInfo();
             });
         }
     }

@@ -16,6 +16,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using SurveyStore.Shared.Infrastructure.Contexts;
+using SurveyStore.Shared.Infrastructure.Modules;
 
 [assembly: InternalsVisibleTo("SurveyStore.Bootstrapper")]
 namespace SurveyStore.Shared.Infrastructure
@@ -45,6 +46,7 @@ namespace SurveyStore.Shared.Infrastructure
 
             services.AddContexts();
             services.AddAuth(modules);
+            services.AddModuleInfo(modules);
             services.AddHostedService<AppInitializer>();
             services.AddSingleton<IClock, ClockUtc>();
             services.AddErrorHandling();

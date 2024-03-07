@@ -12,7 +12,8 @@ namespace SurveyStore.Modules.Users.Api
         public string Name { get; } = "Users";
 
         public string Path => BasePath;
-        public IEnumerable<string> Policies = new[]
+
+        public IEnumerable<string> Policies { get; } = new[]
         {
             "users"
         };

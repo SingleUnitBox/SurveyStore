@@ -2,6 +2,12 @@
 using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.DependencyInjection;
+using SurveyStore.Shared.Abstractions.Modules;
 
 namespace SurveyStore.Shared.Infrastructure.Modules
 {
@@ -24,5 +30,28 @@ namespace SurveyStore.Shared.Infrastructure.Modules
                     => Directory.EnumerateFiles(ctx.HostingEnvironment.ContentRootPath,
                     $"module.{pattern}.json", SearchOption.AllDirectories);
             });
+
+        internal static IServiceCollection AddModuleInfo(this IServiceCollection services, IList<IModule> modules)
+        {
+            var moduleInfoProvider = new ModuleInfoProvider();
+            var moduleInfo = modules?.Select(m => new ModuleInfo(m.Name, m.Path,
+                m.Policies ?? Enumerable.Empty<string>())) ?? Enumerable.Empty<ModuleInfo>();
+            moduleInfoProvider.Modules.AddRange(moduleInfo);
+
+            services.AddSingleton(moduleInfoProvider);
+
+            return services;
+        }
+
+        internal static void MapModuleInfo(this IEndpointRouteBuilder endpointRouteBuilder)
+        {
+            endpointRouteBuilder.MapGet("modules", context =>
+            {
+                var moduleInfoProvider = context.RequestServices.GetRequiredService<ModuleInfoProvider>();
+
+                return context.Response.WriteAsJsonAsync(moduleInfoProvider.Modules);
+            });
+
+        }
     }
 }

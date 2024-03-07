@@ -8,12 +8,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using SurveyStore.Shared.Abstractions.Contexts;
 
 namespace SurveyStore.Modules.Users.Api.Controllers
 {
     public class AccountController : BaseController
     {
+        private const string Policy = "users";
         private readonly IAccountService _accountService;
         private readonly IContext _context;
 
@@ -24,10 +26,10 @@ namespace SurveyStore.Modules.Users.Api.Controllers
             _context = context;
         }
 
+        [Authorize(Policy = Policy)]
         [HttpGet("me")]
         public async Task<ActionResult<AccountDto>> Get()
         {
-            //var userId = Guid.Parse(_httpContextAccessor.HttpContext.User?.Identity.Name);
             var userId = _context.Identity.Id;
             return OkOrNotFound(await _accountService.GetAsync(userId));
         }
