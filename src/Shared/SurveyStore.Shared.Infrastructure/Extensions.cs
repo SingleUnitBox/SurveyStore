@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using SurveyStore.Shared.Infrastructure.Contexts;
 
 [assembly: InternalsVisibleTo("SurveyStore.Bootstrapper")]
 namespace SurveyStore.Shared.Infrastructure
@@ -41,6 +43,7 @@ namespace SurveyStore.Shared.Infrastructure
                 }
             }
 
+            services.AddContexts();
             services.AddAuth(modules);
             services.AddHostedService<AppInitializer>();
             services.AddSingleton<IClock, ClockUtc>();

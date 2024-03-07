@@ -8,27 +8,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SurveyStore.Shared.Abstractions.Contexts;
 
 namespace SurveyStore.Modules.Users.Api.Controllers
 {
     public class AccountController : BaseController
     {
         private readonly IAccountService _accountService;
-        //private readonly HttpContext _httpContext;
+        private readonly IContext _context;
 
-        public AccountController(IAccountService accountService)
+        public AccountController(IAccountService accountService,
+            IContext context)
         {
             _accountService = accountService;
-            //_httpContext = httpContext;
+            _context = context;
         }
 
-        //[HttpGet("me")]
-        //public async Task<ActionResult<AccountDto>> Get()
-        //{
-        //    var userId = Guid.Parse(_httpContext.User?.Identity.Name);
-        //    return OkOrNotFound(await _accountService.GetAsync(userId));
-        //}
-            
+        [HttpGet("me")]
+        public async Task<ActionResult<AccountDto>> Get()
+        {
+            //var userId = Guid.Parse(_httpContextAccessor.HttpContext.User?.Identity.Name);
+            var userId = _context.Identity.Id;
+            return OkOrNotFound(await _accountService.GetAsync(userId));
+        }
+
 
         [HttpPost("sign-up")]
         public async Task<ActionResult> SignUp(SignUpDto signUpDto)
