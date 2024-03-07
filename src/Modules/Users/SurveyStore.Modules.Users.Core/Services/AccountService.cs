@@ -56,7 +56,7 @@ namespace SurveyStore.Modules.Users.Core.Services
 
             var passwordVerified = _passwordHasher.VerifyHashedPassword(default,
                 user.Password, signInDto.Password) == PasswordVerificationResult.Success;
-            if (passwordVerified)
+            if (!passwordVerified)
             {
                 throw new InvalidCredentialsException();
             }

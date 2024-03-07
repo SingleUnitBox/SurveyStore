@@ -1,0 +1,31 @@
+@url = http://localhost:5000/users-module
+
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMWI3NGIyY2EyOWE0NTJhODM1OWZjYzZlMzc4MWNkMSIsInVuaXF1ZV9uYW1lIjoiYjFiNzRiMmNhMjlhNDUyYTgzNTlmY2M2ZTM3ODFjZDEiLCJqdGkiOiI4YTJkNjBlNi01MjI2LTQ0MzgtODhkOS04OWQ5OGJiMTRjMzUiLCJpYXQiOiIxNzA5Nzk0NzU3NzQyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIl0sIm5iZiI6MTcwOTc5NDc1NywiZXhwIjoxNzA5ODc3NTU3LCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.NXFKtEskmG7usoW-arVRi90zBHqkg4-TlRcq8-XD1Lg
+
+###
+GET {{url}}
+
+###
+GET {{url}}/accout/me
+Authorization: Bearer 
+
+###
+POST {{url}}/account/sign-up
+Content-Type: application/json
+
+{
+    "email": "user1@gmail.com",
+    "password": "secret",
+    "role": "user",
+    "claims": {"permissions": ["stores", "users"]}
+
+}
+
+###
+POST {{url}}/account/sign-in
+Content-Type: application/json
+
+{
+    "email": "user1@gmail.com",
+    "password": "secret"
+}
