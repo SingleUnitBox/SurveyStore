@@ -8,6 +8,7 @@ namespace SurveyStore.Shared.Abstractions.Auth
 {
     public interface IAuthManager
     {
-        JsonWebToken CreateToken(string userId, string role, string audience, IDictionary<string, IEnumerable<string>> claims);
+        JsonWebToken CreateToken(string userId, string role, string audience = null,
+            IDictionary<string, IEnumerable<string>> claims = null);
     }
 }

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.OAuth;
-using Microsoft.IdentityModel.Tokens;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Query.Expressions.Internal;
+﻿using Microsoft.IdentityModel.Tokens;
 using SurveyStore.Shared.Abstractions.Auth;
 using SurveyStore.Shared.Abstractions.Time;
 using System;
@@ -9,7 +7,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Windows.Markup;
 
 namespace SurveyStore.Shared.Infrastructure.Auth
 {

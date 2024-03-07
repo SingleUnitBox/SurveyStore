@@ -34,6 +34,7 @@ namespace SurveyStore.Bootstrapper
 
         public void Configure(IApplicationBuilder app, ILogger<Startup> logger)
         {
+
             app.UseInfrastructure();
             foreach (var module in _modules)
             {

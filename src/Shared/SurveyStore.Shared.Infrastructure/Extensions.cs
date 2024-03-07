@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SurveyStore.Shared.Abstractions.Modules;
 using SurveyStore.Shared.Abstractions.Time;
 using SurveyStore.Shared.Infrastructure.Api;
+using SurveyStore.Shared.Infrastructure.Auth;
 using SurveyStore.Shared.Infrastructure.Exceptions;
 using SurveyStore.Shared.Infrastructure.Services;
 using SurveyStore.Shared.Infrastructure.Time;
@@ -40,6 +41,7 @@ namespace SurveyStore.Shared.Infrastructure
                 }
             }
 
+            services.AddAuth(modules);
             services.AddHostedService<AppInitializer>();
             services.AddSingleton<IClock, ClockUtc>();
             services.AddErrorHandling();

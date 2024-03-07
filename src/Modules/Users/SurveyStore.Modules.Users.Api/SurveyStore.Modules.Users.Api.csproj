@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="module.users.development.json" />
+    <None Remove="module.users.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="module.users.development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="module.users.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SurveyStore.Modules.Users.Core\SurveyStore.Modules.Users.Core.csproj" />
+  </ItemGroup>
+
+</Project>
