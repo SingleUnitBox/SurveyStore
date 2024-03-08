@@ -23,9 +23,20 @@ namespace SurveyStore.Shared.Infrastructure
 {
     internal static class Extensions
     {
+        private const string CorsPolicy = "cors";
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IList<Assembly> assemblies,
             IList<IModule> modules)
         {
+            services.AddCors(cors =>
+            {
+                cors.AddPolicy(CorsPolicy, x =>
+                {
+                    x.WithOrigins("*")
+                        .WithMethods("POST", "PUT", "DELETE")
+                        .WithHeaders("Content-Type", "Authorization");
+                });
+            });
+
             var disabledModules = new List<string>();
             using (var serviceProvider = services.BuildServiceProvider())
             {
@@ -73,6 +84,7 @@ namespace SurveyStore.Shared.Infrastructure
 
         public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
         {
+            app.UseCors(CorsPolicy);
             app.UseErrorHandling();
             app.UseAuthentication();
             app.UseRouting();
