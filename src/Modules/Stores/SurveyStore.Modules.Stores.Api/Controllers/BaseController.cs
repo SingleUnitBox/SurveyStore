@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SurveyStore.Shared.Infrastructure.Api;
 
 namespace SurveyStore.Modules.Stores.Api.Controllers
 {
+    [ProducesDefaultContentType]
     [ApiController]
     [Route(StoresModule.BasePath + "/[controller]")]
     internal class BaseController : ControllerBase

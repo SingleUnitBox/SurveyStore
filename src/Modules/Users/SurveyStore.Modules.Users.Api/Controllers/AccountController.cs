@@ -27,6 +27,8 @@ namespace SurveyStore.Modules.Users.Api.Controllers
         }
 
         [Authorize(Policy = Policy)]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
         [HttpGet("me")]
         public async Task<ActionResult<AccountDto>> Get()
         {
@@ -34,7 +36,7 @@ namespace SurveyStore.Modules.Users.Api.Controllers
             return OkOrNotFound(await _accountService.GetAsync(userId));
         }
 
-
+        [ProducesResponseType(204)]
         [HttpPost("sign-up")]
         public async Task<ActionResult> SignUp(SignUpDto signUpDto)
         {
@@ -42,6 +44,7 @@ namespace SurveyStore.Modules.Users.Api.Controllers
             return NoContent();
         }
 
+        [ProducesResponseType(200)]
         [HttpPost("sign-in")]
         public async Task<ActionResult<JsonWebToken>> SignIn(SignInDto signInDto)
         {
