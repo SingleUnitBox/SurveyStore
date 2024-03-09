@@ -20,6 +20,7 @@ using SurveyStore.Shared.Infrastructure.Contexts;
 using SurveyStore.Shared.Infrastructure.Modules;
 
 [assembly: InternalsVisibleTo("SurveyStore.Shared.Tests")]
+[assembly: InternalsVisibleTo("SurveyStore.Modules.Users.Tests.Integration")]
 [assembly: InternalsVisibleTo("SurveyStore.Bootstrapper")]
 namespace SurveyStore.Shared.Infrastructure
 {
