@@ -7,9 +7,11 @@ using SurveyStore.Shared.Tests;
 using SurveyStore.Shared.Infrastructure.Time;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using SurveyStore.Modules.Users.Core.Exceptions;
 using Xunit;
 
 namespace SurveyStore.Modules.Users.Tests.Integration.Controllers
@@ -39,9 +41,12 @@ namespace SurveyStore.Modules.Users.Tests.Integration.Controllers
             await _dbContext.Users.AddAsync(user);
             await _dbContext.SaveChangesAsync();
 
+            // not sure if json is correct?
             var response = await _httpClient.PostAsJsonAsync(Path, signUpDto);
 
             response.IsSuccessStatusCode.ShouldBeFalse();
+            response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+            response.StatusCode.ShouldBeOfType<EmailInUseException>();
         }
 
         private const string Path = "users-module/account";

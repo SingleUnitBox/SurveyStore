@@ -1,0 +1,8 @@
+{
+  "equipment": {
+    "module": {
+      "name": "equipment",
+      "enabled": true
+    }
+  }
+}

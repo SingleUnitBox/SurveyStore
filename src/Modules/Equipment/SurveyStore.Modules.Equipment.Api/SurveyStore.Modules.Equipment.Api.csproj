@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="module .development.equipment.json" />
+    <None Remove="module.equipment.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="module .development.equipment.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="module.equipment.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SurveyStore.Modules.Equipment.Core\SurveyStore.Modules.Equipment.Core.csproj" />
+  </ItemGroup>
+
+</Project>
