@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Shared\SurveyStore.Shared.Infrastructure\SurveyStore.Shared.Infrastructure.csproj" />
+    <ProjectReference Include="..\SurveyStore.Modules.Equipment.Application\SurveyStore.Modules.Equipment.Application.csproj" />
   </ItemGroup>
 
 </Project>

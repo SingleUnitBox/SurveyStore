@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SurveyStore.Modules.Equipment.Core\SurveyStore.Modules.Equipment.Core.csproj" />
+    <ProjectReference Include="..\SurveyStore.Modules.Equipment.Infrastructure\SurveyStore.Modules.Equipment.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
