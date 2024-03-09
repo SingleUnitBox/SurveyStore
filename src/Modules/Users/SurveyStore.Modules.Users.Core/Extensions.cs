@@ -8,6 +8,7 @@ using SurveyStore.Modules.Users.Core.Services;
 using SurveyStore.Shared.Infrastructure.Postgres;
 using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("SurveyStore.Modules.Users.Tests.Integration")]
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Users.Api")]
 namespace SurveyStore.Modules.Users.Core
 {

@@ -20,8 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commons\" />
     <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Modules\Users\SurveyStore.Modules.Users.Core\SurveyStore.Modules.Users.Core.csproj" />
+    <ProjectReference Include="..\..\src\Shared\SurveyStore.Shared.Tests\SurveyStore.Shared.Tests.csproj" />
   </ItemGroup>
 
 </Project>
