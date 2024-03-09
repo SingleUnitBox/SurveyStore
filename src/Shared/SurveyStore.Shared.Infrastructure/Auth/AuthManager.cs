@@ -27,7 +27,8 @@ namespace SurveyStore.Shared.Infrastructure.Auth
                 SecurityAlgorithms.HmacSha256);
         }
 
-        public JsonWebToken CreateToken(string userId, string role, string audience, IDictionary<string, IEnumerable<string>> claims)
+        public JsonWebToken CreateToken(string userId, string role, string audience = null,
+            IDictionary<string, IEnumerable<string>> claims = null)
         {
             if (string.IsNullOrWhiteSpace(userId))
             {
@@ -53,7 +54,7 @@ namespace SurveyStore.Shared.Infrastructure.Auth
                 jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Aud, audience));
             }
 
-            if (claims.Any() is true)
+            if (claims?.Any() is true)
             {
                 var customClaims = new List<Claim>();
                 foreach (var (claim, values) in claims)
@@ -65,8 +66,15 @@ namespace SurveyStore.Shared.Infrastructure.Auth
             }
 
             var expires = now.Add(_options.Expiry);
-            var jwt = new JwtSecurityToken(_issuer, claims: jwtClaims, notBefore: now, expires: expires,
-                signingCredentials: _signingCredentials);
+            var jwt = new JwtSecurityToken(
+                _issuer, claims:
+                jwtClaims,
+                notBefore:
+                now,
+                expires: expires,
+                signingCredentials: _signingCredentials
+                );
+
             var token = new JwtSecurityTokenHandler().WriteToken(jwt);
 
             return new JsonWebToken

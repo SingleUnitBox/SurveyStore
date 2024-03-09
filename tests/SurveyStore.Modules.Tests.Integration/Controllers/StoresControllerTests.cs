@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,7 +70,12 @@ namespace SurveyStore.Modules.Stores.Tests.Integration.Controllers
             var store = CreateStore();
             await _dbContext.Stores.AddAsync(store);
             await _dbContext.SaveChangesAsync();
+            var claims = new Dictionary<string, IEnumerable<string>>
+            {
+                {"permissions", new[] {"stores"}}
+            };
 
+            Autenticate(Guid.NewGuid(), claims);
             var response = await _httpClient.DeleteAsync($"{Path}/{store.Id}");
 
             response.IsSuccessStatusCode.ShouldBeTrue();
@@ -84,6 +90,12 @@ namespace SurveyStore.Modules.Stores.Tests.Integration.Controllers
         {
             _httpClient = factory.CreateClient();
             _dbContext = dbContext.DbContext;
+        }
+
+        private void Autenticate(Guid userId, IDictionary<string, IEnumerable<string>> claims = null)
+        {
+            var jwt = AuthHelper.GenerateJwt(userId.ToString(), claims);
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt);
         }
 
         private static Store CreateStore() =>

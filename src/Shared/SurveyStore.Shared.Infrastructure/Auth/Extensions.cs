@@ -14,7 +14,7 @@ namespace SurveyStore.Shared.Infrastructure.Auth
 {
     public static class Extensions
     {
-        public static IServiceCollection AddAuth(this IServiceCollection services, IList<IModule> modules,
+        public static IServiceCollection AddAuth(this IServiceCollection services, IList<IModule> modules = null,
             Action<JwtBearerOptions> optionsFactory = null)
         {
             var options = services.GetOptions<AuthOptions>("auth");
@@ -55,6 +55,7 @@ namespace SurveyStore.Shared.Infrastructure.Auth
 
             var rawKey = Encoding.UTF8.GetBytes(options.IssuerSigningKey);
             tokenValidationParameters.IssuerSigningKey = new SymmetricSecurityKey(rawKey);
+
             if (!string.IsNullOrWhiteSpace(options.NameClaimType))
             {
                 tokenValidationParameters.NameClaimType = options.NameClaimType;
@@ -90,13 +91,15 @@ namespace SurveyStore.Shared.Infrastructure.Auth
 
             services.AddSingleton(options);
             services.AddSingleton(tokenValidationParameters);
+
             var policies = modules?.SelectMany(m => m.Policies ?? Enumerable.Empty<string>()) ??
                 Enumerable.Empty<string>();
+
             services.AddAuthorization(auth =>
             {
                 foreach (var policy in policies)
                 {
-                    auth.AddPolicy(policy, x => x.RequireClaim("permission", policy));
+                    auth.AddPolicy(policy, x => x.RequireClaim("permissions", policy));
                 }
             });
 

@@ -12,7 +12,8 @@ namespace SurveyStore.Modules.Stores.Api
         public const string BasePath = "stores-module";
         public string Name { get; } = "Stores";
         public string Path => BasePath;
-        public IEnumerable<string> Policies = new[]
+
+        public IEnumerable<string> Policies { get; } = new[]
         {
             "stores"
         };

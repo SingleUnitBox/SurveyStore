@@ -1,6 +1,8 @@
 @url = http://localhost:5000/stores-module
 
-@storeId = 7f1f8601-197e-484c-9f0e-074fa689fbb7
+@storeId = 1649147d-4505-4ad5-9199-aee455a4b0fa
+
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3MjBlMTdiMDM2OTY0MTE2YjZjYTgwZDFkMGJiMjk5NCIsInVuaXF1ZV9uYW1lIjoiNzIwZTE3YjAzNjk2NDExNmI2Y2E4MGQxZDBiYjI5OTQiLCJqdGkiOiIwMDE4ZDE1Zi00YWE4LTRlMTYtODc2Yi0yOTA0OWI0NGI1NzAiLCJpYXQiOiIxNzA5OTgwNTMwNzA2IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIl0sIm5iZiI6MTcwOTk4MDUzMCwiZXhwIjoxNzEwMDYzMzMwLCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.88H0agpkyp3mxqNAvHP20osfNMPk9VRSAnF3XeBqkTc
 
 ###
 GET {{url}}
@@ -13,6 +15,7 @@ GET {{url}}/stores/{{storeId}}
 
 ###
 POST {{url}}/stores
+Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {

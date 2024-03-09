@@ -19,6 +19,7 @@ using Microsoft.OpenApi.Models;
 using SurveyStore.Shared.Infrastructure.Contexts;
 using SurveyStore.Shared.Infrastructure.Modules;
 
+[assembly: InternalsVisibleTo("SurveyStore.Shared.Tests")]
 [assembly: InternalsVisibleTo("SurveyStore.Bootstrapper")]
 namespace SurveyStore.Shared.Infrastructure
 {

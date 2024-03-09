@@ -33,9 +33,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Modules.Stores.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{5BADB444-DE28-4ECC-9B3A-F40033F822BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.Users.Core", "src\Modules\Users\SurveyStore.Modules.Users.Core\SurveyStore.Modules.Users.Core.csproj", "{6C2E9635-9D24-4EF4-BF35-F4E37892965F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Modules.Users.Core", "src\Modules\Users\SurveyStore.Modules.Users.Core\SurveyStore.Modules.Users.Core.csproj", "{6C2E9635-9D24-4EF4-BF35-F4E37892965F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.Users.Api", "src\Modules\Users\SurveyStore.Modules.Users.Api\SurveyStore.Modules.Users.Api.csproj", "{0ADDAF6C-0430-4AE4-B5D5-7194B503584D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Modules.Users.Api", "src\Modules\Users\SurveyStore.Modules.Users.Api\SurveyStore.Modules.Users.Api.csproj", "{0ADDAF6C-0430-4AE4-B5D5-7194B503584D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.Users.Tests.Integration", "tests\SurveyStore.Modules.Users.Tests.Integration\SurveyStore.Modules.Users.Tests.Integration.csproj", "{482079CB-1A3F-4B72-8B8C-722D0FE3EC98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,10 @@ Global
 		{0ADDAF6C-0430-4AE4-B5D5-7194B503584D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0ADDAF6C-0430-4AE4-B5D5-7194B503584D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0ADDAF6C-0430-4AE4-B5D5-7194B503584D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{482079CB-1A3F-4B72-8B8C-722D0FE3EC98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{482079CB-1A3F-4B72-8B8C-722D0FE3EC98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{482079CB-1A3F-4B72-8B8C-722D0FE3EC98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{482079CB-1A3F-4B72-8B8C-722D0FE3EC98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,6 +109,7 @@ Global
 		{5BADB444-DE28-4ECC-9B3A-F40033F822BD} = {FD42E17F-29F4-4A79-8DAE-490EBBE6A081}
 		{6C2E9635-9D24-4EF4-BF35-F4E37892965F} = {5BADB444-DE28-4ECC-9B3A-F40033F822BD}
 		{0ADDAF6C-0430-4AE4-B5D5-7194B503584D} = {5BADB444-DE28-4ECC-9B3A-F40033F822BD}
+		{482079CB-1A3F-4B72-8B8C-722D0FE3EC98} = {771C4F8D-80AE-438C-917C-54E35E50A289}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C381337B-40C7-45CC-8FB7-1F8E39A37BE8}

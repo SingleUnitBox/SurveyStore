@@ -13,9 +13,10 @@ using SurveyStore.Shared.Abstractions.Contexts;
 
 namespace SurveyStore.Modules.Users.Api.Controllers
 {
+    [Authorize(Policy = Policy)]
     public class AccountController : BaseController
     {
-        private const string Policy = "users";
+        public const string Policy = "users";
         private readonly IAccountService _accountService;
         private readonly IContext _context;
 
@@ -26,7 +27,7 @@ namespace SurveyStore.Modules.Users.Api.Controllers
             _context = context;
         }
 
-        [Authorize(Policy = Policy)]
+        
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [HttpGet("me")]
@@ -36,6 +37,7 @@ namespace SurveyStore.Modules.Users.Api.Controllers
             return OkOrNotFound(await _accountService.GetAsync(userId));
         }
 
+        [AllowAnonymous]
         [ProducesResponseType(204)]
         [HttpPost("sign-up")]
         public async Task<ActionResult> SignUp(SignUpDto signUpDto)
@@ -44,6 +46,7 @@ namespace SurveyStore.Modules.Users.Api.Controllers
             return NoContent();
         }
 
+        [AllowAnonymous]
         [ProducesResponseType(200)]
         [HttpPost("sign-in")]
         public async Task<ActionResult<JsonWebToken>> SignIn(SignInDto signInDto)

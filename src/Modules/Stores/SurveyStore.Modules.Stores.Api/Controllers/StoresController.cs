@@ -12,7 +12,7 @@ namespace SurveyStore.Modules.Stores.Api.Controllers
     [Authorize(Policy = Policy)]
     internal class StoresController : BaseController
     {
-        public const string Policy = "stores";
+        private const string Policy = "stores";
         private readonly IStoreService _storeService;
 
         public StoresController(IStoreService storeService)
