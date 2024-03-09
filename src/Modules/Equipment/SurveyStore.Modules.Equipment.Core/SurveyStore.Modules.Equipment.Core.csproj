@@ -8,4 +8,10 @@
     <ProjectReference Include="..\..\..\Shared\SurveyStore.Shared.Infrastructure\SurveyStore.Shared.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DAL\Configuration\" />
+    <Folder Include="DAL\Repositories\" />
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
+
 </Project>
