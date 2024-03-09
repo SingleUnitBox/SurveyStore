@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using SurveyStore.Shared.Abstractions.Modules;
 using System.Collections.Generic;
 using SurveyStore.Modules.Equipment.Core;
+using SurveyStore.Modules.Equipment.Application;
+using SurveyStore.Modules.Equipment.Infrastructure;
 
 namespace SurveyStore.Modules.Equipment.Api
 {
@@ -20,6 +22,8 @@ namespace SurveyStore.Modules.Equipment.Api
         public void Register(IServiceCollection services)
         {
             services.AddCore();
+            services.AddApplication();
+            services.AddInfrastructure();
         }
 
         public void Use(IApplicationBuilder app)
