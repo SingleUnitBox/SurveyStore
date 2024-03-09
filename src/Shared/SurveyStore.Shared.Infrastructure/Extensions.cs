@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Microsoft.OpenApi.Models;
 using SurveyStore.Shared.Infrastructure.Contexts;
 using SurveyStore.Shared.Infrastructure.Modules;
 
@@ -34,6 +35,16 @@ namespace SurveyStore.Shared.Infrastructure
                     x.WithOrigins("*")
                         .WithMethods("POST", "PUT", "DELETE")
                         .WithHeaders("Content-Type", "Authorization");
+                });
+            });
+
+            services.AddSwaggerGen(swagger =>
+            {
+                swagger.CustomSchemaIds(x => x.FullName);
+                swagger.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "SurveyStore API",
+                    Version = "v1",
                 });
             });
 
@@ -86,6 +97,13 @@ namespace SurveyStore.Shared.Infrastructure
         {
             app.UseCors(CorsPolicy);
             app.UseErrorHandling();
+            app.UseSwagger();
+            app.UseReDoc(r =>
+            {
+                r.RoutePrefix = "docs";
+                r.SpecUrl("/swagger/v1/swagger.json");
+                r.DocumentTitle = "SurveyStore API";
+            });
             app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();
