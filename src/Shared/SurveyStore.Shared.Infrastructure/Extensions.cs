@@ -16,6 +16,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Microsoft.OpenApi.Models;
+using SurveyStore.Shared.Infrastructure.Commands;
 using SurveyStore.Shared.Infrastructure.Contexts;
 using SurveyStore.Shared.Infrastructure.Modules;
 
@@ -68,6 +69,7 @@ namespace SurveyStore.Shared.Infrastructure
                 }
             }
 
+            services.AddCommands(assemblies);
             services.AddContexts();
             services.AddAuth(modules);
             services.AddModuleInfo(modules);
