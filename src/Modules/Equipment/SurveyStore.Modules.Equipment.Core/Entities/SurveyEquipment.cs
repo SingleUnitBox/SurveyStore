@@ -12,6 +12,7 @@ namespace SurveyStore.Modules.Equipment.Core.Entities
         public DateTime PurchasedAt { get; set; }
         public DateTime? CalibrationDate { get; set; }
         public TimeSpan? CalibrationInterval { get; set; }
+        public Store? Store { get; set; }
 
     }
 }
