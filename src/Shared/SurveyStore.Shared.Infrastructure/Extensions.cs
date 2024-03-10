@@ -18,6 +18,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.OpenApi.Models;
 using SurveyStore.Shared.Infrastructure.Commands;
 using SurveyStore.Shared.Infrastructure.Contexts;
+using SurveyStore.Shared.Infrastructure.Events;
 using SurveyStore.Shared.Infrastructure.Modules;
 using SurveyStore.Shared.Infrastructure.Queries;
 
@@ -72,6 +73,7 @@ namespace SurveyStore.Shared.Infrastructure
 
             services.AddCommands(assemblies);
             services.AddQueries(assemblies);
+            services.AddEvents(assemblies);
             services.AddContexts();
             services.AddAuth(modules);
             services.AddModuleInfo(modules);
