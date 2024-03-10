@@ -1,19 +1,19 @@
 @url = http://localhost:5000/equipment-module
 
-@equipmentId = 
+@equipmentId = a35a155d-b6b7-49d9-9717-24ccf5073c15
 
 ###
 GET {{url}}
 
 ###
-GET {{url}}/equipment/@{{equipmentId}}
+GET {{url}}/equipment/{{equipmentId}}
 
 ###
 GET {{url}}/equipment
 Content-Type: application/json
 
 {
-    "serialNumber": ""
+    "serialNumber": "ABC123"
 }
 
 ###

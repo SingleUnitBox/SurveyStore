@@ -5,6 +5,7 @@ using System;
 using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SurveyStore.Modules.Equipment.Application.Exceptions;
 using SurveyStore.Modules.Equipment.Core.Entities;
 using SurveyStore.Modules.Equipment.Application.Mappings;
 
@@ -24,7 +25,9 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Queries.Handlers
                 .AsNoTracking()
                 .SingleOrDefaultAsync(s => s.SerialNumber == query.SerialNumber);
 
-            return equipment?.AsDto();
+            return equipment is null
+                ? throw new SurveyEquipmentNotFoundException(query.SerialNumber)
+                : equipment.AsDto();
         }
     }
 }
