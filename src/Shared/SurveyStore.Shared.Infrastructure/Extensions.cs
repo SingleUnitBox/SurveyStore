@@ -19,6 +19,7 @@ using Microsoft.OpenApi.Models;
 using SurveyStore.Shared.Infrastructure.Commands;
 using SurveyStore.Shared.Infrastructure.Contexts;
 using SurveyStore.Shared.Infrastructure.Modules;
+using SurveyStore.Shared.Infrastructure.Queries;
 
 [assembly: InternalsVisibleTo("SurveyStore.Shared.Tests")]
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Users.Tests.Integration")]
@@ -70,6 +71,7 @@ namespace SurveyStore.Shared.Infrastructure
             }
 
             services.AddCommands(assemblies);
+            services.AddQueries(assemblies);
             services.AddContexts();
             services.AddAuth(modules);
             services.AddModuleInfo(modules);

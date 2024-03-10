@@ -17,7 +17,7 @@ namespace SurveyStore.Shared.Infrastructure.Queries
             _serviceProvider = serviceProvider;
         }
 
-        public async Task<TResult> QueryAsync<TQuery, TResult>(TQuery query) where TQuery : class, IQuery
+        public async Task<TResult> QueryAsync<TResult>(IQuery<TResult> query)
         {
             using var scope = _serviceProvider.CreateScope();
             {

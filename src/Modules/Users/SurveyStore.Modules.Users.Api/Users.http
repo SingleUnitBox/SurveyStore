@@ -1,6 +1,6 @@
 @url = http://localhost:5000/users-module
 
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMWI3NGIyY2EyOWE0NTJhODM1OWZjYzZlMzc4MWNkMSIsInVuaXF1ZV9uYW1lIjoiYjFiNzRiMmNhMjlhNDUyYTgzNTlmY2M2ZTM3ODFjZDEiLCJqdGkiOiJhMmY4MWY1Zi03ZmY0LTQzYjEtYmUwOS1kYmNiMTA5ZjM4ZDciLCJpYXQiOiIxNzA5ODU0NTYwNTY5IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIl0sIm5iZiI6MTcwOTg1NDU2MCwiZXhwIjoxNzA5OTM3MzYwLCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.ybbtgxudPqu7bsP4YarrfPkcykGrFlM0XTXx55qnmuA
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3MjBlMTdiMDM2OTY0MTE2YjZjYTgwZDFkMGJiMjk5NCIsInVuaXF1ZV9uYW1lIjoiNzIwZTE3YjAzNjk2NDExNmI2Y2E4MGQxZDBiYjI5OTQiLCJqdGkiOiIwMDE4ZDE1Zi00YWE4LTRlMTYtODc2Yi0yOTA0OWI0NGI1NzAiLCJpYXQiOiIxNzA5OTgwNTMwNzA2IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIl0sIm5iZiI6MTcwOTk4MDUzMCwiZXhwIjoxNzEwMDYzMzMwLCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.88H0agpkyp3mxqNAvHP20osfNMPk9VRSAnF3XeBqkTc
 
 ###
 GET {{url}}
@@ -14,10 +14,10 @@ POST {{url}}/account/sign-up
 Content-Type: application/json
 
 {
-    "email": "user2@gmail.com",
+    "email": "user3@gmail.com",
     "password": "secret",
     "role": "user",
-    "claims": {"permissions": ["stores"]}
+    "claims": {"permissions": ["stores", "users"]}
 
 }
 
@@ -26,6 +26,6 @@ POST {{url}}/account/sign-in
 Content-Type: application/json
 
 {
-    "email": "user1@gmail.com",
+    "email": "user3@gmail.com",
     "password": "secret"
 }

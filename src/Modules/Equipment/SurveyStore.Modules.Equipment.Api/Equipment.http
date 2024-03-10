@@ -1,4 +1,32 @@
 @url = http://localhost:5000/equipment-module
 
+@equipmentId = 
+
 ###
 GET {{url}}
+
+###
+GET {{url}}/equipment/@{{equipmentId}}
+
+###
+GET {{url}}/equipment
+Content-Type: application/json
+
+{
+    "serialNumber": ""
+}
+
+###
+POST {{url}}/equipment
+Content-Type: application/json
+
+{
+        "brand": "Trimble",
+        "model": "S6",
+        "description": "Lorem ipsum",
+        "serialNumber": "ABC123",
+        "purchasedAt": "2023-01-01",
+        "calibrationDate": "2024-12-01",
+        "accuracy": 1.5,
+        "maxRemoteDistance": 400
+}

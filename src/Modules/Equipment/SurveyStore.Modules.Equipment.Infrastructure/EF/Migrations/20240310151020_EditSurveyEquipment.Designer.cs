@@ -10,8 +10,8 @@ using SurveyStore.Modules.Equipment.Infrastructure.EF;
 namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(EquipmentDbContext))]
-    [Migration("20240309200326_AddSurveyEquipment")]
-    partial class AddSurveyEquipment
+    [Migration("20240310151020_EditSurveyEquipment")]
+    partial class EditSurveyEquipment
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,7 +56,7 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SurveyEquipments");
+                    b.ToTable("SurveyEquipment");
 
                     b.HasDiscriminator<string>("Type").HasValue("SurveyEquipment");
                 });

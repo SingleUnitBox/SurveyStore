@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
 {
-    public partial class AddSurveyEquipment : Migration
+    public partial class EditSurveyEquipment : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +11,7 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
                 name: "equipment");
 
             migrationBuilder.CreateTable(
-                name: "SurveyEquipments",
+                name: "SurveyEquipment",
                 schema: "equipment",
                 columns: table => new
                 {
@@ -33,14 +33,14 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SurveyEquipments", x => x.Id);
+                    table.PrimaryKey("PK_SurveyEquipment", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "SurveyEquipments",
+                name: "SurveyEquipment",
                 schema: "equipment");
         }
     }

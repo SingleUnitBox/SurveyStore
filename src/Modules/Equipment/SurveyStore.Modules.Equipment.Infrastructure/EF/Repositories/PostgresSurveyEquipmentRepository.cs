@@ -14,7 +14,7 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Repositories
 
         public PostgresSurveyEquipmentRepository(EquipmentDbContext dbContext)
         {
-            _surveyEquipment = dbContext.SurveyEquipments;
+            _surveyEquipment = dbContext.SurveyEquipment;
             _dbContext = dbContext;
         }
 

@@ -54,7 +54,7 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SurveyEquipments");
+                    b.ToTable("SurveyEquipment");
 
                     b.HasDiscriminator<string>("Type").HasValue("SurveyEquipment");
                 });
