@@ -7,7 +7,7 @@ using SurveyStore.Shared.Abstractions.Commands;
 
 namespace SurveyStore.Modules.Equipment.Application.Commands
 {
-    public record AddTotalStation(
+    public record AddGNSS(
         string Brand,
         string Model,
         string Description,
@@ -15,8 +15,7 @@ namespace SurveyStore.Modules.Equipment.Application.Commands
         DateTime PurchasedAt,
         DateTime? CalibrationDate,
         TimeSpan? CalibrationInterval,
-        decimal Accuracy,
-        int MaxRemoteDistance) : ICommand
+        bool? IsActive) : ICommand
     {
         public Guid Id { get; } = Guid.NewGuid();
     }

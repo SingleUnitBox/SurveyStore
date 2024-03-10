@@ -1,7 +1,7 @@
 {
   "equipment": {
     "module": {
-      "name": "equipment",
+      "name": "Equipment",
       "enabled": true
     }
   }

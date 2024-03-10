@@ -22,5 +22,6 @@ namespace SurveyStore.Modules.Equipment.Application.DTO
         public int? ScreenSize { get; set; }
         public decimal? Frequency { get; set; }
         public bool? OffRoadMode { get; set; }
+        public string Type { get; set; }
     }
 }

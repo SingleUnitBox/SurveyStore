@@ -1,12 +1,13 @@
 ﻿using SurveyStore.Modules.Equipment.Application.Commands;
 using SurveyStore.Modules.Equipment.Application.DTO;
+using SurveyStore.Modules.Equipment.Application.Types;
 using SurveyStore.Modules.Equipment.Core.Entities;
 
 namespace SurveyStore.Modules.Equipment.Application.Mappings
 {
     public static class Extensions
     {
-        public static TotalStation AsEntity(this AddTotalStation command)
+        public static TotalStation AsEntity(this AddSurveyEquipment command)
             => new()
             {
                 Id = command.Id,
@@ -18,7 +19,7 @@ namespace SurveyStore.Modules.Equipment.Application.Mappings
                 CalibrationDate = command.CalibrationDate,
                 CalibrationInterval = command.CalibrationInterval,
                 Accuracy = command.Accuracy ?? 0,
-                MaxRemoteDistance = command.MaxRemoteDistance
+                MaxRemoteDistance = command.MaxRemoteDistance ?? 0
             };
 
         public static SurveyEquipmentDto AsDto(this SurveyEquipment equipment)
@@ -37,7 +38,58 @@ namespace SurveyStore.Modules.Equipment.Application.Mappings
                 IsActive = equipment is GNSS g ? g.IsActive : null,
                 ScreenSize = equipment is FieldController f ? f.ScreenSize : null,
                 Frequency = equipment is GroundPenetratingRadar gpr ? gpr.Frequency : null,
-                OffRoadMode = equipment is GroundPenetratingRadar gp ? gp.OffRoadMode : null 
+                OffRoadMode = equipment is GroundPenetratingRadar gp ? gp.OffRoadMode : null,
+                Type = equipment switch
+                {
+                    TotalStation => SurveyEquipmentTypes.TotalStation,
+                    GNSS => SurveyEquipmentTypes.GNSS,
+                    FieldController => SurveyEquipmentTypes.FieldController,
+                    GroundPenetratingRadar => SurveyEquipmentTypes.GroundPenetratingRadar,
+                    CableAvoidanceTool => SurveyEquipmentTypes.CAT,
+                    _ => null
+                }
+            };
+
+        public static TotalStation AsEntity(this AddTotalStation command)
+            => new()
+            {
+                Id = command.Id,
+                Brand = command.Brand,
+                Model = command.Model,
+                Description = command.Description,
+                SerialNumber = command.SerialNumber,
+                PurchasedAt = command.PurchasedAt,
+                CalibrationDate = command.CalibrationDate,
+                CalibrationInterval = command.CalibrationInterval,
+                Accuracy = command.Accuracy,
+                MaxRemoteDistance = command.MaxRemoteDistance
+            };
+        public static GNSS AsEntity(this AddGNSS command)
+            => new()
+            {
+                Id = command.Id,
+                Brand = command.Brand,
+                Model = command.Model,
+                Description = command.Description,
+                SerialNumber = command.SerialNumber,
+                PurchasedAt = command.PurchasedAt,
+                CalibrationDate = command.CalibrationDate,
+                CalibrationInterval = command.CalibrationInterval,
+                IsActive = command.IsActive ?? false,
+            };
+
+        public static FieldController AsEntity(this AddFieldController command)
+            => new()
+            {
+                Id = command.Id,
+                Brand = command.Brand,
+                Model = command.Model,
+                Description = command.Description,
+                SerialNumber = command.SerialNumber,
+                PurchasedAt = command.PurchasedAt,
+                CalibrationDate = command.CalibrationDate,
+                CalibrationInterval = command.CalibrationInterval,
+                ScreenSize = command.ScreenSize,
             };
     }
 }

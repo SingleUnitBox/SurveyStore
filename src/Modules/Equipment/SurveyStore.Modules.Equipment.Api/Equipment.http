@@ -6,6 +6,9 @@
 GET {{url}}
 
 ###
+GET {{url}}/equipment/all
+
+###
 GET {{url}}/equipment/{{equipmentId}}
 
 ###
@@ -22,11 +25,57 @@ Content-Type: application/json
 
 {
         "brand": "Trimble",
-        "model": "S6",
+        "model": "R12i",
+        "description": "Lorem ipsum",
+        "serialNumber": "XYZ123",
+        "purchasedAt": "2023-01-01",
+        "calibrationDate": "2024-12-01",
+        //"accuracy": 1.0,
+        //"maxRemoteDistance": 800
+        "isActive": true
+        //"screenSize": "",
+        //"frequency": "",
+        //"offRoadMode": ""
+}
+
+###
+POST {{url}}/equipment/total-station
+Content-Type: application/json
+
+{
+        "brand": "Trimble",
+        "model": "S5",
         "description": "Lorem ipsum",
         "serialNumber": "ABC123",
         "purchasedAt": "2023-01-01",
         "calibrationDate": "2024-12-01",
-        "accuracy": 1.5,
-        "maxRemoteDistance": 400
+        "accuracy": 1.0,
+        "maxRemoteDistance": 800
+}
+
+###
+POST {{url}}/equipment/gnss
+Content-Type: application/json
+
+{
+        "brand": "Trimble",
+        "model": "R12i",
+        "description": "Lorem ipsum",
+        "serialNumber": "XYZ123",
+        "purchasedAt": "2023-01-01",
+        "isActive": true
+}
+
+###
+POST {{url}}/equipment/field-controller
+Content-Type: application/json
+
+{
+        "brand": "Trimble",
+        "model": "TSC7",
+        "description": "Lorem ipsum",
+        "serialNumber": "XYZ123",
+        "purchasedAt": "2023-01-01",
+        "calibrationDate": "2024-12-01",
+        "screenSize": 7
 }
