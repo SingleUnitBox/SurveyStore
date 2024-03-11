@@ -74,7 +74,7 @@ Content-Type: application/json
         "brand": "Trimble",
         "model": "TSC7",
         "description": "Lorem ipsum",
-        "serialNumber": "XYZ123",
+        "serialNumber": "QWE123",
         "purchasedAt": "2023-01-01",
         "calibrationDate": "2024-12-01",
         "screenSize": 7

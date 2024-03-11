@@ -37,17 +37,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Modules.Users.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Modules.Users.Api", "src\Modules\Users\SurveyStore.Modules.Users.Api\SurveyStore.Modules.Users.Api.csproj", "{0ADDAF6C-0430-4AE4-B5D5-7194B503584D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.Users.Tests.Integration", "tests\SurveyStore.Modules.Users.Tests.Integration\SurveyStore.Modules.Users.Tests.Integration.csproj", "{482079CB-1A3F-4B72-8B8C-722D0FE3EC98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Modules.Users.Tests.Integration", "tests\SurveyStore.Modules.Users.Tests.Integration\SurveyStore.Modules.Users.Tests.Integration.csproj", "{482079CB-1A3F-4B72-8B8C-722D0FE3EC98}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Equipment", "Equipment", "{2648F90B-8DAE-4109-9D1F-F17A904B6522}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.Equipment.Core", "src\Modules\Equipment\SurveyStore.Modules.Equipment.Core\SurveyStore.Modules.Equipment.Core.csproj", "{1A9A0BFB-4A75-4E9E-915E-648B25FA49F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Modules.Equipment.Core", "src\Modules\Equipment\SurveyStore.Modules.Equipment.Core\SurveyStore.Modules.Equipment.Core.csproj", "{1A9A0BFB-4A75-4E9E-915E-648B25FA49F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.Equipment.Api", "src\Modules\Equipment\SurveyStore.Modules.Equipment.Api\SurveyStore.Modules.Equipment.Api.csproj", "{341855AB-E4DC-42F2-A17A-13AB043C28AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Modules.Equipment.Api", "src\Modules\Equipment\SurveyStore.Modules.Equipment.Api\SurveyStore.Modules.Equipment.Api.csproj", "{341855AB-E4DC-42F2-A17A-13AB043C28AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.Equipment.Application", "src\Modules\Equipment\SurveyStore.Modules.Equipment.Application\SurveyStore.Modules.Equipment.Application.csproj", "{D4760267-EC17-4CB6-B1BE-EF048E52CDA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Modules.Equipment.Application", "src\Modules\Equipment\SurveyStore.Modules.Equipment.Application\SurveyStore.Modules.Equipment.Application.csproj", "{D4760267-EC17-4CB6-B1BE-EF048E52CDA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.Equipment.Infrastructure", "src\Modules\Equipment\SurveyStore.Modules.Equipment.Infrastructure\SurveyStore.Modules.Equipment.Infrastructure.csproj", "{5EC38B92-ADB2-4324-8E6A-748C72BE619A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Modules.Equipment.Infrastructure", "src\Modules\Equipment\SurveyStore.Modules.Equipment.Infrastructure\SurveyStore.Modules.Equipment.Infrastructure.csproj", "{5EC38B92-ADB2-4324-8E6A-748C72BE619A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.Stores.Messages", "src\Modules\Stores\SurveyStore.Modules.Stores.Messages\SurveyStore.Modules.Stores.Messages.csproj", "{90C83DFC-CD05-4B48-AA31-7E687D02046E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +117,10 @@ Global
 		{5EC38B92-ADB2-4324-8E6A-748C72BE619A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EC38B92-ADB2-4324-8E6A-748C72BE619A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EC38B92-ADB2-4324-8E6A-748C72BE619A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90C83DFC-CD05-4B48-AA31-7E687D02046E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90C83DFC-CD05-4B48-AA31-7E687D02046E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90C83DFC-CD05-4B48-AA31-7E687D02046E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90C83DFC-CD05-4B48-AA31-7E687D02046E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -141,6 +147,7 @@ Global
 		{341855AB-E4DC-42F2-A17A-13AB043C28AF} = {2648F90B-8DAE-4109-9D1F-F17A904B6522}
 		{D4760267-EC17-4CB6-B1BE-EF048E52CDA8} = {2648F90B-8DAE-4109-9D1F-F17A904B6522}
 		{5EC38B92-ADB2-4324-8E6A-748C72BE619A} = {2648F90B-8DAE-4109-9D1F-F17A904B6522}
+		{90C83DFC-CD05-4B48-AA31-7E687D02046E} = {ABD11AA1-A28E-4DA2-AD13-1ED3B5C8F37C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C381337B-40C7-45CC-8FB7-1F8E39A37BE8}

@@ -1,13 +1,13 @@
-﻿using SurveyStore.Modules.Stores.Core.DAL;
-using SurveyStore.Modules.Stores.Core.DTO;
+﻿using SurveyStore.Modules.Stores.Core.DTO;
 using SurveyStore.Modules.Stores.Core.Entities;
 using SurveyStore.Modules.Stores.Core.Exceptions;
 using SurveyStore.Modules.Stores.Core.Mappings;
 using SurveyStore.Modules.Stores.Core.Repositories;
+using SurveyStore.Modules.Stores.Messages.Events;
+using SurveyStore.Shared.Abstractions.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Stores.Core.Services
@@ -15,10 +15,13 @@ namespace SurveyStore.Modules.Stores.Core.Services
     internal class StoreService : IStoreService
     {
         private readonly IStoreRepository _storeRepository;
+        private readonly IEventDispatcher _eventDispatcher;
 
-        public StoreService(IStoreRepository storeRepository)
+        public StoreService(IStoreRepository storeRepository,
+            IEventDispatcher eventDispatcher)
         {
             _storeRepository = storeRepository;
+            _eventDispatcher = eventDispatcher;
         }
 
         public async Task AddAsync(StoreDto storeDto)
@@ -44,6 +47,7 @@ namespace SurveyStore.Modules.Stores.Core.Services
             };
 
             await _storeRepository.AddAsync(store);
+            await _eventDispatcher.PublishAsync(new StoreCreated(storeDto.Id, storeDto.Name));
         }
 
         public async Task<IReadOnlyList<StoreDto>> BrowseAsync()
