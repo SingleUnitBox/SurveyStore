@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SurveyStore.Shared.Abstractions.Events;
 using Xunit;
 
 namespace SurveyStore.Modules.Stores.Tests.Unit.Services
@@ -79,12 +80,14 @@ namespace SurveyStore.Modules.Stores.Tests.Unit.Services
         }
 
         private readonly IStoreService _storeService;
+        private readonly IEventDispatcher _eventDispatcher;
         private readonly IStoreRepository _storeRepository;
 
         public StoreService_UpdateAsync_Tests()
         {
             _storeRepository = Substitute.For<IStoreRepository>();
-            _storeService = new StoreService(_storeRepository);
+            _eventDispatcher = Substitute.For<IEventDispatcher>();
+            _storeService = new StoreService(_storeRepository, _eventDispatcher);
         }
     }
 }

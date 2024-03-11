@@ -4,10 +4,8 @@ using SurveyStore.Modules.Stores.Core.Entities;
 using SurveyStore.Modules.Stores.Core.Exceptions;
 using SurveyStore.Modules.Stores.Core.Repositories;
 using SurveyStore.Modules.Stores.Core.Services;
+using SurveyStore.Shared.Abstractions.Events;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -45,11 +43,13 @@ namespace SurveyStore.Modules.Stores.Tests.Unit.Services
         }
 
         private readonly IStoreService _storeService;
+        private readonly IEventDispatcher _eventDispatcher;
         private readonly IStoreRepository _storeRepository;
         public StoreService_DeleteAsync_Tests()
         {
             _storeRepository = Substitute.For<IStoreRepository>();
-            _storeService = new StoreService(_storeRepository);
+            _eventDispatcher = Substitute.For<IEventDispatcher>();
+            _storeService = new StoreService(_storeRepository, _eventDispatcher);
         }
     }
 }
