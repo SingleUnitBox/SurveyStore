@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
@@ -51,6 +52,19 @@ namespace SurveyStore.Shared.Infrastructure.Modules
 
                 return context.Response.WriteAsJsonAsync(moduleInfoProvider.Modules);
             });
+
+        }
+
+        internal static IServiceCollection AddModulesRequests(this IServiceCollection services,
+            IList<Assembly> assemblies)
+        {
+            services.AddModuleRegistry(assemblies);
+
+            return services;
+        }
+
+        private static void AddModuleRegistry(this IServiceCollection services, IList<Assembly> assemblies)
+        {
 
         }
     }

@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Stores\SurveyStore.Modules.Stores.Messages\SurveyStore.Modules.Stores.Messages.csproj" />
     <ProjectReference Include="..\SurveyStore.Modules.Equipment.Core\SurveyStore.Modules.Equipment.Core.csproj" />
   </ItemGroup>
 
