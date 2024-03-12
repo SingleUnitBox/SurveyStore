@@ -62,6 +62,7 @@ namespace SurveyStore.Shared.Infrastructure.Modules
         {
             services.AddModuleRegistry(assemblies);
             services.AddSingleton<IModuleClient, ModuleClient>();
+            services.AddSingleton<IModuleSerializer, JsonModuleSerializer>();
 
             return services;
         }
