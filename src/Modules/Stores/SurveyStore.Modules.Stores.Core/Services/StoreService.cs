@@ -3,7 +3,6 @@ using SurveyStore.Modules.Stores.Core.Entities;
 using SurveyStore.Modules.Stores.Core.Exceptions;
 using SurveyStore.Modules.Stores.Core.Mappings;
 using SurveyStore.Modules.Stores.Core.Repositories;
-using SurveyStore.Modules.Stores.Messages.Events;
 using SurveyStore.Shared.Abstractions.Events;
 using System;
 using System.Collections.Generic;
