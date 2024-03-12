@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using SurveyStore.Shared.Abstractions.Events;
 using SurveyStore.Shared.Abstractions.Modules;
 
 namespace SurveyStore.Shared.Infrastructure.Modules
@@ -63,9 +65,29 @@ namespace SurveyStore.Shared.Infrastructure.Modules
             return services;
         }
 
-        private static void AddModuleRegistry(this IServiceCollection services, IList<Assembly> assemblies)
+        private static void AddModuleRegistry(this IServiceCollection services, IEnumerable<Assembly> assemblies)
         {
+            var registry = new ModuleRegistry();
+            var types = assemblies.SelectMany(a => a.GetTypes().ToArray());
+            var eventTypes = types
+                .Where(t => t.IsClass && typeof(IEvent).IsAssignableFrom(t))
+                .ToArray();
 
+            services.AddSingleton<IModuleRegistry>(sp =>
+            {
+                var eventDispatcher = sp.GetRequiredService<IEventDispatcher>();
+                var eventDispatcherType = eventDispatcher.GetType();
+
+                foreach (var eventType in eventTypes)
+                {
+                    registry.AddBroadcastAction(eventType, @event =>
+                            (Task)eventDispatcherType.GetMethod(nameof(eventDispatcher.PublishAsync))
+                            ?.MakeGenericMethod(eventType)
+                            .Invoke(eventDispatcher, new[] {@event}));
+                }
+
+                return registry;
+            });
         }
     }
 }

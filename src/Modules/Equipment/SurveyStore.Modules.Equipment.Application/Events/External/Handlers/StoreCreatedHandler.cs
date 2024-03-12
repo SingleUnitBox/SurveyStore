@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Builder;
 using SurveyStore.Modules.Equipment.Core.Entities;
 using SurveyStore.Modules.Equipment.Core.Repositories;
 using SurveyStore.Shared.Abstractions.Events;
-using SurveyStore.Modules.Stores.Messages.Events;
 
 namespace SurveyStore.Modules.Equipment.Application.Events.External.Handlers
 {

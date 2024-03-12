@@ -77,6 +77,7 @@ namespace SurveyStore.Shared.Infrastructure
             services.AddContexts();
             services.AddAuth(modules);
             services.AddModuleInfo(modules);
+            services.AddModulesRequests(assemblies);
             services.AddHostedService<AppInitializer>();
             services.AddSingleton<IClock, ClockUtc>();
             services.AddErrorHandling();

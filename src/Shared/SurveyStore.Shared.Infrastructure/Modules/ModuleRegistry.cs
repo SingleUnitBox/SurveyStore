@@ -13,7 +13,7 @@ namespace SurveyStore.Shared.Infrastructure.Modules
         {
             if (string.IsNullOrWhiteSpace(requestType.Namespace))
             {
-                throw new InvalidOperationException("Missing namespace");
+                throw new InvalidOperationException("Missing namespace.");
             }
 
             var broadcastRegistration = new ModuleBroadcastRegistration(requestType, action);
