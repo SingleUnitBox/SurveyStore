@@ -1,6 +1,8 @@
-﻿namespace SurveyStore.Shared.Abstractions.Events
+﻿using SurveyStore.Shared.Abstractions.Messaging;
+
+namespace SurveyStore.Shared.Abstractions.Events
 {
-    public interface IEvent
+    public interface IEvent : IMessage
     {
     }
 }
