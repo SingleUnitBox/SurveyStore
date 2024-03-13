@@ -19,6 +19,7 @@ using Microsoft.OpenApi.Models;
 using SurveyStore.Shared.Infrastructure.Commands;
 using SurveyStore.Shared.Infrastructure.Contexts;
 using SurveyStore.Shared.Infrastructure.Events;
+using SurveyStore.Shared.Infrastructure.Messaging;
 using SurveyStore.Shared.Infrastructure.Modules;
 using SurveyStore.Shared.Infrastructure.Queries;
 
@@ -78,6 +79,7 @@ namespace SurveyStore.Shared.Infrastructure
             services.AddAuth(modules);
             services.AddModuleInfo(modules);
             services.AddModulesRequests(assemblies);
+            services.AddMessaging();
             services.AddHostedService<AppInitializer>();
             services.AddSingleton<IClock, ClockUtc>();
             services.AddErrorHandling();
