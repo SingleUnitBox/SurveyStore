@@ -8,19 +8,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SurveyStore.Modules.Stores.Core.Events;
+using SurveyStore.Shared.Abstractions.Modules;
 
 namespace SurveyStore.Modules.Stores.Core.Services
 {
     internal class StoreService : IStoreService
     {
         private readonly IStoreRepository _storeRepository;
-        private readonly IEventDispatcher _eventDispatcher;
+        private readonly IModuleClient _moduleClient;
 
         public StoreService(IStoreRepository storeRepository,
-            IEventDispatcher eventDispatcher)
+            IModuleClient moduleClient)
         {
             _storeRepository = storeRepository;
-            _eventDispatcher = eventDispatcher;
+            _moduleClient = moduleClient;
         }
 
         public async Task AddAsync(StoreDto storeDto)
@@ -46,7 +48,7 @@ namespace SurveyStore.Modules.Stores.Core.Services
             };
 
             await _storeRepository.AddAsync(store);
-            await _eventDispatcher.PublishAsync(new StoreCreated(storeDto.Id, storeDto.Name));
+            await _moduleClient.PublishAsync(new StoreCreated(storeDto.Id, storeDto.Name));
         }
 
         public async Task<IReadOnlyList<StoreDto>> BrowseAsync()
