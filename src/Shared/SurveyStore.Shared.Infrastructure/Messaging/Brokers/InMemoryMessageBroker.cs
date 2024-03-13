@@ -1,14 +1,13 @@
-﻿using SurveyStore.Shared.Abstractions.Messaging;
+﻿using Microsoft.Extensions.Logging;
+using SurveyStore.Shared.Abstractions.Messaging;
 using SurveyStore.Shared.Abstractions.Modules;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.Extensions.Logging;
 
-namespace SurveyStore.Shared.Infrastructure.Messaging
+namespace SurveyStore.Shared.Infrastructure.Messaging.Brokers
 {
-    internal sealed  class InMemoryMessageBroker : IMessageBroker
+    internal sealed class InMemoryMessageBroker : IMessageBroker
     {
         private readonly IModuleClient _moduleClient;
         private readonly ILogger<InMemoryMessageBroker> _logger;
