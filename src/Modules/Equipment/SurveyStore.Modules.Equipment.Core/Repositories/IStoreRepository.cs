@@ -1,5 +1,4 @@
 ﻿using SurveyStore.Modules.Equipment.Core.Entities;
-using SurveyStore.Modules.Stores.Core.DTO;
 using System;
 using System.Threading.Tasks;
 
