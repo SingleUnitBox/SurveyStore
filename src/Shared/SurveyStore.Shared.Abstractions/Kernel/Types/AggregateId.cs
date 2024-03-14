@@ -12,9 +12,12 @@ namespace SurveyStore.Shared.Abstractions.Kernel.Types
 
         public AggregateId(T value)
             => Value = value;
+
         public bool Equals(AggregateId<T> other)
         {
-            throw new NotImplementedException();
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return EqualityComparer<T>.Default.Equals(Value, other.Value);
         }
 
         public override bool Equals(object obj)
@@ -27,7 +30,21 @@ namespace SurveyStore.Shared.Abstractions.Kernel.Types
 
         public override int GetHashCode()
         {
-            throw new NotImplementedException();
+            return EqualityComparer<T>.Default.GetHashCode(Value);
         }
+    }
+
+    public class AggregateId : AggregateId<Guid>
+    {
+        public AggregateId() : this(Guid.NewGuid())
+        {
+        }
+
+        public AggregateId(Guid value) : base(value)
+        {
+        }
+
+        public static implicit operator Guid(AggregateId id) => id.Value;
+        public static implicit operator AggregateId(Guid value) => new(value);
     }
 }

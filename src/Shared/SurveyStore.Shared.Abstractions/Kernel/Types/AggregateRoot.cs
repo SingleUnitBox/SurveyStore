@@ -36,4 +36,8 @@ namespace SurveyStore.Shared.Abstractions.Kernel.Types
 
         public void ClearEvents() => _events.Clear();
     }
+
+    public abstract class AggregateRoot : AggregateRoot<AggregateId>
+    {
+    }
 }
