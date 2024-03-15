@@ -7,11 +7,13 @@ using SurveyStore.Shared.Tests;
 using SurveyStore.Shared.Infrastructure.Time;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using SurveyStore.Modules.Users.Core.Exceptions;
+using SurveyStore.Shared.Infrastructure.Exceptions;
 using Xunit;
 
 namespace SurveyStore.Modules.Users.Tests.Integration.Controllers
@@ -46,10 +48,13 @@ namespace SurveyStore.Modules.Users.Tests.Integration.Controllers
 
             response.IsSuccessStatusCode.ShouldBeFalse();
             response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
-            response.StatusCode.ShouldBeOfType<EmailInUseException>();
+            //response.StatusCode.ShouldBeOfType<EmailInUseException>();
+            var errors = await response.Content.ReadFromJsonAsync<ExceptionToResponseMapper.ErrorsResponse>();
+            var error = errors?.Errors.FirstOrDefault();
+            error?.Code.ShouldBe("email_in_use");
         }
 
-        private const string Path = "users-module/account";
+        private const string Path = "users-module/account/sign-up";
         private readonly HttpClient _httpClient;
         private readonly UsersDbContext _dbContext;
         private readonly ClockUtc _clock;

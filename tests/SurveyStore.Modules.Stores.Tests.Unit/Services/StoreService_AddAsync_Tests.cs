@@ -9,6 +9,7 @@ using System;
 using System.Threading.Tasks;
 using SurveyStore.Shared.Abstractions.Events;
 using Xunit;
+using SurveyStore.Shared.Abstractions.Messaging;
 
 namespace SurveyStore.Modules.Stores.Tests.Unit.Services
 {
@@ -68,14 +69,15 @@ namespace SurveyStore.Modules.Stores.Tests.Unit.Services
         }
 
         private readonly IStoreService _storeService;
-        private readonly IStoreRepository _storeRepository;
         private readonly IEventDispatcher _eventDispatcher;
-
+        private readonly IStoreRepository _storeRepository;
+        private readonly IMessageBroker _messageBroker;
         public StoreService_AddAsync_Tests()
         {
             _storeRepository = Substitute.For<IStoreRepository>();
             _eventDispatcher = Substitute.For<IEventDispatcher>();
-            _storeService = new StoreService(_storeRepository, _eventDispatcher);
+            _messageBroker = Substitute.For<IMessageBroker>();
+            _storeService = new StoreService(_storeRepository, _messageBroker);
         }
     }
 }
