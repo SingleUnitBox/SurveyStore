@@ -27,7 +27,7 @@ namespace SurveyStore.Modules.Equipment.Application.Commands.Handlers
                 throw new EquipmentAlreadyExistsException(command.SerialNumber);
             }
 
-            equipment = command.AsEntity();
+            //equipment = command.AsEntity();
             await _surveyRepository.AddAsync(equipment);
         }
     }

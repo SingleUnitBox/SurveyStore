@@ -14,7 +14,7 @@ POST {{url}}/account/sign-up
 Content-Type: application/json
 
 {
-    "email": "user3@gmail.com",
+    "email": "user1@gmail.com",
     "password": "secret",
     "role": "user",
     "claims": {"permissions": ["stores", "users"]}
@@ -26,6 +26,6 @@ POST {{url}}/account/sign-in
 Content-Type: application/json
 
 {
-    "email": "user3@gmail.com",
+    "email": "user1@gmail.com",
     "password": "secret"
 }

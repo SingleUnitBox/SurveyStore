@@ -23,6 +23,7 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Queries.Handlers
         {
             var equipment = await _surveyEquipment
                 .AsNoTracking()
+                .Include(s => s.Store)
                 .SingleOrDefaultAsync(s => s.SerialNumber == query.SerialNumber);
 
             return equipment is null

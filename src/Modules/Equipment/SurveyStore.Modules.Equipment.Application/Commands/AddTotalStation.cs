@@ -15,6 +15,7 @@ namespace SurveyStore.Modules.Equipment.Application.Commands
         DateTime PurchasedAt,
         DateTime? CalibrationDate,
         TimeSpan? CalibrationInterval,
+        string StoreName,
         decimal Accuracy,
         int MaxRemoteDistance) : ICommand
     {

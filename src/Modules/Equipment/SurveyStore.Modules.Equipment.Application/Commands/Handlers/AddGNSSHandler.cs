@@ -23,7 +23,7 @@ namespace SurveyStore.Modules.Equipment.Application.Commands.Handlers
                 throw new EquipmentAlreadyExistsException(command.SerialNumber);
             }
 
-            gnss = command.AsEntity();
+            //gnss = command.AsEntity();
             await _repository.AddAsync(gnss);
         }
     }

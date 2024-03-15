@@ -7,19 +7,11 @@ namespace SurveyStore.Modules.Equipment.Application.Mappings
 {
     public static class Extensions
     {
-        public static TotalStation AsEntity(this AddSurveyEquipment command)
+        public static StoreDto AsDto(this Store store)
             => new()
             {
-                Id = command.Id,
-                Brand = command.Brand,
-                Model = command.Model,
-                Description = command.Description,
-                SerialNumber = command.SerialNumber,
-                PurchasedAt = command.PurchasedAt,
-                CalibrationDate = command.CalibrationDate,
-                CalibrationInterval = command.CalibrationInterval,
-                Accuracy = command.Accuracy ?? 0,
-                MaxRemoteDistance = command.MaxRemoteDistance ?? 0
+                Id = store.Id,
+                Name = store.Name
             };
 
         public static SurveyEquipmentDto AsDto(this SurveyEquipment equipment)
@@ -33,6 +25,7 @@ namespace SurveyStore.Modules.Equipment.Application.Mappings
                 PurchasedAt = equipment.PurchasedAt,
                 CalibrationDate = equipment.CalibrationDate,
                 CalibrationInterval = equipment.CalibrationInterval,
+                Store = equipment.Store.AsDto(),
                 Accuracy = equipment is TotalStation ts ? ts.Accuracy : null,
                 MaxRemoteDistance = equipment is TotalStation tst ? tst.MaxRemoteDistance : null,
                 IsActive = equipment is GNSS g ? g.IsActive : null,
@@ -51,45 +44,35 @@ namespace SurveyStore.Modules.Equipment.Application.Mappings
             };
 
         public static TotalStation AsEntity(this AddTotalStation command)
-            => new()
-            {
-                Id = command.Id,
-                Brand = command.Brand,
-                Model = command.Model,
-                Description = command.Description,
-                SerialNumber = command.SerialNumber,
-                PurchasedAt = command.PurchasedAt,
-                CalibrationDate = command.CalibrationDate,
-                CalibrationInterval = command.CalibrationInterval,
-                Accuracy = command.Accuracy,
-                MaxRemoteDistance = command.MaxRemoteDistance
-            };
-        public static GNSS AsEntity(this AddGNSS command)
-            => new()
-            {
-                Id = command.Id,
-                Brand = command.Brand,
-                Model = command.Model,
-                Description = command.Description,
-                SerialNumber = command.SerialNumber,
-                PurchasedAt = command.PurchasedAt,
-                CalibrationDate = command.CalibrationDate,
-                CalibrationInterval = command.CalibrationInterval,
-                IsActive = command.IsActive ?? false,
-            };
+            => TotalStation.Create(command.Brand, command.Model, command.Description, command.SerialNumber,
+                command.PurchasedAt, command.CalibrationDate, command.CalibrationInterval, command.Accuracy, command.MaxRemoteDistance);
 
-        public static FieldController AsEntity(this AddFieldController command)
-            => new()
-            {
-                Id = command.Id,
-                Brand = command.Brand,
-                Model = command.Model,
-                Description = command.Description,
-                SerialNumber = command.SerialNumber,
-                PurchasedAt = command.PurchasedAt,
-                CalibrationDate = command.CalibrationDate,
-                CalibrationInterval = command.CalibrationInterval,
-                ScreenSize = command.ScreenSize,
-            };
+        //public static GNSS AsEntity(this AddGNSS command)
+        //    => new()
+        //    {
+        //        Id = command.Id,
+        //        Brand = command.Brand,
+        //        Model = command.Model,
+        //        Description = command.Description,
+        //        SerialNumber = command.SerialNumber,
+        //        PurchasedAt = command.PurchasedAt,
+        //        CalibrationDate = command.CalibrationDate,
+        //        CalibrationInterval = command.CalibrationInterval,
+        //        IsActive = command.IsActive ?? false,
+        //    };
+
+        //public static FieldController AsEntity(this AddFieldController command)
+        //    => new()
+        //    {
+        //        Id = command.Id,
+        //        Brand = command.Brand,
+        //        Model = command.Model,
+        //        Description = command.Description,
+        //        SerialNumber = command.SerialNumber,
+        //        PurchasedAt = command.PurchasedAt,
+        //        CalibrationDate = command.CalibrationDate,
+        //        CalibrationInterval = command.CalibrationInterval,
+        //        ScreenSize = command.ScreenSize,
+        //    };
     }
 }

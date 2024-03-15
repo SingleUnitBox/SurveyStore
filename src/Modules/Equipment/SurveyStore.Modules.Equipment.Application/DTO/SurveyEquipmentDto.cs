@@ -16,6 +16,7 @@ namespace SurveyStore.Modules.Equipment.Application.DTO
         public DateTime PurchasedAt { get; set; }
         public DateTime? CalibrationDate { get; set; }
         public TimeSpan? CalibrationInterval { get; set; }
+        public StoreDto Store { get; set; }
         public decimal? Accuracy { get; set; }
         public int? MaxRemoteDistance { get; set; }
         public bool? IsActive { get; set; }

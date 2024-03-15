@@ -1,7 +1,6 @@
 @url = http://localhost:5000/equipment-module
 
-@equipmentId = a35a155d-b6b7-49d9-9717-24ccf5073c15
-
+@equipmentId = 339b3aff-4a99-4132-bae5-a8135d2986cd
 ###
 GET {{url}}
 
@@ -49,6 +48,7 @@ Content-Type: application/json
         "serialNumber": "ABC123",
         "purchasedAt": "2023-01-01",
         "calibrationDate": "2024-12-01",
+        "storeName": "TBH",
         "accuracy": 1.0,
         "maxRemoteDistance": 800
 }

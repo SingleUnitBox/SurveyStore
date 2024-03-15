@@ -23,6 +23,7 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Queries.Handlers
         public async Task<IEnumerable<SurveyEquipmentDto>> HandleAsync(BrowseSurveyEquipment query)
             => await _surveyEquipment
                 .AsNoTracking()
+                .Include(s => s.Store)
                 .Select(s => s.AsDto())
                 .ToListAsync();
     }

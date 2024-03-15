@@ -13,10 +13,13 @@ namespace SurveyStore.Modules.Equipment.Application.Commands.Handlers
     public class AddTotalStationHandler : ICommandHandler<AddTotalStation>
     {
         private readonly ISurveyEquipmentRepository _repository;
+        private readonly IStoreRepository _storeRepository;
 
-        public AddTotalStationHandler(ISurveyEquipmentRepository repository)
+        public AddTotalStationHandler(ISurveyEquipmentRepository repository,
+            IStoreRepository storeRepository)
         {
             _repository = repository;
+            _storeRepository = storeRepository;
         }
 
         public async Task HandleAsync(AddTotalStation command)
@@ -28,6 +31,13 @@ namespace SurveyStore.Modules.Equipment.Application.Commands.Handlers
             }
 
             totalStation = command.AsEntity();
+            var store = await _storeRepository.GetByNameAsync(command.StoreName);
+            if (store is null)
+            {
+                throw new StoreNotFoundException(command.StoreName);
+            }
+
+            totalStation.Store = store;
             await _repository.AddAsync(totalStation);
         }
     }

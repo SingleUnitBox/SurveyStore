@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SurveyStore.Modules.Equipment.Application.Types;
 using SurveyStore.Modules.Equipment.Core.Entities;
+using SurveyStore.Shared.Abstractions.Kernel.Types;
 
 namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Configuration
 {
@@ -10,7 +11,9 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Configuration
         public void Configure(EntityTypeBuilder<SurveyEquipment> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.SerialNumber)
+            builder.Property(x => x.Id)
+                .HasConversion(x => x.Value, x => new AggregateId(x));
+            builder.Property(x => x.Version)
                 .IsConcurrencyToken();
             builder.HasDiscriminator<string>("Type")
                 .HasValue<TotalStation>(SurveyEquipmentTypes.TotalStation)

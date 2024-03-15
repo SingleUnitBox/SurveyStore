@@ -9,6 +9,8 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Configuration
         public void Configure(EntityTypeBuilder<Store> builder)
         {
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id)
+                .HasConversion(x => x.Value, x => new(x));
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using SurveyStore.Modules.Equipment.Core.Entities;
 using SurveyStore.Modules.Equipment.Core.Repositories;
 using SurveyStore.Shared.Abstractions.Events;
+using SurveyStore.Shared.Abstractions.Kernel.Types;
 
 namespace SurveyStore.Modules.Equipment.Application.Events.External.Handlers
 {
@@ -31,12 +32,12 @@ namespace SurveyStore.Modules.Equipment.Application.Events.External.Handlers
 
             store = new Store
             {
-                Id = @event.Id,
+                Id = new StoreId(@event.Id),
                 Name = @event.Name,
             };
 
             await _repository.AddAsync(store);
-            _logger.LogInformation($"Store with id '{store.Id}' has been created.");
+            _logger.LogInformation($"Store with id '{store.Id.Value}' has been created.");
         }
     }
 }
