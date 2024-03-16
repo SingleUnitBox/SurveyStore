@@ -13,8 +13,8 @@ namespace SurveyStore.Modules.Equipment.Core.Entities
         public DateTime PurchasedAt { get; private set; }
         public DateTime? CalibrationDate { get; private set; }
         public TimeSpan? CalibrationInterval { get; private set; }
-        public Store Store { get; set; }
-        //public Surveyor? Surveyor { get; set; }
+        public Store? Store { get; set; }
+        public Surveyor? Surveyor { get; set; }
 
         protected SurveyEquipment(AggregateId id)
         {
