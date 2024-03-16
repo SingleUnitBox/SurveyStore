@@ -1,0 +1,4 @@
+@url = http://localhost:5000/surveyors-module
+
+###
+GET {{url}}

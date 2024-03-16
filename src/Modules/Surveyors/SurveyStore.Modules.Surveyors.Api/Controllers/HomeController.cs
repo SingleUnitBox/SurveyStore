@@ -2,7 +2,7 @@
 
 namespace SurveyStore.Modules.Surveyors.Api.Controllers
 {
-
+    [Route(SurveyorsModule.BasePath)]
     internal class HomeController : BaseController
     {
         [HttpGet]

@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Surveyors.Api")]
-namespace SurveyStore.Modules.Surveyors.Core
+namespace SurveyStore.Modules.Surveyors.Domain
 {
     internal static class Extensions
     {
