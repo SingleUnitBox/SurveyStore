@@ -5,6 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="module.surveyors.development.json" />
+    <None Remove="module.surveyors.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="module.surveyors.development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="module.surveyors.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SurveyStore.Modules.Surveyors.Core\SurveyStore.Modules.Surveyors.Core.csproj" />
   </ItemGroup>
 

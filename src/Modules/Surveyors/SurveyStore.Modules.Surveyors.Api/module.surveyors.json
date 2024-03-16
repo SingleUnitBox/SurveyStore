@@ -1,0 +1,8 @@
+{
+  "surveyors": {
+    "module": {
+      "name": "Surveyors",
+      "enabled": true
+    }
+  }
+}
