@@ -1,4 +1,5 @@
-﻿using SurveyStore.Shared.Abstractions.Kernel.Types;
+﻿using System.Collections.Generic;
+using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System.ComponentModel.DataAnnotations;
 
 namespace SurveyStore.Modules.Equipment.Core.Entities

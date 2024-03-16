@@ -1,6 +1,8 @@
 @url = http://localhost:5000/equipment-module
 
-@equipmentId = 339b3aff-4a99-4132-bae5-a8135d2986cd
+@equipmentId = 0fe2378e-8d37-41bd-8077-2c30c6075ca0
+
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4MTRmYjdhYjJhOGU0YmY2ODM0N2RlNmZiYmU5NTBhYiIsInVuaXF1ZV9uYW1lIjoiODE0ZmI3YWIyYThlNGJmNjgzNDdkZTZmYmJlOTUwYWIiLCJqdGkiOiIwNWUwODAwMS1mOTAyLTRiOGUtODc2ZS04ZTEwNDkxN2RiNjIiLCJpYXQiOiIxNzEwNjExMTAyMzI2IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIl0sIm5iZiI6MTcxMDYxMTEwMiwiZXhwIjoxNzEwNjkzOTAyLCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.WN1XLZ5AvLPBcbzDeJG7GpNK49cRzaNGHdDcu26Z_yE
 ###
 GET {{url}}
 
@@ -39,6 +41,7 @@ Content-Type: application/json
 
 ###
 POST {{url}}/equipment/total-station
+Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
@@ -51,6 +54,15 @@ Content-Type: application/json
         "storeName": "TBH",
         "accuracy": 1.0,
         "maxRemoteDistance": 800
+}
+
+###
+POST {{url}}/equipment/assign-store
+Content-Type: application/json
+
+{
+        "serialNumber": "ABC123",
+        "storeName": "TBH"
 }
 
 ###

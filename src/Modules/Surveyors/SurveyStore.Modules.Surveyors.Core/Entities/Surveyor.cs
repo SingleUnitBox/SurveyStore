@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SurveyStore.Modules.Surveyors.Domain.Entities
+namespace SurveyStore.Modules.Surveyors.Core.Entities
 {
     public class Surveyor
     {

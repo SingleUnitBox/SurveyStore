@@ -10,8 +10,8 @@ using SurveyStore.Modules.Equipment.Infrastructure.EF;
 namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(EquipmentDbContext))]
-    [Migration("20240310151020_EditSurveyEquipment")]
-    partial class EditSurveyEquipment
+    [Migration("20240316174039_AddStoreSurveyEquipmentSurveyor")]
+    partial class AddStoreSurveyEquipmentSurveyor
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,10 +22,23 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+            modelBuilder.Entity("SurveyStore.Modules.Equipment.Core.Entities.Store", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Stores");
+                });
+
             modelBuilder.Entity("SurveyStore.Modules.Equipment.Core.Entities.SurveyEquipment", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("Brand")
@@ -47,18 +60,47 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("SerialNumber")
-                        .IsConcurrencyToken()
                         .HasColumnType("text");
+
+                    b.Property<Guid?>("StoreId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("SurveyorId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("StoreId");
+
+                    b.HasIndex("SurveyorId");
 
                     b.ToTable("SurveyEquipment");
 
                     b.HasDiscriminator<string>("Type").HasValue("SurveyEquipment");
+                });
+
+            modelBuilder.Entity("SurveyStore.Modules.Equipment.Core.Entities.Surveyor", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Position")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Surveyor");
                 });
 
             modelBuilder.Entity("SurveyStore.Modules.Equipment.Core.Entities.CableAvoidanceTool", b =>
@@ -112,6 +154,21 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
                         .HasColumnType("integer");
 
                     b.HasDiscriminator().HasValue("total station");
+                });
+
+            modelBuilder.Entity("SurveyStore.Modules.Equipment.Core.Entities.SurveyEquipment", b =>
+                {
+                    b.HasOne("SurveyStore.Modules.Equipment.Core.Entities.Store", "Store")
+                        .WithMany()
+                        .HasForeignKey("StoreId");
+
+                    b.HasOne("SurveyStore.Modules.Equipment.Core.Entities.Surveyor", "Surveyor")
+                        .WithMany()
+                        .HasForeignKey("SurveyorId");
+
+                    b.Navigation("Store");
+
+                    b.Navigation("Surveyor");
                 });
 #pragma warning restore 612, 618
         }

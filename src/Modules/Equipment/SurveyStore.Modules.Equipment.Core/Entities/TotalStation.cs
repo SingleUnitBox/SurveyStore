@@ -12,10 +12,10 @@ namespace SurveyStore.Modules.Equipment.Core.Entities
         public decimal Accuracy { get; set; }
         public int MaxRemoteDistance { get; set; }
 
-        public static TotalStation Create(string brand, string model, string description, string serialNumber, DateTime purchasedAt,
+        public static TotalStation Create(Guid id, string brand, string model, string description, string serialNumber, DateTime purchasedAt,
             DateTime? calibrationDate, TimeSpan? calibrationInterval, decimal accuracy, int maxRemoteDistance)
         {
-            var totalStation = new TotalStation(Guid.NewGuid());
+            var totalStation = new TotalStation(id);
             totalStation.ChangeBrand(brand);
             totalStation.ChangeModel(model);
             totalStation.ChangeDescription(description);

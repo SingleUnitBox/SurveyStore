@@ -31,13 +31,18 @@ namespace SurveyStore.Modules.Equipment.Application.Commands.Handlers
             }
 
             totalStation = command.AsEntity();
-            var store = await _storeRepository.GetByNameAsync(command.StoreName);
-            if (store is null)
+
+            if (!string.IsNullOrWhiteSpace(command.StoreName))
             {
-                throw new StoreNotFoundException(command.StoreName);
+                var store = await _storeRepository.GetByNameAsync(command.StoreName);
+                if (store is null)
+                {
+                    throw new StoreNotFoundException(command.StoreName);
+                }
+
+                totalStation.Store = store;
             }
 
-            totalStation.Store = store;
             await _repository.AddAsync(totalStation);
         }
     }

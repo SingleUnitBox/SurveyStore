@@ -7,11 +7,14 @@ using SurveyStore.Shared.Abstractions.Queries;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SurveyStore.Modules.Equipment.Api.Controllers
 {
+    [Authorize(Policy = Policy)]
     public class EquipmentController : BaseController
     {
+        public const string Policy = "equipment";
         private readonly ICommandDispatcher _commandDispatcher;
         private readonly IQueryDispatcher _queryDispatcher;
 
@@ -22,6 +25,7 @@ namespace SurveyStore.Modules.Equipment.Api.Controllers
             _queryDispatcher = queryDispatcher;
         }
 
+        [AllowAnonymous]
         [ProducesResponseType(200)]
         [HttpGet("all")]
         public async Task<ActionResult<IReadOnlyCollection<SurveyEquipmentDto>>> Browse()
@@ -64,6 +68,13 @@ namespace SurveyStore.Modules.Equipment.Api.Controllers
         {
             await _commandDispatcher.DispatchAsync(command);
             return CreatedAtAction(nameof(Get), new { id = command.Id }, null);
+        }
+
+        [HttpPost("assign-store")]
+        public async Task<ActionResult> AssignStoreAsync(AssignStoreToSurveyEquipment command)
+        {
+            await _commandDispatcher.DispatchAsync(command);
+            return NoContent();
         }
     }
 }

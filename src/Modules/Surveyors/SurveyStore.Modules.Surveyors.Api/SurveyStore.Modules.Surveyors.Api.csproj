@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SurveyStore.Modules.Surveyors.Core\SurveyStore.Modules.Surveyors.Domain.csproj" />
+    <ProjectReference Include="..\SurveyStore.Modules.Surveyors.Core\SurveyStore.Modules.Surveyors.Core.csproj" />
   </ItemGroup>
 
 </Project>

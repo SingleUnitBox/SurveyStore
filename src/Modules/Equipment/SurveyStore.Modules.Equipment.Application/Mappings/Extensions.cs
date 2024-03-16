@@ -25,7 +25,7 @@ namespace SurveyStore.Modules.Equipment.Application.Mappings
                 PurchasedAt = equipment.PurchasedAt,
                 CalibrationDate = equipment.CalibrationDate,
                 CalibrationInterval = equipment.CalibrationInterval,
-                Store = equipment.Store.AsDto(),
+                Store = equipment.Store?.AsDto(),
                 Accuracy = equipment is TotalStation ts ? ts.Accuracy : null,
                 MaxRemoteDistance = equipment is TotalStation tst ? tst.MaxRemoteDistance : null,
                 IsActive = equipment is GNSS g ? g.IsActive : null,
@@ -44,7 +44,7 @@ namespace SurveyStore.Modules.Equipment.Application.Mappings
             };
 
         public static TotalStation AsEntity(this AddTotalStation command)
-            => TotalStation.Create(command.Brand, command.Model, command.Description, command.SerialNumber,
+            => TotalStation.Create(command.Id, command.Brand, command.Model, command.Description, command.SerialNumber,
                 command.PurchasedAt, command.CalibrationDate, command.CalibrationInterval, command.Accuracy, command.MaxRemoteDistance);
 
         //public static GNSS AsEntity(this AddGNSS command)

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SurveyStore.Shared.Abstractions.Commands;
+﻿using SurveyStore.Shared.Abstractions.Commands;
+using System;
 
 namespace SurveyStore.Modules.Equipment.Application.Commands
 {
@@ -15,7 +11,7 @@ namespace SurveyStore.Modules.Equipment.Application.Commands
         DateTime PurchasedAt,
         DateTime? CalibrationDate,
         TimeSpan? CalibrationInterval,
-        string StoreName,
+        string? StoreName,
         decimal Accuracy,
         int MaxRemoteDistance) : ICommand
     {

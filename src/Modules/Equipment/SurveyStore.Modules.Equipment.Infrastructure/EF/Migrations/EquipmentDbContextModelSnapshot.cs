@@ -63,6 +63,9 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
                     b.Property<Guid?>("StoreId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("SurveyorId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("text");
@@ -75,9 +78,27 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
 
                     b.HasIndex("StoreId");
 
+                    b.HasIndex("SurveyorId");
+
                     b.ToTable("SurveyEquipment");
 
                     b.HasDiscriminator<string>("Type").HasValue("SurveyEquipment");
+                });
+
+            modelBuilder.Entity("SurveyStore.Modules.Equipment.Core.Entities.Surveyor", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Position")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Surveyor");
                 });
 
             modelBuilder.Entity("SurveyStore.Modules.Equipment.Core.Entities.CableAvoidanceTool", b =>
@@ -139,7 +160,13 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
                         .WithMany()
                         .HasForeignKey("StoreId");
 
+                    b.HasOne("SurveyStore.Modules.Equipment.Core.Entities.Surveyor", "Surveyor")
+                        .WithMany()
+                        .HasForeignKey("SurveyorId");
+
                     b.Navigation("Store");
+
+                    b.Navigation("Surveyor");
                 });
 #pragma warning restore 612, 618
         }

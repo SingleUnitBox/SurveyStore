@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using SurveyStore.Modules.Surveyors.Domain;
+using SurveyStore.Modules.Surveyors.Core;
 using SurveyStore.Shared.Abstractions.Modules;
 using System.Collections.Generic;
 
