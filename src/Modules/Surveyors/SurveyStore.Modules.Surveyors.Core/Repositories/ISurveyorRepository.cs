@@ -8,6 +8,7 @@ namespace SurveyStore.Modules.Surveyors.Core.Repositories
     public interface ISurveyorRepository
     {
         Task<Surveyor> GetByIdAsync(Guid id);
+        Task<Surveyor> GetByEmailAsync(string email);
         Task<IReadOnlyCollection<Surveyor>> BrowseAsync();
         Task AddAsync(Surveyor surveyor);
         Task UpdateAsync(Surveyor surveyor);
