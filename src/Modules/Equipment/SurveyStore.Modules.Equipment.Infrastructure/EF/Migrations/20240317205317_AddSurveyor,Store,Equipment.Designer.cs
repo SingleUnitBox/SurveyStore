@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SurveyStore.Modules.Equipment.Infrastructure.EF;
@@ -9,9 +10,10 @@ using SurveyStore.Modules.Equipment.Infrastructure.EF;
 namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(EquipmentDbContext))]
-    partial class EquipmentDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240317205317_AddSurveyor,Store,Equipment")]
+    partial class AddSurveyorStoreEquipment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,6 +93,9 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("FullName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Position")
                         .HasColumnType("text");
 
                     b.HasKey("Id");

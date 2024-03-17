@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using SurveyStore.Modules.Stores.Core.Commands;
+using SurveyStore.Shared.Abstractions.Commands;
 
 namespace SurveyStore.Modules.Stores.Api.Controllers
 {
@@ -14,10 +16,13 @@ namespace SurveyStore.Modules.Stores.Api.Controllers
     {
         private const string Policy = "stores";
         private readonly IStoreService _storeService;
+        private readonly ICommandDispatcher _commandDispatcher;
 
-        public StoresController(IStoreService storeService)
+        public StoresController(IStoreService storeService,
+            ICommandDispatcher commandDispatcher)
         {
             _storeService = storeService;
+            _commandDispatcher = commandDispatcher;
         }
 
         [AllowAnonymous]
@@ -38,11 +43,10 @@ namespace SurveyStore.Modules.Stores.Api.Controllers
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
         [HttpPost]
-        public async Task<ActionResult> Post(StoreDto storeDto)
+        public async Task<ActionResult> Post(AddStore command)
         {
-            storeDto.Id = Guid.NewGuid();
-            await _storeService.AddAsync(storeDto);
-            return CreatedAtAction(nameof(Get), new { storeId = storeDto.Id }, null);
+            await _commandDispatcher.DispatchAsync(command);
+            return CreatedAtAction(nameof(Get), new { storeId = command.Id }, null);
         }
 
         [ProducesResponseType(204)]

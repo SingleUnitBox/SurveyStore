@@ -10,8 +10,8 @@ using SurveyStore.Modules.Equipment.Infrastructure.EF;
 namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(EquipmentDbContext))]
-    [Migration("20240316174039_AddStoreSurveyEquipmentSurveyor")]
-    partial class AddStoreSurveyEquipmentSurveyor
+    [Migration("20240317205609_removeSurveyorPosition")]
+    partial class removeSurveyorPosition
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -95,12 +95,9 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
                     b.Property<string>("FullName")
                         .HasColumnType("text");
 
-                    b.Property<string>("Position")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Surveyor");
+                    b.ToTable("Surveyors");
                 });
 
             modelBuilder.Entity("SurveyStore.Modules.Equipment.Core.Entities.CableAvoidanceTool", b =>

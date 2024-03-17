@@ -7,7 +7,6 @@ namespace SurveyStore.Modules.Stores.Core.Services
 {
     public interface IStoreService
     {
-        Task AddAsync(StoreDto storeDto);
         Task UpdateAsync(StoreDto storeDto);
         Task DeleteAsync(Guid id);
         Task<StoreDto> GetAsync(Guid id);

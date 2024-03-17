@@ -26,32 +26,6 @@ namespace SurveyStore.Modules.Stores.Core.Services
             _messageBroker = messageBroker;
         }
 
-        public async Task AddAsync(StoreDto storeDto)
-        {
-            var store = await _storeRepository.GetAsync(storeDto.Id);
-            if (store is not null)
-            {
-                throw new StoreAlreadyExistsException(storeDto.Id);
-            }
-
-            if (storeDto.OpeningTime >= storeDto.ClosingTime)
-            {
-                throw new InvalidOperationTimeException(storeDto.OpeningTime, storeDto.ClosingTime);
-            }
-
-            store = new Store
-            {
-                Id = storeDto.Id,
-                Name = storeDto.Name,
-                Location = storeDto.Location,
-                OpeningTime = storeDto.OpeningTime,
-                ClosingTime = storeDto.ClosingTime,
-            };
-
-            await _storeRepository.AddAsync(store);
-            await _messageBroker.PublishAsync(new StoreCreated(storeDto.Id, storeDto.Name));
-        }
-
         public async Task<IReadOnlyList<StoreDto>> BrowseAsync()
             => (await _storeRepository.BrowseAsync())
                 .Select(x => x.AsDto())

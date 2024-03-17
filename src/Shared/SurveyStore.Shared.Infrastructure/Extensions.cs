@@ -25,6 +25,7 @@ using SurveyStore.Shared.Infrastructure.Queries;
 
 [assembly: InternalsVisibleTo("SurveyStore.Shared.Tests")]
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Users.Tests.Integration")]
+[assembly: InternalsVisibleTo("SurveyStore.Modules.Stores.Tests.Unit")]
 [assembly: InternalsVisibleTo("SurveyStore.Bootstrapper")]
 namespace SurveyStore.Shared.Infrastructure
 {

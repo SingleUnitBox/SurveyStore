@@ -14,10 +14,10 @@ POST {{url}}/account/sign-up
 Content-Type: application/json
 
 {
-    "email": "user1@gmail.com",
+    "email": "user@gmail.com",
     "password": "secret",
     "role": "user",
-    "claims": {"permissions": ["stores", "users", "surveyors"]}
+    "claims": {"permissions": ["stores", "users", "surveyors", "equipment"]}
 
 }
 
@@ -26,6 +26,6 @@ POST {{url}}/account/sign-in
 Content-Type: application/json
 
 {
-    "email": "user1@gmail.com",
+    "email": "user@gmail.com",
     "password": "secret"
 }

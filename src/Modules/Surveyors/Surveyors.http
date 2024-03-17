@@ -9,12 +9,12 @@ GET {{url}}
 GET {{url}}/{{surveyorId}}
 
 ###
-POST {{url}}
+POST {{url}}/surveyors
 Content-Type: application/json
 
 {
-    "email": "cezzuk@gmail.com",
-    "firstName": "Cez",
+    "email": "ce@gmail.com",
+    "firstName": "Cezasdas",
     "surname": "Zuk",
-    "position": "surveyor",
+    "position": "surveyor"
 }
