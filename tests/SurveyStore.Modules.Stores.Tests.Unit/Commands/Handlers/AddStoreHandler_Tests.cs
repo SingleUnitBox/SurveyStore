@@ -40,6 +40,41 @@ namespace SurveyStore.Modules.Stores.Tests.Unit.Commands.Handlers
             exception.ShouldBeOfType<StoreAlreadyExistsException>();
         }
 
+        [Fact]
+        public async Task given_invalid_operation_hours_add_async_should_fail()
+        {
+            var command = new AddStore
+            (
+                "testName",
+                "testLocation",
+                new DateTime(2024, 1, 1, 08, 0, 0),
+                new DateTime(2024, 1, 1, 06, 0, 0)
+            );
+
+            var exception = await Record.ExceptionAsync(() => Act(command));
+
+            exception.ShouldNotBeNull();
+            exception.ShouldBeOfType<InvalidOperationTimeException>();
+        }
+
+        [Fact]
+        public async Task given_valid_store_add_async_should_succeed()
+        {
+            var command = new AddStore
+            (
+                "testName",
+                "testLocation",
+                new DateTime(2024, 1, 1, 08, 0, 0),
+                new DateTime(2024, 1, 1, 16, 0, 0)
+            );
+
+            await Act(command);
+
+            await _storeRepository.Received(1).AddAsync(
+                Arg.Is<Store>(x => x.Id == command.Id));
+
+        }
+
         private readonly ICommandHandler<AddStore> _commandHandler;
         private readonly IStoreRepository _storeRepository;
         private readonly IMessageBroker _messageBroker;
