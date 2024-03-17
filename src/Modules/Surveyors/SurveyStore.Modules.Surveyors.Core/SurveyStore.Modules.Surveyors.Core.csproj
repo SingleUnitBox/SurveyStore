@@ -8,8 +8,4 @@
     <ProjectReference Include="..\..\..\Shared\SurveyStore.Shared.Infrastructure\SurveyStore.Shared.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DAL\Queries\" />
-  </ItemGroup>
-
 </Project>

@@ -1,4 +1,20 @@
 @url = http://localhost:5000/surveyors-module
 
+@surveyorId = 
+
 ###
 GET {{url}}
+
+###
+GET {{url}}/{{surveyorId}}
+
+###
+POST {{url}}
+Content-Type: application/json
+
+{
+    "email": "cezzuk@gmail.com",
+    "firstName": "Cez",
+    "surname": "Zuk",
+    "position": "surveyor",
+}
