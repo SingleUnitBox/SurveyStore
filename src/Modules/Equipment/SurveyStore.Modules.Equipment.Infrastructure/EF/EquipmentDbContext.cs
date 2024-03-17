@@ -7,6 +7,7 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF
     {
         public DbSet<SurveyEquipment> SurveyEquipment { get; set; }
         public DbSet<Store> Stores { get; set; }
+        public DbSet<Surveyor> Surveyors { get; set; }
         public EquipmentDbContext(DbContextOptions<EquipmentDbContext> options)
             : base(options)
         {

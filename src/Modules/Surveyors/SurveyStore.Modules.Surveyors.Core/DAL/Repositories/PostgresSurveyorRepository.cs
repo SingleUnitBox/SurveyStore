@@ -1,4 +1,5 @@
-﻿using SurveyStore.Modules.Surveyors.Core.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using SurveyStore.Modules.Surveyors.Core.Entities;
 using SurveyStore.Modules.Surveyors.Core.Repositories;
 using System;
 using System.Collections.Generic;
@@ -8,34 +9,42 @@ namespace SurveyStore.Modules.Surveyors.Core.DAL.Repositories
 {
     public class PostgresSurveyorRepository : ISurveyorRepository
     {
-        public Task<Surveyor> GetByIdAsync(Guid id)
+        private readonly DbSet<Surveyor> _surveyors;
+        private readonly SurveyorDbContext _dbContext;
+
+        public PostgresSurveyorRepository(SurveyorDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _surveyors = dbContext.Surveyors;
+            _dbContext = dbContext;
         }
+
+        public Task<Surveyor> GetByIdAsync(Guid id)
+            => _surveyors.SingleOrDefaultAsync(x => x.Id == id);
 
         public Task<Surveyor> GetByEmailAsync(string email)
+            => _surveyors.SingleOrDefaultAsync(x => x.Email == email);
+
+        public async Task<IReadOnlyCollection<Surveyor>> BrowseAsync()
+            => await _surveyors
+                .AsNoTracking()
+                .ToListAsync();
+
+        public async Task AddAsync(Surveyor surveyor)
         {
-            throw new NotImplementedException();
+            await _surveyors.AddAsync(surveyor);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task<IReadOnlyCollection<Surveyor>> BrowseAsync()
+        public async Task UpdateAsync(Surveyor surveyor)
         {
-            throw new NotImplementedException();
+            _surveyors.Update(surveyor);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task AddAsync(Surveyor surveyor)
+        public async Task DeleteAsync(Surveyor surveyor)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(Surveyor surveyor)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteAsync(Surveyor surveyor)
-        {
-            throw new NotImplementedException();
+            _surveyors.Remove(surveyor);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

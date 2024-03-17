@@ -1,11 +1,10 @@
-﻿using System.Threading.Tasks;
-using SurveyStore.Modules.Surveyors.Core.Entities;
+﻿using SurveyStore.Modules.Surveyors.Core.Entities;
 using SurveyStore.Modules.Surveyors.Core.Events;
 using SurveyStore.Modules.Surveyors.Core.Exceptions;
 using SurveyStore.Modules.Surveyors.Core.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
 using SurveyStore.Shared.Abstractions.Messaging;
-using SurveyStore.Shared.Abstractions.Modules;
+using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Surveyors.Core.Commands.Handlers
 {
