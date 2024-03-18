@@ -27,17 +27,6 @@ namespace SurveyStore.Modules.Stores.Core.Services
                 .Select(x => x.AsDto())
                 .ToList();
 
-        public async Task DeleteAsync(Guid id)
-        {
-            var store = await _storeRepository.GetAsync(id);
-            if (store is null)
-            {
-                throw new StoreNotFoundException(id);
-            }
-
-            await _storeRepository.DeleteAsync(store);
-        }
-
         public async Task<StoreDto> GetAsync(Guid id)
         {
             var store = await _storeRepository.GetAsync(id);

@@ -1,20 +1,20 @@
-﻿using NSubstitute;
+﻿using System;
+using NSubstitute;
+using SurveyStore.Modules.Stores.Core.Commands;
+using SurveyStore.Modules.Stores.Core.Repositories;
+using SurveyStore.Shared.Abstractions.Commands;
+using System.Threading.Tasks;
 using Shouldly;
+using SurveyStore.Modules.Stores.Core.Commands.Handlers;
 using SurveyStore.Modules.Stores.Core.Entities;
 using SurveyStore.Modules.Stores.Core.Exceptions;
-using SurveyStore.Modules.Stores.Core.Repositories;
-using SurveyStore.Modules.Stores.Core.Services;
-using SurveyStore.Shared.Abstractions.Events;
-using System;
-using System.Threading.Tasks;
-using SurveyStore.Shared.Abstractions.Messaging;
 using Xunit;
 
-namespace SurveyStore.Modules.Stores.Tests.Unit.Services
+namespace SurveyStore.Modules.Stores.Tests.Unit.Commands.Handlers
 {
-    public class StoreService_DeleteAsync_Tests
+    public class DeleteStoreHandler_Tests
     {
-        private Task Act(Guid id) => _storeService.DeleteAsync(id);
+        public Task Act(DeleteStore command) => _commandHandler.HandleAsync(command);
 
         [Fact]
         public async Task given_non_existing_store_delete_async_should_fail()
@@ -22,7 +22,7 @@ namespace SurveyStore.Modules.Stores.Tests.Unit.Services
             var id = Guid.NewGuid();
             _storeRepository.GetAsync(id).Returns(Task.FromResult<Store>(null));
 
-            var exception = await Record.ExceptionAsync(() => Act(id));
+            var exception = await Record.ExceptionAsync(() => Act(new DeleteStore(id)));
 
             exception.ShouldNotBeNull();
             exception.ShouldBeOfType<StoreNotFoundException>();
@@ -37,22 +37,18 @@ namespace SurveyStore.Modules.Stores.Tests.Unit.Services
             };
             _storeRepository.GetAsync(store.Id).Returns(Task.FromResult<Store>(store));
 
-            await Act(store.Id);
+            await Act(new DeleteStore(store.Id));
 
             await _storeRepository.Received(1)
                 .DeleteAsync(Arg.Is<Store>(s => s.Id == store.Id));
         }
 
-        private readonly IStoreService _storeService;
-        private readonly IEventDispatcher _eventDispatcher;
+        private readonly ICommandHandler<DeleteStore> _commandHandler;
         private readonly IStoreRepository _storeRepository;
-        private readonly IMessageBroker _messageBroker;
-        public StoreService_DeleteAsync_Tests()
+        public DeleteStoreHandler_Tests()
         {
             _storeRepository = Substitute.For<IStoreRepository>();
-            _eventDispatcher = Substitute.For<IEventDispatcher>();
-            _messageBroker = Substitute.For<IMessageBroker>();
-            _storeService = new StoreService(_storeRepository, _messageBroker);
+            _commandHandler = new DeleteStoreHandler(_storeRepository);
         }
     }
 }
