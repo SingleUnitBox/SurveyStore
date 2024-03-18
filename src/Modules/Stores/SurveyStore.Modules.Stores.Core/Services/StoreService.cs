@@ -1,16 +1,12 @@
 ﻿using SurveyStore.Modules.Stores.Core.DTO;
-using SurveyStore.Modules.Stores.Core.Entities;
 using SurveyStore.Modules.Stores.Core.Exceptions;
 using SurveyStore.Modules.Stores.Core.Mappings;
 using SurveyStore.Modules.Stores.Core.Repositories;
-using SurveyStore.Shared.Abstractions.Events;
+using SurveyStore.Shared.Abstractions.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SurveyStore.Modules.Stores.Core.Events;
-using SurveyStore.Shared.Abstractions.Messaging;
-using SurveyStore.Shared.Abstractions.Modules;
 
 namespace SurveyStore.Modules.Stores.Core.Services
 {

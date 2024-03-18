@@ -69,8 +69,7 @@ namespace SurveyStore.Modules.Stores.Api.Controllers
         [HttpDelete("{storeId:guid}")]
         public async Task<ActionResult> Delete(Guid storeId)
         {
-            await _storeService.DeleteAsync(storeId);
-
+            await _commandDispatcher.DispatchAsync(new DeleteStore(storeId));
             return NoContent();
         }
     }
