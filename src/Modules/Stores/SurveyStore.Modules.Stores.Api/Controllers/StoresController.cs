@@ -57,7 +57,6 @@ namespace SurveyStore.Modules.Stores.Api.Controllers
         public async Task<ActionResult> Put(Guid storeId, UpdateStore command)
         {
             await _commandDispatcher.DispatchAsync(command with { Id = storeId });
-
             return NoContent();
         }
 
