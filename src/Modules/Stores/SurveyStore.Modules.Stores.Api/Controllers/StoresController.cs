@@ -54,10 +54,9 @@ namespace SurveyStore.Modules.Stores.Api.Controllers
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
         [HttpPut("{storeId:guid}")]
-        public async Task<ActionResult> Put(Guid storeId, StoreDto storeDto)
+        public async Task<ActionResult> Put(Guid storeId, UpdateStore command)
         {
-            storeDto.Id = storeId;
-            await _storeService.UpdateAsync(storeDto);
+            await _commandDispatcher.DispatchAsync(command with { Id = storeId });
 
             return NoContent();
         }

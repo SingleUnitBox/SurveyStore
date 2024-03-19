@@ -37,24 +37,5 @@ namespace SurveyStore.Modules.Stores.Core.Services
 
             return store.AsDto();
         }
-
-        public async Task UpdateAsync(StoreDto storeDto)
-        {
-            var store = await _storeRepository.GetAsync(storeDto.Id);
-            if (store is null)
-            {
-                throw new StoreNotFoundException(storeDto.Id);
-            }
-
-            if (storeDto.OpeningTime >= storeDto.ClosingTime)
-            {
-                throw new InvalidOperationTimeException(storeDto.OpeningTime, storeDto.ClosingTime);
-            }
-
-            store.OpeningTime = storeDto.OpeningTime;
-            store.ClosingTime = storeDto.ClosingTime;
-
-            await _storeRepository.UpdateAsync(store);
-        }
     }
 }
