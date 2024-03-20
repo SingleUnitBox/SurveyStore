@@ -56,8 +56,13 @@ namespace SurveyStore.Modules.Equipment.Core.Entities
         public void ChangeCalibrationInterval(TimeSpan calibrationInterval)
             => CalibrationInterval = calibrationInterval;
 
-        public void ChangeStore(Store store)
-            => Store = store;
+        public void AssignStore(Store store)
+        {
+            Store = store;
+            IncrementVersion();
+        }
+
+        
     }
 }
  

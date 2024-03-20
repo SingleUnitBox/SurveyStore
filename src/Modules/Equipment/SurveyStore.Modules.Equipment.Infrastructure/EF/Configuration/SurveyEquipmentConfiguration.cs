@@ -21,6 +21,8 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Configuration
                 .HasValue<FieldController>(SurveyEquipmentTypes.FieldController)
                 .HasValue<GroundPenetratingRadar>(SurveyEquipmentTypes.GroundPenetratingRadar)
                 .HasValue<CableAvoidanceTool>(SurveyEquipmentTypes.CAT);
+            builder.HasIndex(x => x.SerialNumber)
+                .IsUnique();
         }
     }
 }

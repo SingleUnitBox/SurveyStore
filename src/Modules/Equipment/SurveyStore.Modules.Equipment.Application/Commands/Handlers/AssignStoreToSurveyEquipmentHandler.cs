@@ -33,7 +33,7 @@ namespace SurveyStore.Modules.Equipment.Application.Commands.Handlers
                 throw new StoreNotFoundException(command.StoreName);
             }
 
-            equipment.ChangeStore(store);
+            equipment.AssignStore(store);
             await _surveyEquipmentRepository.UpdateAsync(equipment);
         }
     }
