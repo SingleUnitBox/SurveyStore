@@ -2,7 +2,7 @@
 
 namespace SurveyStore.Shared.Abstractions.Kernel
 {
-    public interface IDomainDispatcher
+    public interface IDomainEventDispatcher
     {
         Task DispatchAsync(params IDomainEvent[] @events);
     }
