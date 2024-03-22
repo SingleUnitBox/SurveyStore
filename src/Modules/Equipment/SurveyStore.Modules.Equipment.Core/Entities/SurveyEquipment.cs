@@ -1,4 +1,5 @@
 ﻿using System;
+using SurveyStore.Modules.Equipment.Core.Events;
 using SurveyStore.Modules.Equipment.Core.Exceptions;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
 
@@ -59,7 +60,7 @@ namespace SurveyStore.Modules.Equipment.Core.Entities
         public void AssignStore(Store store)
         {
             Store = store;
-            IncrementVersion();
+            AddEvent(new StoreAssigned(store.Id, store.Name));
         }
 
         

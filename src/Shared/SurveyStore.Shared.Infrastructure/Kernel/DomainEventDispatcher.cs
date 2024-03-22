@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using SurveyStore.Shared.Abstractions.Kernel;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SurveyStore.Shared.Infrastructure.Kernel
 {
-    public class DomainEventDispatcher : IDomainEventDispatcher
+    internal class DomainEventDispatcher : IDomainEventDispatcher
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -29,7 +27,8 @@ namespace SurveyStore.Shared.Infrastructure.Kernel
                 foreach (var domainEvent in events)
                 {
                     var handlerType = typeof(IDomainEventHandler<>).MakeGenericType(domainEvent.GetType());
-                    var handlers = scope.ServiceProvider.GetServices(handlerType).ToArray();
+                    var handlers = scope.ServiceProvider.GetServices(handlerType);
+
                     var tasks = handlers.Select(h => (Task)handlerType
                         .GetMethod(nameof(IDomainEventHandler<IDomainEvent>.HandleAsync))
                         ?.Invoke(h, new[] { domainEvent }));

@@ -77,7 +77,7 @@ namespace SurveyStore.Shared.Infrastructure
             services.AddCommands(assemblies);
             services.AddQueries(assemblies);
             services.AddEvents(assemblies);
-            services.AddDomainEvents();
+            services.AddDomainEvents(assemblies);
             services.AddContexts();
             services.AddAuth(modules);
             services.AddModuleInfo(modules);
