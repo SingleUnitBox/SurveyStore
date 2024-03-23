@@ -62,8 +62,6 @@ namespace SurveyStore.Modules.Equipment.Core.Entities
             Store = store;
             AddEvent(new StoreAssigned(store.Id, store.Name));
         }
-
-        
     }
 }
  
