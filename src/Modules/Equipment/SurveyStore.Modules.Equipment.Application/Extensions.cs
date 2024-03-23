@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.Extensions.DependencyInjection;
+using SurveyStore.Modules.Equipment.Application.Services;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
 
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Equipment.Api")]
 namespace SurveyStore.Modules.Equipment.Application
@@ -13,6 +9,8 @@ namespace SurveyStore.Modules.Equipment.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
+            services.AddSingleton<IEventMapper, EventMapper>();
+
             return services;
         }
     }
