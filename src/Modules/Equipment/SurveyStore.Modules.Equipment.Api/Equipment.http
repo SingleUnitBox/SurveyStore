@@ -1,6 +1,6 @@
 @url = http://localhost:5000/equipment-module
 
-@equipmentId = 3b89a4f1-591c-4f9d-bfe3-bc99a81ad0cf
+@equipmentId = 51afc112-5c80-4657-a1c4-0f05ffa2045b
 
 @accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDNmZDllZWJmMmQ0ZTIzOWIzMjZmMWZiNGYzYjVlYiIsInVuaXF1ZV9uYW1lIjoiNjQzZmQ5ZWViZjJkNGUyMzliMzI2ZjFmYjRmM2I1ZWIiLCJqdGkiOiI4M2M1OGIxYS01MTM5LTQ4YTUtYjY1OC1lY2VmZTljMTBjMzYiLCJpYXQiOiIxNzEwOTY3NDEyNjk3IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50Il0sIm5iZiI6MTcxMDk2NzQxMiwiZXhwIjoxNzExMDUwMjEyLCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.pgQtudG_vXPoDOj7ChLqwKkIbNvkdcdoKKCujOY2CWQ
 ###
@@ -15,6 +15,7 @@ Authorization: Bearer {{accessToken}}
 
 ###
 GET {{url}}/equipment
+Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
@@ -47,9 +48,9 @@ Content-Type: application/json
 
 {
         "brand": "Trimble",
-        "model": "S7",
+        "model": "S5",
         "description": "Lorem ipsum",
-        "serialNumber": "ABC1234",
+        "serialNumber": "ABC123",
         "purchasedAt": "2023-01-01",
         "calibrationDate": "2024-12-01",
         //"storeName": "TBH",
@@ -59,6 +60,7 @@ Content-Type: application/json
 
 ###
 POST {{url}}/equipment/assign-store
+Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
