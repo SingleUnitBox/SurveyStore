@@ -11,6 +11,7 @@ namespace SurveyStore.Modules.Stores.Core.Repositories
         Task UpdateAsync(Store store);
         Task DeleteAsync(Store store);
         Task<Store> GetAsync(Guid id);
+        Task<Store> GetByNameAsync(string name);
         Task<IReadOnlyList<Store>> BrowseAsync();
     }
 }

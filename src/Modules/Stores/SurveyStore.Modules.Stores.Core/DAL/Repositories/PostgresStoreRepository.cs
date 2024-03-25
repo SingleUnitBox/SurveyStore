@@ -26,6 +26,9 @@ namespace SurveyStore.Modules.Stores.Core.DAL.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<Store> GetByNameAsync(string name)
+            => await _stores.SingleOrDefaultAsync(s => s.Name == name);
+
         public async Task<IReadOnlyList<Store>> BrowseAsync()
             => await _stores
                 .OrderBy(s => s.Name)

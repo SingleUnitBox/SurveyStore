@@ -8,8 +8,4 @@
     <ProjectReference Include="..\SurveyStore.Modules.Collections.Core\SurveyStore.Modules.Collections.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Events\External\Handlers\" />
-  </ItemGroup>
-
 </Project>

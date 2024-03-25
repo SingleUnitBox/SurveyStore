@@ -22,10 +22,10 @@ namespace SurveyStore.Modules.Stores.Core.Commands.Handlers
 
         public async Task HandleAsync(AddStore command)
         {
-            var store = await _storeRepository.GetAsync(command.Id);
+            var store = await _storeRepository.GetByNameAsync(command.Name);
             if (store is not null)
             {
-                throw new StoreAlreadyExistsException(command.Id);
+                throw new StoreAlreadyExistsException(command.Name);
             }
 
             if (command.OpeningTime >= command.ClosingTime)
