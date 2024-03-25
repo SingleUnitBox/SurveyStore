@@ -1,0 +1,8 @@
+{
+  "collections": {
+    "module": {
+      "name": "Collections",
+      "enabled": true
+    }
+  }
+}

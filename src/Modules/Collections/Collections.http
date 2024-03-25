@@ -1,0 +1,4 @@
+@url = http://localhost:5000/collections-module
+
+###
+GET {{url}}

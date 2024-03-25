@@ -5,10 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="module.collections.development.json" />
     <None Remove="module.collections.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="module.collections.development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="module.collections.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
