@@ -1,7 +1,11 @@
-﻿using SurveyStore.Shared.Abstractions.Exceptions;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SurveyStore.Shared.Abstractions.Exceptions;
 
-namespace SurveyStore.Modules.Equipment.Application.Exceptions
+namespace SurveyStore.Modules.Collections.Application.Exceptions
 {
     public class SurveyEquipmentNotFoundException : SurveyStoreException
     {

@@ -1,13 +1,11 @@
-﻿using SurveyStore.Modules.Equipment.Application.DTO;
-using SurveyStore.Modules.Equipment.Application.Queries;
-using SurveyStore.Shared.Abstractions.Queries;
-using System;
-using System.Runtime.InteropServices.ComTypes;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using SurveyStore.Modules.Equipment.Application.DTO;
 using SurveyStore.Modules.Equipment.Application.Exceptions;
-using SurveyStore.Modules.Equipment.Core.Entities;
 using SurveyStore.Modules.Equipment.Application.Mappings;
+using SurveyStore.Modules.Equipment.Application.Queries;
+using SurveyStore.Modules.Equipment.Core.Entities;
+using SurveyStore.Shared.Abstractions.Queries;
+using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Queries.Handlers
 {
@@ -23,7 +21,6 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Queries.Handlers
         {
             var equipment = await _surveyEquipment
                 .AsNoTracking()
-                .Include(s => s.Store)
                 .SingleOrDefaultAsync(s => s.SerialNumber == query.SerialNumber);
 
             return equipment is null

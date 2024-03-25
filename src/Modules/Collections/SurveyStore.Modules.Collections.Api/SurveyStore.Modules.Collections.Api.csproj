@@ -5,6 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="module.collections.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="module.collections.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SurveyStore.Modules.Collections.Infrastructure\SurveyStore.Modules.Collections.Infrastructure.csproj" />
   </ItemGroup>
 

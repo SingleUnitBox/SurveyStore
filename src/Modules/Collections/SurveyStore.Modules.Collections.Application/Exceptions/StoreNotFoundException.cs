@@ -1,6 +1,6 @@
 ﻿using SurveyStore.Shared.Abstractions.Exceptions;
 
-namespace SurveyStore.Modules.Equipment.Application.Exceptions
+namespace SurveyStore.Modules.Collections.Application.Exceptions
 {
     public class StoreNotFoundException : SurveyStoreException
     {

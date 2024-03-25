@@ -69,12 +69,5 @@ namespace SurveyStore.Modules.Equipment.Api.Controllers
             await _commandDispatcher.DispatchAsync(command);
             return CreatedAtAction(nameof(Get), new { id = command.Id }, null);
         }
-
-        [HttpPost("assign-store")]
-        public async Task<ActionResult> AssignStoreAsync(AssignStoreToSurveyEquipment command)
-        {
-            await _commandDispatcher.DispatchAsync(command);
-            return NoContent();
-        }
     }
 }

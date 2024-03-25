@@ -13,7 +13,7 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Queries.Handlers
 {
     public class BrowseSurveyEquipmentHandler : IQueryHandler<BrowseSurveyEquipment, IEnumerable<SurveyEquipmentDto>>
     {
-        private DbSet<SurveyEquipment> _surveyEquipment;
+        private readonly DbSet<SurveyEquipment> _surveyEquipment;
 
         public BrowseSurveyEquipmentHandler(EquipmentDbContext dbContext)
         {
@@ -23,7 +23,6 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Queries.Handlers
         public async Task<IEnumerable<SurveyEquipmentDto>> HandleAsync(BrowseSurveyEquipment query)
             => await _surveyEquipment
                 .AsNoTracking()
-                .Include(s => s.Store)
                 .Select(s => s.AsDto())
                 .ToListAsync();
     }

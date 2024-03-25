@@ -3,14 +3,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SurveyStore.Modules.Stores.Api;
 using SurveyStore.Shared.Abstractions.Modules;
 using SurveyStore.Shared.Infrastructure;
-using System.Collections;
+using SurveyStore.Shared.Infrastructure.Modules;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using SurveyStore.Shared.Infrastructure.Modules;
 
 namespace SurveyStore.Bootstrapper
 {

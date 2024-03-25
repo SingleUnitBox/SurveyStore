@@ -11,7 +11,7 @@ namespace SurveyStore.Modules.Equipment.Application.Services
         public IMessage Map(IDomainEvent @event)
             => @event switch
             {
-                StoreAssigned e => new SurveyEquipmentUpdated(e.StoreId),
+                //StoreAssigned e => new SurveyEquipmentUpdated(e.StoreId),
                 _ => null,
             };
 
