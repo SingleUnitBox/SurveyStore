@@ -1,8 +1,8 @@
-﻿using SurveyStore.Modules.Equipment.Core.Entities;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using SurveyStore.Modules.Collections.Core.Entities;
 
-namespace SurveyStore.Modules.Equipment.Core.Repositories
+namespace SurveyStore.Modules.Collections.Core.Repositories
 {
     public interface IStoreRepository
     {

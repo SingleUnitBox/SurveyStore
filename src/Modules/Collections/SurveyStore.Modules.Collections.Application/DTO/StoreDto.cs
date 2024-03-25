@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SurveyStore.Modules.Equipment.Application.DTO
+namespace SurveyStore.Modules.Collections.Application.DTO
 {
     public class StoreDto
     {

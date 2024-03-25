@@ -7,12 +7,6 @@ namespace SurveyStore.Modules.Equipment.Application.Mappings
 {
     public static class Extensions
     {
-        public static StoreDto AsDto(this Store store)
-            => new()
-            {
-                Id = store.Id,
-                Name = store.Name
-            };
 
         public static SurveyEquipmentDto AsDto(this SurveyEquipment equipment)
             => new()
@@ -25,7 +19,6 @@ namespace SurveyStore.Modules.Equipment.Application.Mappings
                 PurchasedAt = equipment.PurchasedAt,
                 CalibrationDate = equipment.CalibrationDate,
                 CalibrationInterval = equipment.CalibrationInterval,
-                Store = equipment.Store?.AsDto(),
                 Accuracy = equipment is TotalStation ts ? ts.Accuracy : null,
                 MaxRemoteDistance = equipment is TotalStation tst ? tst.MaxRemoteDistance : null,
                 IsActive = equipment is GNSS g ? g.IsActive : null,

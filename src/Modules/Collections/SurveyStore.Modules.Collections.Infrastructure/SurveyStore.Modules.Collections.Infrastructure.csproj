@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\SurveyStore.Shared.Infrastructure\SurveyStore.Shared.Infrastructure.csproj" />
+    <ProjectReference Include="..\SurveyStore.Modules.Collections.Application\SurveyStore.Modules.Collections.Application.csproj" />
+  </ItemGroup>
+
+</Project>

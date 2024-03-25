@@ -1,5 +1,4 @@
 ﻿using System;
-using SurveyStore.Modules.Equipment.Core.Events;
 using SurveyStore.Modules.Equipment.Core.Exceptions;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
 
@@ -14,8 +13,6 @@ namespace SurveyStore.Modules.Equipment.Core.Entities
         public DateTime PurchasedAt { get; private set; }
         public DateTime? CalibrationDate { get; private set; }
         public TimeSpan? CalibrationInterval { get; private set; }
-        public Store? Store { get; set; }
-        public Surveyor? Surveyor { get; set; }
 
         protected SurveyEquipment(AggregateId id)
         {
@@ -56,12 +53,6 @@ namespace SurveyStore.Modules.Equipment.Core.Entities
 
         public void ChangeCalibrationInterval(TimeSpan calibrationInterval)
             => CalibrationInterval = calibrationInterval;
-
-        public void AssignStore(Store store)
-        {
-            Store = store;
-            AddEvent(new StoreAssigned(store.Id, store.Name));
-        }
     }
 }
  

@@ -8,8 +8,4 @@
     <ProjectReference Include="..\..\..\Shared\SurveyStore.Shared.Abstractions\SurveyStore.Shared.Abstractions.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DomainEvents\" />
-  </ItemGroup>
-
 </Project>
