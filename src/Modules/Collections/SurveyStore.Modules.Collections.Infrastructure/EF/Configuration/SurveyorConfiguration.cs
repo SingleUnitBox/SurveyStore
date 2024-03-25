@@ -4,9 +4,9 @@ using SurveyStore.Modules.Collections.Core.Entities;
 
 namespace SurveyStore.Modules.Collections.Infrastructure.EF.Configuration
 {
-    public class StoreConfiguration : IEntityTypeConfiguration<Store>
+    public class SurveyorConfiguration : IEntityTypeConfiguration<Surveyor>
     {
-        public void Configure(EntityTypeBuilder<Store> builder)
+        public void Configure(EntityTypeBuilder<Surveyor> builder)
         {
             builder.HasKey(s => s.Id);
         }
