@@ -1,20 +1,22 @@
-﻿using System;
+﻿using SurveyStore.Modules.Collections.Core.Types;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.InteropServices;
 
 namespace SurveyStore.Modules.Collections.Core.Entities
 {
     public class Store
     {
-        public Guid Id { get; set; }
+        public StoreId Id { get; private set; }
         [MaxLength(20)]
-        public string Name { get; set; }
+        public string Name { get; private set; }
+
+        public Store(StoreId id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
 
         public static Store Create(Guid id, string name)
-            => new Store
-            {
-                Id = id,
-                Name = name,
-            };
+            => new(id, name);
     }
 }
