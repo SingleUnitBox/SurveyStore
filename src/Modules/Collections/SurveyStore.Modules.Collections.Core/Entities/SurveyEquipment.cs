@@ -1,17 +1,17 @@
 ﻿using System;
+using SurveyStore.Modules.Collections.Core.Events;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
 
 namespace SurveyStore.Modules.Collections.Core.Entities
 {
-    public class SurveyEquipment
+    public class SurveyEquipment : AggregateRoot
     {
-        public SurveyEquipmentId Id { get; set; }
         public StoreId? StoreId { get; set; }
         public string SerialNumber { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
 
-        public SurveyEquipment(SurveyEquipmentId id, string serialNumber, string brand, string model)
+        public SurveyEquipment(AggregateId id, string serialNumber, string brand, string model)
         {
             Id = id;
             SerialNumber = serialNumber;
@@ -25,6 +25,7 @@ namespace SurveyStore.Modules.Collections.Core.Entities
         public void AssignStore(StoreId storeId)
         {
             StoreId = storeId;
+            AddEvent(new StoreAssigned(storeId));
         }
     }
 }

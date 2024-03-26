@@ -1,7 +1,5 @@
 ﻿using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System;
-using SurveyStore.Modules.Collections.Core.Events;
-using SurveyStore.Modules.Collections.Core.Exceptions;
 
 namespace SurveyStore.Modules.Collections.Core.Entities
 {

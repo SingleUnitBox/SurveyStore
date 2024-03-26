@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SurveyStore.Modules.Collections.Infrastructure.EF;
@@ -9,9 +10,10 @@ using SurveyStore.Modules.Collections.Infrastructure.EF;
 namespace SurveyStore.Modules.Collections.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(CollectionsDbContext))]
-    partial class CollectionsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240326223058_EditConfiguration")]
+    partial class EditConfiguration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,10 +86,6 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Migrations
 
                     b.Property<Guid?>("StoreId")
                         .HasColumnType("uuid");
-
-                    b.Property<int>("Version")
-                        .IsConcurrencyToken()
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

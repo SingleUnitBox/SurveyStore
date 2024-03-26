@@ -11,6 +11,11 @@ namespace SurveyStore.Modules.Collections.Core.Entities
         public IEnumerable<Collection> Collections => _collections;
         private readonly ICollection<Collection> _collections = new List<Collection>();
 
+        private Surveyor()
+        {
+
+        }
+
         public Surveyor(Guid id, string fullName)
         {
             Id = id;
