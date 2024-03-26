@@ -1,21 +1,25 @@
 ﻿using System;
+using SurveyStore.Modules.Collections.Core.Types;
 
 namespace SurveyStore.Modules.Collections.Core.Entities
 {
     public class SurveyEquipment
     {
-        public Guid Id { get; set; }
+        public SurveyEquipmentId Id { get; set; }
         public string SerialNumber { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
 
+        public SurveyEquipment(SurveyEquipmentId id, string serialNumber, string brand, string model)
+        {
+            Id = id;
+            SerialNumber = serialNumber;
+            Brand = brand;
+            Model = model;
+        }
+
         public static SurveyEquipment Create(Guid id, string serialNumber, string brand, string model)
-            => new SurveyEquipment()
-            {
-                Id = id,
-                SerialNumber = serialNumber,
-                Brand = brand,
-                Model = model
-            };
+            => new(id, serialNumber, brand, model);
+
     }
 }
