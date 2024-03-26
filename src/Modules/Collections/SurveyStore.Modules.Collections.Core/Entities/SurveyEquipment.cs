@@ -25,7 +25,7 @@ namespace SurveyStore.Modules.Collections.Core.Entities
         public void AssignStore(StoreId storeId)
         {
             StoreId = storeId;
-            AddEvent(new StoreAssigned(storeId));
+            AddEvent(new StoreAssigned(this, storeId));
         }
     }
 }
