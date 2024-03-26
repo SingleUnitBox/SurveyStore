@@ -1,18 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
 
 namespace SurveyStore.Modules.Collections.Core.Entities
 {
     public class Surveyor
     {
-        public SurveyorId Id { get; set; }
-        public string FullName { get; set; }
+        public SurveyorId Id { get; private set; }
+        public string FullName { get; private set; }
+        public IEnumerable<Collection> Collections => _collections;
+        private readonly ICollection<Collection> _collections = new List<Collection>();
+
+        public Surveyor(Guid id, string fullName)
+        {
+            Id = id;
+            FullName = fullName;
+        }
 
         public static Surveyor Create(Guid id, string firstName, string surname)
-            => new Surveyor()
-            {
-                Id = id,
-                FullName = firstName + " " + surname,
-            };
+            => new(id, firstName + " " + surname);
     }
 }
