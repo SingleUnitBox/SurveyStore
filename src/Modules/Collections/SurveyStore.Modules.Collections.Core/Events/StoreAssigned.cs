@@ -1,8 +1,8 @@
-﻿using System;
-using SurveyStore.Shared.Abstractions.Kernel;
+﻿using SurveyStore.Shared.Abstractions.Kernel;
+using SurveyStore.Shared.Abstractions.Kernel.Types;
 
 namespace SurveyStore.Modules.Collections.Core.Events
 {
-    public record StoreAssigned(Guid StoreId, string Name) : IDomainEvent;
+    public record StoreAssigned(StoreId StoreId) : IDomainEvent;
 
 }

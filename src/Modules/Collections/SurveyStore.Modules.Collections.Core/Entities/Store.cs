@@ -1,4 +1,4 @@
-﻿using SurveyStore.Modules.Collections.Core.Types;
+﻿using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System;
 using System.ComponentModel.DataAnnotations;
 

@@ -13,6 +13,12 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Configuration
                 .HasConversion(c => c.Value, c => new(c));
             builder.Property(c => c.Version)
                 .IsConcurrencyToken();
+            builder.Property(c => c.CollectionStoreId)
+                .HasConversion(c => c.Value, c => new(c));
+            builder.Property(c => c.ReturnStoreId)
+                .HasConversion(c => c.Value, c => new(c));
+            builder.Property(c => c.SurveyEquipmentId)
+                .HasConversion(c => c.Value, c => new(c));
         }
     }
 }

@@ -1,13 +1,15 @@
-﻿using System;
-using SurveyStore.Modules.Collections.Core.Types;
-using SurveyStore.Shared.Abstractions.Kernel.Types;
+﻿using SurveyStore.Shared.Abstractions.Kernel.Types;
+using System;
+using SurveyStore.Modules.Collections.Core.Events;
+using SurveyStore.Modules.Collections.Core.Exceptions;
 
 namespace SurveyStore.Modules.Collections.Core.Entities
 {
     public class Collection : AggregateRoot
     {
         public Surveyor? Surveyor { get; private set; }
-        public Store? Store { get; private set; }
+        public StoreId? CollectionStoreId { get; private set; }
+        public StoreId?  ReturnStoreId { get; private set; }
         public SurveyEquipmentId SurveyEquipmentId { get; private set; }
         public DateTime? CollectedAt { get; private set; }
         public DateTime? ReturnedAt { get; private set; }
@@ -20,5 +22,22 @@ namespace SurveyStore.Modules.Collections.Core.Entities
 
         public static Collection Create(Guid id, Guid surveyEquipmentId)
             => new(id, surveyEquipmentId);
+
+        //public void AssignStore(StoreId storeId)
+        //{
+        //    StoreId = storeId;
+        //    AddEvent(new StoreAssigned(storeId));
+        //}
+
+        //public void Collect(SurveyorId surveyorId)
+        //{
+        //    if (StoreId is null)
+        //    {
+        //        throw new SurveyEquipmentNotFoundInStoreException(SurveyEquipmentId);
+        //    }
+
+        //    SurveyorId = surveyorId;
+        //    AddEvent(new EquipmentCollected(SurveyEquipmentId, SurveyorId));
+        //}
     }
 }

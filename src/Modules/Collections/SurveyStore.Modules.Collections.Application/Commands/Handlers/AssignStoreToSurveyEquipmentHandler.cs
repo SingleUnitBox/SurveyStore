@@ -1,10 +1,7 @@
-﻿using SurveyStore.Shared.Abstractions.Commands;
-using SurveyStore.Shared.Abstractions.Kernel;
-using SurveyStore.Shared.Abstractions.Messaging;
-using System.Linq;
-using System.Threading.Tasks;
-using SurveyStore.Modules.Collections.Application.Exceptions;
+﻿using SurveyStore.Modules.Collections.Application.Exceptions;
 using SurveyStore.Modules.Collections.Core.Repositories;
+using SurveyStore.Shared.Abstractions.Commands;
+using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 {

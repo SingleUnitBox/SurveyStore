@@ -1,7 +1,6 @@
-﻿using SurveyStore.Shared.Abstractions.Kernel.Types;
-using System;
+﻿using System;
 
-namespace SurveyStore.Modules.Collections.Core.Types
+namespace SurveyStore.Shared.Abstractions.Kernel.Types
 {
     public class SurveyEquipmentId : TypeId
     {
@@ -10,5 +9,6 @@ namespace SurveyStore.Modules.Collections.Core.Types
         }
 
         public static implicit operator SurveyEquipmentId(Guid id) => new(id);
+        public static implicit operator Guid(SurveyEquipmentId id) => id.Value;
     }
 }

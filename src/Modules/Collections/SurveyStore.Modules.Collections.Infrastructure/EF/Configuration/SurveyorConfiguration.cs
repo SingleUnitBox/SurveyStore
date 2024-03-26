@@ -11,6 +11,8 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Configuration
             builder.HasKey(s => s.Id);
             builder.Property(s => s.Id)
                 .HasConversion(s => s.Value, s => new(s));
+            builder.HasMany(s => s.Collections)
+                .WithOne(c => c.Surveyor);
         }
     }
 }
