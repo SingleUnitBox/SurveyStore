@@ -1,4 +1,16 @@
 @url = http://localhost:5000/collections-module
 
+@equipmentId = d061d7a4-3a6f-4bce-b05e-795c3f1b82c3
+
+@storeId = 596f3a1b-a0a8-41ef-b460-20a8384053d1
+
 ###
 GET {{url}}
+
+###
+POST {{url}}/equipment/{{equipmentId}}/assign-store
+Content-Type: application/json
+
+{
+    "storeId": "{{storeId}}"
+}

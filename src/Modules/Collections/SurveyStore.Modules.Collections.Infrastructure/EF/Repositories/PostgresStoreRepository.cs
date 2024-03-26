@@ -3,6 +3,7 @@ using SurveyStore.Modules.Collections.Core.Repositories;
 using System;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SurveyStore.Shared.Abstractions.Kernel.Types;
 
 namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
 {
@@ -17,7 +18,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<Store> GetByIdAsync(Guid id)
+        public async Task<Store> GetByIdAsync(StoreId id)
             => await _stores.SingleOrDefaultAsync(s => s.Id == id);
 
         public async Task<Store> GetByNameAsync(string name)

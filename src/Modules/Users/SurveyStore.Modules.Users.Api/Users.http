@@ -17,7 +17,7 @@ Content-Type: application/json
     "email": "user@gmail.com",
     "password": "secret",
     "role": "user",
-    "claims": {"permissions": ["stores", "users", "surveyors", "equipment"]}
+    "claims": {"permissions": ["stores", "users", "surveyors", "equipment", "collections"]}
 
 }
 

@@ -13,7 +13,7 @@ POST {{url}}/surveyors
 Content-Type: application/json
 
 {
-    "email": "ce@gmail.com",
+    "email": "cez@gmail.com",
     "firstName": "Cezasdas",
     "surname": "Zuk",
     "position": "surveyor"
