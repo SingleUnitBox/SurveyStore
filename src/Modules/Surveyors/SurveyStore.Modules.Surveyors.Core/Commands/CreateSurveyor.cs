@@ -7,7 +7,7 @@ using SurveyStore.Shared.Abstractions.Commands;
 
 namespace SurveyStore.Modules.Surveyors.Core.Commands
 {
-    public record AddSurveyor(string Email, string FirstName, string Surname, string Position) : ICommand
+    public record CreateSurveyor(string Email, string FirstName, string Surname, string Position) : ICommand
     {
         public Guid Id { get; } = Guid.NewGuid();
     }

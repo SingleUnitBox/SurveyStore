@@ -25,7 +25,7 @@ namespace SurveyStore.Modules.Surveyors.Api.Controllers
             => OkOrNotFound(await _queryDispatcher.QueryAsync(new GetSurveyorByEmail(email)));
 
         [HttpPost]
-        public async Task<ActionResult> AddSurveyorAsync(AddSurveyor command)
+        public async Task<ActionResult> AddSurveyorAsync(CreateSurveyor command)
         {
             await _commandDispatcher.DispatchAsync(command);
             return CreatedAtAction(nameof(Get), new { email = command.Email }, null);

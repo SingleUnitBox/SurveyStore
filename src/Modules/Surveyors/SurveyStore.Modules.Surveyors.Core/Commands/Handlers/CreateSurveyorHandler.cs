@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Surveyors.Core.Commands.Handlers
 {
-    internal class AddSurveyorHandler : ICommandHandler<AddSurveyor>
+    internal class CreateSurveyorHandler : ICommandHandler<CreateSurveyor>
     {
         private readonly ISurveyorRepository _surveyorRepository;
         private readonly IMessageBroker _messageBroker;
 
-        public AddSurveyorHandler(ISurveyorRepository surveyorRepository,
+        public CreateSurveyorHandler(ISurveyorRepository surveyorRepository,
             IMessageBroker messageBroker)
         {
             _surveyorRepository = surveyorRepository;
             _messageBroker = messageBroker;
         }
 
-        public async Task HandleAsync(AddSurveyor command)
+        public async Task HandleAsync(CreateSurveyor command)
         {
             var surveyor = await _surveyorRepository.GetByEmailAsync(command.Email);
             if (surveyor is not null)
@@ -38,7 +38,7 @@ namespace SurveyStore.Modules.Surveyors.Core.Commands.Handlers
             };
 
             await _surveyorRepository.AddAsync(surveyor);
-            await _messageBroker.PublishAsync(new SurveyorAdded(surveyor.Id, surveyor.Email, surveyor.FirstName,
+            await _messageBroker.PublishAsync(new SurveyorCreated(surveyor.Id, surveyor.FirstName,
                 surveyor.Surname));
         }
     }
