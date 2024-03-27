@@ -20,7 +20,14 @@ namespace SurveyStore.Modules.Collections.Core.Entities
         }
 
         public static SurveyEquipment Create(Guid id, string serialNumber, string brand, string model)
-            => new(id, serialNumber, brand, model);
+        {
+            var equipment = new SurveyEquipment(id, serialNumber, brand, model);
+
+            equipment.ClearEvents();
+            equipment.Version = 0;
+
+            return equipment;
+        }
 
         public void AssignStore(StoreId storeId)
         {

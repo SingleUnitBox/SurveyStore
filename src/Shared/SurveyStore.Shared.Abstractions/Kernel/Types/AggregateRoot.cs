@@ -6,7 +6,7 @@ namespace SurveyStore.Shared.Abstractions.Kernel.Types
     public abstract class AggregateRoot<T>
     {
         public T Id { get; protected set; }
-        public int Version { get; private set; }
+        public int Version { get; protected set; }
         public IEnumerable<IDomainEvent> Events => _events;
 
         private readonly List<IDomainEvent> _events = new();
@@ -14,13 +14,13 @@ namespace SurveyStore.Shared.Abstractions.Kernel.Types
 
         protected void AddEvent(IDomainEvent @event)
         {
-            if (!_versionIncremented && _events.Any())
+            if (!_versionIncremented && !_events.Any())
             {
                 Version++;
-                _versionIncremented = true;
             }
 
             _events.Add(@event);
+            _versionIncremented = true;
         }
 
         protected void IncrementVersion()

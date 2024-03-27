@@ -8,7 +8,10 @@
 GET {{url}}
 
 ###
-POST {{url}}/equipment/{{equipmentId}}/assign-store
+GET {{url}}/collections
+
+###
+POST {{url}}/collections/equipment/{{equipmentId}}/assign-store
 Content-Type: application/json
 
 {

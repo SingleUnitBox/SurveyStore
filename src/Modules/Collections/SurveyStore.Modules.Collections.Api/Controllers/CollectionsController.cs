@@ -15,8 +15,12 @@ namespace SurveyStore.Modules.Collections.Api.Controllers
             _commandDispatcher = commandDispatcher;
         }
 
+        [HttpGet]
+        public ActionResult<string> Test() => "this is test";
+
         [HttpPost("equipment/{id:guid}/assign-store")]
         public async Task<ActionResult> AssignStore(Guid id, AssignStore command)
+        //public async Task<ActionResult> AssignStore(Guid id)
         {
             await _commandDispatcher.DispatchAsync(command with { Id = id });
             return NoContent();
