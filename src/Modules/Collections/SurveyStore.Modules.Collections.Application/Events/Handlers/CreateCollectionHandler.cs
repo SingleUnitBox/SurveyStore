@@ -18,7 +18,7 @@ namespace SurveyStore.Modules.Collections.Application.Events.Handlers
         public async Task HandleAsync(CreateCollection @event)
         {
             var collection = Collection.Create(Guid.NewGuid(), @event.SurveyEquipment.Id);
-            collection.ChangeCollectionStoreId(@event.StoreId);
+            collection.ChangeCollectionStoreId(@event.CollectionStoreId);
 
             await _collectionRepository.AddAsync(collection);
         }

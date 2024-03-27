@@ -5,19 +5,22 @@ using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 {
-    public class CreateCollectionHandler : ICommandHandler<CreateCollection>
+    public class AddCollectionHandler : ICommandHandler<AddCollection>
     {
         private readonly ISurveyEquipmentRepository _surveyEquipmentRepository;
         private readonly IStoreRepository _storeRepository;
+        private readonly ICollectionRepository _collectionRepository;
 
-        public CreateCollectionHandler(ISurveyEquipmentRepository surveyEquipmentRepository,
-            IStoreRepository storeRepository)
+        public AddCollectionHandler(ISurveyEquipmentRepository surveyEquipmentRepository,
+            IStoreRepository storeRepository,
+            ICollectionRepository collectionRepository)
         {
             _surveyEquipmentRepository = surveyEquipmentRepository;
             _storeRepository = storeRepository;
+            _collectionRepository = collectionRepository;
         }
 
-        public async Task HandleAsync(CreateCollection command)
+        public async Task HandleAsync(AddCollection command)
         {
             var equipment = await _surveyEquipmentRepository.GetByIdAsync(command.SurveyEquipmentId);
             if (equipment is null)
@@ -31,9 +34,8 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
                 throw new StoreNotFoundException(command.CollectionStoreId);
             }
 
-            //equipment.AssignStore(store);
+            equipment.AssignStore(store.Id);
             await _surveyEquipmentRepository.UpdateAsync(equipment);
-            //await _domainEventDispatcher.DispatchAsync(equipment.Events.ToArray());
         }
     }
 }

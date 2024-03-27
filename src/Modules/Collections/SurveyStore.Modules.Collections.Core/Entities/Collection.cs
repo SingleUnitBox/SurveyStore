@@ -25,23 +25,14 @@ namespace SurveyStore.Modules.Collections.Core.Entities
         }
 
         public static Collection Create(Guid id, Guid surveyEquipmentId)
-            => new(id, surveyEquipmentId);
+        {
+            var collection = new Collection(id, surveyEquipmentId);
 
-        //public void AssignStore(StoreId storeId)
-        //{
-        //    StoreId = storeId;
-        //    AddEvent(new StoreAssigned(storeId));
-        //}
+            collection.ClearEvents();
+            collection.Version = 0;
 
-        //public void Collect(SurveyorId surveyorId)
-        //{
-        //    if (StoreId is null)
-        //    {
-        //        throw new SurveyEquipmentNotFoundInStoreException(SurveyEquipmentId);
-        //    }
+            return collection;
+        }
 
-        //    SurveyorId = surveyorId;
-        //    AddEvent(new EquipmentCollected(SurveyEquipmentId, SurveyorId));
-        //}
     }
 }
