@@ -29,7 +29,8 @@ namespace SurveyStore.Shared.Infrastructure.Kernel
                     var handlerType = typeof(IDomainEventHandler<>).MakeGenericType(domainEvent.GetType());
                     var handlers = scope.ServiceProvider.GetServices(handlerType);
 
-                    var tasks = handlers.Select(h => (Task)handlerType
+                    var tasks = handlers.Select(h => 
+                        (Task)handlerType
                         .GetMethod(nameof(IDomainEventHandler<IDomainEvent>.HandleAsync))
                         ?.Invoke(h, new[] { domainEvent }));
 

@@ -18,6 +18,12 @@ namespace SurveyStore.Modules.Collections.Core.Entities
             SurveyEquipmentId = surveyEquipmentId;
         }
 
+        public void ChangeCollectionStoreId(StoreId collectionStoreId)
+        {
+            CollectionStoreId = collectionStoreId;
+            IncrementVersion();
+        }
+
         public static Collection Create(Guid id, Guid surveyEquipmentId)
             => new(id, surveyEquipmentId);
 

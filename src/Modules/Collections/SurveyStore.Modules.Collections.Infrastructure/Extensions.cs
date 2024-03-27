@@ -14,6 +14,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure
             services.AddScoped<IStoreRepository, PostgresStoreRepository>();
             services.AddScoped<ISurveyEquipmentRepository, PostgresSurveyEquipmentRepository>();
             services.AddScoped<ISurveyorRepository, PostgresSurveyorRepository>();
+            services.AddScoped<ICollectionRepository, PostgresCollectionRepository>();
 
             return services;
         }

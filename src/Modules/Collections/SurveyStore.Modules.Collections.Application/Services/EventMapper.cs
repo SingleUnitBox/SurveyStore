@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SurveyStore.Modules.Collections.Application.Events;
-using SurveyStore.Modules.Collections.Core.Events;
+using SurveyStore.Modules.Collections.Core.DomainEvents;
 
 namespace SurveyStore.Modules.Collections.Application.Services
 {
@@ -13,7 +13,7 @@ namespace SurveyStore.Modules.Collections.Application.Services
         public IMessage Map(IDomainEvent domainEvent)
             => domainEvent switch
             {
-                StoreAssigned de => new CollectionStoreAssigned(de.StoreId),
+                StoreAssigned de => new CreateCollection(de.SurveyEquipment, de.StoreId),
                 _ => null
             };
 
