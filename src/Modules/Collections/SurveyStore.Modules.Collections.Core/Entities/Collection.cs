@@ -1,5 +1,6 @@
 ﻿using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System;
+using SurveyStore.Modules.Collections.Core.Exceptions;
 
 namespace SurveyStore.Modules.Collections.Core.Entities
 {
@@ -21,6 +22,17 @@ namespace SurveyStore.Modules.Collections.Core.Entities
         public void ChangeCollectionStoreId(StoreId collectionStoreId)
         {
             CollectionStoreId = collectionStoreId;
+            IncrementVersion();
+        }
+
+        public void MakeCollection(Surveyor surveyor)
+        {
+            if (CollectionStoreId is null)
+            {
+                throw new SurveyEquipmentNotFoundInStoreException(SurveyEquipmentId);
+            }
+
+            Surveyor = surveyor;
             IncrementVersion();
         }
 

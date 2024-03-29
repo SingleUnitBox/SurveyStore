@@ -14,7 +14,7 @@ Content-Type: application/json
 
 {
     "email": "cez@gmail.com",
-    "firstName": "Cezasdas",
+    "firstName": "Cez",
     "surname": "Zuk",
     "position": "surveyor"
 }

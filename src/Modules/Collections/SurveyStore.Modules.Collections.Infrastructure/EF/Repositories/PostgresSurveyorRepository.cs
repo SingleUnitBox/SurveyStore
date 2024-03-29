@@ -3,6 +3,7 @@ using SurveyStore.Modules.Collections.Core.Entities;
 using SurveyStore.Modules.Collections.Core.Repositories;
 using System;
 using System.Threading.Tasks;
+using SurveyStore.Shared.Abstractions.Kernel.Types;
 
 namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
 {
@@ -21,5 +22,8 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
             await _surveyors.AddAsync(surveyor);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<Surveyor> GetAsync(SurveyorId id)
+            => await _surveyors.SingleOrDefaultAsync(s => s.Id == id);
     }
 }

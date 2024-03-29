@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SurveyStore.Modules.Collections.Core.Entities;
 using SurveyStore.Modules.Collections.Core.Repositories;
+using SurveyStore.Shared.Abstractions.Kernel.Types;
 
 namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
 {
@@ -26,5 +29,18 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
             _collections.Update(collection);
             await _dbContext.SaveChangesAsync();
         }
+
+        // do not let to create multiple OPEN collections for same equipment
+        public async Task<Collection> GetCurrentBySurveyEquipmentAsync(SurveyEquipmentId surveyEquipmentId)
+            => await _collections
+                .Where(c => c.SurveyEquipmentId == surveyEquipmentId
+                            && c.ReturnStoreId == null
+                            && c.CollectedAt == null)
+                .SingleOrDefaultAsync();
+
+        public async Task<IEnumerable<Collection>> BrowseCollectionsAsync(SurveyEquipmentId surveyEquipmentId)
+            => await _collections
+                .Where(c => c.SurveyEquipmentId == surveyEquipmentId)
+            .ToListAsync();
     }
 }
