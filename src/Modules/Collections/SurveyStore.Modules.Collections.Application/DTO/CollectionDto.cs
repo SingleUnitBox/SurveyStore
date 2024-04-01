@@ -9,7 +9,7 @@ namespace SurveyStore.Modules.Collections.Application.DTO
 		public CollectionDto()
 		{ 
 			public AggregateId Id { get; set; }
-            public Surveyor? Surveyor { get; private set; }
+            public SurveyorDto? Surveyor { get; private set; }
             public StoreId? CollectionStoreId { get; private set; }
             public StoreId? ReturnStoreId { get; private set; }
             public SurveyEquipmentId SurveyEquipmentId { get; private set; }
