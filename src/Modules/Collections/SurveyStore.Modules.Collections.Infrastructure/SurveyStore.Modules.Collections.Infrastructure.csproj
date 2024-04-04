@@ -9,4 +9,8 @@
     <ProjectReference Include="..\SurveyStore.Modules.Collections.Application\SurveyStore.Modules.Collections.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EF\Queries\" />
+  </ItemGroup>
+
 </Project>

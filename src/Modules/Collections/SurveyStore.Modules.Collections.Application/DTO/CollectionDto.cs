@@ -1,13 +1,10 @@
-﻿using System;
-using SurveyStore.Modules.Collections.Core.Entities;
-using SurveyStore.Shared.Abstractions.Kernel.Types;
+﻿using SurveyStore.Shared.Abstractions.Kernel.Types;
+using System;
 
 namespace SurveyStore.Modules.Collections.Application.DTO
 {
     public class CollectionDto
 	{
-		public CollectionDto()
-		{ 
 			public AggregateId Id { get; set; }
             public SurveyorDto? Surveyor { get; private set; }
             public StoreId? CollectionStoreId { get; private set; }
@@ -15,7 +12,6 @@ namespace SurveyStore.Modules.Collections.Application.DTO
             public SurveyEquipmentId SurveyEquipmentId { get; private set; }
             public DateTime? CollectedAt { get; private set; }
             public DateTime? ReturnedAt { get; private set; }
-        }
 	}
 }
 
