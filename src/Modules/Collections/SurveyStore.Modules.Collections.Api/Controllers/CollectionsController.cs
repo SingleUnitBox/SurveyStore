@@ -22,6 +22,10 @@ namespace SurveyStore.Modules.Collections.Api.Controllers
             _queryDispatcher = queryDispatcher;
         }
 
+        [HttpGet("equipment/all")]
+        public async Task<ActionResult<IEnumerable<SurveyEquipmentDto>>> BrowseEquipment()
+            => Ok(await _queryDispatcher.QueryAsync(new BrowseEquipment()));
+
         [HttpGet("equipment/available")]
         public async Task<ActionResult<IEnumerable<SurveyEquipmentDto>>> BrowseAvailableEquipment()
             => Ok(await _queryDispatcher.QueryAsync(new BrowseAvailableEquipment()));
