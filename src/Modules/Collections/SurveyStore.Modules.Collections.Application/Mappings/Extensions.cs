@@ -11,5 +11,15 @@ namespace SurveyStore.Modules.Collections.Application.Mappings
                 Id = store.Id,
                 Name = store.Name
             };
+
+        public static SurveyEquipmentDto AsDto(this SurveyEquipment surveyEquipment)
+            => new()
+            {
+                Id = surveyEquipment.Id,
+                SerialNumber = surveyEquipment.SerialNumber,
+                Brand = surveyEquipment.Brand,
+                Model = surveyEquipment.Model,
+                Store = surveyEquipment?.Store?.AsDto()
+            };
     }
 }

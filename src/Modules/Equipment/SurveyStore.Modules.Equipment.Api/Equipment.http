@@ -2,7 +2,7 @@
 
 @equipmentId = 51afc112-5c80-4657-a1c4-0f05ffa2045b
 
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5MzAwYTA5MzJmYWU0MzJkOTYxMjIyNjkzMGM4ZGNlZSIsInVuaXF1ZV9uYW1lIjoiOTMwMGEwOTMyZmFlNDMyZDk2MTIyMjY5MzBjOGRjZWUiLCJqdGkiOiJjZWU2YTQ3Zi1mOGUwLTRkZjAtYjhmMy1mNmM3ZDQ0MTY2YzUiLCJpYXQiOiIxNzExNjY1OTU4MDAyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiXSwibmJmIjoxNzExNjY1OTU4LCJleHAiOjE3MTE3NDg3NTgsImlzcyI6InN1cnZleXN0b3JlIn0.Tj6bPtKTD-7_SyViVzZe-VenafgKPtlgx6E-IJ2FQ50
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5YWZmN2VjYWFhNmM0OTZkYjBiZDc2Yjg5YzQ4ODkzNCIsInVuaXF1ZV9uYW1lIjoiOWFmZjdlY2FhYTZjNDk2ZGIwYmQ3NmI4OWM0ODg5MzQiLCJqdGkiOiI3ZjQ1YjU3Yy03NDg2LTQwOTYtOWQwZC1hMTRhNDNkZmExODUiLCJpYXQiOiIxNzEyMzQ4NDM2NTY4IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiXSwibmJmIjoxNzEyMzQ4NDM2LCJleHAiOjE3MTI0MzEyMzYsImlzcyI6InN1cnZleXN0b3JlIn0.LPgcYWGGDO4ikSP2-W_l422lnjzMEeX8LbfGxjna6KQ
 ###
 GET {{url}}
 
@@ -48,14 +48,14 @@ Content-Type: application/json
 
 {
         "brand": "Trimble",
-        "model": "S5",
+        "model": "S7",
         "description": "Lorem ipsum",
-        "serialNumber": "ABC123",
+        "serialNumber": "ABC12",
         "purchasedAt": "2023-01-01",
         "calibrationDate": "2024-12-01",
         //"storeName": "TBH",
         "accuracy": 2.0,
-        "maxRemoteDistance": 600
+        "maxRemoteDistance": 800
 }
 
 ###

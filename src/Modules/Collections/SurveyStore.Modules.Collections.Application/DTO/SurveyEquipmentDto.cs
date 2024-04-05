@@ -1,10 +1,11 @@
-﻿using SurveyStore.Shared.Abstractions.Kernel.Types;
+﻿using System;
 
 namespace SurveyStore.Modules.Collections.Application.DTO
 {
     public class SurveyEquipmentDto
     {
-        public StoreId? StoreId { get; set; }
+        public Guid Id { get; set; }
+        public StoreDto? Store { get; set; }
         public string SerialNumber { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }

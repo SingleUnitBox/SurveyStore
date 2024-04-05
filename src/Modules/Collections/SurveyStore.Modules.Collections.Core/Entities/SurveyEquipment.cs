@@ -7,6 +7,7 @@ namespace SurveyStore.Modules.Collections.Core.Entities
     public class SurveyEquipment : AggregateRoot
     {
         public StoreId? StoreId { get; private set; }
+        public Store? Store { get; private set; }
         public string SerialNumber { get; private set; }
         public string Brand { get; private set; }
         public string Model { get; private set; }
