@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SurveyStore.Modules.Users.Core.Events;
+using SurveyStore.Shared.Abstractions.Messaging;
 
 namespace SurveyStore.Modules.Users.Core.Services
 {
@@ -18,14 +20,17 @@ namespace SurveyStore.Modules.Users.Core.Services
         private readonly IPasswordHasher<User> _passwordHasher;
         private readonly IClock _clock;
         private readonly IAuthManager _authManager;
+        private readonly IMessageBroker _messageBroker;
 
         public AccountService(IUserRepository userRepository, IClock clock,
-            IPasswordHasher<User> passwordHasher, IAuthManager authManager)
+            IPasswordHasher<User> passwordHasher, IAuthManager authManager,
+            IMessageBroker messageBroker)
         {
             _userRepository = userRepository;
             _clock = clock;
             _passwordHasher = passwordHasher;
             _authManager = authManager;
+            _messageBroker = messageBroker;
         }
 
         public async Task<AccountDto> GetAsync(Guid id)
@@ -91,6 +96,7 @@ namespace SurveyStore.Modules.Users.Core.Services
             };
 
             await _userRepository.AddAsync(user);
+            await _messageBroker.PublishAsync(new UserCreated(user.Id, user.Email));
         }
     }
 }
