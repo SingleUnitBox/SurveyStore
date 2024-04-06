@@ -1,10 +1,10 @@
 @url = http://localhost:5000/collections-module
 
-@equipmentId = 950cefd3-1c3c-4bd4-bff7-f36da077b9f0
+@equipmentId = 653286a2-6540-499a-ad6e-b966fe67899b
 
-@storeId = e10dc6cc-4f60-40b6-9e7a-264eccc3c43e
+@storeId = f3bac81e-9766-41e1-a7fc-913fc68d82a8
 
-@surveyorId = 0b3a28b6-017b-4f0c-bd73-f8f0da30bdf1
+@surveyorId = 0e00b6e1-8f55-44c0-a7ff-b777fd5e31d0
 
 ###
 GET {{url}}
@@ -40,4 +40,13 @@ Content-Type: application/json
 
 {
     "surveyorId": "{{surveyorId}}"
+}
+
+###
+PUT {{url}}/collections/equipment/{{equipmentId}}/return
+Content-Type: application/json
+
+{
+    "surveyorId": "{{surveyorId}}",
+    "returnStoreId": "{{storeId}}"
 }

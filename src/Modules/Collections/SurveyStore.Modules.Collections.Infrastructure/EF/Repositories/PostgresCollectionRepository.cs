@@ -31,12 +31,28 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
         }
 
         // do not let to create multiple OPEN collections for same equipment
-        public async Task<Collection> GetCurrentBySurveyEquipmentAsync(SurveyEquipmentId surveyEquipmentId)
+        public async Task<Collection> GetFreeBySurveyEquipmentAsync(SurveyEquipmentId surveyEquipmentId)
             => await _collections
                 .Where(c => c.SurveyEquipmentId == surveyEquipmentId
                             && c.ReturnStoreId == null
                             && c.CollectedAt == null)
                 .SingleOrDefaultAsync();
+
+        public async Task<Collection> GetOpenBySurveyEquipmentAsync(SurveyEquipmentId surveyEquipmentId)
+            => await _collections
+                .Where(c => c.SurveyEquipmentId == surveyEquipmentId
+                    && c.ReturnStoreId == null
+                    && c.CollectedAt != null)
+                .SingleOrDefaultAsync();
+
+        public async Task<Collection> GetCompletedBySurveyEquipmentAsync(SurveyEquipmentId surveyEquipmentId)
+            => await _collections
+                .Where(c => c.SurveyEquipmentId == surveyEquipmentId
+                            && c.ReturnStoreId == null
+                            && c.ReturnedAt != null)
+                .OrderBy(c => c.ReturnedAt)
+                .SingleOrDefaultAsync();
+
 
         public async Task<IEnumerable<Collection>> BrowseCollectionsAsync(SurveyEquipmentId surveyEquipmentId)
             => await _collections

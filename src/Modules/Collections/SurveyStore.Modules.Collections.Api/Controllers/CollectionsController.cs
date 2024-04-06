@@ -50,5 +50,12 @@ namespace SurveyStore.Modules.Collections.Api.Controllers
             await _commandDispatcher.DispatchAsync(command with { SurveyEquipmentId = id });
             return NoContent();
         }
+
+        [HttpPut("equipment/{id:guid}/return")]
+        public async Task<ActionResult> ReturnAsync(Guid id, ReturnSurveyEquipment command)
+        {
+            await _commandDispatcher.DispatchAsync(command with { SurveyEquipmentId = id });
+            return NoContent();
+        }
     }
 }

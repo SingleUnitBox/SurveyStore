@@ -30,7 +30,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
                 throw new SurveyorNotFoundException(command.SurveyorId);
             }
 
-            var collection = await _collectionRepository.GetCurrentBySurveyEquipmentAsync(command.SurveyEquipmentId);
+            var collection = await _collectionRepository.GetFreeBySurveyEquipmentAsync(command.SurveyEquipmentId);
             if (collection is null)
             {
                 throw new CollectionNotFoundException(command.SurveyEquipmentId);

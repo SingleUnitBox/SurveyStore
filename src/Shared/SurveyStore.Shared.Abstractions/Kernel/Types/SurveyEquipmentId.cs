@@ -8,7 +8,7 @@ namespace SurveyStore.Shared.Abstractions.Kernel.Types
         {
         }
 
-        public static implicit operator SurveyEquipmentId(Guid id) => new(id);
+        public static implicit operator SurveyEquipmentId(Guid id) => new SurveyEquipmentId(id);
         public static implicit operator Guid(SurveyEquipmentId id) => id.Value;
     }
 }

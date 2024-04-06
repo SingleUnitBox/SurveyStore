@@ -1,5 +1,6 @@
 ﻿using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System;
+using SurveyStore.Modules.Collections.Core.DomainEvents;
 using SurveyStore.Modules.Collections.Core.Exceptions;
 
 namespace SurveyStore.Modules.Collections.Core.Entities
@@ -34,6 +35,14 @@ namespace SurveyStore.Modules.Collections.Core.Entities
 
             Surveyor = surveyor;
             CollectedAt = collectedAt;
+            IncrementVersion();
+        }
+
+        public void Return(StoreId returnStoreId, DateTime returnAt)
+        {
+            ReturnStoreId = returnStoreId;
+            ReturnedAt = returnAt;
+            AddEvent(new ReturnStoreAssigned(ReturnStoreId?.Value));
             IncrementVersion();
         }
 

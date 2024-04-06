@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using SurveyStore.Modules.Collections.Core.Entities;
 using SurveyStore.Modules.Collections.Core.Repositories;
+using SurveyStore.Shared.Abstractions.Kernel.Types;
 
 namespace SurveyStore.Modules.Collections.Core.DomainEvents.Handlers
 {
@@ -17,10 +18,21 @@ namespace SurveyStore.Modules.Collections.Core.DomainEvents.Handlers
 
         public async Task HandleAsync(StoreAssigned @event)
         {
-            var collection = Collection.Create(Guid.NewGuid(), @event.SurveyEquipment.Id);
-            collection.ChangeCollectionStoreId(@event.StoreId);
+            //var surveyEquipmentId = new SurveyEquipmentId(@event.SurveyEquipment.Id);
+            //var collection = await _collectionRepository.GetCompletedBySurveyEquipmentAsync(surveyEquipmentId);
+            //if (collection is not null)
+            //{
+            //    collection.ChangeCollectionStoreId(@event.StoreId);
 
-            await _collectionRepository.AddAsync(collection);
+            //    await _collectionRepository.UpdateAsync(collection);
+            //}
+            //else
+            {
+                var collection = Collection.Create(Guid.NewGuid(), @event.SurveyEquipment.Id);
+                collection.ChangeCollectionStoreId(@event.StoreId);
+
+                await _collectionRepository.AddAsync(collection);
+            }
         }
     }
 }

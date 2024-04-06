@@ -9,7 +9,9 @@ namespace SurveyStore.Modules.Collections.Core.Repositories
     {
         Task AddAsync(Collection collection);
         Task UpdateAsync(Collection collection);
-        Task<Collection> GetCurrentBySurveyEquipmentAsync(SurveyEquipmentId surveyEquipmentId);
+        Task<Collection> GetFreeBySurveyEquipmentAsync(SurveyEquipmentId surveyEquipmentId);
+        Task<Collection> GetOpenBySurveyEquipmentAsync(SurveyEquipmentId surveyEquipmentId);
+        Task<Collection> GetCompletedBySurveyEquipmentAsync(SurveyEquipmentId surveyEquipmentId);
         Task<IEnumerable<Collection>> BrowseCollectionsAsync(SurveyEquipmentId surveyEquipmentId);
     }
 }

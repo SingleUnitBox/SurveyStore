@@ -20,14 +20,14 @@ namespace SurveyStore.Modules.Collections.Application.Events.Handlers
 
         public async Task HandleAsync(CreateCollection @event)
         {
-            var surveyEquipmentId = new SurveyEquipmentId(@event.SurveyEquipment.Id.Value);
-            var collections = await _collectionRepository.BrowseCollectionsAsync(surveyEquipmentId);
+            //var surveyEquipmentId = new SurveyEquipmentId(@event.SurveyEquipment.Id.Value);
+            var collections = await _collectionRepository.BrowseCollectionsAsync(@event.SurveyEquipmentId);
             if (collections.Any(c => c.CollectedAt is null))
             {
-                throw new AvailableCollectionAlreadyExistsException(@event.SurveyEquipment.Id);
+                throw new AvailableCollectionAlreadyExistsException(@event.SurveyEquipmentId);
             }
 
-            var collection = Collection.Create(Guid.NewGuid(), @event.SurveyEquipment.Id);
+            var collection = Collection.Create(Guid.NewGuid(), @event.SurveyEquipmentId);
             collection.ChangeCollectionStoreId(@event.CollectionStoreId);
 
             await _collectionRepository.AddAsync(collection);
