@@ -2,5 +2,5 @@
 
 namespace SurveyStore.Modules.Surveyors.Core.Commands
 {
-    public record AssignDetails(string Email, string FirstName, string Surname, string Position) : ICommand;
+    public record AssignSurveyorDetails(string Email, string FirstName, string Surname, string Position) : ICommand;
 }

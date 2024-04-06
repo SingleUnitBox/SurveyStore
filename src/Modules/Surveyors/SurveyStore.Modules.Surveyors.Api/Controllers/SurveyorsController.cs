@@ -30,5 +30,12 @@ namespace SurveyStore.Modules.Surveyors.Api.Controllers
             await _commandDispatcher.DispatchAsync(command);
             return CreatedAtAction(nameof(Get), new { email = command.Email }, null);
         }
+
+        [HttpPost("{email}")]
+        public async Task<ActionResult> AssignSurveyorDetailsAsync(string email, AssignSurveyorDetails command)
+        {
+            await _commandDispatcher.DispatchAsync(command with { Email = email });
+            return NoContent();
+        }
     }
 }

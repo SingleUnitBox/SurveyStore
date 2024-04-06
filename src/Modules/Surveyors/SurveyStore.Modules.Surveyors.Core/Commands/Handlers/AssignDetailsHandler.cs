@@ -7,19 +7,19 @@ using SurveyStore.Shared.Abstractions.Messaging;
 
 namespace SurveyStore.Modules.Surveyors.Core.Commands.Handlers
 {
-    public class AssignDetailsHandler : ICommandHandler<AssignDetails>
+    public class AssignSurveyorDetailsHandler : ICommandHandler<AssignSurveyorDetails>
     {
         private readonly ISurveyorRepository _surveyorRepository;
         private readonly IMessageBroker _messageBroker;
 
-        public AssignDetailsHandler(ISurveyorRepository surveyorRepository,
+        public AssignSurveyorDetailsHandler(ISurveyorRepository surveyorRepository,
             IMessageBroker messageBroker)
         {
             _surveyorRepository = surveyorRepository;
             _messageBroker = messageBroker;
         }
 
-        public async Task HandleAsync(AssignDetails command)
+        public async Task HandleAsync(AssignSurveyorDetails command)
         {
             var surveyor = await _surveyorRepository.GetByEmailAsync(command.Email);
             if (surveyor is null)
