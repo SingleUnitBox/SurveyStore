@@ -25,10 +25,11 @@ namespace SurveyStore.Modules.Stores.Tests.Unit.Commands.Handlers
             var command = new AddStore("test", "testLocation", _clock.Current(), _clock.Current().AddHours(8));
             var store = new Store
             {
-                Id = command.Id
+                Id = command.Id,
+                Name = command.Name
             };
 
-            _storeRepository.GetAsync(store.Id).Returns(Task.FromResult<Store>(store));
+            _storeRepository.GetByNameAsync(store.Name).Returns(Task.FromResult<Store>(store));
 
             var exception = await Record.ExceptionAsync(() => Act(command));
 
