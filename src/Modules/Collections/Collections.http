@@ -2,15 +2,13 @@
 
 @equipmentId = 653286a2-6540-499a-ad6e-b966fe67899b
 
-@storeId = f3bac81e-9766-41e1-a7fc-913fc68d82a8
+@store1Id = f3bac81e-9766-41e1-a7fc-913fc68d82a8
+@store2Id = ace17756-0b3a-4363-a7bf-c778e3dd5c59
 
 @surveyorId = 0e00b6e1-8f55-44c0-a7ff-b777fd5e31d0
 
 ###
 GET {{url}}
-
-###
-GET {{url}}/collections
 
 ###
 GET {{url}}/collections/equipment/all
@@ -23,7 +21,7 @@ POST {{url}}/collections/equipment/{{equipmentId}}/assign-store
 Content-Type: application/json
 
 {
-    "storeId": "{{storeId}}"
+    "storeId": "{{store1Id}}"
 }
 
 ###
@@ -31,7 +29,7 @@ POST {{url}}/collections/equipment/{{equipmentId}}
 Content-Type: application/json
 
 {
-    "collectionStoreId": "{{storeId}}"
+    "collectionStoreId": "{{store1Id}}"
 }
 
 ###
@@ -48,5 +46,5 @@ Content-Type: application/json
 
 {
     "surveyorId": "{{surveyorId}}",
-    "returnStoreId": "{{storeId}}"
+    "returnStoreId": "{{store2Id}}"
 }

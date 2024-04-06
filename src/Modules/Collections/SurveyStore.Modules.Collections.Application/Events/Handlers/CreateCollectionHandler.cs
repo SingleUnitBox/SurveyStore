@@ -20,7 +20,6 @@ namespace SurveyStore.Modules.Collections.Application.Events.Handlers
 
         public async Task HandleAsync(CreateCollection @event)
         {
-            //var surveyEquipmentId = new SurveyEquipmentId(@event.SurveyEquipment.Id.Value);
             var collections = await _collectionRepository.BrowseCollectionsAsync(@event.SurveyEquipmentId);
             if (collections.Any(c => c.CollectedAt is null))
             {
