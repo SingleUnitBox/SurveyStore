@@ -25,7 +25,7 @@ namespace SurveyStore.Modules.Collections.Core.Entities
             IncrementVersion();
         }
 
-        public void MakeCollection(Surveyor surveyor)
+        public void Collect(Surveyor surveyor, DateTime collectedAt)
         {
             if (CollectionStoreId is null)
             {
@@ -33,6 +33,7 @@ namespace SurveyStore.Modules.Collections.Core.Entities
             }
 
             Surveyor = surveyor;
+            CollectedAt = collectedAt;
             IncrementVersion();
         }
 

@@ -3,6 +3,7 @@ using SurveyStore.Modules.Collections.Application.Exceptions;
 using SurveyStore.Modules.Collections.Core.Exceptions;
 using SurveyStore.Modules.Collections.Core.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
+using SurveyStore.Shared.Abstractions.Time;
 
 namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 {
@@ -10,12 +11,15 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
     {
         private readonly ICollectionRepository _collectionRepository;
         private readonly ISurveyorRepository _surveyorRepository;
+        private readonly IClock _clock;
 
         public CollectSurveyEquipmentHandler(ICollectionRepository collectionRepository,
-            ISurveyorRepository surveyorRepository)
+            ISurveyorRepository surveyorRepository,
+            IClock clock)
         {
             _collectionRepository = collectionRepository;
             _surveyorRepository = surveyorRepository;
+            _clock = clock;
         }
 
         public async Task HandleAsync(CollectSurveyEquipment command)
@@ -32,7 +36,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
                 throw new CollectionNotFoundException(command.SurveyEquipmentId);
             }
 
-            collection.MakeCollection(surveyor);
+            collection.Collect(surveyor, _clock.Current());
             await _collectionRepository.UpdateAsync(collection);
         }
     }
