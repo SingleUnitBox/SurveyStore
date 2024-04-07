@@ -11,6 +11,7 @@ namespace SurveyStore.Modules.Collections.Core.Entities
         public string SerialNumber { get; private set; }
         public string Brand { get; private set; }
         public string Model { get; private set; }
+        public bool IsFree => StoreId is null;
 
         public SurveyEquipment(AggregateId id, string serialNumber, string brand, string model)
         {
