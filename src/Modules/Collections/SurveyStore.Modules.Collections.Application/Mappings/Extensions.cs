@@ -19,6 +19,15 @@ namespace SurveyStore.Modules.Collections.Application.Mappings
                 SerialNumber = surveyEquipment.SerialNumber,
                 Brand = surveyEquipment.Brand,
                 Model = surveyEquipment.Model,
+            };
+
+        public static SurveyEquipmentDetailsDto AsDetailsDto(this SurveyEquipment surveyEquipment)
+            => new()
+            {
+                Id = surveyEquipment.Id,
+                SerialNumber = surveyEquipment.SerialNumber,
+                Brand = surveyEquipment.Brand,
+                Model = surveyEquipment.Model,
                 Store = surveyEquipment?.Store?.AsDto()
             };
     }

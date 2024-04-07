@@ -23,12 +23,17 @@ namespace SurveyStore.Modules.Collections.Api.Controllers
         }
 
         [HttpGet("equipment/all")]
-        public async Task<ActionResult<IEnumerable<SurveyEquipmentDto>>> BrowseEquipment()
+        public async Task<ActionResult<IEnumerable<SurveyEquipmentDetailsDto>>> BrowseEquipment()
             => Ok(await _queryDispatcher.QueryAsync(new BrowseEquipment()));
 
         [HttpGet("equipment/available")]
-        public async Task<ActionResult<IEnumerable<SurveyEquipmentDto>>> BrowseAvailableEquipment()
+        public async Task<ActionResult<IEnumerable<SurveyEquipmentDetailsDto>>> BrowseAvailableEquipment()
             => Ok(await _queryDispatcher.QueryAsync(new BrowseAvailableEquipment()));
+
+        [HttpGet("equipment/{surveyorId:guid}/collected")]
+        public async Task<ActionResult<IEnumerable<SurveyEquipmentDto>>> BrowseCollectedEquipmentBySurveyor(
+            Guid surveyorId)
+            => Ok(await _queryDispatcher.QueryAsync(new BrowseCollectedEquipmentBySurveyor(surveyorId)));
 
         [HttpPost("equipment/{id:guid}/assign-store")]
         public async Task<ActionResult> AssignStoreAsync(Guid id, AssignStore command)

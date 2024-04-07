@@ -24,7 +24,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Queries.Handlers
                 .AsNoTracking()
                 .Include(s => s.Store)
                 .Where(s => s.Store.Id != null)
-                .Select(s => s.AsDto())
+                .Select(s => s.AsDetailsDto())
                 .ToListAsync();
     }
 }

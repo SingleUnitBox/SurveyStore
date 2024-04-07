@@ -1,6 +1,6 @@
 @url = http://localhost:5000/collections-module
 
-@equipmentId = 653286a2-6540-499a-ad6e-b966fe67899b
+@equipmentId = 1986694d-4f2f-426e-808a-da9d36ae7dc0
 
 @store1Id = f3bac81e-9766-41e1-a7fc-913fc68d82a8
 @store2Id = ace17756-0b3a-4363-a7bf-c778e3dd5c59
@@ -15,6 +15,9 @@ GET {{url}}/collections/equipment/all
 
 ###
 GET {{url}}/collections/equipment/available
+
+###
+GET {{url}}/collections/equipment/{{surveyorId}}/collected
 
 ###
 POST {{url}}/collections/equipment/{{equipmentId}}/assign-store
