@@ -31,21 +31,21 @@ namespace SurveyStore.Modules.Collections.Api.Controllers
             => Ok(await _queryDispatcher.QueryAsync(new BrowseAvailableEquipment()));
 
         [HttpPost("equipment/{id:guid}/assign-store")]
-        public async Task<ActionResult> AssignStore(Guid id, AssignStore command)
+        public async Task<ActionResult> AssignStoreAsync(Guid id, AssignStore command)
         {
             await _commandDispatcher.DispatchAsync(command with { Id = id });
             return NoContent();
         }
 
         [HttpPost("equipment/{id:guid}")]
-        public async Task<ActionResult> Post(Guid id, AddCollection command)
+        public async Task<ActionResult> AddCollectionAsync(Guid id, AddCollection command)
         {
             await _commandDispatcher.DispatchAsync(command with { SurveyEquipmentId = id });
             return NoContent();
         }
 
         [HttpPut("equipment/{id:guid}/collect")]
-        public async Task<ActionResult> Put(Guid id, CollectSurveyEquipment command)
+        public async Task<ActionResult> CollectAsync(Guid id, CollectSurveyEquipment command)
         {
             await _commandDispatcher.DispatchAsync(command with { SurveyEquipmentId = id });
             return NoContent();

@@ -2,6 +2,8 @@
 
 @surveyorId = 
 
+@surveyorEmail = user@gmail.com
+
 ###
 GET {{url}}
 
@@ -13,8 +15,18 @@ POST {{url}}/surveyors
 Content-Type: application/json
 
 {
-    "email": "cez@gmail.com",
+    "email": "ce@gmail.com",
+    "firstName": "Ce",
+    "surname": "Zu",
+    "position": "surveyor"
+}
+
+###
+POST {{url}}/surveyors/{{surveyorEmail}}
+Content-Type: application/json
+
+{
     "firstName": "Cez",
     "surname": "Zuk",
-    "position": "surveyor"
+    "position": "land surveyor"
 }

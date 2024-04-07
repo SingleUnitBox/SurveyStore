@@ -22,5 +22,15 @@ namespace SurveyStore.Shared.Infrastructure.Modules
 
         public IEnumerable<ModuleBroadcastRegistration> GetBroadcastRegistration(string key)
             => _broadcastRegistrations.Where(br => br.Key == key);
+
+        public void AddRequestAction(string path, Type requestType, Type responseType, Func<object, Task<object>> action)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ModuleRequestRegistration GetRequestRegistration(string path)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
