@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SurveyStore.Modules.Collections.Application.Clients.Surveyors;
 using SurveyStore.Modules.Collections.Core.Repositories;
+using SurveyStore.Modules.Collections.Infrastructure.Clients;
 using SurveyStore.Modules.Collections.Infrastructure.EF;
 using SurveyStore.Modules.Collections.Infrastructure.EF.Repositories;
 using SurveyStore.Shared.Infrastructure.Postgres;
@@ -15,6 +17,8 @@ namespace SurveyStore.Modules.Collections.Infrastructure
             services.AddScoped<ISurveyEquipmentRepository, PostgresSurveyEquipmentRepository>();
             services.AddScoped<ISurveyorRepository, PostgresSurveyorRepository>();
             services.AddScoped<ICollectionRepository, PostgresCollectionRepository>();
+
+            services.AddSingleton<ISurveyorsApiClient, SurveyorsApiClient>();
 
             return services;
         }

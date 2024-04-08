@@ -29,7 +29,7 @@ namespace SurveyStore.Modules.Surveyors.Api
         public void Use(IApplicationBuilder app)
         {
             app.UseModuleRequests()
-                .Subscribe<GetSurveyorByEmail, SurveyorDto>("surveyors/get",
+                .Subscribe<GetSurveyorById, SurveyorDto>("surveyors/get",
                     (query, sp) => sp.GetRequiredService<IQueryDispatcher>().QueryAsync(query));
         }
     }
