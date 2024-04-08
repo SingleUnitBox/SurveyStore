@@ -16,6 +16,21 @@ namespace SurveyStore.Shared.Infrastructure.Modules
             _registry = registry;
             _serializer = serializer;
         }
+
+        public async Task<TResult> SendAsync<TResult>(string path, object request) where TResult : class
+        {
+            var registration = _registry.GetRequestRegistration(path);
+            if (registration is null)
+            {
+                throw new InvalidOperationException($"No action has been defined for path '{path}'.");
+            }
+
+            var receiverRequest = TranslateType(request, registration.RequestType);
+            var result = await registration.Action(receiverRequest);
+
+            return result is null ? null : TranslateType<TResult>(result);
+        }
+
         public async Task PublishAsync(object message)
         {
             var key = message.GetType().Name;

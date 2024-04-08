@@ -24,6 +24,7 @@ using SurveyStore.Shared.Infrastructure.Messaging;
 using SurveyStore.Shared.Infrastructure.Modules;
 using SurveyStore.Shared.Infrastructure.Queries;
 
+[assembly: InternalsVisibleTo("SurveyStore.Modules.Surveyors.Api")]
 [assembly: InternalsVisibleTo("SurveyStore.Shared.Tests")]
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Users.Tests.Integration")]
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Stores.Tests.Unit")]

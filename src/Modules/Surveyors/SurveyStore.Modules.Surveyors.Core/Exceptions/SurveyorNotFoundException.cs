@@ -9,7 +9,15 @@ namespace SurveyStore.Modules.Surveyors.Core.Exceptions
 {
     public class SurveyorNotFoundException : SurveyStoreException
     {
+        public Guid Id { get; }
         public string Email { get; }
+
+        public SurveyorNotFoundException(Guid id)
+            : base($"Surveyor with id '{id}' was not found.")
+        {
+            Id = id;
+        }
+
         public SurveyorNotFoundException(string email)
             : base($"Surveyor with email '{email}' was not found.")
         {
