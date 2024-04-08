@@ -17,15 +17,21 @@ namespace SurveyStore.Modules.Surveyors.Core.DAL.Queries.Handlers
         }
         public async Task<SurveyorDto> HandleAsync(GetSurveyorById query)
         {
+            //var surveyor = await _surveyors
+            //    .AsNoTracking()
+            //    .SingleOrDefaultAsync(s => s.Id == query.Id);
+            //if (surveyor is null)
+            //{
+            //    throw new SurveyorNotFoundException(query.Id);
+            //}
+
+            //return surveyor.AsDto();
+
             var surveyor = await _surveyors
                 .AsNoTracking()
                 .SingleOrDefaultAsync(s => s.Id == query.Id);
-            if (surveyor is null)
-            {
-                throw new SurveyorNotFoundException(query.Id);
-            }
 
-            return surveyor.AsDto();
+            return surveyor is not null ? surveyor.AsDto() : throw new SurveyorNotFoundException(query.Id);
         }
     }
 }
