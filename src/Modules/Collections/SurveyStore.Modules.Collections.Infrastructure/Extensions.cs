@@ -18,7 +18,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure
             services.AddScoped<ISurveyorRepository, PostgresSurveyorRepository>();
             services.AddScoped<ICollectionRepository, PostgresCollectionRepository>();
 
-            services.AddSingleton<ISurveyorsApiClient, SurveyorsApiClient>();
+            services.AddApiClients();
 
             return services;
         }
