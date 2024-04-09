@@ -4,6 +4,10 @@ using SurveyStore.Modules.Stores.Core;
 using SurveyStore.Shared.Abstractions.Modules;
 using System;
 using System.Collections.Generic;
+using SurveyStore.Modules.Stores.Core.DAL.Queries;
+using SurveyStore.Modules.Stores.Core.DTO;
+using SurveyStore.Shared.Abstractions.Queries;
+using SurveyStore.Shared.Infrastructure.Modules;
 
 namespace SurveyStore.Modules.Stores.Api
 {
@@ -25,7 +29,9 @@ namespace SurveyStore.Modules.Stores.Api
 
         public void Use(IApplicationBuilder app)
         {
-            
+            app.UseModuleRequests()
+                .Subscribe<GetStoreById, StoreDto>("stores/get",
+                    (query, sp) => sp.GetRequiredService<IQueryDispatcher>().QueryAsync(query));
         }
     }
 }
