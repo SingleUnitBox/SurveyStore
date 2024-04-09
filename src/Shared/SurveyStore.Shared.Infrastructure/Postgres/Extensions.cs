@@ -24,5 +24,14 @@ namespace SurveyStore.Shared.Infrastructure.Postgres
 
             return services;
         }
+
+        public static IServiceCollection AddUnitOfWork<TUnitOfWork, TImplementation>(this IServiceCollection services)
+            where TUnitOfWork : class, IUnitOfWork where TImplementation : class, TUnitOfWork
+        {
+            services.AddScoped<TUnitOfWork, TImplementation>();
+            services.AddScoped<IUnitOfWork, TImplementation>();
+
+            return services;
+        }
     }
 }

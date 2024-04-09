@@ -19,6 +19,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure
             services.AddScoped<ICollectionRepository, PostgresCollectionRepository>();
 
             services.AddApiClients();
+            services.AddUnitOfWork<ICollectionsUnitOfWork, CollectionsUnitOfWork>();
 
             return services;
         }
