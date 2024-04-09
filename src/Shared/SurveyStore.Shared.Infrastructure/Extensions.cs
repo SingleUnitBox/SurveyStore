@@ -1,13 +1,20 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using SurveyStore.Shared.Abstractions.Modules;
 using SurveyStore.Shared.Abstractions.Time;
 using SurveyStore.Shared.Infrastructure.Api;
 using SurveyStore.Shared.Infrastructure.Auth;
+using SurveyStore.Shared.Infrastructure.Commands;
+using SurveyStore.Shared.Infrastructure.Contexts;
+using SurveyStore.Shared.Infrastructure.Events;
 using SurveyStore.Shared.Infrastructure.Exceptions;
+using SurveyStore.Shared.Infrastructure.Kernel;
+using SurveyStore.Shared.Infrastructure.Messaging;
+using SurveyStore.Shared.Infrastructure.Modules;
+using SurveyStore.Shared.Infrastructure.Queries;
 using SurveyStore.Shared.Infrastructure.Services;
 using SurveyStore.Shared.Infrastructure.Time;
 using System;
@@ -15,14 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using Microsoft.OpenApi.Models;
-using SurveyStore.Shared.Infrastructure.Commands;
-using SurveyStore.Shared.Infrastructure.Contexts;
-using SurveyStore.Shared.Infrastructure.Events;
-using SurveyStore.Shared.Infrastructure.Kernel;
-using SurveyStore.Shared.Infrastructure.Messaging;
-using SurveyStore.Shared.Infrastructure.Modules;
-using SurveyStore.Shared.Infrastructure.Queries;
+using SurveyStore.Shared.Infrastructure.Postgres;
 
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Surveyors.Api")]
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Stores.Api")]
@@ -85,6 +85,8 @@ namespace SurveyStore.Shared.Infrastructure
             services.AddModuleInfo(modules);
             services.AddModulesRequests(assemblies);
             services.AddMessaging();
+            //services.AddPostgres();
+            services.AddTransactionalDecorators();
             services.AddHostedService<AppInitializer>();
             services.AddSingleton<IClock, ClockUtc>();
             services.AddErrorHandling();
@@ -145,6 +147,21 @@ namespace SurveyStore.Shared.Infrastructure
             section.Bind(options);
 
             return options;
+        }
+
+        public static string GetModuleName(this object value)
+            => value?.GetType().GetModuleName() ?? string.Empty;
+
+        public static string GetModuleName(this Type type)
+        {
+            if (type?.Namespace is null)
+            {
+                return string.Empty;
+            }
+
+            return type.Namespace.StartsWith("SurveyStore.Modules.")
+                ? type.Namespace.Split(".")[2].ToLowerInvariant()
+                : string.Empty;
         }
     }
 }
