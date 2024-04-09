@@ -1,4 +1,4 @@
-﻿using SurveyStore.Shared.Abstractions.Kernel.Types;
+﻿ using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System;
 using SurveyStore.Modules.Collections.Core.DomainEvents;
 using SurveyStore.Modules.Collections.Core.Exceptions;
