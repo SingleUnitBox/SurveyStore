@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Modules\Collections\SurveyStore.Modules.Collections.Api\SurveyStore.Modules.Collections.Api.csproj" />
     <ProjectReference Include="..\..\Modules\Equipment\SurveyStore.Modules.Equipment.Api\SurveyStore.Modules.Equipment.Api.csproj" />
+    <ProjectReference Include="..\..\Modules\Saga\SurveyStore.Modules.Saga\SurveyStore.Modules.Saga.csproj" />
     <ProjectReference Include="..\..\Modules\Stores\SurveyStore.Modules.Stores.Api\SurveyStore.Modules.Stores.Api.csproj" />
     <ProjectReference Include="..\..\Modules\Surveyors\SurveyStore.Modules.Surveyors.Api\SurveyStore.Modules.Surveyors.Api.csproj" />
     <ProjectReference Include="..\..\Modules\Users\SurveyStore.Modules.Users.Api\SurveyStore.Modules.Users.Api.csproj" />
