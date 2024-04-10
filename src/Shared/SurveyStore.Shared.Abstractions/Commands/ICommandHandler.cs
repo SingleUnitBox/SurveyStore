@@ -6,4 +6,9 @@ namespace SurveyStore.Shared.Abstractions.Commands
     {
         Task HandleAsync(TCommand command);
     }
+
+    public interface ICommandHandler<in TCommand, JsonWebToken> where TCommand : class, ICommand<JsonWebToken>
+    {
+        Task<JsonWebToken> HandleAsync(TCommand command);
+    }
 }

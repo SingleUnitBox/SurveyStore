@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SurveyStore.Shared.Abstractions.Commands;
 
 namespace SurveyStore.Modules.Saga.Messages
 {
-    public class SendWelcomeMessage
-    {
-    }
+    internal record SendWelcomeMessage(string Email, string FullName) : ICommand;
 }
