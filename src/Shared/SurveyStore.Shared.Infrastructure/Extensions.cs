@@ -85,7 +85,7 @@ namespace SurveyStore.Shared.Infrastructure
             services.AddModuleInfo(modules);
             services.AddModulesRequests(assemblies);
             services.AddMessaging();
-            //services.AddPostgres();
+            services.AddPostgres();
             services.AddTransactionalDecorators();
             services.AddHostedService<AppInitializer>();
             services.AddSingleton<IClock, ClockUtc>();

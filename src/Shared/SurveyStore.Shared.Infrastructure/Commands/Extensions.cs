@@ -13,7 +13,7 @@ namespace SurveyStore.Shared.Infrastructure.Commands
             services.AddSingleton<ICommandDispatcher, CommandDispatcher>();
             services.Scan(a => a.FromAssemblies(assemblies)
                 .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>))
-                    .WithAttribute<DecoratorAttribute>())
+                    .WithoutAttribute<DecoratorAttribute>())
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
 
