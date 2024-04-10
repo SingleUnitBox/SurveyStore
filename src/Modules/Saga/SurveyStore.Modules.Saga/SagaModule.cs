@@ -13,7 +13,7 @@ namespace SurveyStore.Modules.Saga
 
         public void Register(IServiceCollection services)
         {
-            
+            services.AddSaga();
         }
 
         public void Use(IApplicationBuilder app)
