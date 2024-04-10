@@ -4,6 +4,7 @@ using SurveyStore.Modules.Users.Core.Exceptions;
 using SurveyStore.Modules.Users.Core.Repositories;
 using SurveyStore.Shared.Abstractions.Auth;
 using SurveyStore.Shared.Abstractions.Commands;
+using SurveyStore.Shared.Abstractions.Messaging;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Users.Core.Commands.Handlers
@@ -14,7 +15,7 @@ namespace SurveyStore.Modules.Users.Core.Commands.Handlers
         private readonly IPasswordHasher<User> _passwordHasher;
         private readonly IAuthManager _authManager;
 
-        public SignInHandler(IUserRepository userRepository,            
+        public SignInHandler(IUserRepository userRepository,
             IPasswordHasher<User> passwordHasher,
             IAuthManager authManager)
         {

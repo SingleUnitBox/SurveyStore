@@ -53,7 +53,7 @@ namespace SurveyStore.Modules.Users.Core.Commands.Handlers
             };
 
             await _userRepository.UpdateAsync(user);
-            await _messageBroker.PublishAsync(new UserCreated(user.Id, user.Email));
+            await _messageBroker.PublishAsync(new SignedUp(user.Id, user.Email));
         }
     }
 }
