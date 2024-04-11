@@ -1,6 +1,7 @@
 ﻿using Chronicle;
 using Microsoft.VisualBasic;
 using SurveyStore.Modules.Saga.Messages;
+using SurveyStore.Shared.Abstractions.Modules;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,9 +9,17 @@ namespace SurveyStore.Modules.Saga.InviteSurveyor
 {
     internal class InviteSurveyorSaga : Saga<InviteSurveyorSaga.SagaData>,
         ISagaStartAction<UserCreated>,
+        //ISagaStartAction<SignedUp>
         ISagaAction<SurveyorCreated>,
         ISagaAction<SignedIn>
     {
+        private readonly IModuleClient _moduleClient;
+
+        public InviteSurveyorSaga(IModuleClient moduleClient)
+        {
+            _moduleClient = moduleClient;
+        }
+
         internal class SagaData
         {
             public string Email { get; set; }
@@ -26,7 +35,7 @@ namespace SurveyStore.Modules.Saga.InviteSurveyor
             };
         }
 
-        public Task HandleAsync(UserCreated message, ISagaContext context)
+        public async Task HandleAsync(UserCreated message, ISagaContext context)
         {
             var (userId, email) = message;
             if (Data.InvitedSurveyors.TryGetValue(email, out var fullName))
@@ -34,6 +43,15 @@ namespace SurveyStore.Modules.Saga.InviteSurveyor
                 Data.Email = email;
                 Data.FirstName = fullName.Split()[0];
                 Data.Surname = fullName.Split()[1];
+
+                await _moduleClient.SendAsync("surveyors/create", new
+                {
+                    Id = userId,
+                    Email = email,
+                    FirstName = Data.FirstName,
+                    Surname = Data.Surname,
+                    Position = "surveyor",
+                });
             }
         }
 

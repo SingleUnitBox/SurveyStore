@@ -8,6 +8,11 @@ using SurveyStore.Modules.Surveyors.Core.DAL.Queries;
 using SurveyStore.Modules.Surveyors.Core.DTO;
 using SurveyStore.Shared.Abstractions.Queries;
 using SurveyStore.Shared.Infrastructure.Modules;
+using System.Net.WebSockets;
+using SurveyStore.Shared.Abstractions.Commands;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using SurveyStore.Modules.Surveyors.Core.Commands;
+using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Surveyors.Api
 {
@@ -31,6 +36,18 @@ namespace SurveyStore.Modules.Surveyors.Api
             app.UseModuleRequests()
                 .Subscribe<GetSurveyorById, SurveyorDto>("surveyors/get",
                     (query, sp) => sp.GetRequiredService<IQueryDispatcher>().QueryAsync(query));
+            //app.UseModuleRequests()
+            //    .Subscribe<CreateSurveyor, Task>("surveyors/create",
+            //        (command, sp) => sp.GetRequiredService<ICommandHandler<CreateSurveyor>>().HandleAsync(command));
+            app.UseModuleRequests()
+                .Subscribe<CreateSurveyor, object>("surveyors/create",
+                async (command, sp) =>
+                {
+                    var handler = sp.GetRequiredService<ICommandHandler<CreateSurveyor>>();
+                    await handler.HandleAsync(command);
+
+                    return null;
+                });
         }
     }
 }
