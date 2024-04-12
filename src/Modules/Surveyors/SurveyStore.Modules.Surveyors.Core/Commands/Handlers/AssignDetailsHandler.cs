@@ -33,7 +33,7 @@ namespace SurveyStore.Modules.Surveyors.Core.Commands.Handlers
 
             await _surveyorRepository.UpdateAsync(surveyor);
             await _messageBroker.PublishAsync(
-                new SurveyorCreated(surveyor.Id));
+                new SurveyorCreated(surveyor.Id, surveyor.Email));
         }
     }
 }

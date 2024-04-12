@@ -1,6 +1,8 @@
-﻿namespace SurveyStore.Shared.Abstractions.Commands
+﻿using SurveyStore.Shared.Abstractions.Messaging;
+
+namespace SurveyStore.Shared.Abstractions.Commands
 {
-    public interface ICommand
+    public interface ICommand : IMessage
     {
     }
 

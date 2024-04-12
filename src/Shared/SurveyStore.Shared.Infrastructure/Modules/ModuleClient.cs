@@ -18,17 +18,17 @@ namespace SurveyStore.Shared.Infrastructure.Modules
         }
 
         public async Task SendAsync(string path, object request)
-        //=> SendAsync<object>(path, request);
-        {
-            var registration = _registry.GetRequestRegistration(path);
-            if (registration is null)
-            {
-                throw new InvalidOperationException($"No action has been defined for path '{path}'.");
-            }
+            => SendAsync<object>(path, request);
+        //{
+        //    var registration = _registry.GetRequestRegistration(path);
+        //    if (registration is null)
+        //    {
+        //        throw new InvalidOperationException($"No action has been defined for path '{path}'.");
+        //    }
 
-            var receiverRequest = TranslateType(request, registration.RequestType);
-            registration.Action(receiverRequest);
-        }
+        //    var receiverRequest = TranslateType(request, registration.RequestType);
+        //    registration.Action(receiverRequest);
+        //}
 
         public async Task<TResult> SendAsync<TResult>(string path, object request) where TResult : class
         {

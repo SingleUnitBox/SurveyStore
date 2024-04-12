@@ -38,7 +38,7 @@ namespace SurveyStore.Modules.Surveyors.Core.Commands.Handlers
             };
 
             await _surveyorRepository.AddAsync(surveyor);
-            await _messageBroker.PublishAsync(new SurveyorCreated(surveyor.Id));
+            await _messageBroker.PublishAsync(new SurveyorCreated(surveyor.Id, surveyor.Email));
         }
     }
 }

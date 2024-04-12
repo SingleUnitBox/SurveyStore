@@ -1,6 +1,7 @@
 ﻿using Chronicle;
 using Microsoft.VisualBasic;
 using SurveyStore.Modules.Saga.Messages;
+using SurveyStore.Shared.Abstractions.Messaging;
 using SurveyStore.Shared.Abstractions.Modules;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,10 +15,22 @@ namespace SurveyStore.Modules.Saga.InviteSurveyor
         ISagaAction<SignedIn>
     {
         private readonly IModuleClient _moduleClient;
+        private readonly IMessageBroker _messageBroker;
 
-        public InviteSurveyorSaga(IModuleClient moduleClient)
+        public override SagaId ResolveId(object message, ISagaContext context)
+            => message switch
+            {
+                UserCreated m => m.Id.ToString(),
+                SurveyorCreated m => m.Id.ToString(),
+                SignedIn m => m.Id.ToString(),
+                _ => base.ResolveId(message, context)
+            };
+
+        public InviteSurveyorSaga(IModuleClient moduleClient,
+            IMessageBroker messageBroker)
         {
             _moduleClient = moduleClient;
+            _messageBroker = messageBroker;
         }
 
         internal class SagaData
@@ -52,17 +65,26 @@ namespace SurveyStore.Modules.Saga.InviteSurveyor
                     Surname = Data.Surname,
                     Position = "surveyor",
                 });
+
+                return;
             }
+
+            await CompleteAsync();
         }
 
         public Task HandleAsync(SurveyorCreated message, ISagaContext context)
         {
-            throw new System.NotImplementedException();
+            Data.SurveyorCreated = true;
+            return Task.CompletedTask;
         }
 
-        public Task HandleAsync(SignedIn message, ISagaContext context)
+        public async Task HandleAsync(SignedIn message, ISagaContext context)
         {
-            throw new System.NotImplementedException();
+            if (Data.SurveyorCreated)
+            {
+                await _messageBroker.PublishAsync(new SendWelcomeMessage(Data.Email, $"{Data.FirstName} {Data.Surname}"));
+                await CompleteAsync();
+            }
         }
 
         public Task CompensateAsync(UserCreated message, ISagaContext context)

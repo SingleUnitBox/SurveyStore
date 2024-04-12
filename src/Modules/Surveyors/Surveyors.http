@@ -1,6 +1,6 @@
 @url = http://localhost:5000/surveyors-module
 
-@surveyorId = 
+@surveyorId = 1986694d-4f2f-426e-808a-da9d36ae7dc0
 
 @surveyorEmail = user@gmail.com
 
@@ -29,4 +29,23 @@ Content-Type: application/json
     "firstName": "Cez",
     "surname": "Zuk",
     "position": "land surveyor"
+}
+
+###
+POST {{url}}/surveyors/backdoor/create
+Content-Type: application/json
+
+{
+    "email": "test@gmail.com",
+    "firstName": "Cezz",
+    "surname": "Zuzz",
+    "position": "surveyor"
+}
+
+###
+GET {{url}}/surveyors/get
+Content-Type: application/json
+
+{
+    "id": "{{surveyorId}}"
 }

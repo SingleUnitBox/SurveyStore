@@ -40,7 +40,7 @@ namespace SurveyStore.Modules.Surveyors.Api
             //    .Subscribe<CreateSurveyor, Task>("surveyors/create",
             //        (command, sp) => sp.GetRequiredService<ICommandHandler<CreateSurveyor>>().HandleAsync(command));
             app.UseModuleRequests()
-                .Subscribe<CreateSurveyor, object>("surveyors/create",
+                .Subscribe<CreateSurveyor, object>("surveyors/backdoor/create",
                 async (command, sp) =>
                 {
                     var handler = sp.GetRequiredService<ICommandHandler<CreateSurveyor>>();

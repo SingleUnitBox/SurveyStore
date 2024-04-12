@@ -52,8 +52,8 @@ namespace SurveyStore.Modules.Users.Core.Commands.Handlers
                 Claims = command.Claims ?? new Dictionary<string, IEnumerable<string>>()
             };
 
-            await _userRepository.UpdateAsync(user);
-            await _messageBroker.PublishAsync(new SignedUp(user.Id, user.Email));
-        }
+            await _userRepository.AddAsync(user);
+            await _messageBroker.PublishAsync(new UserCreated(user.Id, user.Email));
+         }
     }
 }

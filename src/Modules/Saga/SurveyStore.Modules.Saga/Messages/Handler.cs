@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Saga.Messages
 {
-    internal class Handler : IEventHandler<SignedUp>, IEventHandler<SignedIn>, IEventHandler<SurveyorCreated>
+    internal class Handler : IEventHandler<UserCreated>, IEventHandler<SignedIn>, IEventHandler<SurveyorCreated>
     {
         private readonly ISagaCoordinator _coordinator;
 
@@ -16,7 +16,7 @@ namespace SurveyStore.Modules.Saga.Messages
         public Task HandleAsync(SurveyorCreated @event)
             => _coordinator.ProcessAsync(@event, SagaContext.Empty);
 
-        public Task HandleAsync(SignedUp @event)
+        public Task HandleAsync(UserCreated @event)
             => _coordinator.ProcessAsync(@event, SagaContext.Empty);
 
         public Task HandleAsync(SignedIn @event)
