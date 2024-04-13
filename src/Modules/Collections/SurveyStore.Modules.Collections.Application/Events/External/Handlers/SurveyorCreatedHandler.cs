@@ -3,6 +3,7 @@ using SurveyStore.Modules.Collections.Application.Exceptions;
 using SurveyStore.Modules.Collections.Core.Entities;
 using SurveyStore.Modules.Collections.Core.Repositories;
 using SurveyStore.Shared.Abstractions.Events;
+using System;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
@@ -36,6 +37,8 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
             surveyor = Surveyor.Create(surveyorDto.Id, surveyorDto.FirstName, surveyorDto.Surname);
 
             await _surveyorRepository.AddAsync(surveyor);
+
+            _surveyorsApiClient.CreateSurveyorAsync(Guid.NewGuid());
         }
     }
 }

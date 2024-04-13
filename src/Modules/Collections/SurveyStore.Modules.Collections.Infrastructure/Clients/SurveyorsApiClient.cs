@@ -15,6 +15,22 @@ namespace SurveyStore.Modules.Collections.Infrastructure.Clients
         {
             _moduleClient = moduleClient;
         }
+
+        public Task CreateSurveyorAsync(Guid id)
+        {
+            _moduleClient.SendAsync("surveyors/backdoor/create",
+                new
+                {
+                    Id = id,
+                    Email = "test@gmail.com",
+                    FirstName = "Johny",
+                    Surname = "B",
+                    Position = "land owner"
+                });
+
+            return Task.CompletedTask;
+        }
+
         public Task<SurveyorDto> GetSurveyorAsync(Guid id)
             => _moduleClient.SendAsync<SurveyorDto>("surveyors/get",
                 new GetSurveyorById

@@ -36,15 +36,16 @@ namespace SurveyStore.Modules.Surveyors.Api
             app.UseModuleRequests()
                 .Subscribe<GetSurveyorById, SurveyorDto>("surveyors/get",
                     (query, sp) => sp.GetRequiredService<IQueryDispatcher>().QueryAsync(query));
-            //app.UseModuleRequests()
-            //    .Subscribe<CreateSurveyor, Task>("surveyors/create",
-            //        (command, sp) => sp.GetRequiredService<ICommandHandler<CreateSurveyor>>().HandleAsync(command));
+
             app.UseModuleRequests()
-                .Subscribe<CreateSurveyor, object>("surveyors/backdoor/create",
+                .Subscribe<CreateSurveyor, object>("surveyors/create",
                 async (command, sp) =>
                 {
-                    var handler = sp.GetRequiredService<ICommandHandler<CreateSurveyor>>();
-                    await handler.HandleAsync(command);
+                    //var handler = sp.GetRequiredService<ICommandHandler<CreateSurveyor>>();
+                    var dispatcher = sp.GetRequiredService<ICommandDispatcher>();
+
+                    //await handler.HandleAsync(command);
+                    await dispatcher.DispatchAsync(command);
 
                     return null;
                 });
