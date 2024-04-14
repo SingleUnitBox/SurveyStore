@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SurveyStore.Modules.Surveyors.Core.Commands;
 using SurveyStore.Modules.Surveyors.Core.DAL.Queries;
@@ -27,7 +28,7 @@ namespace SurveyStore.Modules.Surveyors.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> AddSurveyorAsync(CreateSurveyor command)
         {
-            await _commandDispatcher.DispatchAsync(command);
+            await _commandDispatcher.DispatchAsync(command with { Id = Guid.NewGuid() });
             return CreatedAtAction(nameof(Get), new { email = command.Email }, null);
         }
 

@@ -7,6 +7,6 @@ namespace SurveyStore.Modules.Users.Core.Commands
     public record SignUp(string Email, string Password, string Role,
         Dictionary<string, IEnumerable<string>> Claims) : ICommand
     {
-        public Guid Id => Guid.NewGuid();
+        public Guid Id { get; set; } = Guid.NewGuid();
     }
 }

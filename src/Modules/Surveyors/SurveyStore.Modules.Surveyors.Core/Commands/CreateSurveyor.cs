@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SurveyStore.Shared.Abstractions.Commands;
+﻿using SurveyStore.Shared.Abstractions.Commands;
+using System;
 
 namespace SurveyStore.Modules.Surveyors.Core.Commands
 {
-    public record CreateSurveyor(string Email, string FirstName, string Surname, string Position) : ICommand
-    {
-        public Guid Id { get; } = Guid.NewGuid();
-    }
+    public record CreateSurveyor(Guid Id, string Email, string FirstName, string Surname, string Position) : ICommand;
 
 }

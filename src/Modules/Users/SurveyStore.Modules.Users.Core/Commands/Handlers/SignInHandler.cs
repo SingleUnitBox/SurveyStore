@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using SurveyStore.Modules.Users.Core.Entities;
+using SurveyStore.Modules.Users.Core.Events;
 using SurveyStore.Modules.Users.Core.Exceptions;
 using SurveyStore.Modules.Users.Core.Repositories;
 using SurveyStore.Shared.Abstractions.Auth;
@@ -14,14 +15,17 @@ namespace SurveyStore.Modules.Users.Core.Commands.Handlers
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHasher<User> _passwordHasher;
         private readonly IAuthManager _authManager;
+        private readonly IMessageBroker _messageBroker;
 
         public SignInHandler(IUserRepository userRepository,
             IPasswordHasher<User> passwordHasher,
-            IAuthManager authManager)
+            IAuthManager authManager,
+            IMessageBroker messageBroker)
         {
             _userRepository = userRepository;
             _authManager = authManager;
             _passwordHasher = passwordHasher;
+            _messageBroker = messageBroker;
         }
         public async Task<JsonWebToken> HandleAsync(SignIn command)
         {
@@ -41,6 +45,7 @@ namespace SurveyStore.Modules.Users.Core.Commands.Handlers
             var jwt = _authManager.CreateToken(user.Id.ToString("N"), user.Role, claims: user.Claims);
             jwt.Email = user.Email;
 
+            await _messageBroker.PublishAsync(new SignedIn(user.Id, user.Email));
             return jwt;
         }
     }
