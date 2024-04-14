@@ -36,5 +36,11 @@ namespace SurveyStore.Modules.Collections.Core.Entities
             StoreId = storeId;
             AddEvent(new StoreAssigned(this, storeId));
         }
+
+        public void UnassignStore()
+        {
+            StoreId = null;
+            IncrementVersion();
+        }
     }
 }

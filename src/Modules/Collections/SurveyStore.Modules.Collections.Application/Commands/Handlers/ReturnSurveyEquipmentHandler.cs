@@ -44,6 +44,11 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
                 throw new OpenCollectionNotFoundException(command.SurveyEquipmentId);
             }
 
+            if (command.SurveyorId != collection.Surveyor.Id)
+            {
+                throw new ReturningOtherCollectionException(collection.Id, command.SurveyorId);
+            }
+
             var surveyor = await _surveyorRepository.GetAsync(command.SurveyorId);
             if (surveyor is null)
             {

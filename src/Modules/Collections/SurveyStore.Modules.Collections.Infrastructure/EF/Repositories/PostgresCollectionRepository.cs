@@ -43,6 +43,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
                 .Where(c => c.SurveyEquipmentId == surveyEquipmentId
                     && c.ReturnStoreId == null
                     && c.CollectedAt != null)
+                .Include(c => c.Surveyor)
                 .SingleOrDefaultAsync();
 
         public async Task<Collection> GetCompletedBySurveyEquipmentAsync(SurveyEquipmentId surveyEquipmentId)

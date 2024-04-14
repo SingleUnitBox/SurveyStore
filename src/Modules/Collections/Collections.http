@@ -1,11 +1,12 @@
 @url = http://localhost:5000/collections-module
 
-@equipmentId = 1986694d-4f2f-426e-808a-da9d36ae7dc0
+@equipmentId = 14f37f8d-5ebc-4123-a1d9-4e01451ed73f
 
-@store1Id = f3bac81e-9766-41e1-a7fc-913fc68d82a8
+@store1Id = 12996fdf-65ed-4e2a-8dde-e6b5609fe23c
 @store2Id = ace17756-0b3a-4363-a7bf-c778e3dd5c59
 
-@surveyorId = 0e00b6e1-8f55-44c0-a7ff-b777fd5e31d0
+@surveyorId = 4073370e-fb91-4cd5-8b8e-df09cb8ba726
+@surveyorId2 = cfa0957d-d81a-4395-a5ac-d311fd001541
 
 ###
 GET {{url}}
