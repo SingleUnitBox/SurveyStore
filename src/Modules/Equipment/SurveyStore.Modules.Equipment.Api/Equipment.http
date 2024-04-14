@@ -2,7 +2,7 @@
 
 @equipmentId = 51afc112-5c80-4657-a1c4-0f05ffa2045b
 
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwZTAwYjZlMThmNTU0NGMwYTdmZmI3NzdmZDVlMzFkMCIsInVuaXF1ZV9uYW1lIjoiMGUwMGI2ZTE4ZjU1NDRjMGE3ZmZiNzc3ZmQ1ZTMxZDAiLCJqdGkiOiI3NTc3NDI3YS04MTg4LTQ3OTItODljZi0xOTIwMzFmNzBiOTciLCJpYXQiOiIxNzEyNDM0NzAyNDU2IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiXSwibmJmIjoxNzEyNDM0NzAyLCJleHAiOjE3MTI1MTc1MDIsImlzcyI6InN1cnZleXN0b3JlIn0.AoEABfQhqUcIy-ty_Jx9S2DkMztthaNmfO4LOsJtdec
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MDczMzcwZWZiOTE0Y2Q1OGI4ZWRmMDljYjhiYTcyNiIsInVuaXF1ZV9uYW1lIjoiNDA3MzM3MGVmYjkxNGNkNThiOGVkZjA5Y2I4YmE3MjYiLCJqdGkiOiIwMDRlY2Y1Zi0xNGUwLTQ4ZDAtOWFlMy1jYmM3NDY3ODNkZTgiLCJpYXQiOiIxNzEzMTA1OTg0NTI4IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiXSwibmJmIjoxNzEzMTA1OTg0LCJleHAiOjE3MTMxODg3ODQsImlzcyI6InN1cnZleXN0b3JlIn0.JlOqd1lFIB-TnU6POyLWwHSTtIahkh6YRDBi8hhkz-U
 ###
 GET {{url}}
 
@@ -57,16 +57,6 @@ Content-Type: application/json
         //"storeName": "TBH",
         "accuracy": 2.0,
         "maxRemoteDistance": 800
-}
-
-###
-POST {{url}}/equipment/assign-store
-Authorization: Bearer {{accessToken}}
-Content-Type: application/json
-
-{
-        "serialNumber": "ABC1",
-        "storeName": "TBH"
 }
 
 ###
