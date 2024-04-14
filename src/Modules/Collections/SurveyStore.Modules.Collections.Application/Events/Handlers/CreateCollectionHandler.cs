@@ -23,12 +23,12 @@ namespace SurveyStore.Modules.Collections.Application.Events.Handlers
             var collections = await _collectionRepository.BrowseCollectionsAsync(@event.SurveyEquipmentId);
             if (collections.Any(c => c.CollectedAt is null))
             {
-                throw new AvailableCollectionAlreadyExistsException(@event.SurveyEquipmentId);
+                throw new FreeCollectionAlreadyExistsException(@event.SurveyEquipmentId);
             }
 
             var collection = Collection.Create(Guid.NewGuid(), @event.SurveyEquipmentId);
             collection.ChangeCollectionStoreId(@event.CollectionStoreId);
-
+            
             await _collectionRepository.AddAsync(collection);
         }
     }

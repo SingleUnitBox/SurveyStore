@@ -4,11 +4,11 @@ using SurveyStore.Shared.Abstractions.Kernel.Types;
 
 namespace SurveyStore.Modules.Collections.Application.Exceptions
 {
-    public class AvailableCollectionAlreadyExistsException : SurveyStoreException
+    public class FreeCollectionAlreadyExistsException : SurveyStoreException
     {
         public Guid Id { get; }
-        public AvailableCollectionAlreadyExistsException(SurveyEquipmentId id)
-            : base($"Available collection already exists for survey equipment with id '{id.Value}'.")
+        public FreeCollectionAlreadyExistsException(SurveyEquipmentId id)
+            : base($"Free collection already exists for survey equipment with id '{id.Value}'.")
         {
             Id = id;
         }

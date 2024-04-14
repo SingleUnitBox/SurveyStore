@@ -3,5 +3,5 @@ using SurveyStore.Shared.Abstractions.Commands;
 
 namespace SurveyStore.Modules.Collections.Application.Commands
 {
-    public record AssignStore(Guid Id, Guid StoreId) : ICommand;
+    public record AssignStore(Guid SurveyEquipmentId, Guid StoreId) : ICommand;
 }

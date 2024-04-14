@@ -38,7 +38,7 @@ namespace SurveyStore.Modules.Collections.Api.Controllers
         [HttpPost("equipment/{id:guid}/assign-store")]
         public async Task<ActionResult> AssignStoreAsync(Guid id, AssignStore command)
         {
-            await _commandDispatcher.DispatchAsync(command with { Id = id });
+            await _commandDispatcher.DispatchAsync(command with { SurveyEquipmentId = id });
             return NoContent();
         }
 
