@@ -3,9 +3,9 @@
 @equipmentId = 14f37f8d-5ebc-4123-a1d9-4e01451ed73f
 
 @store1Id = 12996fdf-65ed-4e2a-8dde-e6b5609fe23c
-@store2Id = ace17756-0b3a-4363-a7bf-c778e3dd5c59
+@store2Id = 398e2129-71a2-4680-aa73-3f2cdaa5bdc0
 
-@surveyorId = 4073370e-fb91-4cd5-8b8e-df09cb8ba726
+@surveyorId1 = 4073370e-fb91-4cd5-8b8e-df09cb8ba726
 @surveyorId2 = cfa0957d-d81a-4395-a5ac-d311fd001541
 
 ###
@@ -18,14 +18,14 @@ GET {{url}}/collections/equipment/all
 GET {{url}}/collections/equipment/available
 
 ###
-GET {{url}}/collections/equipment/{{surveyorId}}/collected
+GET {{url}}/collections/equipment/{{surveyorId1}}/collected
 
 ###
 POST {{url}}/collections/equipment/{{equipmentId}}/assign-store
 Content-Type: application/json
 
 {
-    "storeId": "{{store1Id}}"
+    "storeId": "{{store2Id}}"
 }
 
 ###
@@ -33,7 +33,7 @@ POST {{url}}/collections/equipment/{{equipmentId}}
 Content-Type: application/json
 
 {
-    "collectionStoreId": "{{store1Id}}"
+    "collectionStoreId": "{{store2Id}}"
 }
 
 ###
@@ -41,7 +41,7 @@ PUT {{url}}/collections/equipment/{{equipmentId}}/collect
 Content-Type: application/json
 
 {
-    "surveyorId": "{{surveyorId}}"
+    "surveyorId": "{{surveyorId1}}"
 }
 
 ###
@@ -49,6 +49,6 @@ PUT {{url}}/collections/equipment/{{equipmentId}}/return
 Content-Type: application/json
 
 {
-    "surveyorId": "{{surveyorId}}",
+    "surveyorId": "{{surveyorId1}}",
     "returnStoreId": "{{store2Id}}"
 }

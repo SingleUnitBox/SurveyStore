@@ -15,9 +15,9 @@ POST {{url}}/surveyors
 Content-Type: application/json
 
 {
-    "email": "cezzz@gmail.com",
-    "firstName": "Cezz",
-    "surname": "Zuzz",
+    "email": "user@gmail.com",
+    "firstName": "user",
+    "surname": "user",
     "position": "surveyor"
 }
 
@@ -26,8 +26,8 @@ POST {{url}}/surveyors/{{surveyorEmail}}
 Content-Type: application/json
 
 {
-    "firstName": "Cez",
-    "surname": "Zuk",
+    "firstName": "johny",
+    "surname": "john",
     "position": "land surveyor"
 }
 
@@ -36,10 +36,10 @@ POST {{url}}/surveyors/backdoor/create
 Content-Type: application/json
 
 {
-    "email": "test@gmail.com",
-    "firstName": "Cezz",
-    "surname": "Zuzz",
-    "position": "surveyor"
+    "email": "test2@gmail.com",
+    "firstName": "johny",
+    "surname": "bonny",
+    "position": "land surveyor"
 }
 
 ###
