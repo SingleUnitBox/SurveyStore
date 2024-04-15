@@ -36,7 +36,7 @@ namespace SurveyStore.Modules.Equipment.Application.Mappings
 
         public static TotalStation AsEntity(this AddTotalStation command)
             => TotalStation.Create(command.Id, command.Brand, command.Model, command.Description, command.SerialNumber,
-                command.PurchasedAt, command.CalibrationDate, command.CalibrationInterval, command.Accuracy, command.MaxRemoteDistance);
+                command.PurchasedAt, command.Accuracy, command.MaxRemoteDistance);
 
         //public static GNSS AsEntity(this AddGNSS command)
         //    => new()

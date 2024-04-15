@@ -12,8 +12,8 @@ namespace SurveyStore.Modules.Equipment.Core.Entities
         public decimal Accuracy { get; set; }
         public int MaxRemoteDistance { get; set; }
 
-        public static TotalStation Create(Guid id, string brand, string model, string description, string serialNumber, DateTime purchasedAt,
-            DateTime? calibrationDate, TimeSpan? calibrationInterval, decimal accuracy, int maxRemoteDistance)
+        public static TotalStation Create(Guid id, string brand, string model, string description, string serialNumber,
+            DateTime purchasedAt, decimal accuracy, int maxRemoteDistance)
         {
             var totalStation = new TotalStation(id);
             totalStation.ChangeBrand(brand);
@@ -21,16 +21,6 @@ namespace SurveyStore.Modules.Equipment.Core.Entities
             totalStation.ChangeDescription(description);
             totalStation.ChangeSerialNumber(serialNumber);
             totalStation.ChangePurchasedAt(purchasedAt);
-            if (calibrationDate.HasValue)
-            {
-                totalStation.ChangeCalibrationDate(calibrationDate.Value);
-            }
-
-            if (calibrationInterval.HasValue)
-            {
-                totalStation.ChangeCalibrationInterval(calibrationInterval.Value);
-            }
-
             totalStation.Accuracy = accuracy;
             totalStation.MaxRemoteDistance = maxRemoteDistance;
 
