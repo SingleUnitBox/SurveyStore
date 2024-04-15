@@ -11,8 +11,6 @@ namespace SurveyStore.Modules.Equipment.Core.Entities
         public string Description { get; private set; }
         public string SerialNumber { get; private set; }
         public DateTime PurchasedAt { get; private set; }
-        public DateTime? CalibrationDate { get; private set; }
-        public TimeSpan? CalibrationInterval { get; private set; }
 
         protected SurveyEquipment(AggregateId id)
         {
@@ -47,12 +45,6 @@ namespace SurveyStore.Modules.Equipment.Core.Entities
 
         public void ChangePurchasedAt(DateTime purchasedAt)
             => PurchasedAt = purchasedAt;
-
-        public void ChangeCalibrationDate(DateTime calibrationDate)
-            => CalibrationDate = calibrationDate;
-
-        public void ChangeCalibrationInterval(TimeSpan calibrationInterval)
-            => CalibrationInterval = calibrationInterval;
     }
 }
  

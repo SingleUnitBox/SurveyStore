@@ -10,8 +10,6 @@ namespace SurveyStore.Modules.Equipment.Application.DTO
         public string Description { get; set; }
         public string SerialNumber { get; set; }
         public DateTime PurchasedAt { get; set; }
-        public DateTime? CalibrationDate { get; set; }
-        public TimeSpan? CalibrationInterval { get; set; }
         public decimal? Accuracy { get; set; }
         public int? MaxRemoteDistance { get; set; }
         public bool? IsActive { get; set; }

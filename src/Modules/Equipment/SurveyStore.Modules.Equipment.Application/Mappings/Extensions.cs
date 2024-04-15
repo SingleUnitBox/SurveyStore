@@ -17,8 +17,6 @@ namespace SurveyStore.Modules.Equipment.Application.Mappings
                 Description = equipment.Description,
                 SerialNumber = equipment.SerialNumber,
                 PurchasedAt = equipment.PurchasedAt,
-                CalibrationDate = equipment.CalibrationDate,
-                CalibrationInterval = equipment.CalibrationInterval,
                 Accuracy = equipment is TotalStation ts ? ts.Accuracy : null,
                 MaxRemoteDistance = equipment is TotalStation tst ? tst.MaxRemoteDistance : null,
                 IsActive = equipment is GNSS g ? g.IsActive : null,
