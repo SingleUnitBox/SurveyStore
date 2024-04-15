@@ -9,8 +9,6 @@ namespace SurveyStore.Modules.Equipment.Application.Commands
         string Description,
         string SerialNumber,
         DateTime PurchasedAt,
-        DateTime? CalibrationDate,
-        TimeSpan? CalibrationInterval,
         string? StoreName,
         decimal Accuracy,
         int MaxRemoteDistance) : ICommand

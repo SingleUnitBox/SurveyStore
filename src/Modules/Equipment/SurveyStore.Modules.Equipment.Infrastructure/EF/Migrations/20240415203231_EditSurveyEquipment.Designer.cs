@@ -10,8 +10,8 @@ using SurveyStore.Modules.Equipment.Infrastructure.EF;
 namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(EquipmentDbContext))]
-    [Migration("20240325215030_RemoveStoreAndSurveyor")]
-    partial class RemoveStoreAndSurveyor
+    [Migration("20240415203231_EditSurveyEquipment")]
+    partial class EditSurveyEquipment
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,12 +29,6 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Migrations
 
                     b.Property<string>("Brand")
                         .HasColumnType("text");
-
-                    b.Property<DateTime?>("CalibrationDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<TimeSpan?>("CalibrationInterval")
-                        .HasColumnType("interval");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
