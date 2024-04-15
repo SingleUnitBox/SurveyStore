@@ -5,6 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="module.calibrations.json" />
+    <None Remove="module.development.calibrations.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="module.calibrations.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="module.development.calibrations.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SurveyStore.Modules.Calibrations.Infrastructure\SurveyStore.Modules.Calibrations.Infrastructure.csproj" />
   </ItemGroup>
 
