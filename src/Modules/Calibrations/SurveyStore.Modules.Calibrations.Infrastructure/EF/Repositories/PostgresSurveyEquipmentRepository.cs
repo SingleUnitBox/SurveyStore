@@ -1,4 +1,5 @@
-﻿using SurveyStore.Modules.Calibrations.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using SurveyStore.Modules.Calibrations.Domain.Entities;
 using SurveyStore.Modules.Calibrations.Domain.Repositories;
 using System;
 using System.Threading.Tasks;
@@ -7,19 +8,23 @@ namespace SurveyStore.Modules.Calibrations.Infrastructure.EF.Repositories
 {
     internal sealed class PostgresSurveyEquipmentRepository : ISurveyEquipmentRepository
     {
-        public Task AddAsync(SurveyEquipment surveyEquipment)
+        private readonly DbSet<SurveyEquipment> _surveyEquipment;
+        private readonly CalibrationsDbContext _dbContext;
+        public PostgresSurveyEquipmentRepository(CalibrationsDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+            _surveyEquipment = dbContext.SurveyEquipment;
+        }
+        public async Task AddAsync(SurveyEquipment surveyEquipment)
+        {
+            await _surveyEquipment.AddAsync(surveyEquipment);
+            await _dbContext.SaveChangesAsync();
         }
 
         public Task<SurveyEquipment> GetByIdAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+            => _surveyEquipment.SingleOrDefaultAsync(c => c.Id == id);
 
         public Task<SurveyEquipment> GetBySerialNumberAsync(string serialNumber)
-        {
-            throw new NotImplementedException();
-        }
+            => _surveyEquipment.SingleOrDefaultAsync(c => c.SerialNumber == serialNumber);
     }
 }
