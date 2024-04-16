@@ -10,18 +10,18 @@ namespace SurveyStore.Modules.Calibrations.Domain.Entities
         public SurveyEquipmentId SurveyEquipmentId { get; private set; }
         public SurveyEquipment SurveyEquipment { get; private set; }
         public DateTime CalibrationDueDate { get; private set; }
-        public CalibrationStatus CalibrationStatus { get; private set; }
+        public TimeSpan CalibrationInterval { get; private set; }
         public string CertificateNumber { get; private set; }
-        public TimeSpan CalibrationInterval { get; set; }
+        public CalibrationStatus CalibrationStatus { get; private set; }
 
         internal Calibration(AggregateId id, SurveyEquipmentId surveyEquipmentId)
             {
                 Id = id;
                 SurveyEquipmentId = surveyEquipmentId;
-                CalibrationStatus = CalibrationStatus.Calibrated;
+                CalibrationStatus = CalibrationStatus.Pending;
             }
 
-        public void ChangeCalibrationDate(DateTime calibrationDate)
+        public void ChangeCalibrationDueDate(DateTime calibrationDate)
         {
             if (calibrationDate.Date <= CalibrationDueDate.Date)
             {
@@ -31,10 +31,10 @@ namespace SurveyStore.Modules.Calibrations.Domain.Entities
             CalibrationDueDate = calibrationDate;
             IncrementVersion();
         }
-
-        public void ChangeCalibrationStatus(CalibrationStatus calibrationStatus)
+ 
+        public void ChangeCalibrationInterval(TimeSpan calibrationInterval)
         {
-            CalibrationStatus = calibrationStatus;
+            CalibrationInterval = calibrationInterval;
             IncrementVersion();
         }
 
@@ -43,10 +43,9 @@ namespace SurveyStore.Modules.Calibrations.Domain.Entities
             CertificateNumber = certificateNumber;
             IncrementVersion();
         }
-
-        public void ChangeCalibrationInterval(TimeSpan calibrationInterval)
+        public void ChangeCalibrationStatus(CalibrationStatus calibrationStatus)
         {
-            CalibrationInterval = calibrationInterval;
+            CalibrationStatus = calibrationStatus;
             IncrementVersion();
         }
 

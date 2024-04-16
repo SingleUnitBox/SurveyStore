@@ -5,6 +5,7 @@
         ToBeReturnForCalibration,
         InCalibration,
         Calibrated,
-        Uncalibrated
+        Uncalibrated,
+        Pending
     }
 }

@@ -38,10 +38,10 @@ namespace SurveyStore.Modules.Calibrations.Infrastructure.EF.Repositories
             .Include(c => c.SurveyEquipment)
             .SingleOrDefaultAsync(c => c.Id == id);
 
-        public Task<Calibration> GetBySurveyEquipmentId(Guid surveyEquipmentId)
+        public Task<Calibration> GetBySerialNumberAsync(string serialNumber)
             => _calibrations
             .Include(c => c.SurveyEquipment)
-            .SingleOrDefaultAsync(c => c.SurveyEquipmentId == surveyEquipmentId);
+            .SingleOrDefaultAsync(c => c.SurveyEquipment.SerialNumber == serialNumber);
 
         public async Task UpdateAsync(Calibration calibration)
         {

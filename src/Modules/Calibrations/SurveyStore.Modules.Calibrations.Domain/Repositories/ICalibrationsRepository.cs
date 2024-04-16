@@ -8,7 +8,7 @@ namespace SurveyStore.Modules.Calibrations.Domain.Repositories
     public interface ICalibrationsRepository
     {
         Task<Calibration> GetAsync(Guid id);
-        Task<Calibration> GetBySurveyEquipmentId(Guid surveyEquipmentId);
+        Task<Calibration> GetBySerialNumberAsync(string serialNumber);
         Task<IReadOnlyCollection<Calibration>> BrowseForSurveyEquipmentAsync(Guid surveyEquipmentId);
         Task<IReadOnlyCollection<Calibration>> BrowseAsync();
         Task AddAsync(Calibration calibration);
