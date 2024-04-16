@@ -9,6 +9,7 @@ namespace SurveyStore.Modules.Collections.Core.Repositories
     {
         Task AddAsync(Collection collection);
         Task UpdateAsync(Collection collection);
+        Task DeleteAsync(Collection collection);
         Task<Collection> GetFreeBySurveyEquipmentAsync(SurveyEquipmentId surveyEquipmentId);
         Task<Collection> GetOpenBySurveyEquipmentAsync(SurveyEquipmentId surveyEquipmentId);
         Task<Collection> GetCompletedBySurveyEquipmentAsync(SurveyEquipmentId surveyEquipmentId);

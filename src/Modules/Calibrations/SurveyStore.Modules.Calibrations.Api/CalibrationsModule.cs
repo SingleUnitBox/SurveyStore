@@ -1,9 +1,13 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using SurveyStore.Modules.Calibrations.Application;
+using SurveyStore.Modules.Calibrations.Application.DTO;
+using SurveyStore.Modules.Calibrations.Application.Queries;
 using SurveyStore.Modules.Calibrations.Domain;
 using SurveyStore.Modules.Calibrations.Infrastructure;
 using SurveyStore.Shared.Abstractions.Modules;
+using SurveyStore.Shared.Abstractions.Queries;
+using SurveyStore.Shared.Infrastructure.Modules;
 using System.Collections.Generic;
 
 namespace SurveyStore.Modules.Calibrations.Api
@@ -26,7 +30,9 @@ namespace SurveyStore.Modules.Calibrations.Api
 
         public void Use(IApplicationBuilder app)
         {
-            
+            app.UseModuleRequests()
+                .Subscribe<GetCalibrationBySerialNumber, CalibrationDto>("calibrations/get",
+                    (query, sp) => sp.GetRequiredService<IQueryDispatcher>().QueryAsync(query));
         }
     }
 }

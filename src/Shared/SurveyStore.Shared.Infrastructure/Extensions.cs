@@ -24,6 +24,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using SurveyStore.Shared.Infrastructure.Postgres;
 
+[assembly: InternalsVisibleTo("SurveyStore.Modules.Calibrations.Api")]
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Surveyors.Api")]
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Stores.Api")]
 [assembly: InternalsVisibleTo("SurveyStore.Shared.Tests")]

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using SurveyStore.Modules.Calibrations.Domain.Types;
+using System;
 
-namespace SurveyStore.Modules.Collections.Application.Clients.Calibrations.DTO
+namespace SurveyStore.Modules.Calibrations.Application.DTO
 {
     public class CalibrationDto
     {
@@ -9,6 +10,6 @@ namespace SurveyStore.Modules.Collections.Application.Clients.Calibrations.DTO
         public DateTime CalibrationDueDate { get; set; }
         public TimeSpan CalibrationInterval { get; set; }
         public string CertificateNumber { get; set; }
-        public string CalibrationStatus { get; set; }
+        public CalibrationStatus CalibrationStatus { get; set; }
     }
 }

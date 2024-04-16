@@ -3,5 +3,5 @@ using SurveyStore.Shared.Abstractions.Kernel.Types;
 
 namespace SurveyStore.Modules.Calibrations.Application.Events
 {
-    public record CalibrationUpdated(AggregateId Id) : IEvent;
+    public record CalibrationUpdated(SurveyEquipmentId SurveyEquipmentId) : IEvent;
 }
