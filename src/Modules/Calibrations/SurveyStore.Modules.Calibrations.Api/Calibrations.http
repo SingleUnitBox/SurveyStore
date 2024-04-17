@@ -1,4 +1,17 @@
 @url = http://localhost:5000/calibrations-module
 
+@serialNumber = ABC123
+
 ###
 GET {{url}}
+
+###
+POST {{url}}/equipment/{{serialNumber}}/details
+Content-Type: application/json
+
+{
+    "calibrationDueDate": "2024-04-20",
+    "calibrationInterval": "P12M",
+    "certificateNumber": "qwer-tyuio-123",
+    "calibrationStatus": "",
+}

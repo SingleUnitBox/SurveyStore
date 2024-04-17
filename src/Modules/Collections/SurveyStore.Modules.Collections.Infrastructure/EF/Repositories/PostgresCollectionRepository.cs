@@ -59,5 +59,11 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
             => await _collections
                 .Where(c => c.SurveyEquipmentId == surveyEquipmentId)
             .ToListAsync();
+
+        public async Task DeleteAsync(Collection collection)
+        {
+            _collections.Remove(collection);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

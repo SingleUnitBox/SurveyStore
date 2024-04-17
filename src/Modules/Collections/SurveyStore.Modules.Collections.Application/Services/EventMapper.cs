@@ -14,7 +14,7 @@ namespace SurveyStore.Modules.Collections.Application.Services
         public IMessage Map(IDomainEvent domainEvent)
             => domainEvent switch
             {
-                StoreAssigned de => new CreateCollection(new SurveyEquipmentId(de.SurveyEquipment.Id.Value), de.StoreId),
+                StoreAssigned de => new CollectionCreated(new SurveyEquipmentId(de.SurveyEquipment.Id.Value), de.StoreId),
                 _ => null
             };
 

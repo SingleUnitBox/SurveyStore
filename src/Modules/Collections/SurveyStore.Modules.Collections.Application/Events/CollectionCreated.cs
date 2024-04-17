@@ -4,5 +4,5 @@ using SurveyStore.Shared.Abstractions.Kernel.Types;
 
 namespace SurveyStore.Modules.Collections.Application.Events
 {
-    public record CreateCollection(SurveyEquipmentId SurveyEquipmentId, StoreId CollectionStoreId) : IEvent;
+    public record CollectionCreated(SurveyEquipmentId SurveyEquipmentId, StoreId CollectionStoreId) : IEvent;
 }

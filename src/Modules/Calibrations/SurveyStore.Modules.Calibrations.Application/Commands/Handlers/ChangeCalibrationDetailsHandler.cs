@@ -44,7 +44,7 @@ namespace SurveyStore.Modules.Calibrations.Application.Commands.Handlers
             }
 
             await _calibrationsRepository.UpdateAsync(calibration);
-            await _messageBroker.PublishAsync(new CalibrationUpdated(calibration.Id));
+            await _messageBroker.PublishAsync(new CalibrationUpdated(calibration.SurveyEquipmentId));
         }
     }
 }

@@ -9,16 +9,16 @@ using SurveyStore.Shared.Abstractions.Kernel.Types;
 
 namespace SurveyStore.Modules.Collections.Application.Events.Handlers
 {
-    public class CreateCollectionHandler : IEventHandler<CreateCollection>
+    public class CollectionCreatedHandler : IEventHandler<CollectionCreated>
     {
         private readonly ICollectionRepository _collectionRepository;
 
-        public CreateCollectionHandler(ICollectionRepository collectionRepository)
+        public CollectionCreatedHandler(ICollectionRepository collectionRepository)
         {
             _collectionRepository = collectionRepository;
         }
 
-        public async Task HandleAsync(CreateCollection @event)
+        public async Task HandleAsync(CollectionCreated @event)
         {
             var collections = await _collectionRepository.BrowseCollectionsAsync(@event.SurveyEquipmentId);
             if (collections.Any(c => c.CollectedAt is null))
