@@ -31,8 +31,9 @@ namespace SurveyStore.Modules.Calibrations.Infrastructure.EF.Migrations
                     b.Property<TimeSpan>("CalibrationInterval")
                         .HasColumnType("interval");
 
-                    b.Property<int>("CalibrationStatus")
-                        .HasColumnType("integer");
+                    b.Property<string>("CalibrationStatus")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("CertificateNumber")
                         .HasColumnType("text");

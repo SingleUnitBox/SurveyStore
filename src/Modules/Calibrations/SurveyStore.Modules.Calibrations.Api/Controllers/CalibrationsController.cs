@@ -13,10 +13,8 @@ namespace SurveyStore.Modules.Calibrations.Api.Controllers
             _commandDispatcher = commandDispatcher;
         }
 
-        [HttpGet()]
-
         [HttpPost("equipment/{serialNumber}/details")]
-        internal async Task<ActionResult> Post(string serialNumber, ChangeCalibrationDetails command)
+        public async Task<ActionResult> Post(string serialNumber, ChangeCalibrationDetails command)
         {
             await _commandDispatcher.DispatchAsync(command with { SerialNumber = serialNumber});
             return NoContent();

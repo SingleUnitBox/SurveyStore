@@ -28,20 +28,20 @@ namespace SurveyStore.Modules.Calibrations.Application.Commands.Handlers
                 calibration.ChangeCalibrationDueDate(command.CalibrationDueDate.Value);
             }
 
-            if (command.CalibrationInterval.HasValue)
-            {
-                calibration.ChangeCalibrationInterval(command.CalibrationInterval.Value);
-            }
+            //if (command.CalibrationInterval.HasValue)
+            //{
+            //    calibration.ChangeCalibrationInterval(command.CalibrationInterval.Value);
+            //}
 
             if (!string.IsNullOrWhiteSpace(command.CertificateNumber))
             {
                 calibration.ChangeCertificateNumber(command.CertificateNumber);
             }
 
-            if (command.CalibrationStatus.HasValue)
-            {
-                calibration.ChangeCalibrationStatus(command.CalibrationStatus.Value);
-            }
+            //if (command.CalibrationStatus.HasValue)
+            //{
+            //    calibration.ChangeCalibrationStatus(command.CalibrationStatus.Value);
+            //}
 
             await _calibrationsRepository.UpdateAsync(calibration);
             await _messageBroker.PublishAsync(new CalibrationUpdated(calibration.SurveyEquipmentId));
