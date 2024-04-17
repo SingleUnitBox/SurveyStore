@@ -23,11 +23,14 @@ namespace SurveyStore.Modules.Calibrations.Domain.Entities
 
         public void ChangeCalibrationDueDate(DateTime calibrationDate)
         {
-            if (calibrationDate.Date <= CalibrationDueDate.Value.Date)
+            if (CalibrationDueDate.HasValue)
             {
-                throw new InvalidCalibrationDateException(calibrationDate);
+                if (calibrationDate.Date <= CalibrationDueDate.Value.Date)
+                {
+                    throw new InvalidCalibrationDateException(calibrationDate);
+                }
             }
-
+            
             CalibrationDueDate = calibrationDate;
             IncrementVersion();
         }
