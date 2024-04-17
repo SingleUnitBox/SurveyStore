@@ -25,10 +25,10 @@ namespace SurveyStore.Modules.Calibrations.Infrastructure.EF.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CalibrationDueDate")
+                    b.Property<DateTime?>("CalibrationDueDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<TimeSpan>("CalibrationInterval")
+                    b.Property<TimeSpan?>("CalibrationInterval")
                         .HasColumnType("interval");
 
                     b.Property<string>("CalibrationStatus")

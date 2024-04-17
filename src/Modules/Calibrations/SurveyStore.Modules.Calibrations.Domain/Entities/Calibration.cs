@@ -9,8 +9,8 @@ namespace SurveyStore.Modules.Calibrations.Domain.Entities
     {
         public SurveyEquipmentId SurveyEquipmentId { get; private set; }
         public SurveyEquipment SurveyEquipment { get; private set; }
-        public DateTime CalibrationDueDate { get; private set; }
-        public TimeSpan CalibrationInterval { get; private set; }
+        public DateTime? CalibrationDueDate { get; private set; }
+        public TimeSpan? CalibrationInterval { get; private set; }
         public string CertificateNumber { get; private set; }
         public CalibrationStatus CalibrationStatus { get; private set; }
 
@@ -23,7 +23,7 @@ namespace SurveyStore.Modules.Calibrations.Domain.Entities
 
         public void ChangeCalibrationDueDate(DateTime calibrationDate)
         {
-            if (calibrationDate.Date <= CalibrationDueDate.Date)
+            if (calibrationDate.Date <= CalibrationDueDate.Value.Date)
             {
                 throw new InvalidCalibrationDateException(calibrationDate);
             }
