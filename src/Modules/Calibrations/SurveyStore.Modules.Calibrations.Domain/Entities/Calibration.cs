@@ -10,7 +10,7 @@ namespace SurveyStore.Modules.Calibrations.Domain.Entities
         public SurveyEquipmentId SurveyEquipmentId { get; private set; }
         public SurveyEquipment SurveyEquipment { get; private set; }
         public DateTime? CalibrationDueDate { get; private set; }
-        public TimeSpan? CalibrationInterval { get; private set; }
+        //public TimeSpan? CalibrationInterval { get; private set; }
         public string CertificateNumber { get; private set; }
         public CalibrationStatus CalibrationStatus { get; private set; }
 
@@ -35,11 +35,11 @@ namespace SurveyStore.Modules.Calibrations.Domain.Entities
             IncrementVersion();
         }
  
-        public void ChangeCalibrationInterval(TimeSpan calibrationInterval)
-        {
-            CalibrationInterval = calibrationInterval;
-            IncrementVersion();
-        }
+        //public void ChangeCalibrationInterval(TimeSpan calibrationInterval)
+        //{
+        //    CalibrationInterval = calibrationInterval;
+        //    IncrementVersion();
+        //}
 
         public void ChangeCertificateNumber(string certificateNumber)
         {

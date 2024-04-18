@@ -14,5 +14,19 @@ namespace SurveyStore.Modules.Equipment.Core.Entities
         protected GNSS(AggregateId id) : base(id)
         {
         }
+
+        public static GNSS Create(Guid id, string brand, string model, string description, string serialNumber,
+            DateTime purchasedAt, bool isActive)
+        {
+            var gnss = new GNSS(id);
+            gnss.ChangeBrand(brand);
+            gnss.ChangeModel(model);
+            gnss.ChangeDescription(description);
+            gnss.ChangeSerialNumber(serialNumber);
+            gnss.ChangePurchasedAt(purchasedAt);
+            gnss.IsActive = isActive;
+
+            return gnss;
+        }
     }
 }

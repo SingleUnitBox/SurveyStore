@@ -46,6 +46,13 @@ namespace SurveyStore.Modules.Collections.Core.Entities
             IncrementVersion();
         }
 
+        public void ReturnForCalibration(StoreId returnStoreId, DateTime returnAt)
+        {
+            ReturnStoreId = returnStoreId;
+            ReturnedAt = returnAt;
+            IncrementVersion();
+        }
+
         public static Collection Create(Guid id, Guid surveyEquipmentId)
         {
             var collection = new Collection(id, surveyEquipmentId);

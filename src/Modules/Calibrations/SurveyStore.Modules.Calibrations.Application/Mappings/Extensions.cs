@@ -11,7 +11,7 @@ namespace SurveyStore.Modules.Calibrations.Application.Mappings
                 Id = calibration.Id,
                 SurveyEquipmentId = calibration.SurveyEquipmentId,
                 CalibrationDueDate = calibration.CalibrationDueDate,
-                CalibrationInterval = calibration.CalibrationInterval,
+                //CalibrationInterval = calibration.CalibrationInterval,
                 CertificateNumber = calibration.CertificateNumber,
                 CalibrationStatus = calibration.CalibrationStatus,
             };

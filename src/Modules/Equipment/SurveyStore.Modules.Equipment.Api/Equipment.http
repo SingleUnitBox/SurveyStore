@@ -2,7 +2,7 @@
 
 @equipmentId = 51afc112-5c80-4657-a1c4-0f05ffa2045b
 
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MDczMzcwZWZiOTE0Y2Q1OGI4ZWRmMDljYjhiYTcyNiIsInVuaXF1ZV9uYW1lIjoiNDA3MzM3MGVmYjkxNGNkNThiOGVkZjA5Y2I4YmE3MjYiLCJqdGkiOiJiN2Q5YjRiZC03ODM1LTQ1MDgtYTY5NC0zODRmM2EwZjdlZmIiLCJpYXQiOiIxNzEzMjEzMjQ4NjU0IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiXSwibmJmIjoxNzEzMjEzMjQ4LCJleHAiOjE3MTMyOTYwNDgsImlzcyI6InN1cnZleXN0b3JlIn0.mCFXVCA-oz72XO7z92kdCQiACXLq829MA8HaDfhdDic
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MDczMzcwZWZiOTE0Y2Q1OGI4ZWRmMDljYjhiYTcyNiIsInVuaXF1ZV9uYW1lIjoiNDA3MzM3MGVmYjkxNGNkNThiOGVkZjA5Y2I4YmE3MjYiLCJqdGkiOiJkZmEzNjFlMS05NmNhLTRjODEtODZhNS0xYzcwNzg1M2Y4ZDIiLCJpYXQiOiIxNzEzMjk5OTY1NzQ0IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiXSwibmJmIjoxNzEzMjk5OTY1LCJleHAiOjE3MTMzODI3NjUsImlzcyI6InN1cnZleXN0b3JlIn0.YGtwgFMA0_WscLZ216kRcSZO0nlBn0aeBVIEZZaqvuY
 ###
 GET {{url}}
 
@@ -48,9 +48,9 @@ Content-Type: application/json
 
 {
         "brand": "Trimble",
-        "model": "S5",
+        "model": "S6",
         "description": "Lorem ipsum",
-        "serialNumber": "ABC12",
+        "serialNumber": "ABC123",
         "purchasedAt": "2023-01-01",
         //"storeName": "TBH",
         "accuracy": 2.0,

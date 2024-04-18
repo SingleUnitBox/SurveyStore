@@ -15,8 +15,6 @@ POST {{url}}/calibrations/equipment/{{serialNumber}}/details
 Content-Type: application/json
 
 {
-    "calibrationDueDate": "2024-04-20",
-    "calibrationInterval": "2.00:00:01",
-    "certificateNumber": "qwer-tyuio-123",
-    "calibrationStatus": ""
+    "calibrationDueDate": "2024-05-20",
+    "certificateNumber": "XXX-YYY-123"
 }

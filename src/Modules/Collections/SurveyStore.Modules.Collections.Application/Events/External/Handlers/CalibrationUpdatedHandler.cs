@@ -4,6 +4,7 @@ using SurveyStore.Modules.Collections.Core.Repositories;
 using SurveyStore.Shared.Abstractions.Events;
 using SurveyStore.Shared.Abstractions.Messaging;
 using SurveyStore.Shared.Abstractions.Time;
+using System;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
@@ -12,18 +13,19 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
     {
         private readonly ICalibrationsApiClient _calibrationsApiClient;
         private readonly ICollectionRepository _collectionRepository;
-        private readonly IFreeCollectionRemovalPolicy _freeCollectionRemovalPolicy;
-        private readonly IMessageBroker _messageBroker;
+        private readonly ISurveyEquipmentRepository _surveyEquipmentRepository;
+        private readonly IClock _clock;
         public CalibrationUpdatedHandler(ICalibrationsApiClient calibrationsApiClient,
             ICollectionRepository collectionRepository,
-            IFreeCollectionRemovalPolicy freeCollectionRemovalPolicy,
-            IMessageBroker messageBroker)
+            IClock clock,
+            ISurveyEquipmentRepository surveyEquipmentRepository)
         {
             _calibrationsApiClient = calibrationsApiClient;
             _collectionRepository = collectionRepository;
-            _freeCollectionRemovalPolicy = freeCollectionRemovalPolicy;
-            _messageBroker = messageBroker;
+            _clock = clock;
+            _surveyEquipmentRepository = surveyEquipmentRepository;
         }
+
         public async Task HandleAsync(CalibrationUpdated @event)
         {
             var calibration = await _calibrationsApiClient.GetCalibrationAsync(@event.SurveyEquipmentId);
@@ -31,24 +33,62 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
             {
                 return;
             }
-
-            if (_freeCollectionRemovalPolicy.CanBeDeleted(calibration))
+            else
             {
-                var collection = await _collectionRepository.GetFreeBySurveyEquipmentAsync(calibration.SurveyEquipmentId);
-                if (collection is not null)
+                if (LessThanThreeDaysToCalibrationDate(calibration.CalibrationDueDate, _clock.Current()))
                 {
-                    await _collectionRepository.DeleteAsync(collection);
+                    var collection = await _collectionRepository.GetFreeBySurveyEquipmentAsync(calibration.SurveyEquipmentId);
+                    if (collection is not null)
+                    {
+                        collection.ReturnForCalibration(collection.CollectionStoreId, _clock.Current());
+                        await _collectionRepository.UpdateAsync(collection);
+
+                        var surveyEquipment = await _surveyEquipmentRepository.GetByIdAsync(calibration.SurveyEquipmentId);
+                        if (surveyEquipment is not null)
+                        {
+                            surveyEquipment.UnassignStore();
+                            await _surveyEquipmentRepository.UpdateAsync(surveyEquipment);
+                        }
+                        return;
+                    }
+                    else
+                    {
+                        collection = await _collectionRepository.GetOpenBySurveyEquipmentAsync(calibration.SurveyEquipmentId);
+                        if (collection is not null)
+                        {
+                            //send mail to surveyor to return for calibration, for now only return and update db
+                            collection.ReturnForCalibration(collection.CollectionStoreId, _clock.Current());
+                            await _collectionRepository.UpdateAsync(collection);
+
+                            var surveyEquipment = await _surveyEquipmentRepository.GetByIdAsync(calibration.SurveyEquipmentId);
+                            if (surveyEquipment is not null)
+                            {
+                                surveyEquipment.UnassignStore();
+                                await _surveyEquipmentRepository.UpdateAsync(surveyEquipment);
+                            }
+                            return;
+                        }
+                        else
+                        {
+                            //store not assigned yet so there is no collection available
+                        }
+                    }
                 }
                 else
                 {
-                    collection = await _collectionRepository.GetOpenBySurveyEquipmentAsync(@event.SurveyEquipmentId);
-                    if (collection is not null)
-                    {
-                        //TODO inform surveyor to return equipment before calibrationDueDate
-                        return;
-                    }
+                    return;
                 }
+            }          
+        }
+
+        private bool LessThanThreeDaysToCalibrationDate(DateTime calibrationDueDate, DateTime now)
+        {
+            if (calibrationDueDate <= now.AddDays(3))
+            {
+                return true;
             }
+
+            return false;
         }
     }
 }

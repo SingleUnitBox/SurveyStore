@@ -38,32 +38,8 @@ namespace SurveyStore.Modules.Equipment.Application.Mappings
             => TotalStation.Create(command.Id, command.Brand, command.Model, command.Description, command.SerialNumber,
                 command.PurchasedAt, command.Accuracy, command.MaxRemoteDistance);
 
-        //public static GNSS AsEntity(this AddGNSS command)
-        //    => new()
-        //    {
-        //        Id = command.Id,
-        //        Brand = command.Brand,
-        //        Model = command.Model,
-        //        Description = command.Description,
-        //        SerialNumber = command.SerialNumber,
-        //        PurchasedAt = command.PurchasedAt,
-        //        CalibrationDate = command.CalibrationDate,
-        //        CalibrationInterval = command.CalibrationInterval,
-        //        IsActive = command.IsActive ?? false,
-        //    };
-
-        //public static FieldController AsEntity(this AddFieldController command)
-        //    => new()
-        //    {
-        //        Id = command.Id,
-        //        Brand = command.Brand,
-        //        Model = command.Model,
-        //        Description = command.Description,
-        //        SerialNumber = command.SerialNumber,
-        //        PurchasedAt = command.PurchasedAt,
-        //        CalibrationDate = command.CalibrationDate,
-        //        CalibrationInterval = command.CalibrationInterval,
-        //        ScreenSize = command.ScreenSize,
-        //    };
+        public static GNSS AsEntity(this AddGNSS command)
+            => GNSS.Create(command.Id, command.Brand, command.Model, command.Description, command.SerialNumber,
+                command.PurchasedAt, command.IsActive);
     }
 }

@@ -14,9 +14,11 @@ namespace SurveyStore.Modules.Collections.Infrastructure.Clients
             _moduleClient = moduleClient;
         }
         public Task<CalibrationDto> GetCalibrationAsync(Guid surveyEquipmentId)
-        {
-            throw new NotImplementedException();
-        }
+            => _moduleClient.SendAsync<CalibrationDto>("calibrations/get",
+                new
+                {
+                    SurveyEquipmentId = surveyEquipmentId,
+                });
 
         public Task<CalibrationDto> GetCalibrationAsync(string serialNumber)
             => _moduleClient.SendAsync<CalibrationDto>("calibrations/get",

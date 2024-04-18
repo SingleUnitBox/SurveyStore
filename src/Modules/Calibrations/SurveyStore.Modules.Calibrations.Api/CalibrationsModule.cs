@@ -31,7 +31,7 @@ namespace SurveyStore.Modules.Calibrations.Api
         public void Use(IApplicationBuilder app)
         {
             app.UseModuleRequests()
-                .Subscribe<GetCalibrationBySerialNumber, CalibrationDto>("calibrations/get",
+                .Subscribe<GetCalibrationBySurveyEquipmentId, CalibrationDto>("calibrations/get",
                     (query, sp) => sp.GetRequiredService<IQueryDispatcher>().QueryAsync(query));
         }
     }

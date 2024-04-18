@@ -4,11 +4,11 @@ using SurveyStore.Shared.Abstractions.Kernel.Types;
 
 namespace SurveyStore.Modules.Collections.Core.Exceptions
 {
-    public class CollectionNotFoundException : SurveyStoreException
+    public class FreeCollectionNotFoundException : SurveyStoreException
     {
         public Guid SurveyEquipmentId { get; }
-        public CollectionNotFoundException(SurveyEquipmentId surveyEquipmentId)
-            : base($"Current collection for survey equipment with id '{surveyEquipmentId.Value}' was not found.")
+        public FreeCollectionNotFoundException(SurveyEquipmentId surveyEquipmentId)
+            : base($"Free collection for survey equipment with id '{surveyEquipmentId.Value}' was not found.")
         {
             SurveyEquipmentId = surveyEquipmentId;
         }

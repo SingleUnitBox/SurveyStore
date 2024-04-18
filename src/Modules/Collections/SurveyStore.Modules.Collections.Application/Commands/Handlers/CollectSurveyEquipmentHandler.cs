@@ -36,7 +36,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             var collection = await _collectionRepository.GetFreeBySurveyEquipmentAsync(command.SurveyEquipmentId);
             if (collection is null)
             {
-                throw new CollectionNotFoundException(command.SurveyEquipmentId);
+                throw new FreeCollectionNotFoundException(command.SurveyEquipmentId);
             }
 
             collection.Collect(surveyor, _clock.Current());

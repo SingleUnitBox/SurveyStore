@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SurveyStore.Shared.Abstractions.Commands;
+﻿using SurveyStore.Shared.Abstractions.Commands;
+using System;
 
 namespace SurveyStore.Modules.Equipment.Application.Commands
 {
@@ -13,7 +9,7 @@ namespace SurveyStore.Modules.Equipment.Application.Commands
         string Description,
         string SerialNumber,
         DateTime PurchasedAt,
-        bool? IsActive) : ICommand
+        bool IsActive) : ICommand
     {
         public Guid Id { get; } = Guid.NewGuid();
     }
