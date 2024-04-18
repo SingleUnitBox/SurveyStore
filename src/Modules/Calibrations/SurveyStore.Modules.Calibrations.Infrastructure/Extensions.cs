@@ -2,6 +2,7 @@
 using SurveyStore.Modules.Calibrations.Domain.Repositories;
 using SurveyStore.Modules.Calibrations.Infrastructure.EF;
 using SurveyStore.Modules.Calibrations.Infrastructure.EF.Repositories;
+using SurveyStore.Modules.Calibrations.Infrastructure.Services;
 using SurveyStore.Shared.Infrastructure.Postgres;
 using System.Runtime.CompilerServices;
 
@@ -15,6 +16,7 @@ namespace SurveyStore.Modules.Calibrations.Infrastructure
             services.AddPostgres<CalibrationsDbContext>();
             services.AddScoped<ISurveyEquipmentRepository, PostgresSurveyEquipmentRepository>();
             services.AddScoped<ICalibrationsRepository, PostgresCalibrationsRepository>();
+            services.AddHostedService<CalibrationsDueBackgroundService>();
 
             return services;
         }
