@@ -29,12 +29,8 @@ namespace SurveyStore.Modules.Calibrations.Infrastructure.Services
         {
             using (var scope = _serviceProvider.CreateScope())
             {
-                //var queryHandler = scope.ServiceProvider
-                //    .GetRequiredService<IQueryHandler<BrowseCurrentDueCalibrations, IReadOnlyCollection<CalibrationDto>>>();
-
                 var dbContext = (CalibrationsDbContext)scope.ServiceProvider.GetRequiredService(typeof(CalibrationsDbContext));
 
-                //var calibrations = await queryHandler.HandleAsync(new BrowseCurrentDueCalibrations());
                 var calibrations = await dbContext.Calibrations
                     .Where(c => c.CalibrationDueDate.Value.Date <= _clock.Current().AddDays(7)
                         && c.CalibrationStatus == CalibrationStatus.Calibrated)
