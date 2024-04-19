@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using SurveyStore.Modules.Collections.Application.Exceptions;
 using SurveyStore.Modules.Collections.Application.Services;
 using SurveyStore.Shared.Abstractions.Messaging;
+using SurveyStore.Modules.Collections.Application.Clients.Calibrations;
 
 namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 {
@@ -13,6 +14,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
         private readonly ISurveyEquipmentRepository _surveyEquipmentRepository;
         private readonly IStoreRepository _storeRepository;
         private readonly ICollectionRepository _collectionRepository;
+        private readonly ICalibrationsApiClient _calibrationsApiClient;
         private readonly IEventMapper _eventMapper;
         private readonly IMessageBroker _messageBroker;
 
@@ -20,17 +22,25 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             IStoreRepository storeRepository,
             ICollectionRepository collectionRepository,
             IEventMapper eventMapper,
-            IMessageBroker messageBroker)
+            IMessageBroker messageBroker,
+            ICalibrationsApiClient calibrationsApiClient)
         {
             _surveyEquipmentRepository = surveyEquipmentRepository;
             _storeRepository = storeRepository;
             _collectionRepository = collectionRepository;
             _eventMapper = eventMapper;
-            _messageBroker = messageBroker;            
+            _messageBroker = messageBroker;
+            _calibrationsApiClient = calibrationsApiClient;
         }
 
         public async Task HandleAsync(AssignStore command)
         {
+            var calibration = await _calibrationsApiClient.GetCalibrationAsync(command.SurveyEquipmentId);
+            if (calibration?.CalibrationStatus.ToString() == "ToBeReturnForCalibration")
+            {
+                throw new SurveyEquipmentToBeCalibratedException(command.SurveyEquipmentId);
+            }
+            
             var collection = await _collectionRepository.GetOpenBySurveyEquipmentAsync(command.SurveyEquipmentId);
             if (collection is not null)
             {
