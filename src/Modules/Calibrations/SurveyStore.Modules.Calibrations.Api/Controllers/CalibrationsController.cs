@@ -20,8 +20,12 @@ namespace SurveyStore.Modules.Calibrations.Api.Controllers
             _queryDispatcher = queryDispatcher;
         }
 
+        [HttpGet("all")]
+        public async Task<ActionResult<IReadOnlyCollection<CalibrationDto>>> BrowseAllAsync()
+            => Ok(await _queryDispatcher.QueryAsync(new BrowseCalibrations()));
+
         [HttpGet("due")]
-        public async Task<ActionResult<IReadOnlyCollection<CalibrationDto>>> BrowseAsync()
+        public async Task<ActionResult<IReadOnlyCollection<CalibrationDto>>> BrowseCurrentAsync()
             => Ok(await _queryDispatcher.QueryAsync(new BrowseCurrentDueCalibrations()));
 
         [HttpPost("equipment/{serialNumber}/details")]
