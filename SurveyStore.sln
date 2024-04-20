@@ -71,13 +71,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Modules.Saga", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Calibrations", "Calibrations", "{5DA059A1-3BB0-4B0E-A6D5-33FBC593422B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.Calibrations.Domain", "src\Modules\Calibrations\SurveyStore.Modules.Calibrations.Domain\SurveyStore.Modules.Calibrations.Domain.csproj", "{936A73BF-1C51-4956-8501-C7EFDB8B6978}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Modules.Calibrations.Domain", "src\Modules\Calibrations\SurveyStore.Modules.Calibrations.Domain\SurveyStore.Modules.Calibrations.Domain.csproj", "{936A73BF-1C51-4956-8501-C7EFDB8B6978}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.Calibrations.Application", "src\Modules\Calibrations\SurveyStore.Modules.Calibrations.Application\SurveyStore.Modules.Calibrations.Application.csproj", "{7726888E-C037-4C44-8519-C3B6B2B8B117}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Modules.Calibrations.Application", "src\Modules\Calibrations\SurveyStore.Modules.Calibrations.Application\SurveyStore.Modules.Calibrations.Application.csproj", "{7726888E-C037-4C44-8519-C3B6B2B8B117}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.Calibrations.Infrastructure", "src\Modules\Calibrations\SurveyStore.Modules.Calibrations.Infrastructure\SurveyStore.Modules.Calibrations.Infrastructure.csproj", "{F6084276-0C4E-4170-B1D1-14024237FA3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Modules.Calibrations.Infrastructure", "src\Modules\Calibrations\SurveyStore.Modules.Calibrations.Infrastructure\SurveyStore.Modules.Calibrations.Infrastructure.csproj", "{F6084276-0C4E-4170-B1D1-14024237FA3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.Calibrations.Api", "src\Modules\Calibrations\SurveyStore.Modules.Calibrations.Api\SurveyStore.Modules.Calibrations.Api.csproj", "{A8099CF2-E9C2-4DA6-B3BC-3F4C50FB3261}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Modules.Calibrations.Api", "src\Modules\Calibrations\SurveyStore.Modules.Calibrations.Api\SurveyStore.Modules.Calibrations.Api.csproj", "{A8099CF2-E9C2-4DA6-B3BC-3F4C50FB3261}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{8B4163A1-A3B5-4F30-BA40-AD067DF285B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Services.Stores.Api", "src\Services\SurveyStore.Services.Stores.Api\SurveyStore.Services.Stores.Api.csproj", "{DA21B1E9-5412-479D-A820-A1B5738E29C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Services.Stores.Core", "src\Services\SurveyStore.Services.Stores.Core\SurveyStore.Services.Stores.Core.csproj", "{0FF62FCE-636E-4D35-B0D1-0E2DA0867051}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -189,6 +195,14 @@ Global
 		{A8099CF2-E9C2-4DA6-B3BC-3F4C50FB3261}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8099CF2-E9C2-4DA6-B3BC-3F4C50FB3261}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8099CF2-E9C2-4DA6-B3BC-3F4C50FB3261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA21B1E9-5412-479D-A820-A1B5738E29C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA21B1E9-5412-479D-A820-A1B5738E29C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA21B1E9-5412-479D-A820-A1B5738E29C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA21B1E9-5412-479D-A820-A1B5738E29C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FF62FCE-636E-4D35-B0D1-0E2DA0867051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FF62FCE-636E-4D35-B0D1-0E2DA0867051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FF62FCE-636E-4D35-B0D1-0E2DA0867051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FF62FCE-636E-4D35-B0D1-0E2DA0867051}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -230,6 +244,9 @@ Global
 		{7726888E-C037-4C44-8519-C3B6B2B8B117} = {5DA059A1-3BB0-4B0E-A6D5-33FBC593422B}
 		{F6084276-0C4E-4170-B1D1-14024237FA3B} = {5DA059A1-3BB0-4B0E-A6D5-33FBC593422B}
 		{A8099CF2-E9C2-4DA6-B3BC-3F4C50FB3261} = {5DA059A1-3BB0-4B0E-A6D5-33FBC593422B}
+		{8B4163A1-A3B5-4F30-BA40-AD067DF285B2} = {215139CA-69C4-44A3-BCB7-BE89EAB111C2}
+		{DA21B1E9-5412-479D-A820-A1B5738E29C1} = {8B4163A1-A3B5-4F30-BA40-AD067DF285B2}
+		{0FF62FCE-636E-4D35-B0D1-0E2DA0867051} = {8B4163A1-A3B5-4F30-BA40-AD067DF285B2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C381337B-40C7-45CC-8FB7-1F8E39A37BE8}
