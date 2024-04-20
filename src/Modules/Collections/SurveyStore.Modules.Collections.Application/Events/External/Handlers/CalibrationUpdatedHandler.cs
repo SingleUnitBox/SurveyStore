@@ -33,7 +33,7 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
             }
             else
             {
-                if (LessThanThreeDaysToCalibrationDate(calibration.CalibrationDueDate, _clock.Current()))
+                if (LessThanThreeDaysToCalibrationDate(calibration.CalibrationDueDate.Value, _clock.Current()))
                 {
                     var collection = await _collectionRepository.GetFreeBySurveyEquipmentAsync(calibration.SurveyEquipmentId);
                     if (collection is not null)
@@ -51,6 +51,7 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
                     }
                     else
                     {
+                        var surveyEquipment = await _surveyEquipmentRepository.GetByIdAsync(calibration.SurveyEquipmentId);
                         collection = await _collectionRepository.GetOpenBySurveyEquipmentAsync(calibration.SurveyEquipmentId);
                         if (collection is not null)
                         {
@@ -58,7 +59,6 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
                             collection.ReturnForCalibration(collection.CollectionStoreId, _clock.Current());
                             await _collectionRepository.UpdateAsync(collection);
 
-                            var surveyEquipment = await _surveyEquipmentRepository.GetByIdAsync(calibration.SurveyEquipmentId);
                             if (surveyEquipment is not null)
                             {
                                 surveyEquipment.UnassignStore();
@@ -69,6 +69,7 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
                         else
                         {
                             //store not assigned yet so there is no collection available
+                            return;
                         }
                     }
                 }
