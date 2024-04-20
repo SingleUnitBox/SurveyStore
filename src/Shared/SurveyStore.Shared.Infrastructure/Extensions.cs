@@ -31,6 +31,7 @@ using SurveyStore.Shared.Infrastructure.Postgres;
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Users.Tests.Integration")]
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Stores.Tests.Unit")]
 [assembly: InternalsVisibleTo("SurveyStore.Bootstrapper")]
+[assembly: InternalsVisibleTo("SurveyStore.Services.Stores.Core")]
 namespace SurveyStore.Shared.Infrastructure
 {
     internal static class Extensions
