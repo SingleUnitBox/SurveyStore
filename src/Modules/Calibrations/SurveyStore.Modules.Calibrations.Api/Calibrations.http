@@ -1,8 +1,14 @@
 @url = http://localhost:5000/calibrations-module
-@serialNumber = ABC123
+@serialNumber = DCE123
 
 ###
 GET {{url}}
+
+###
+GET {{url}}/calibrations/all
+
+###
+GET {{url}}/calibrations/due
 
 ###
 GET {{url}}/calibrations/equipment/details
@@ -15,6 +21,15 @@ POST {{url}}/calibrations/equipment/{{serialNumber}}/details
 Content-Type: application/json
 
 {
-    "calibrationDueDate": "2024-05-20",
+    "calibrationDueDate": "2024-04-21",
     "certificateNumber": "XXX-YYY-123"
+}
+
+###
+POST {{url}}/calibrations/equipment/{{serialNumber}}/calibrate
+Content-Type: application/json
+
+{
+    "calibrationDueDate": "2024-04-21",
+    "certificateNumber": "XXX-YYY-345"
 }
