@@ -1,6 +1,6 @@
 @url = http://localhost:5000/users-module
 
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MDczMzcwZWZiOTE0Y2Q1OGI4ZWRmMDljYjhiYTcyNiIsInVuaXF1ZV9uYW1lIjoiNDA3MzM3MGVmYjkxNGNkNThiOGVkZjA5Y2I4YmE3MjYiLCJqdGkiOiI1ZGM1Y2NmMi1hODQwLTQ1M2MtYWJiNy03Mzg4NGNlNThkNWYiLCJpYXQiOiIxNzEzMTA5OTkyNDkxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiXSwibmJmIjoxNzEzMTA5OTkyLCJleHAiOjE3MTMxOTI3OTIsImlzcyI6InN1cnZleXN0b3JlIn0.KeLagB4lXo97OCt3K-rz-vO49YShKTWx2ik8J2en8jE
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMWIyMWZhNmI3MzM0NjNlOWE2NzQ5ODRkZThkZDEyZCIsInVuaXF1ZV9uYW1lIjoiYTFiMjFmYTZiNzMzNDYzZTlhNjc0OTg0ZGU4ZGQxMmQiLCJqdGkiOiI2Y2IxYWFkOS02NWE2LTRmZGYtYTI4YS1kODhhYTEyNzUzNzkiLCJpYXQiOiIxNzEzODE3OTQyOTc4IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxMzgxNzk0MiwiZXhwIjoxNzEzOTAwNzQyLCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.Stn0V1HL8ADs5M3cJ5algXiQb1Ui17idyuCmJR5muJM
 
 ###
 GET {{url}}
@@ -14,10 +14,10 @@ POST {{url}}/account/sign-up
 Content-Type: application/json
 
 {
-    "email": "test1@gmail.com",
+    "email": "test2@gmail.com",
     "password": "secret",
     "role": "user",
-    "claims": {"permissions": ["stores", "users", "surveyors", "equipment", "collections"]}
+    "claims": {"permissions": ["stores", "users", "surveyors", "equipment", "collections", "calibrations", "saga"]}
 
 }
 
@@ -26,6 +26,6 @@ POST {{url}}/account/sign-in
 Content-Type: application/json
 
 {
-    "email": "test1@gmail.com",
+    "email": "test2@gmail.com",
     "password": "secret"
 }

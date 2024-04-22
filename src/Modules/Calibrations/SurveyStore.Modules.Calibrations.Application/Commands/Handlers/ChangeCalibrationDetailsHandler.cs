@@ -4,6 +4,7 @@ using SurveyStore.Modules.Calibrations.Domain.Repositories;
 using SurveyStore.Modules.Calibrations.Domain.Types;
 using SurveyStore.Shared.Abstractions.Commands;
 using SurveyStore.Shared.Abstractions.Messaging;
+using SurveyStore.Shared.Abstractions.Time;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Calibrations.Application.Commands.Handlers
@@ -11,12 +12,15 @@ namespace SurveyStore.Modules.Calibrations.Application.Commands.Handlers
     internal sealed class ChangeCalibrationDetailsHandler : ICommandHandler<ChangeCalibrationDetails>
     {
         private readonly ICalibrationsRepository _calibrationsRepository;
+        private readonly IClock _clock;
         private readonly IMessageBroker _messageBroker;
         public ChangeCalibrationDetailsHandler(ICalibrationsRepository calibrationsRepository,
-            IMessageBroker messageBroker)
+            IMessageBroker messageBroker,
+            IClock clock)
         {
             _calibrationsRepository = calibrationsRepository;
             _messageBroker = messageBroker;
+            _clock = clock;
         }
         public async Task HandleAsync(ChangeCalibrationDetails command)
         {
@@ -27,7 +31,15 @@ namespace SurveyStore.Modules.Calibrations.Application.Commands.Handlers
             }
 
             calibration.ChangeCalibrationDueDate(command.CalibrationDueDate);
-            calibration.ChangeCalibrationStatus(CalibrationStatus.Calibrated);
+            if (command.CalibrationDueDate < _clock.Current())
+            {
+                calibration.ChangeCalibrationStatus(CalibrationStatus.ToBeReturnForCalibration);
+            }
+            else
+            {
+                calibration.ChangeCalibrationStatus(CalibrationStatus.Calibrated);
+            }
+            
 
             //if (command.CalibrationInterval.HasValue)
             //{

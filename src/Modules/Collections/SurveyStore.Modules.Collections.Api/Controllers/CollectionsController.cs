@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 using SurveyStore.Modules.Collections.Application.DTO;
 using SurveyStore.Modules.Collections.Application.Queries;
 using SurveyStore.Shared.Abstractions.Queries;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SurveyStore.Modules.Collections.Api.Controllers
 {
+    [Authorize(Policy = Policy)]
     public class CollectionsController : BaseController
     {
+        public const string Policy = "collections";
         private readonly ICommandDispatcher _commandDispatcher;
         private readonly IQueryDispatcher _queryDispatcher;
 

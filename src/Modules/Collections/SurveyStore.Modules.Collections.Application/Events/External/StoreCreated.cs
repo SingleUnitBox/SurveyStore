@@ -1,9 +1,10 @@
-﻿using System;
-using Convey.CQRS.Events;
-using Convey.MessageBrokers;
+﻿using SurveyStore.Shared.Abstractions.Events;
+using System;
+//using Convey.CQRS.Events;
+//using Convey.MessageBrokers;
 
 namespace SurveyStore.Modules.Collections.Application.Events.External
 {
-    [Message("stores")]
-    public record StoreCreated(Guid Id, string Name) : IEvent;
+    //[Message("stores")]
+    public record StoreCreated(Guid Id) : IEvent;
 }

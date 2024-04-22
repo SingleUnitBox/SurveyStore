@@ -15,19 +15,19 @@ namespace SurveyStore.Shared.Infrastructure.Messaging.Brokers
         private readonly IAsyncMessageDispatcher _messageDispatcher;
         private readonly MessagingOptions _messagingOptions;
         private readonly ILogger<MessageBroker> _logger;
-        private readonly IBusPublisher _busPublisher;
+        //private readonly IBusPublisher _busPublisher;
 
         public MessageBroker(IModuleClient moduleClient,
             IAsyncMessageDispatcher messageDispatcher,
             MessagingOptions messagingOptions,
-            ILogger<MessageBroker> logger,
-            IBusPublisher busPublisher)
+            ILogger<MessageBroker> logger)
+            //IBusPublisher busPublisher)
         {
             _moduleClient = moduleClient;
             _messageDispatcher = messageDispatcher;
             _messagingOptions = messagingOptions;
             _logger = logger;
-            _busPublisher = busPublisher;
+            //_busPublisher = busPublisher;
         }
 
         public async Task PublishAsync(params IMessage[] messages)
@@ -46,7 +46,7 @@ namespace SurveyStore.Shared.Infrastructure.Messaging.Brokers
             var tasks = new List<Task>();
             foreach (var message in messages)
             {
-                await _busPublisher.PublishAsync(message);
+                //await _busPublisher.PublishAsync(message);
                 if (_messagingOptions.UseBackgroundDispatcher)
                 {
                     await _messageDispatcher.PublishAsync(message);

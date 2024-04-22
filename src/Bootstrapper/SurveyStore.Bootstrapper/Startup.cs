@@ -53,9 +53,9 @@ namespace SurveyStore.Bootstrapper
                 endpoints.MapModuleInfo();
             });
 
-            app.UseConvey();
-            app.UseRabbitMq()
-                .SubscribeEvent<StoreCreated>();
+            //app.UseConvey();
+            //app.UseRabbitMq()
+            //    .SubscribeEvent<StoreCreated>();
 
             _assemblies.Clear();
             _modules.Clear();

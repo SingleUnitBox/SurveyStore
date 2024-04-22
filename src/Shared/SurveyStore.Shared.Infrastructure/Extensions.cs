@@ -116,12 +116,12 @@ namespace SurveyStore.Shared.Infrastructure
                     manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
                 });
 
-            services
-                .AddConvey()
-                .AddRabbitMq()
-                .AddEventHandlers()
-                .AddInMemoryEventDispatcher()
-                .Build();
+            //services
+            //    .AddConvey()
+            //    .AddRabbitMq()
+            //    .AddEventHandlers()
+            //    .AddInMemoryEventDispatcher()
+            //    .Build();
 
             return services;
         }

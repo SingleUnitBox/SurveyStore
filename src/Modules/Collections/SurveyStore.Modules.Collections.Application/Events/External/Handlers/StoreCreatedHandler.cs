@@ -1,9 +1,10 @@
-﻿using Convey.CQRS.Events;
+﻿//using Convey.CQRS.Events;
 using Microsoft.Extensions.Logging;
 using SurveyStore.Modules.Collections.Application.Clients.Stores;
 using SurveyStore.Modules.Collections.Application.Exceptions;
 using SurveyStore.Modules.Collections.Core.Entities;
 using SurveyStore.Modules.Collections.Core.Repositories;
+using SurveyStore.Shared.Abstractions.Events;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
@@ -30,13 +31,13 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
                 return;
             }
 
-            //var storeDto = await _storesApiClient.GetStoreAsync(@event.Id);
-            //if (storeDto is null)
-            //{
-            //    throw new StoreNotFoundException(@event.Id);
-            //}
+            var storeDto = await _storesApiClient.GetStoreAsync(@event.Id);
+            if (storeDto is null)
+            {
+                throw new StoreNotFoundException(@event.Id);
+            }
 
-            store = Store.Create(@event.Id, @event.Name);
+            store = Store.Create(storeDto.Id, storeDto.Name);
             await _storeRepository.AddAsync(store);
             _logger.LogInformation($"Created a store with id '{@event.Id}'.");
         }

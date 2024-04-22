@@ -1,8 +1,8 @@
-@url = http://localhost:5010/stores-module
+@url = http://localhost:5000/stores-module
 
 @storeId = 83eeae8e-e0a3-4551-b254-b870cb048b00
 
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MDczMzcwZWZiOTE0Y2Q1OGI4ZWRmMDljYjhiYTcyNiIsInVuaXF1ZV9uYW1lIjoiNDA3MzM3MGVmYjkxNGNkNThiOGVkZjA5Y2I4YmE3MjYiLCJqdGkiOiIwNGQ5ZjkwMi03N2Q3LTQzNDgtOWQxMy0yODZjNGJlMjM1ZTkiLCJpYXQiOiIxNzEzNzY1NDIzNDczIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiXSwibmJmIjoxNzEzNzY1NDIzLCJleHAiOjE3MTM4NDgyMjMsImlzcyI6InN1cnZleXN0b3JlIn0.OO3Xq-PsWjZs-SgRlWK3ECGkbd9W8Rw162sVcnPkTko
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMWIyMWZhNmI3MzM0NjNlOWE2NzQ5ODRkZThkZDEyZCIsInVuaXF1ZV9uYW1lIjoiYTFiMjFmYTZiNzMzNDYzZTlhNjc0OTg0ZGU4ZGQxMmQiLCJqdGkiOiI2Y2IxYWFkOS02NWE2LTRmZGYtYTI4YS1kODhhYTEyNzUzNzkiLCJpYXQiOiIxNzEzODE3OTQyOTc4IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxMzgxNzk0MiwiZXhwIjoxNzEzOTAwNzQyLCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.Stn0V1HL8ADs5M3cJ5algXiQb1Ui17idyuCmJR5muJM
 
 ###
 GET {{url}}
@@ -19,8 +19,8 @@ Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
-    "name": "VIAA",
-    "location": "Bilsthopre",
+    "name": "VIA",
+    "location": "Bilsthorpe",
     "openingTime": "2020-01-01T07:00:00",
     "closingTime": "2020-01-01T17:00:00"
 }
