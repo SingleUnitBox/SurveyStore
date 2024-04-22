@@ -30,13 +30,13 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
                 return;
             }
 
-            var storeDto = await _storesApiClient.GetStoreAsync(@event.Id);
-            if (storeDto is null)
-            {
-                throw new StoreNotFoundException(@event.Id);
-            }
+            //var storeDto = await _storesApiClient.GetStoreAsync(@event.Id);
+            //if (storeDto is null)
+            //{
+            //    throw new StoreNotFoundException(@event.Id);
+            //}
 
-            store = Store.Create(storeDto.Id, storeDto.Name);
+            store = Store.Create(@event.Id, @event.Name);
             await _storeRepository.AddAsync(store);
             _logger.LogInformation($"Created a store with id '{@event.Id}'.");
         }

@@ -43,7 +43,7 @@ namespace SurveyStore.Services.Stores.Core.Commands.Handlers
             };
 
             await _storeRepository.AddAsync(store);
-            await _messageBroker.PublishAsync(new StoreCreated(command.Id));
+            await _messageBroker.PublishAsync(new StoreCreated(command.Id, command.Name));
         }
     }
 }

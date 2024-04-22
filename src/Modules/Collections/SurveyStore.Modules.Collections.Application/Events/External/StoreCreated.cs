@@ -5,5 +5,5 @@ using Convey.MessageBrokers;
 namespace SurveyStore.Modules.Collections.Application.Events.External
 {
     [Message("stores")]
-    public record StoreCreated(Guid Id) : IEvent;
+    public record StoreCreated(Guid Id, string Name) : IEvent;
 }

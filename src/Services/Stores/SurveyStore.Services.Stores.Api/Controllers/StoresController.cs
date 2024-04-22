@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace SurveyStore.Services.Stores.Api.Controllers
 {
-    [Authorize(Policy = Policy)]
+    //[Authorize(Policy = Policy)]
     public class StoresController : BaseController
     {
-        private const string Policy = "stores";
+        //private const string Policy = "stores";
         private readonly IStoreService _storeService;
         private readonly ICommandDispatcher _commandDispatcher;
 
