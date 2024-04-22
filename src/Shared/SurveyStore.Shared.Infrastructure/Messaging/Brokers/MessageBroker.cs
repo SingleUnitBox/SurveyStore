@@ -5,26 +5,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SurveyStore.Shared.Infrastructure.Messaging.Dispatchers;
+using Convey.MessageBrokers;
 
 namespace SurveyStore.Shared.Infrastructure.Messaging.Brokers
 {
-    internal sealed class InMemoryMessageBroker : IMessageBroker
+    internal sealed class MessageBroker : IMessageBroker
     {
         private readonly IModuleClient _moduleClient;
         private readonly IAsyncMessageDispatcher _messageDispatcher;
         private readonly MessagingOptions _messagingOptions;
-        private readonly ILogger<InMemoryMessageBroker> _logger;
+        private readonly ILogger<MessageBroker> _logger;
+        private readonly IBusPublisher _busPublisher;
 
-        public InMemoryMessageBroker(IModuleClient moduleClient,
+        public MessageBroker(IModuleClient moduleClient,
             IAsyncMessageDispatcher messageDispatcher,
             MessagingOptions messagingOptions,
-            ILogger<InMemoryMessageBroker> logger)
+            ILogger<MessageBroker> logger,
+            IBusPublisher busPublisher)
         {
             _moduleClient = moduleClient;
             _messageDispatcher = messageDispatcher;
             _messagingOptions = messagingOptions;
             _logger = logger;
-
+            _busPublisher = busPublisher;
         }
 
         public async Task PublishAsync(params IMessage[] messages)
@@ -43,6 +46,7 @@ namespace SurveyStore.Shared.Infrastructure.Messaging.Brokers
             var tasks = new List<Task>();
             foreach (var message in messages)
             {
+                await _busPublisher.PublishAsync(message);
                 if (_messagingOptions.UseBackgroundDispatcher)
                 {
                     await _messageDispatcher.PublishAsync(message);

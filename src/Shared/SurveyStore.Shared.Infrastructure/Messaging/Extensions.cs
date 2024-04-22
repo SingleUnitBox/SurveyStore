@@ -11,7 +11,7 @@ namespace SurveyStore.Shared.Infrastructure.Messaging
         private const string SectionName = "messaging";
         public static IServiceCollection AddMessaging(this IServiceCollection services)
         {
-            services.AddSingleton<IMessageBroker, InMemoryMessageBroker>();
+            services.AddSingleton<IMessageBroker, MessageBroker>();
             services.AddSingleton<IMessageChannel, MessageChannel>();
             services.AddSingleton<IAsyncMessageDispatcher, AsyncMessageDispatcher>();
 

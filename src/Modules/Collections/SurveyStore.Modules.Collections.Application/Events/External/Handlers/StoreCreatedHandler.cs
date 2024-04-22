@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Convey.CQRS.Events;
+using Microsoft.Extensions.Logging;
 using SurveyStore.Modules.Collections.Application.Clients.Stores;
 using SurveyStore.Modules.Collections.Application.Exceptions;
 using SurveyStore.Modules.Collections.Core.Entities;
 using SurveyStore.Modules.Collections.Core.Repositories;
-using SurveyStore.Shared.Abstractions.Events;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers

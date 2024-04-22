@@ -5,6 +5,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Convey.MessageBrokers.CQRS" Version="0.5.518" />
+	  <PackageReference Include="Convey.MessageBrokers.RabbitMQ" Version="0.5.518" />
 	  <PackageReference Include="Humanizer" Version="2.14.1" />
 	  <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.17" />
 	  <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="5.0.17" />

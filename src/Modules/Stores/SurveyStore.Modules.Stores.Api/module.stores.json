@@ -2,7 +2,7 @@
   "stores": {
     "module": {
       "name": "Stores",
-      "enabled": true
+      "enabled": false
     }
   }
 }

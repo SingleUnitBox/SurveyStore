@@ -87,6 +87,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Services.Stores
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Services.Stores.Core", "src\Services\Stores\SurveyStore.Services.Stores.Core\SurveyStore.Services.Stores.Core.csproj", "{966EB079-11EF-439E-AD27-A77B5F27D58A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIGateway", "APIGateway", "{0AD8EDC0-DE00-405A-8046-7AD9A4E35A96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.APIGateway", "src\APIGateway\SurveyStore.APIGateway\SurveyStore.APIGateway.csproj", "{D6F04AB9-9D3C-4636-851F-59E75D3B7D88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -205,6 +209,10 @@ Global
 		{966EB079-11EF-439E-AD27-A77B5F27D58A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{966EB079-11EF-439E-AD27-A77B5F27D58A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{966EB079-11EF-439E-AD27-A77B5F27D58A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6F04AB9-9D3C-4636-851F-59E75D3B7D88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6F04AB9-9D3C-4636-851F-59E75D3B7D88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6F04AB9-9D3C-4636-851F-59E75D3B7D88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6F04AB9-9D3C-4636-851F-59E75D3B7D88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -250,6 +258,8 @@ Global
 		{BEDF87E1-397D-4C6A-BF42-841F66A99600} = {8B4163A1-A3B5-4F30-BA40-AD067DF285B2}
 		{09E6FE27-08B8-4F90-816F-E51A1C12186E} = {BEDF87E1-397D-4C6A-BF42-841F66A99600}
 		{966EB079-11EF-439E-AD27-A77B5F27D58A} = {BEDF87E1-397D-4C6A-BF42-841F66A99600}
+		{0AD8EDC0-DE00-405A-8046-7AD9A4E35A96} = {215139CA-69C4-44A3-BCB7-BE89EAB111C2}
+		{D6F04AB9-9D3C-4636-851F-59E75D3B7D88} = {0AD8EDC0-DE00-405A-8046-7AD9A4E35A96}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C381337B-40C7-45CC-8FB7-1F8E39A37BE8}

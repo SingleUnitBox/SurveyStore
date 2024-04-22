@@ -18,6 +18,8 @@ using SurveyStore.Shared.Infrastructure.Modules;
 using SurveyStore.Shared.Infrastructure.Messaging;
 using System;
 using System.Runtime.CompilerServices;
+using Convey;
+using Convey.MessageBrokers.RabbitMQ;
 
 [assembly: InternalsVisibleTo("SurveyStore.Services.Stores.Api")]
 namespace SurveyStore.Services.Stores.Core
@@ -45,6 +47,11 @@ namespace SurveyStore.Services.Stores.Core
             services.AddSingleton<IClock, ClockUtc>();
             services.AddErrorHandling();
             services.AddControllers();
+
+            services
+                .AddConvey()
+                .AddRabbitMq()
+                .Build();
 
             return services;
         }

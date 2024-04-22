@@ -23,6 +23,9 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using SurveyStore.Shared.Infrastructure.Postgres;
+using Convey;
+using Convey.MessageBrokers.RabbitMQ;
+using Convey.CQRS.Events;
 
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Calibrations.Api")]
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Surveyors.Api")]
@@ -109,6 +112,13 @@ namespace SurveyStore.Shared.Infrastructure
                     }
                     manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
                 });
+
+            services
+                .AddConvey()
+                .AddRabbitMq()
+                .AddEventHandlers()
+                .AddInMemoryEventDispatcher()
+                .Build();
 
             return services;
         }

@@ -1,8 +1,12 @@
+using Convey;
+using Convey.MessageBrokers.CQRS;
+using Convey.MessageBrokers.RabbitMQ;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SurveyStore.Modules.Collections.Application.Events.External;
 using SurveyStore.Shared.Abstractions.Modules;
 using SurveyStore.Shared.Infrastructure;
 using SurveyStore.Shared.Infrastructure.Modules;
@@ -48,6 +52,13 @@ namespace SurveyStore.Bootstrapper
                     => context.Response.WriteAsync("SurveyStore API"));
                 endpoints.MapModuleInfo();
             });
+
+            app.UseConvey();
+            app.UseRabbitMq()
+                .SubscribeEvent<StoreCreated>();
+
+            _assemblies.Clear();
+            _modules.Clear();
         }
     }
 }

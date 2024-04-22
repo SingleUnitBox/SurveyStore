@@ -1,6 +1,6 @@
-﻿using System;
+﻿using SurveyStore.Shared.Abstractions.Events;
+using System;
 using System.Runtime.CompilerServices;
-using SurveyStore.Shared.Abstractions.Events;
 
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Stores.Core")]
 namespace SurveyStore.Services.Stores.Core.Events
