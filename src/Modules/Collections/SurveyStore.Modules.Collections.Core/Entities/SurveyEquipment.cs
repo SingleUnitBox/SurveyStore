@@ -11,19 +11,21 @@ namespace SurveyStore.Modules.Collections.Core.Entities
         public string SerialNumber { get; private set; }
         public string Brand { get; private set; }
         public string Model { get; private set; }
+        public string Type { get; private set; }
         public bool IsFree => StoreId is null;
 
-        public SurveyEquipment(AggregateId id, string serialNumber, string brand, string model)
+        public SurveyEquipment(AggregateId id, string serialNumber, string brand, string model, string type)
         {
             Id = id;
             SerialNumber = serialNumber;
             Brand = brand;
             Model = model;
+            Type = type;
         }
 
-        public static SurveyEquipment Create(Guid id, string serialNumber, string brand, string model)
+        public static SurveyEquipment Create(Guid id, string serialNumber, string brand, string model, string type)
         {
-            var equipment = new SurveyEquipment(id, serialNumber, brand, model);
+            var equipment = new SurveyEquipment(id, serialNumber, brand, model, type);
 
             equipment.ClearEvents();
             equipment.Version = 0;
