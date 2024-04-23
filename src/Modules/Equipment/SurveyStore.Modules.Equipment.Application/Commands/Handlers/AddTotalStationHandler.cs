@@ -5,6 +5,7 @@ using SurveyStore.Shared.Abstractions.Commands;
 using System.Threading.Tasks;
 using SurveyStore.Modules.Equipment.Application.Events;
 using SurveyStore.Shared.Abstractions.Messaging;
+using SurveyStore.Modules.Equipment.Application.Types;
 
 namespace SurveyStore.Modules.Equipment.Application.Commands.Handlers
 {
@@ -32,7 +33,7 @@ namespace SurveyStore.Modules.Equipment.Application.Commands.Handlers
 
             await _repository.AddAsync(totalStation);
             await _messageBroker.PublishAsync(new SurveyEquipmentCreated(
-                totalStation.Id, totalStation.SerialNumber, totalStation.Brand, totalStation.Model));
+                totalStation.Id, totalStation.SerialNumber, totalStation.Brand, totalStation.Model, SurveyEquipmentTypes.TotalStation));
         }
     }
 }

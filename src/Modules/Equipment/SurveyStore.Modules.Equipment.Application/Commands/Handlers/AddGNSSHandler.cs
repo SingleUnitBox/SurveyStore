@@ -1,6 +1,7 @@
 ﻿using SurveyStore.Modules.Equipment.Application.Events;
 using SurveyStore.Modules.Equipment.Application.Exceptions;
 using SurveyStore.Modules.Equipment.Application.Mappings;
+using SurveyStore.Modules.Equipment.Application.Types;
 using SurveyStore.Modules.Equipment.Core.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
 using SurveyStore.Shared.Abstractions.Messaging;
@@ -31,7 +32,7 @@ namespace SurveyStore.Modules.Equipment.Application.Commands.Handlers
             gnss = command.AsEntity();
             await _repository.AddAsync(gnss);
             await _messageBroker.PublishAsync(new SurveyEquipmentCreated(
-                gnss.Id, gnss.SerialNumber, gnss.Brand, gnss.Model));
+                gnss.Id, gnss.SerialNumber, gnss.Brand, gnss.Model, SurveyEquipmentTypes.GNSS));
         }
     }
 }

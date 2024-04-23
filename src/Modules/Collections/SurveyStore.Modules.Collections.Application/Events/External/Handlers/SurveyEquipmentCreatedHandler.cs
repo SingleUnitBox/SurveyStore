@@ -22,7 +22,7 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
                 return;
             }
 
-            equipment = SurveyEquipment.Create(@event.Id, @event.SerialNumber, @event.Brand, @event.Model);
+            equipment = SurveyEquipment.Create(@event.Id, @event.SerialNumber, @event.Brand, @event.Model, @event.Type);
             await _surveyEquipmentRepository.AddAsync(equipment);
         }
     }
