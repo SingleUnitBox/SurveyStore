@@ -1,33 +1,36 @@
 @url = http://localhost:5000/collections-module
 
-@equipmentId = 0ad2f50b-e7e8-40dc-9b0a-5de90b3875c9
+@equipmentId = 56c50ded-127b-49c3-aace-f8b14bf58bb2
 
-@store1Id = 6d7ba32f-605e-460a-87a9-ece9595ebcc8
+@store1Id = 9b55bfb9-63c1-4532-9549-2cd31d1cc62c
 @store2Id = 90bc5871-9e80-473d-a268-e86bafa81766
 
-@surveyorId1 = a1b21fa6-b733-463e-9a67-4984de8dd12d
+@surveyorId1 = 5a8b5e86-6168-47e6-92ab-1f11a0e63c3b
 @surveyorId2 = ce62dacaba2845079b8bf099f4bfd8ca
 
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMWIyMWZhNmI3MzM0NjNlOWE2NzQ5ODRkZThkZDEyZCIsInVuaXF1ZV9uYW1lIjoiYTFiMjFmYTZiNzMzNDYzZTlhNjc0OTg0ZGU4ZGQxMmQiLCJqdGkiOiI2Y2IxYWFkOS02NWE2LTRmZGYtYTI4YS1kODhhYTEyNzUzNzkiLCJpYXQiOiIxNzEzODE3OTQyOTc4IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxMzgxNzk0MiwiZXhwIjoxNzEzOTAwNzQyLCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.Stn0V1HL8ADs5M3cJ5algXiQb1Ui17idyuCmJR5muJM
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MGM3YjI5ZDUwN2I0OTMwOWIwNDUzMjAxMTYxOTc3ZCIsInVuaXF1ZV9uYW1lIjoiNDBjN2IyOWQ1MDdiNDkzMDliMDQ1MzIwMTE2MTk3N2QiLCJqdGkiOiJlN2FiOWI5Ni02NzI4LTQxMmYtYTRhYy05MzE5ODIxMWU1YmIiLCJpYXQiOiIxNzEzOTM2NjY0NzcyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxMzkzNjY2NCwiZXhwIjoxNzE0MDE5NDY0LCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.qK_iEsCP0EPmF5uP8ZA4S0jxPo1nv1kkjSBFRME0a88
 
 ###
 GET {{url}}
 
 ###
 GET {{url}}/collections/equipment/all
+Authorization: Bearer {{accessToken}}
 
 ###
 GET {{url}}/collections/equipment/available
+Authorization: Bearer {{accessToken}}
 
 ###
 GET {{url}}/collections/equipment/{{surveyorId1}}/collected
 
 ###
 POST {{url}}/collections/equipment/{{equipmentId}}/assign-store
+Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
-    "storeId": "{{store2Id}}"
+    "storeId": "{{store1Id}}"
 }
 
 ###
@@ -35,11 +38,12 @@ POST {{url}}/collections/equipment/{{equipmentId}}
 Content-Type: application/json
 
 {
-    "collectionStoreId": "{{store2Id}}"
+    "collectionStoreId": "{{store1Id}}"
 }
 
 ###
 PUT {{url}}/collections/equipment/{{equipmentId}}/collect
+Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
@@ -52,5 +56,5 @@ Content-Type: application/json
 
 {
     "surveyorId": "{{surveyorId1}}",
-    "returnStoreId": "{{store2Id}}"
+    "returnStoreId": "{{store1Id}}"
 }

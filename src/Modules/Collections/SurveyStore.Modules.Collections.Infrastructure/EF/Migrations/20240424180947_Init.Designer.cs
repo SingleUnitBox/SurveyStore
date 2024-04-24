@@ -10,8 +10,8 @@ using SurveyStore.Modules.Collections.Infrastructure.EF;
 namespace SurveyStore.Modules.Collections.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(CollectionsDbContext))]
-    [Migration("20240326175624_AddCollectionConfiguration")]
-    partial class AddCollectionConfiguration
+    [Migration("20240424180947_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,11 +30,14 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Migrations
                     b.Property<DateTime?>("CollectedAt")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<Guid?>("CollectionStoreId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ReturnStoreId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime?>("ReturnedAt")
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<Guid?>("StoreId")
-                        .HasColumnType("uuid");
 
                     b.Property<Guid?>("SurveyEquipmentId")
                         .HasColumnType("uuid");
@@ -48,19 +51,16 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StoreId");
-
                     b.HasIndex("SurveyEquipmentId");
 
                     b.HasIndex("SurveyorId");
 
-                    b.ToTable("Collection");
+                    b.ToTable("Collections");
                 });
 
             modelBuilder.Entity("SurveyStore.Modules.Collections.Core.Entities.Store", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
@@ -75,7 +75,6 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Migrations
             modelBuilder.Entity("SurveyStore.Modules.Collections.Core.Entities.SurveyEquipment", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("Brand")
@@ -87,7 +86,19 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Migrations
                     b.Property<string>("SerialNumber")
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("StoreId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("StoreId");
 
                     b.ToTable("SurveyEquipment");
                 });
@@ -107,23 +118,31 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Migrations
 
             modelBuilder.Entity("SurveyStore.Modules.Collections.Core.Entities.Collection", b =>
                 {
-                    b.HasOne("SurveyStore.Modules.Collections.Core.Entities.Store", "Store")
-                        .WithMany()
-                        .HasForeignKey("StoreId");
-
                     b.HasOne("SurveyStore.Modules.Collections.Core.Entities.SurveyEquipment", "SurveyEquipment")
                         .WithMany()
                         .HasForeignKey("SurveyEquipmentId");
 
                     b.HasOne("SurveyStore.Modules.Collections.Core.Entities.Surveyor", "Surveyor")
-                        .WithMany()
+                        .WithMany("Collections")
                         .HasForeignKey("SurveyorId");
-
-                    b.Navigation("Store");
 
                     b.Navigation("SurveyEquipment");
 
                     b.Navigation("Surveyor");
+                });
+
+            modelBuilder.Entity("SurveyStore.Modules.Collections.Core.Entities.SurveyEquipment", b =>
+                {
+                    b.HasOne("SurveyStore.Modules.Collections.Core.Entities.Store", "Store")
+                        .WithMany()
+                        .HasForeignKey("StoreId");
+
+                    b.Navigation("Store");
+                });
+
+            modelBuilder.Entity("SurveyStore.Modules.Collections.Core.Entities.Surveyor", b =>
+                {
+                    b.Navigation("Collections");
                 });
 #pragma warning restore 612, 618
         }

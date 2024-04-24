@@ -49,6 +49,8 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SurveyEquipmentId");
+
                     b.HasIndex("SurveyorId");
 
                     b.ToTable("Collections");
@@ -114,9 +116,15 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Migrations
 
             modelBuilder.Entity("SurveyStore.Modules.Collections.Core.Entities.Collection", b =>
                 {
+                    b.HasOne("SurveyStore.Modules.Collections.Core.Entities.SurveyEquipment", "SurveyEquipment")
+                        .WithMany()
+                        .HasForeignKey("SurveyEquipmentId");
+
                     b.HasOne("SurveyStore.Modules.Collections.Core.Entities.Surveyor", "Surveyor")
                         .WithMany("Collections")
                         .HasForeignKey("SurveyorId");
+
+                    b.Navigation("SurveyEquipment");
 
                     b.Navigation("Surveyor");
                 });
