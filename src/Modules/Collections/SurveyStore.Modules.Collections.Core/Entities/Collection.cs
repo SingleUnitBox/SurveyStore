@@ -27,7 +27,7 @@ namespace SurveyStore.Modules.Collections.Core.Entities
             IncrementVersion();
         }
 
-        public void Collect(Surveyor surveyor, DateTime collectedAt)
+        internal void Collect(Surveyor surveyor, DateTime collectedAt)
         {
             if (CollectionStoreId is null)
             {

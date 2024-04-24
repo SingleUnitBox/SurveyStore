@@ -19,7 +19,7 @@ namespace SurveyStore.Modules.Collections.Core.DomainEvents.Handlers
 
         public async Task HandleAsync(StoreAssigned @event)
         {
-            var surveyEquipmentId = new SurveyEquipmentId(@event.SurveyEquipment.Id);
+            var surveyEquipmentId = new AggregateId(@event.SurveyEquipment.Id);
             var collections = await _collectionRepository.BrowseCollectionsAsync(surveyEquipmentId);
             var collection = collections.SingleOrDefault(c => !c.CollectedAt.HasValue);
             if (collection is not null)
