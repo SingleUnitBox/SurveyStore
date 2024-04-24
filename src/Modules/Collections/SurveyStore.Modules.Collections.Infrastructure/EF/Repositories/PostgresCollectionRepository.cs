@@ -29,16 +29,21 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
             _collections.Update(collection);
             await _dbContext.SaveChangesAsync();
         }
+        public async Task DeleteAsync(Collection collection)
+        {
+            _collections.Remove(collection);
+            await _dbContext.SaveChangesAsync();
+        }
 
         // do not let to create multiple OPEN collections for same equipment
-        public async Task<Collection> GetFreeBySurveyEquipmentAsync(SurveyEquipmentId surveyEquipmentId)
+        public async Task<Collection> GetFreeBySurveyEquipmentAsync(AggregateId surveyEquipmentId)
             => await _collections
                 .Where(c => c.SurveyEquipmentId == surveyEquipmentId
                             && c.ReturnStoreId == null
                             && c.CollectedAt == null)
                 .SingleOrDefaultAsync();
 
-        public async Task<Collection> GetOpenBySurveyEquipmentAsync(SurveyEquipmentId surveyEquipmentId)
+        public async Task<Collection> GetOpenBySurveyEquipmentAsync(AggregateId surveyEquipmentId)
             => await _collections
                 .Where(c => c.SurveyEquipmentId == surveyEquipmentId
                     && c.ReturnStoreId == null
@@ -46,7 +51,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
                 .Include(c => c.Surveyor)
                 .SingleOrDefaultAsync();
 
-        public async Task<Collection> GetCompletedBySurveyEquipmentAsync(SurveyEquipmentId surveyEquipmentId)
+        public async Task<Collection> GetCompletedBySurveyEquipmentAsync(AggregateId surveyEquipmentId)
             => await _collections
                 .Where(c => c.SurveyEquipmentId == surveyEquipmentId
                             && c.ReturnStoreId == null
@@ -55,15 +60,16 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
                 .SingleOrDefaultAsync();
 
 
-        public async Task<IEnumerable<Collection>> BrowseCollectionsAsync(SurveyEquipmentId surveyEquipmentId)
+        public async Task<IEnumerable<Collection>> BrowseCollectionsAsync(AggregateId surveyEquipmentId)
             => await _collections
                 .Where(c => c.SurveyEquipmentId == surveyEquipmentId)
-            .ToListAsync();
+                .ToListAsync();
 
-        public async Task DeleteAsync(Collection collection)
-        {
-            _collections.Remove(collection);
-            await _dbContext.SaveChangesAsync();
-        }
+        public async Task<IEnumerable<Collection>> BrowseOpenCollectionsBySurveyorIdAsync(SurveyorId surveyorId)
+            => await _collections
+                .Where(c => c.Surveyor.Id == surveyorId
+                && c.CollectedAt != null
+                && c.ReturnedAt == null)
+                .ToListAsync();
     }
 }

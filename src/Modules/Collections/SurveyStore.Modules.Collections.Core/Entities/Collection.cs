@@ -10,11 +10,12 @@ namespace SurveyStore.Modules.Collections.Core.Entities
         public Surveyor? Surveyor { get; private set; }
         public StoreId? CollectionStoreId { get; private set; }
         public StoreId? ReturnStoreId { get; private set; }
-        public SurveyEquipmentId SurveyEquipmentId { get; private set; }
+        public SurveyEquipment SurveyEquipment { get; private set; }
+        public AggregateId SurveyEquipmentId { get; private set; }
         public DateTime? CollectedAt { get; private set; }
         public DateTime? ReturnedAt { get; private set; }
 
-        public Collection(AggregateId id, SurveyEquipmentId surveyEquipmentId)
+        public Collection(AggregateId id, AggregateId surveyEquipmentId)
         {
             Id = id;
             SurveyEquipmentId = surveyEquipmentId;
