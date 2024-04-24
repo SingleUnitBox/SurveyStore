@@ -41,6 +41,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
                 .Where(c => c.SurveyEquipmentId == surveyEquipmentId
                             && c.ReturnStoreId == null
                             && c.CollectedAt == null)
+                .Include(c => c.SurveyEquipment)
                 .SingleOrDefaultAsync();
 
         public async Task<Collection> GetOpenBySurveyEquipmentAsync(AggregateId surveyEquipmentId)
@@ -67,6 +68,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
 
         public async Task<IEnumerable<Collection>> BrowseOpenCollectionsBySurveyorIdAsync(SurveyorId surveyorId)
             => await _collections
+                .Include(c => c.SurveyEquipment)
                 .Where(c => c.Surveyor.Id == surveyorId
                 && c.CollectedAt != null
                 && c.ReturnedAt == null)
