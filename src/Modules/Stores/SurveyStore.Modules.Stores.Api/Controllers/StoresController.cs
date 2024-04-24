@@ -17,25 +17,15 @@ namespace SurveyStore.Modules.Stores.Api.Controllers
     internal class StoresController : BaseController
     {
         private const string Policy = "stores";
-        private readonly IStoreService _storeService;
         private readonly ICommandDispatcher _commandDispatcher;
         private readonly IQueryDispatcher _queryDispatcher;
 
-        public StoresController(IStoreService storeService,
-            ICommandDispatcher commandDispatcher,
+        public StoresController(ICommandDispatcher commandDispatcher,
             IQueryDispatcher queryDispatcher)
         {
-            _storeService = storeService;
             _commandDispatcher = commandDispatcher;
             _queryDispatcher = queryDispatcher;
         }
-
-        //[AllowAnonymous]
-        //[ProducesResponseType(200)]
-        //[ProducesResponseType(404)]
-        //[HttpGet("{storeId:guid}")]
-        //public async Task<ActionResult<StoreDto>> Get(Guid storeId)
-        //    => OkOrNotFound(await _storeService.GetAsync(storeId));
 
         [AllowAnonymous]
         [ProducesResponseType(200)]
@@ -48,7 +38,7 @@ namespace SurveyStore.Modules.Stores.Api.Controllers
         [ProducesResponseType(200)]
         [HttpGet]
         public async Task<ActionResult<IReadOnlyCollection<StoreDto>>> Browse()
-            => Ok(await _storeService.BrowseAsync());
+            => Ok(await _queryDispatcher.QueryAsync(new BrowseStores()));
 
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
