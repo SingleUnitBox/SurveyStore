@@ -1,6 +1,6 @@
 @url = http://localhost:5000/stores-module
 
-@storeId = 83eeae8e-e0a3-4551-b254-b870cb048b00
+@storeId = 9b55bfb9-63c1-4532-9549-2cd31d1cc62c
 
 @accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YThiNWU4NjYxNjg0N2U2OTJhYjFmMTFhMGU2M2MzYiIsInVuaXF1ZV9uYW1lIjoiNWE4YjVlODY2MTY4NDdlNjkyYWIxZjExYTBlNjNjM2IiLCJqdGkiOiIwMmY4MDkwYi1iNjg4LTRkZDgtODk0NS0wNjEwNDNjZWRkNjIiLCJpYXQiOiIxNzEzOTgyMjE2NTkzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxMzk4MjIxNiwiZXhwIjoxNzE0MDY1MDE2LCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.r_6Gmx-jvsG62v3CjYl9Ib3m7d0instQaP9VIQaLYNg
 ###
@@ -10,7 +10,7 @@ GET {{url}}
 GET {{url}}/stores
 
 ###
-GET {{url}}/stores/{{storeId}}
+GET {{url}}/stores/{{storeId}}S
 
 ###
 POST {{url}}/stores

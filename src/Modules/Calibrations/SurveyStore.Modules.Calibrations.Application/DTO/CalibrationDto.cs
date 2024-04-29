@@ -7,6 +7,7 @@ namespace SurveyStore.Modules.Calibrations.Application.DTO
     {
         public Guid Id { get; set; }
         public Guid SurveyEquipmentId { get; set; }
+        public string SerialNumber { get; set; }
         public DateTime? CalibrationDueDate { get; set; }
         //public TimeSpan? CalibrationInterval { get; set; }
         public string CertificateNumber { get; set; }

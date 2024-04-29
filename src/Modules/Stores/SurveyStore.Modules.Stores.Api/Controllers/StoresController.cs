@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SurveyStore.Modules.Stores.Core.DTO;
-using SurveyStore.Modules.Stores.Core.Services;
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using SurveyStore.Modules.Stores.Core.Commands;
