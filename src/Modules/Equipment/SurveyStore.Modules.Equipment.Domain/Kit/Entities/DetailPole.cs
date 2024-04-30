@@ -1,4 +1,4 @@
-﻿using SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Exceptions;
+﻿using SurveyStore.Modules.Equipment.Domain.Kit.Exceptions;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System;
 
@@ -20,7 +20,7 @@ namespace SurveyStore.Modules.Equipment.Domain.Kit.Entities
         {
             if (string.IsNullOrWhiteSpace(brand))
             {
-                throw new EmptyBrandException();
+                throw new EmptyBrandException(typeof(DetailPole).Name);
             }
 
             Brand = brand;
@@ -30,7 +30,7 @@ namespace SurveyStore.Modules.Equipment.Domain.Kit.Entities
         {
             if (string.IsNullOrWhiteSpace(model))
             {
-                throw new EmptyModelException();
+                throw new EmptyModelException(typeof(DetailPole).Name);
             }
 
             Model = model;
