@@ -1,11 +1,11 @@
-﻿using SurveyStore.Modules.Equipment.Application.Exceptions;
+﻿using SurveyStore.Modules.Equipment.Application.Events;
+using SurveyStore.Modules.Equipment.Application.Exceptions;
 using SurveyStore.Modules.Equipment.Application.Mappings;
-using SurveyStore.Modules.Equipment.Core.Repositories;
-using SurveyStore.Shared.Abstractions.Commands;
-using System.Threading.Tasks;
-using SurveyStore.Modules.Equipment.Application.Events;
-using SurveyStore.Shared.Abstractions.Messaging;
 using SurveyStore.Modules.Equipment.Application.Types;
+using SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Repositories;
+using SurveyStore.Shared.Abstractions.Commands;
+using SurveyStore.Shared.Abstractions.Messaging;
+using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Equipment.Application.Commands.Handlers
 {

@@ -1,8 +1,8 @@
-﻿using System;
-using SurveyStore.Modules.Equipment.Core.Exceptions;
+﻿using SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Exceptions;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
+using System;
 
-namespace SurveyStore.Modules.Equipment.Core.Entities
+namespace SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Entities
 {
     public class SurveyEquipment : AggregateRoot
     {
@@ -47,4 +47,3 @@ namespace SurveyStore.Modules.Equipment.Core.Entities
             => PurchasedAt = purchasedAt;
     }
 }
- 

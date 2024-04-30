@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using SurveyStore.Modules.Equipment.Application;
+using SurveyStore.Modules.Equipment.Domain;
+using SurveyStore.Modules.Equipment.Infrastructure;
 using SurveyStore.Shared.Abstractions.Modules;
 using System.Collections.Generic;
-using SurveyStore.Modules.Equipment.Core;
-using SurveyStore.Modules.Equipment.Application;
-using SurveyStore.Modules.Equipment.Infrastructure;
 
 namespace SurveyStore.Modules.Equipment.Api
 {

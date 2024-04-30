@@ -1,15 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SurveyStore.Modules.Equipment.Core\SurveyStore.Modules.Equipment.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Events\External\" />
+    <ProjectReference Include="..\SurveyStore.Modules.Equipment.Domain\SurveyStore.Modules.Equipment.Domain.csproj" />
   </ItemGroup>
 
 </Project>

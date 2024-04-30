@@ -1,9 +1,9 @@
-﻿using SurveyStore.Modules.Equipment.Core.Entities;
-using SurveyStore.Modules.Equipment.Core.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Entities;
+using SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Repositories
 {

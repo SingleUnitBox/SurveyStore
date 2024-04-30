@@ -2,7 +2,7 @@
 using SurveyStore.Modules.Equipment.Application.Exceptions;
 using SurveyStore.Modules.Equipment.Application.Mappings;
 using SurveyStore.Modules.Equipment.Application.Types;
-using SurveyStore.Modules.Equipment.Core.Repositories;
+using SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
 using SurveyStore.Shared.Abstractions.Messaging;
 using System.Threading.Tasks;

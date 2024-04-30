@@ -1,5 +1,5 @@
 ﻿using SurveyStore.Modules.Collections.Domain.Collections.Entities;
-using SurveyStore.Modules.Collections.Domain.Exceptions;
+using SurveyStore.Modules.Collections.Domain.Collections.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

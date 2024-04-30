@@ -1,7 +1,7 @@
 ﻿using System;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
 
-namespace SurveyStore.Modules.Equipment.Core.Entities
+namespace SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Entities
 {
     public class TotalStation : SurveyEquipment
     {

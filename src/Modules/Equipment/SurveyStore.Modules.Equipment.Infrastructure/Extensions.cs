@@ -1,9 +1,9 @@
-﻿using System.Runtime.CompilerServices;
-using Microsoft.Extensions.DependencyInjection;
-using SurveyStore.Modules.Equipment.Core.Repositories;
+﻿using Microsoft.Extensions.DependencyInjection;
+using SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Repositories;
 using SurveyStore.Modules.Equipment.Infrastructure.EF;
 using SurveyStore.Modules.Equipment.Infrastructure.EF.Repositories;
 using SurveyStore.Shared.Infrastructure.Postgres;
+using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Equipment.Api")]
 namespace SurveyStore.Modules.Equipment.Infrastructure

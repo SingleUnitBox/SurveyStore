@@ -1,5 +1,5 @@
-﻿using SurveyStore.Modules.Collections.Domain.DomainEvents;
-using SurveyStore.Modules.Collections.Domain.Exceptions;
+﻿using SurveyStore.Modules.Collections.Domain.Collections.DomainEvents;
+using SurveyStore.Modules.Collections.Domain.Collections.Exceptions;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System;
 

@@ -1,7 +1,7 @@
 ﻿using SurveyStore.Modules.Equipment.Application.Commands;
 using SurveyStore.Modules.Equipment.Application.DTO;
 using SurveyStore.Modules.Equipment.Application.Types;
-using SurveyStore.Modules.Equipment.Core.Entities;
+using SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Entities;
 
 namespace SurveyStore.Modules.Equipment.Application.Mappings
 {

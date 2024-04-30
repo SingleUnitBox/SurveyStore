@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using SurveyStore.Modules.Equipment.Application.DTO;
 using SurveyStore.Modules.Equipment.Application.Exceptions;
 using SurveyStore.Modules.Equipment.Application.Mappings;
 using SurveyStore.Modules.Equipment.Application.Queries;
-using SurveyStore.Modules.Equipment.Core.Entities;
+using SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Entities;
 using SurveyStore.Shared.Abstractions.Queries;
+using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Queries.Handlers
 {

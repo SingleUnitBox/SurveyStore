@@ -1,6 +1,6 @@
 ﻿using SurveyStore.Shared.Abstractions.Exceptions;
 
-namespace SurveyStore.Modules.Equipment.Core.Exceptions
+namespace SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Exceptions
 {
     public class EmptyModelException : SurveyStoreException
     {

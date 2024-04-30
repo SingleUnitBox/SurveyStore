@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
 
-namespace SurveyStore.Modules.Equipment.Core.Entities
+namespace SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Entities
 {
     public class GroundPenetratingRadar : SurveyEquipment
     {

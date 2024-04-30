@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SurveyStore.Modules.Equipment.Core.Entities;
+using SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Entities;
 
 namespace SurveyStore.Modules.Equipment.Infrastructure.EF
 {

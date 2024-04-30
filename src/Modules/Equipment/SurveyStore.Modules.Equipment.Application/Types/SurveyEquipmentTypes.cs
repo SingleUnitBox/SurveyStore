@@ -13,11 +13,11 @@ namespace SurveyStore.Modules.Equipment.Application.Types
         public static string GetType(object equipment)
             => equipment switch
             {
-                Core.Entities.TotalStation => TotalStation,
-                Core.Entities.GNSS => GNSS,
-                Core.Entities.FieldController => FieldController,
-                Core.Entities.GroundPenetratingRadar => GroundPenetratingRadar,
-                Core.Entities.CableAvoidanceTool => CAT,
+                Domain.SurveyEquipment.Entities.TotalStation => TotalStation,
+                Domain.SurveyEquipment.Entities.GNSS => GNSS,
+                Domain.SurveyEquipment.Entities.FieldController => FieldController,
+                Domain.SurveyEquipment.Entities.GroundPenetratingRadar => GroundPenetratingRadar,
+                Domain.SurveyEquipment.Entities.CableAvoidanceTool => CAT,
                 _ => throw new SurveyEquipmentTypeNotFoundException(equipment.GetType().Name)
             };
     }

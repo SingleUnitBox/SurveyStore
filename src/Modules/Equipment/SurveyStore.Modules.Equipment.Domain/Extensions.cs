@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Equipment.Api")]
-namespace SurveyStore.Modules.Equipment.Core
+namespace SurveyStore.Modules.Equipment.Domain
 {
     internal static class Extensions
     {

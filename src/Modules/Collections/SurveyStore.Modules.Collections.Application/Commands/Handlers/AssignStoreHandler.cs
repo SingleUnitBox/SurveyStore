@@ -1,7 +1,7 @@
 ﻿using SurveyStore.Modules.Collections.Application.Clients.Calibrations;
 using SurveyStore.Modules.Collections.Application.Exceptions;
 using SurveyStore.Modules.Collections.Application.Services;
-using SurveyStore.Modules.Collections.Domain.Repositories;
+using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
 using SurveyStore.Shared.Abstractions.Messaging;
 using System.Linq;
