@@ -9,10 +9,10 @@ namespace SurveyStore.Modules.Calibrations.Domain.DomainServices
     {
         public void ChangeCalibrationDetails(Calibration calibration, DateTime calibrationDueDate, DateTime now)
         {
-            var status = calibrationDueDate.Date <= now
+            var status = calibrationDueDate.Date <= now.Date
                 ? CalibrationStatus.Uncalibrated
                 : CalibrationStatus.Calibrated;
-            if (calibrationDueDate.Date < now.AddDays(3))
+            if (calibrationDueDate.Date < now.AddDays(3).Date)
             {
                 status = CalibrationStatus.ToBeReturnForCalibration;
             }

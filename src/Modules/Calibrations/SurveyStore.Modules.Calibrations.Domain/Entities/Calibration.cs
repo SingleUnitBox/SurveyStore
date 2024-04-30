@@ -2,7 +2,9 @@
 using SurveyStore.Modules.Calibrations.Domain.Types;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("SurveyStore.Modules.Calibrations.Infrastructure")]
 namespace SurveyStore.Modules.Calibrations.Domain.Entities
 {
     public class Calibration : AggregateRoot
@@ -34,7 +36,7 @@ namespace SurveyStore.Modules.Calibrations.Domain.Entities
             CalibrationDueDate = calibrationDate;
             IncrementVersion();
         }
- 
+
         //public void ChangeCalibrationInterval(TimeSpan calibrationInterval)
         //{
         //    CalibrationInterval = calibrationInterval;
@@ -46,7 +48,7 @@ namespace SurveyStore.Modules.Calibrations.Domain.Entities
             CertificateNumber = certificateNumber;
             IncrementVersion();
         }
-        public void ChangeCalibrationStatus(CalibrationStatus calibrationStatus)
+        internal void ChangeCalibrationStatus(CalibrationStatus calibrationStatus)
         {
             CalibrationStatus = calibrationStatus;
             IncrementVersion();
