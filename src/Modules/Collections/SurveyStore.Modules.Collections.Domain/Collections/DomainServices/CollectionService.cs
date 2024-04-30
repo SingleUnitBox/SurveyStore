@@ -1,10 +1,10 @@
-﻿using SurveyStore.Modules.Collections.Core.Entities;
-using SurveyStore.Modules.Collections.Core.Exceptions;
+﻿using SurveyStore.Modules.Collections.Domain.Collections.Entities;
+using SurveyStore.Modules.Collections.Domain.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SurveyStore.Modules.Collections.Core.DomainServices
+namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
 {
     internal class CollectionService : ICollectionService
     {
@@ -30,4 +30,3 @@ namespace SurveyStore.Modules.Collections.Core.DomainServices
         }
     }
 }
- 

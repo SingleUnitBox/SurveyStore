@@ -3,10 +3,10 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using SurveyStore.Modules.Collections.Application.Exceptions;
-using SurveyStore.Modules.Collections.Core.Entities;
-using SurveyStore.Modules.Collections.Core.Repositories;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
 using Microsoft.IdentityModel.Tokens;
+using SurveyStore.Modules.Collections.Domain.Collections.Entities;
+using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 
 namespace SurveyStore.Modules.Collections.Application.Events.Handlers
 {

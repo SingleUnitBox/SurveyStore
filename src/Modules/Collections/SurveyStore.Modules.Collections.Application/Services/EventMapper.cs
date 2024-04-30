@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SurveyStore.Modules.Collections.Application.Events;
-using SurveyStore.Modules.Collections.Core.DomainEvents;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
+using SurveyStore.Modules.Collections.Domain.Collections.DomainEvents;
 
 namespace SurveyStore.Modules.Collections.Application.Services
 {

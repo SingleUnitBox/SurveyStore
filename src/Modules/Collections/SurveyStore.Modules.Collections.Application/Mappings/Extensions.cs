@@ -1,5 +1,5 @@
 ﻿using SurveyStore.Modules.Collections.Application.DTO;
-using SurveyStore.Modules.Collections.Core.Entities;
+using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 
 namespace SurveyStore.Modules.Collections.Application.Mappings
 {

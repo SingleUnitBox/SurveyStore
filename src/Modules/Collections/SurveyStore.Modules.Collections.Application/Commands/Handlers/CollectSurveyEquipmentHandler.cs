@@ -1,6 +1,6 @@
 ﻿using SurveyStore.Modules.Collections.Application.Exceptions;
-using SurveyStore.Modules.Collections.Core.DomainServices;
-using SurveyStore.Modules.Collections.Core.Repositories;
+using SurveyStore.Modules.Collections.Domain.Collections.DomainServices;
+using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
 using SurveyStore.Shared.Abstractions.Time;
 using System.Threading.Tasks;

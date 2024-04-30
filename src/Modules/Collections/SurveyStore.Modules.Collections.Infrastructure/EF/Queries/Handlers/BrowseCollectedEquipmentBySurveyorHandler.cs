@@ -7,8 +7,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SurveyStore.Modules.Collections.Application.Mappings;
-using SurveyStore.Modules.Collections.Core.Entities;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
+using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 
 namespace SurveyStore.Modules.Collections.Infrastructure.EF.Queries.Handlers
 {

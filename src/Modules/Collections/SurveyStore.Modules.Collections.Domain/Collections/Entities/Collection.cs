@@ -1,15 +1,15 @@
-﻿ using SurveyStore.Shared.Abstractions.Kernel.Types;
+﻿using SurveyStore.Modules.Collections.Domain.DomainEvents;
+using SurveyStore.Modules.Collections.Domain.Exceptions;
+using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System;
-using SurveyStore.Modules.Collections.Core.DomainEvents;
-using SurveyStore.Modules.Collections.Core.Exceptions;
 
-namespace SurveyStore.Modules.Collections.Core.Entities
+namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
 {
     public class Collection : AggregateRoot
     {
-        public Surveyor? Surveyor { get; private set; }
-        public StoreId? CollectionStoreId { get; private set; }
-        public StoreId? ReturnStoreId { get; private set; }
+        public Surveyor Surveyor { get; private set; }
+        public StoreId CollectionStoreId { get; private set; }
+        public StoreId ReturnStoreId { get; private set; }
         public SurveyEquipment SurveyEquipment { get; private set; }
         public AggregateId SurveyEquipmentId { get; private set; }
         public DateTime? CollectedAt { get; private set; }
@@ -63,6 +63,5 @@ namespace SurveyStore.Modules.Collections.Core.Entities
 
             return collection;
         }
-
     }
 }

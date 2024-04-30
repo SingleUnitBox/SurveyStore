@@ -1,8 +1,8 @@
-﻿using SurveyStore.Modules.Collections.Core.Entities;
+﻿using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using System;
 using System.Collections.Generic;
 
-namespace SurveyStore.Modules.Collections.Core.DomainServices
+namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
 {
     public interface ICollectionService
     {
@@ -10,4 +10,3 @@ namespace SurveyStore.Modules.Collections.Core.DomainServices
             Collection toBeCollected, DateTime now);
     }
 }
- 

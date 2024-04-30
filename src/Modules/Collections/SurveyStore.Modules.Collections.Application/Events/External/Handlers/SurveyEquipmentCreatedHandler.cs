@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using SurveyStore.Modules.Collections.Core.Entities;
-using SurveyStore.Modules.Collections.Core.Repositories;
+using SurveyStore.Modules.Collections.Domain.Collections.Entities;
+using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Shared.Abstractions.Events;
 
 namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers

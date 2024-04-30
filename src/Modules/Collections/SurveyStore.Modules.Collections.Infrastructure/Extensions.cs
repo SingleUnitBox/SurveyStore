@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SurveyStore.Modules.Collections.Application.Clients.Surveyors;
-using SurveyStore.Modules.Collections.Core.Repositories;
+using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Modules.Collections.Infrastructure.Clients;
 using SurveyStore.Modules.Collections.Infrastructure.EF;
 using SurveyStore.Modules.Collections.Infrastructure.EF.Repositories;

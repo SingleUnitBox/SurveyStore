@@ -1,6 +1,6 @@
 ﻿using SurveyStore.Shared.Abstractions.Exceptions;
 
-namespace SurveyStore.Modules.Collections.Core.Exceptions
+namespace SurveyStore.Modules.Collections.Domain.Collections.Exceptions
 {
     public class CannotCollectSurveyEquipmentException : SurveyStoreException
     {

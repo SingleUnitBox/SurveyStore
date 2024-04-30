@@ -2,7 +2,7 @@
 using SurveyStore.Shared.Abstractions.Exceptions;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
 
-namespace SurveyStore.Modules.Collections.Core.Exceptions
+namespace SurveyStore.Modules.Collections.Domain.Collections.Exceptions
 {
     public class SurveyEquipmentNotFoundInStoreException : SurveyStoreException
     {

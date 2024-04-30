@@ -1,13 +1,13 @@
-﻿using System;
-using SurveyStore.Modules.Collections.Core.DomainEvents;
+﻿using SurveyStore.Modules.Collections.Domain.DomainEvents;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
+using System;
 
-namespace SurveyStore.Modules.Collections.Core.Entities
+namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
 {
     public class SurveyEquipment : AggregateRoot
     {
-        public StoreId? StoreId { get; private set; }
-        public Store? Store { get; private set; }
+        public StoreId StoreId { get; private set; }
+        public Store Store { get; private set; }
         public string SerialNumber { get; private set; }
         public string Brand { get; private set; }
         public string Model { get; private set; }

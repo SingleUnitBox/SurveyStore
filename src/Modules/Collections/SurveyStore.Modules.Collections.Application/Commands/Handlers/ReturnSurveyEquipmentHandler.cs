@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using SurveyStore.Modules.Collections.Application.Exceptions;
-using SurveyStore.Modules.Collections.Core.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
 using System.Threading.Tasks;
 using SurveyStore.Modules.Collections.Application.Services;
 using SurveyStore.Shared.Abstractions.Messaging;
 using SurveyStore.Shared.Abstractions.Time;
+using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 
 namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 {

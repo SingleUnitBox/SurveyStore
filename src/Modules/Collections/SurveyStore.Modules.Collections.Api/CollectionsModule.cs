@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using SurveyStore.Shared.Abstractions.Modules;
 using SurveyStore.Modules.Collections.Application;
-using SurveyStore.Modules.Collections.Core;
 using SurveyStore.Modules.Collections.Infrastructure;
+using SurveyStore.Modules.Collections.Domain;
 
 namespace SurveyStore.Modules.Collections.Api
 {

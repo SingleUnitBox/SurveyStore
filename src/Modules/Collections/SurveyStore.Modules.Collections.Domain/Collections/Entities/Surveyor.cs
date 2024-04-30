@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
 
-namespace SurveyStore.Modules.Collections.Core.Entities
+namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
 {
     public class Surveyor
     {

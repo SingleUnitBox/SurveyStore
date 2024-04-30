@@ -1,5 +1,5 @@
 ﻿using SurveyStore.Modules.Collections.Application.Clients.Calibrations;
-using SurveyStore.Modules.Collections.Core.Repositories;
+using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Shared.Abstractions.Events;
 using SurveyStore.Shared.Abstractions.Time;
 using System;

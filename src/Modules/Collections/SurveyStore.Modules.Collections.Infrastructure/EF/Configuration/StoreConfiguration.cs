@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SurveyStore.Modules.Collections.Core.Entities;
+using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 
 namespace SurveyStore.Modules.Collections.Infrastructure.EF.Configuration
 {

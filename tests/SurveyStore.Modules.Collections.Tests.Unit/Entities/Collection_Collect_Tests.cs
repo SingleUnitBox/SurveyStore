@@ -1,6 +1,6 @@
 ﻿using Shouldly;
-using SurveyStore.Modules.Collections.Core.Entities;
-using SurveyStore.Modules.Collections.Core.Exceptions;
+using SurveyStore.Modules.Collections.Domain.Collections.Entities;
+using SurveyStore.Modules.Collections.Domain.Collections.Exceptions;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System;
 using Xunit;

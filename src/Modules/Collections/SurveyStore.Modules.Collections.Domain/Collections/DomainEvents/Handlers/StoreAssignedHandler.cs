@@ -1,12 +1,13 @@
 ﻿using SurveyStore.Shared.Abstractions.Kernel;
 using System;
 using System.Threading.Tasks;
-using SurveyStore.Modules.Collections.Core.Entities;
-using SurveyStore.Modules.Collections.Core.Repositories;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System.Linq;
+using SurveyStore.Modules.Collections.Domain.Collections.Entities;
+using SurveyStore.Modules.Collections.Domain.Collections.DomainEvents;
+using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 
-namespace SurveyStore.Modules.Collections.Core.DomainEvents.Handlers
+namespace SurveyStore.Modules.Collections.Domain.Collections.DomainEvents.Handlers
 {
     public class StoreAssignedHandler : IDomainEventHandler<StoreAssigned>
     {

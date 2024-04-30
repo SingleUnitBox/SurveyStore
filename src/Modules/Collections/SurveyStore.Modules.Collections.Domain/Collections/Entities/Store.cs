@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SurveyStore.Modules.Collections.Core.Entities
+namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
 {
     public class Store
     {

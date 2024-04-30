@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\SurveyStore.Shared.Infrastructure\SurveyStore.Shared.Infrastructure.csproj" />
-    <ProjectReference Include="..\SurveyStore.Modules.Collections.Core\SurveyStore.Modules.Collections.Core.csproj" />
+    <ProjectReference Include="..\SurveyStore.Modules.Collections.Domain\SurveyStore.Modules.Collections.Domain.csproj" />
   </ItemGroup>
 
 </Project>

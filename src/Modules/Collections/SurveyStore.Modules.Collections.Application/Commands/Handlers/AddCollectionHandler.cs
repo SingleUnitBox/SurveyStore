@@ -1,5 +1,5 @@
 ﻿using SurveyStore.Modules.Collections.Application.Exceptions;
-using SurveyStore.Modules.Collections.Core.Repositories;
+using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
 using System.Threading.Tasks;
 
