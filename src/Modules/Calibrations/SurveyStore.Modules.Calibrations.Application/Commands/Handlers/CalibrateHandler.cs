@@ -1,5 +1,6 @@
 ﻿using SurveyStore.Modules.Calibrations.Application.Events;
 using SurveyStore.Modules.Calibrations.Application.Exceptions;
+using SurveyStore.Modules.Calibrations.Domain.DomainServices;
 using SurveyStore.Modules.Calibrations.Domain.Repositories;
 using SurveyStore.Modules.Calibrations.Domain.Types;
 using SurveyStore.Shared.Abstractions.Commands;
@@ -14,14 +15,17 @@ namespace SurveyStore.Modules.Calibrations.Application.Commands.Handlers
         private readonly ICalibrationsRepository _calibrationsRepository;
         private readonly IMessageBroker _messageBroker;
         private readonly IClock _clock;
+        private readonly ICalibrationService _calibrationService;
 
         public CalibrateHandler(ICalibrationsRepository calibrationsRepository,
             IMessageBroker messageBroker,
-            IClock clock)
+            IClock clock,
+            ICalibrationService calibrationService)
         {
             _calibrationsRepository = calibrationsRepository;
             _messageBroker = messageBroker;
             _clock = clock;
+            _calibrationService = calibrationService;
         }
 
         public async Task HandleAsync(Calibrate command)
@@ -32,18 +36,10 @@ namespace SurveyStore.Modules.Calibrations.Application.Commands.Handlers
                 throw new CalibrationNotFoundException(command.SerialNumber);
             }
 
-            calibration.ChangeCalibrationDueDate(command.CalibrationDueDate);
             calibration.ChangeCertificateNumber(command.CertificateNumber);
             
             var now = _clock.Current();
-            var status = command.CalibrationDueDate.Date <= now
-                ? CalibrationStatus.Uncalibrated
-                : CalibrationStatus.Calibrated;
-            if (command.CalibrationDueDate.Date < now.AddDays(3))
-            {
-                status = CalibrationStatus.ToBeReturnForCalibration;
-            }
-            calibration.ChangeCalibrationStatus(status);
+            _calibrationService.ChangeCalibrationDetails(calibration, command.CalibrationDueDate, now);
 
             await _calibrationsRepository.UpdateAsync(calibration);
             await _messageBroker.PublishAsync(new CalibrationUpdated(calibration.SurveyEquipmentId));

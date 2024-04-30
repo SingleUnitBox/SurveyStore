@@ -21,7 +21,7 @@ namespace SurveyStore.Modules.Calibrations.Domain.Entities
                 CalibrationStatus = CalibrationStatus.Pending;
             }
 
-        public void ChangeCalibrationDueDate(DateTime calibrationDate)
+        internal void ChangeCalibrationDueDate(DateTime calibrationDate)
         {
             if (CalibrationDueDate.HasValue)
             {

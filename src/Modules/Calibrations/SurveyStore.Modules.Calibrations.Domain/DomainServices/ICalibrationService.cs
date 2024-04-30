@@ -5,6 +5,6 @@ namespace SurveyStore.Modules.Calibrations.Domain.DomainServices
 {
     public interface ICalibrationService
     {
-        bool ChangeCalibrationDetails(Calibration calibration, DateTime now);
+        void ChangeCalibrationDetails(Calibration calibration, DateTime calibrationDueDate, DateTime now);
     }
 }

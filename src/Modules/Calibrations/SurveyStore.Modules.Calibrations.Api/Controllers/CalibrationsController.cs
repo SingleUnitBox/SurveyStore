@@ -28,13 +28,6 @@ namespace SurveyStore.Modules.Calibrations.Api.Controllers
         public async Task<ActionResult<IReadOnlyCollection<CalibrationDto>>> BrowseCurrentAsync()
             => Ok(await _queryDispatcher.QueryAsync(new BrowseCurrentDueCalibrations()));
 
-        [HttpPost("equipment/{serialNumber}/details")]
-        public async Task<ActionResult> Post(string serialNumber, ChangeCalibrationDetails command)
-        {
-            await _commandDispatcher.DispatchAsync(command with { SerialNumber = serialNumber});
-            return NoContent();
-        }
-
         [HttpPost("equipment/{serialNumber}/calibrate")]
         public async Task<ActionResult> CalibrateAsync(string serialNumber, Calibrate command)
         {

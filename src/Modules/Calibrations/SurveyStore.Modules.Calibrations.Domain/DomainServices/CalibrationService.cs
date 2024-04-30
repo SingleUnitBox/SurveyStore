@@ -1,13 +1,24 @@
 ﻿using SurveyStore.Modules.Calibrations.Domain.Entities;
+using SurveyStore.Modules.Calibrations.Domain.Types;
+using SurveyStore.Shared.Abstractions.Time;
 using System;
 
 namespace SurveyStore.Modules.Calibrations.Domain.DomainServices
 {
     internal class CalibrationService : ICalibrationService
     {
-        public bool ChangeCalibrationDetails(Calibration calibration, DateTime now)
+        public void ChangeCalibrationDetails(Calibration calibration, DateTime calibrationDueDate, DateTime now)
         {
-            throw new NotImplementedException();
+            var status = calibrationDueDate.Date <= now
+                ? CalibrationStatus.Uncalibrated
+                : CalibrationStatus.Calibrated;
+            if (calibrationDueDate.Date < now.AddDays(3))
+            {
+                status = CalibrationStatus.ToBeReturnForCalibration;
+            }
+
+            calibration.ChangeCalibrationDueDate(calibrationDueDate);
+            calibration.ChangeCalibrationStatus(status);
         }
     }
 }
