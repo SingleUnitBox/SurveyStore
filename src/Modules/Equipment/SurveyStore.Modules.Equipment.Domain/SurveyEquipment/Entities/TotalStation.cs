@@ -26,7 +26,5 @@ namespace SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Entities
 
             return totalStation;
         }
-
-
     }
 }
