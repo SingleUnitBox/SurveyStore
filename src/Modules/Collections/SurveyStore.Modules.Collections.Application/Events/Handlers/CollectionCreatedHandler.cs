@@ -6,6 +6,7 @@ using SurveyStore.Modules.Collections.Application.Exceptions;
 using SurveyStore.Modules.Collections.Core.Entities;
 using SurveyStore.Modules.Collections.Core.Repositories;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
+using Microsoft.IdentityModel.Tokens;
 
 namespace SurveyStore.Modules.Collections.Application.Events.Handlers
 {
@@ -21,7 +22,9 @@ namespace SurveyStore.Modules.Collections.Application.Events.Handlers
         public async Task HandleAsync(CollectionCreated @event)
         {
             var collections = await _collectionRepository.BrowseCollectionsAsync(new AggregateId(@event.SurveyEquipmentId));
-            if (collections.Any(c => c.CollectedAt is null))
+            if (collections.Any(c => c.CollectedAt is null
+            && c.ReturnedAt is null
+            && c.Surveyor is null))
             {
                 throw new FreeCollectionAlreadyExistsException(@event.SurveyEquipmentId);
             }

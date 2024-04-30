@@ -63,6 +63,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
 
         public async Task<IEnumerable<Collection>> BrowseCollectionsAsync(AggregateId surveyEquipmentId)
             => await _collections
+                .Include(c => c.Surveyor)
                 .Where(c => c.SurveyEquipmentId == surveyEquipmentId)
                 .ToListAsync();
 

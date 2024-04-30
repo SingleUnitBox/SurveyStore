@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using SurveyStore.Modules.Collections.Core.Repositories;
-using SurveyStore.Shared.Abstractions.Commands;
-using System.Threading.Tasks;
+﻿using SurveyStore.Modules.Collections.Application.Clients.Calibrations;
 using SurveyStore.Modules.Collections.Application.Exceptions;
 using SurveyStore.Modules.Collections.Application.Services;
+using SurveyStore.Modules.Collections.Core.Repositories;
+using SurveyStore.Shared.Abstractions.Commands;
 using SurveyStore.Shared.Abstractions.Messaging;
-using SurveyStore.Modules.Collections.Application.Clients.Calibrations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 {
@@ -70,6 +70,8 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             }
             else
             {
+                //collection = Collection.Create(Guid.NewGuid(), command.SurveyEquipmentId);
+                //await _collectionRepository.AddAsync(collection);
                 var events = _eventMapper.MapAll(surveyEquipment.Events);
                 await _messageBroker.PublishAsync(events.ToArray());
             }           

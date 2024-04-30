@@ -25,7 +25,6 @@ namespace SurveyStore.Modules.Collections.Core.DomainEvents.Handlers
             if (collection is not null)
             {
                 collection.ChangeCollectionStoreId(@event.StoreId);
-
                 await _collectionRepository.UpdateAsync(collection);
             }
             else

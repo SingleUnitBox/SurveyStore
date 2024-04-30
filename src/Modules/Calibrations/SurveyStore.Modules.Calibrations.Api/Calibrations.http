@@ -21,6 +21,6 @@ POST {{url}}/calibrations/equipment/{{serialNumber}}/calibrate
 Content-Type: application/json
 
 {
-    "calibrationDueDate": "2024-04-30",
+    "calibrationDueDate": "2024-04-03",
     "certificateNumber": "XXX-YYY-345"
 }
