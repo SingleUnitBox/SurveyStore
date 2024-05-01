@@ -4,18 +4,17 @@ using System;
 
 namespace SurveyStore.Modules.Equipment.Domain.Kit.Entities
 {
-    public class DetailPole : AggregateRoot
+    public class DetailPole : Kit
     {
         public string Brand { get; private set; }
         public string Model { get; private set; }
         public string SerialNumber { get; private set; }
         public DateTime PurchasedAt { get; private set; }
 
-        protected DetailPole(AggregateId id)
+        public DetailPole(AggregateId id) : base(id)
         {
-            Id = id;
+            
         }
-
         public void ChangeBrand(string brand)
         {
             if (string.IsNullOrWhiteSpace(brand))
