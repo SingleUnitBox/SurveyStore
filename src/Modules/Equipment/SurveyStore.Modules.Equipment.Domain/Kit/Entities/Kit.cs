@@ -15,8 +15,6 @@ namespace SurveyStore.Modules.Equipment.Domain.Kit.Entities
         {
             Id = id;
         }
-
-
     }
 }
 
