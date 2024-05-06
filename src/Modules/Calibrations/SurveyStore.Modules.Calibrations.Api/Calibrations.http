@@ -11,12 +11,6 @@ GET {{url}}/calibrations/all
 GET {{url}}/calibrations/due
 
 ###
-GET {{url}}/calibrations/equipment/details
-
-###
-GET {{url}}/calibrations/equipment/{{serialNumber}}/details
-
-###
 POST {{url}}/calibrations/equipment/{{serialNumber}}/calibrate
 Content-Type: application/json
 

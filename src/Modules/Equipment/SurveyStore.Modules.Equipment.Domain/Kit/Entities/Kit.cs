@@ -15,6 +15,31 @@ namespace SurveyStore.Modules.Equipment.Domain.Kit.Entities
         {
             Id = id;
         }
+
+        public void ChangeBrand(string brand)
+        {
+            if (string.IsNullOrWhiteSpace(brand))
+            {
+                throw new EmptyBrandException(GetType().Name);
+            }
+            Brand = brand;
+        }
+
+        public void ChangeModel(string model)
+        {
+            if (string.IsNullOrWhiteSpace(model))
+            {
+                throw new EmptyModelException(GetType().Name);
+            }
+
+            Model = model;
+        }
+
+        public void ChangeSerialNumber(string serialNumber)
+            => SerialNumber = serialNumber;
+
+        public void ChangePurchasedAt(DateTime purchasedAt)
+            => PurchasedAt = purchasedAt;
     }
 }
 

@@ -1,9 +1,9 @@
 @url = http://localhost:5000/collections-module
 
-@equipmentId = 56c50ded-127b-49c3-aace-f8b14bf58bb2
+@equipmentId = 78aa8cd6-e331-451d-8ea0-574a94ce399e
 
 @store1Id = 9b55bfb9-63c1-4532-9549-2cd31d1cc62c
-@store2Id = 90bc5871-9e80-473d-a268-e86bafa81766
+@store2Id = c6762acf-b304-4025-bb6e-acce7bb27402
 
 @surveyorId1 = 5a8b5e86-6168-47e6-92ab-1f11a0e63c3b
 @surveyorId2 = ce62dacaba2845079b8bf099f4bfd8ca
@@ -36,6 +36,7 @@ Content-Type: application/json
 
 ###
 POST {{url}}/collections/equipment/{{equipmentId}}
+Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
@@ -58,5 +59,5 @@ Content-Type: application/json
 
 {
     "surveyorId": "{{surveyorId1}}",
-    "returnStoreId": "{{store1Id}}"
+    "returnStoreId": "{{store2Id}}"
 }
