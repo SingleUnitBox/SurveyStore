@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SurveyStore.Modules.Equipment.Application.DTO;
 using SurveyStore.Modules.Equipment.Application.Mappings;
-using SurveyStore.Modules.Equipment.Application.Queries;
+using SurveyStore.Modules.Equipment.Application.SurveyEquipment.DTO;
+using SurveyStore.Modules.Equipment.Application.SurveyEquipment.Queries;
 using SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Entities;
 using SurveyStore.Shared.Abstractions.Queries;
 using System.Collections.Generic;

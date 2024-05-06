@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SurveyStore.Modules.Equipment.Application.Commands;
-using SurveyStore.Modules.Equipment.Application.DTO;
-using SurveyStore.Modules.Equipment.Application.Queries;
 using SurveyStore.Shared.Abstractions.Commands;
 using SurveyStore.Shared.Abstractions.Queries;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using SurveyStore.Modules.Equipment.Application.SurveyEquipment.Queries;
+using SurveyStore.Modules.Equipment.Application.SurveyEquipment.Commands;
+using SurveyStore.Modules.Equipment.Application.SurveyEquipment.DTO;
 
 namespace SurveyStore.Modules.Equipment.Api.Controllers
 {

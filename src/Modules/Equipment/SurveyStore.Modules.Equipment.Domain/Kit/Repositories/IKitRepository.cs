@@ -8,7 +8,8 @@ namespace SurveyStore.Modules.Equipment.Domain.Kit.Repositories
     {
         Task AddAsync(Entities.Kit kit);
         Task UpdateAsync(Entities.Kit kit);
-        Task<Entities.Kit> GetAsyncById(Guid id);
+        Task<Entities.Kit> GetByIdAsync(Guid id);
+        Task<Entities.Kit> GetBySerialNumberAsync(string serialNumber);
         Task<IReadOnlyCollection<Entities.Kit>> BrowseAsync();
     }
 }
