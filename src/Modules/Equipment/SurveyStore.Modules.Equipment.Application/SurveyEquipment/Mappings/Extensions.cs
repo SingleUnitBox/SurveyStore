@@ -8,7 +8,7 @@ namespace SurveyStore.Modules.Equipment.Application.SurveyEquipment.Mappings
     public static class Extensions
     {
 
-        public static SurveyEquipmentDto AsDto(this SurveyEquipment equipment)
+        public static SurveyEquipmentDto AsDto(this Domain.SurveyEquipment.Entities.SurveyEquipment equipment)
             => new()
             {
                 Id = equipment.Id,

@@ -1,5 +1,4 @@
-﻿using SurveyStore.Modules.Equipment.Application.Exceptions;
-using SurveyStore.Modules.Equipment.Application.SurveyEquipment.Commands;
+﻿using SurveyStore.Modules.Equipment.Application.SurveyEquipment.Exceptions;
 using SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
 using System.Threading.Tasks;
