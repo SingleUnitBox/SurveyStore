@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SurveyStore.Modules.Equipment.Domain.Kit.Entities;
 using SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Entities;
 
 namespace SurveyStore.Modules.Equipment.Infrastructure.EF
@@ -6,6 +7,7 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF
     public class EquipmentDbContext : DbContext
     {
         public DbSet<SurveyEquipment> SurveyEquipment { get; set; }
+        public DbSet<Kit> Kit { get; set; }
         public EquipmentDbContext(DbContextOptions<EquipmentDbContext> options)
             : base(options)
         {
