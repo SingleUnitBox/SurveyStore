@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SurveyStore.Modules.Equipment.Domain.Kit.Repositories;
 using SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Repositories;
 using SurveyStore.Modules.Equipment.Infrastructure.EF;
 using SurveyStore.Modules.Equipment.Infrastructure.EF.Repositories;
@@ -14,6 +15,7 @@ namespace SurveyStore.Modules.Equipment.Infrastructure
         {
             services.AddPostgres<EquipmentDbContext>();
             services.AddScoped<ISurveyEquipmentRepository, PostgresSurveyEquipmentRepository>();
+            services.AddScoped<IKitRepository, PostgresKitRepository>();
 
             return services;
         }
