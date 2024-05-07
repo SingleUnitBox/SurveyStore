@@ -10,7 +10,7 @@ SurveyStore is an application to help professionals keep track of their survey e
 ## Technology
 
 ## Contributing
-Contributions to SurveyStore projects are welcomed.
+Contributions to SurveyStore project are welcomed.
 
 ## License
 This project is licensed under the MIT License.
