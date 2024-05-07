@@ -8,8 +8,4 @@
     <ProjectReference Include="..\SurveyStore.Modules.Equipment.Domain\SurveyStore.Modules.Equipment.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Kit\Queries\" />
-  </ItemGroup>
-
 </Project>

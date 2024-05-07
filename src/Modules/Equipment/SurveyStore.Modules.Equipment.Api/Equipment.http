@@ -2,7 +2,7 @@
 
 @equipmentId = 0a6cb60f-b11e-4fac-b07a-3fe6ba007734
 
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MDczMzcwZWZiOTE0Y2Q1OGI4ZWRmMDljYjhiYTcyNiIsInVuaXF1ZV9uYW1lIjoiNDA3MzM3MGVmYjkxNGNkNThiOGVkZjA5Y2I4YmE3MjYiLCJqdGkiOiI4NzUwOGRhOC01NTY4LTQ0MzYtYWVlYi1lMjk3NDViYTMwZDYiLCJpYXQiOiIxNzEzNjA3MDI2NDU4IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiXSwibmJmIjoxNzEzNjA3MDI2LCJleHAiOjE3MTM2ODk4MjYsImlzcyI6InN1cnZleXN0b3JlIn0.f5ZjKAumsYIY9gXugOwaIgOqg6fg8FNtDmcXErjLv6A
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YThiNWU4NjYxNjg0N2U2OTJhYjFmMTFhMGU2M2MzYiIsInVuaXF1ZV9uYW1lIjoiNWE4YjVlODY2MTY4NDdlNjkyYWIxZjExYTBlNjNjM2IiLCJqdGkiOiJiN2U1NmUyOS1mZmY4LTRhYzgtYjBlNS05ZTk3NGFkMjQ3MWEiLCJpYXQiOiIxNzE1MTAzNzg1MTYwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxNTEwMzc4NSwiZXhwIjoxNzE1MTg2NTg1LCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.Oa1BCV3Xm_eRxd85AFtHhsWQLdhWXt9xoPMcAQZWP5I
 ###
 GET {{url}}
 
@@ -38,7 +38,7 @@ Content-Type: application/json
         "isActive": true
         //"screenSize": "",
         //"frequency": "",
-        //"offRoadMode": ""
+//"offRoadMode": ""
 }
 
 ###
@@ -48,9 +48,9 @@ Content-Type: application/json
 
 {
         "brand": "Trimble",
-        "model": "S7",
+        "model": "S5",
         "description": "Lorem ipsum",
-        "serialNumber": "DCE123",
+        "serialNumber": "ABC1234",
         "purchasedAt": "2023-01-01",
         //"storeName": "TBH",
         "accuracy": 2.0,
@@ -64,9 +64,9 @@ Content-Type: application/json
 
 {
         "brand": "Trimble",
-        "model": "R12i",
+        "model": "R8",
         "description": "Lorem ipsum",
-        "serialNumber": "XYZ123",
+        "serialNumber": "XYZ1234",
         "purchasedAt": "2023-01-01",
         "isActive": true
 }
@@ -83,4 +83,16 @@ Content-Type: application/json
         "purchasedAt": "2023-01-01",
         "calibrationDate": "2024-12-01",
         "screenSize": 7
+}
+
+###
+POST {{url}}/kit
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+        "brand": "Trimble",
+        "model": "Tri300",
+        "serialNumber": "123456",
+        "purchasedAt": "2023-01-01",
 }
