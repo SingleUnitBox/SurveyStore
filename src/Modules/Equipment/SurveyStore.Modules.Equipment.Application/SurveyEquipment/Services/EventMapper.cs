@@ -1,5 +1,4 @@
-﻿using SurveyStore.Modules.Equipment.Application.Events;
-using SurveyStore.Shared.Abstractions.Kernel;
+﻿using SurveyStore.Shared.Abstractions.Kernel;
 using SurveyStore.Shared.Abstractions.Messaging;
 using System.Collections.Generic;
 using System.Linq;

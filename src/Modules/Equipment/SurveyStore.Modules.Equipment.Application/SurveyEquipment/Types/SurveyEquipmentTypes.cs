@@ -1,4 +1,4 @@
-﻿using SurveyStore.Modules.Equipment.Application.Exceptions;
+﻿using SurveyStore.Modules.Equipment.Application.SurveyEquipment.Exceptions;
 
 namespace SurveyStore.Modules.Equipment.Application.SurveyEquipment.Types
 {
