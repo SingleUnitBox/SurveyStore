@@ -46,5 +46,8 @@ namespace SurveyStore.Shared.Abstractions.Kernel.Types
 
         public static implicit operator Guid(AggregateId id) => id.Value;
         public static implicit operator AggregateId(Guid value) => new(value);
+
+        public override string ToString()
+            => Value.ToString();
     }
 }
