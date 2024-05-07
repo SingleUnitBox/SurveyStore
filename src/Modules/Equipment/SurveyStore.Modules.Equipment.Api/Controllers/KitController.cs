@@ -32,7 +32,7 @@ namespace SurveyStore.Modules.Equipment.Api.Controllers
         public async Task<ActionResult> Post(AddTripod command)
         {
             await _commandDispatcher.DispatchAsync(command);
-            return CreatedAtAction(nameof(Get), new { id = command.Id });
+            return CreatedAtAction(nameof(Get), new { id = command.Id }, null);
         }
     }
 }

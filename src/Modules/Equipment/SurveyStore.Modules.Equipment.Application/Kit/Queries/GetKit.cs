@@ -4,5 +4,5 @@ using System;
 
 namespace SurveyStore.Modules.Equipment.Application.Kit.Queries
 {
-    public record GetKit(Guid id) : IQuery<KitDto>;
+    public record GetKit(Guid Id) : IQuery<KitDto>;
 }

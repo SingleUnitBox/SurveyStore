@@ -7,7 +7,7 @@ namespace SurveyStore.Modules.Equipment.Application.Kit.Exceptions
         public string KitType { get; }
         public string SerialNumber { get; }
         public KitAlreadyExistsException(string kitType, string serialNumber)
-            : base($"{kitType} with serial number '' already exists.")
+            : base($"'{kitType}' with serial number '{serialNumber}' already exists.")
         {
             KitType = kitType;
             SerialNumber = serialNumber;
