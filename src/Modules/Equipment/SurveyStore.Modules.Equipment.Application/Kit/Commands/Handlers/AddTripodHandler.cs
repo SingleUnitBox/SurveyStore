@@ -2,6 +2,7 @@
 using SurveyStore.Modules.Equipment.Domain.Kit.Entities;
 using SurveyStore.Modules.Equipment.Domain.Kit.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
+using SurveyStore.Shared.Abstractions.Messaging;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Equipment.Application.Kit.Commands.Handlers
@@ -9,9 +10,12 @@ namespace SurveyStore.Modules.Equipment.Application.Kit.Commands.Handlers
     internal class AddTripodHandler : ICommandHandler<AddTripod>
     {
         private readonly IKitRepository _kitRepository;
-        public AddTripodHandler(IKitRepository kitRepository)
+        private readonly IMessageBroker _messageBroker;
+        public AddTripodHandler(IKitRepository kitRepository,
+            IMessageBroker messageBroker)
         {
             _kitRepository = kitRepository;
+            _messageBroker = messageBroker;
         }
         public async Task HandleAsync(AddTripod command)
         {
@@ -23,6 +27,8 @@ namespace SurveyStore.Modules.Equipment.Application.Kit.Commands.Handlers
 
             tripod = Tripod.Create(command.Id, command.brand, command.model, command.serialNumber, command.purchasedAt);
             await _kitRepository.AddAsync(tripod);
+
+            await _messageBroker.PublishAsync();
         }
     }
 }
