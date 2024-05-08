@@ -1,4 +1,5 @@
-﻿using SurveyStore.Modules.Collections.Domain.Collections.Entities;
+﻿using SurveyStore.Modules.Collections.Application.Clients.Equipment.Kit;
+using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Shared.Abstractions.Events;
 using System;
