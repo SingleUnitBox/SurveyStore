@@ -20,7 +20,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("SurveyStore.Modules.Collections.Core.Entities.Collection", b =>
+            modelBuilder.Entity("SurveyStore.Modules.Collections.Domain.Collections.Entities.Collection", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -56,7 +56,41 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Migrations
                     b.ToTable("Collections");
                 });
 
-            modelBuilder.Entity("SurveyStore.Modules.Collections.Core.Entities.Store", b =>
+            modelBuilder.Entity("SurveyStore.Modules.Collections.Domain.Collections.Entities.Kit", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Brand")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SerialNumber")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("StoreId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SerialNumber")
+                        .IsUnique();
+
+                    b.HasIndex("StoreId");
+
+                    b.ToTable("Kit");
+                });
+
+            modelBuilder.Entity("SurveyStore.Modules.Collections.Domain.Collections.Entities.Store", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -70,7 +104,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Migrations
                     b.ToTable("Stores");
                 });
 
-            modelBuilder.Entity("SurveyStore.Modules.Collections.Core.Entities.SurveyEquipment", b =>
+            modelBuilder.Entity("SurveyStore.Modules.Collections.Domain.Collections.Entities.SurveyEquipment", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -101,7 +135,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Migrations
                     b.ToTable("SurveyEquipment");
                 });
 
-            modelBuilder.Entity("SurveyStore.Modules.Collections.Core.Entities.Surveyor", b =>
+            modelBuilder.Entity("SurveyStore.Modules.Collections.Domain.Collections.Entities.Surveyor", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -114,13 +148,13 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Migrations
                     b.ToTable("Surveyors");
                 });
 
-            modelBuilder.Entity("SurveyStore.Modules.Collections.Core.Entities.Collection", b =>
+            modelBuilder.Entity("SurveyStore.Modules.Collections.Domain.Collections.Entities.Collection", b =>
                 {
-                    b.HasOne("SurveyStore.Modules.Collections.Core.Entities.SurveyEquipment", "SurveyEquipment")
+                    b.HasOne("SurveyStore.Modules.Collections.Domain.Collections.Entities.SurveyEquipment", "SurveyEquipment")
                         .WithMany()
                         .HasForeignKey("SurveyEquipmentId");
 
-                    b.HasOne("SurveyStore.Modules.Collections.Core.Entities.Surveyor", "Surveyor")
+                    b.HasOne("SurveyStore.Modules.Collections.Domain.Collections.Entities.Surveyor", "Surveyor")
                         .WithMany("Collections")
                         .HasForeignKey("SurveyorId");
 
@@ -129,16 +163,25 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Migrations
                     b.Navigation("Surveyor");
                 });
 
-            modelBuilder.Entity("SurveyStore.Modules.Collections.Core.Entities.SurveyEquipment", b =>
+            modelBuilder.Entity("SurveyStore.Modules.Collections.Domain.Collections.Entities.Kit", b =>
                 {
-                    b.HasOne("SurveyStore.Modules.Collections.Core.Entities.Store", "Store")
+                    b.HasOne("SurveyStore.Modules.Collections.Domain.Collections.Entities.Store", "Store")
                         .WithMany()
                         .HasForeignKey("StoreId");
 
                     b.Navigation("Store");
                 });
 
-            modelBuilder.Entity("SurveyStore.Modules.Collections.Core.Entities.Surveyor", b =>
+            modelBuilder.Entity("SurveyStore.Modules.Collections.Domain.Collections.Entities.SurveyEquipment", b =>
+                {
+                    b.HasOne("SurveyStore.Modules.Collections.Domain.Collections.Entities.Store", "Store")
+                        .WithMany()
+                        .HasForeignKey("StoreId");
+
+                    b.Navigation("Store");
+                });
+
+            modelBuilder.Entity("SurveyStore.Modules.Collections.Domain.Collections.Entities.Surveyor", b =>
                 {
                     b.Navigation("Collections");
                 });

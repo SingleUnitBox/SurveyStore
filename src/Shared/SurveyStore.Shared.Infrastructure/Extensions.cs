@@ -27,6 +27,7 @@ using Convey;
 using Convey.MessageBrokers.RabbitMQ;
 using Convey.CQRS.Events;
 
+[assembly: InternalsVisibleTo("SurveyStore.Modules.Equipment.Api")]
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Calibrations.Api")]
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Surveyors.Api")]
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Stores.Api")]
