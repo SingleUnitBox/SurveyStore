@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Kit\" />
+    <Folder Include="Kit\NewFolder\" />
   </ItemGroup>
 
 </Project>
