@@ -1,4 +1,5 @@
 ﻿using SurveyStore.Modules.Collections.Application.Clients.Equipment.Kit;
+using SurveyStore.Modules.Collections.Application.Exceptions;
 using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Shared.Abstractions.Events;
@@ -25,7 +26,14 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
                 return;
             }
 
-            kit = Kit.Create()
+            var kitDto = await _kitApiClient.GetKitAsync(@event.Id);
+            if (kitDto is null)
+            {
+                throw new KitNotFoundException(@event.Id);
+            }
+
+            kit = Kit.Create(kitDto.Id, kitDto.Brand, kitDto.Model, kitDto.SerialNumber, kitDto.Type);
+            await _kitRepository.AddAsync(kit);
         }
     }
 }

@@ -6,6 +6,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Repositories
 {
     public interface IKitRepository
     {
+        Task AddAsync(Kit kit);
         Task<Kit> GetAsync(AggregateId id);
         Task<Kit> GetBySerialNumberAsync(string serialNumber);
     }
