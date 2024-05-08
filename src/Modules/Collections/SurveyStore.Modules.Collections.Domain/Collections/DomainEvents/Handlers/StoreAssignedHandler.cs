@@ -1,11 +1,10 @@
-﻿using SurveyStore.Shared.Abstractions.Kernel;
-using System;
-using System.Threading.Tasks;
-using SurveyStore.Shared.Abstractions.Kernel.Types;
-using System.Linq;
-using SurveyStore.Modules.Collections.Domain.Collections.Entities;
-using SurveyStore.Modules.Collections.Domain.Collections.DomainEvents;
+﻿using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
+using SurveyStore.Shared.Abstractions.Kernel;
+using SurveyStore.Shared.Abstractions.Kernel.Types;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Collections.Domain.Collections.DomainEvents.Handlers
 {

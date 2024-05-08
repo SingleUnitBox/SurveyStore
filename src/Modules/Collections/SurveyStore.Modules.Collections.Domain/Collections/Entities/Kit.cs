@@ -34,7 +34,13 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
         public void AssignStore(StoreId storeId)
         {
             StoreId = storeId;
-            AddEvent(new StoreAssigned(this, storeId));
+            AddEvent(new StoreAssignedToKit(this, storeId));
+        }
+
+        public void UnassignStore()
+        {
+            StoreId = null;
+            IncrementVersion();
         }
     }
 }
