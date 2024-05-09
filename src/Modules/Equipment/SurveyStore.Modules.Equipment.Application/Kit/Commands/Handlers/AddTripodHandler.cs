@@ -1,4 +1,5 @@
-﻿using SurveyStore.Modules.Equipment.Application.Kit.Exceptions;
+﻿using SurveyStore.Modules.Equipment.Application.Kit.Events;
+using SurveyStore.Modules.Equipment.Application.Kit.Exceptions;
 using SurveyStore.Modules.Equipment.Domain.Kit.Entities;
 using SurveyStore.Modules.Equipment.Domain.Kit.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
@@ -28,7 +29,7 @@ namespace SurveyStore.Modules.Equipment.Application.Kit.Commands.Handlers
             tripod = Tripod.Create(command.Id, command.brand, command.model, command.serialNumber, command.purchasedAt);
             await _kitRepository.AddAsync(tripod);
 
-            await _messageBroker.PublishAsync();
+            await _messageBroker.PublishAsync(new KitCreated(command.Id));
         }
     }
 }

@@ -13,9 +13,11 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
         private readonly IKitRepository _kitRepository;
         private readonly IKitApiClient _kitApiClient;
 
-        public KitCreatedHandler(IKitRepository kitRepository)
+        public KitCreatedHandler(IKitRepository kitRepository,
+            IKitApiClient kitApiClient)
         {
             _kitRepository = kitRepository;
+            _kitApiClient = kitApiClient;
         }
 
         public async Task HandleAsync(KitCreated @event)

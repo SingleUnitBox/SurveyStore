@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using SurveyStore.Shared.Abstractions.Events;
+using SurveyStore.Shared.Infrastructure.Postgres.Decorators;
 
 namespace SurveyStore.Shared.Infrastructure.Events
 {
@@ -11,7 +12,8 @@ namespace SurveyStore.Shared.Infrastructure.Events
         {
             services.AddSingleton<IEventDispatcher, EventDispatcher>();
             services.Scan(a => a.FromAssemblies(assemblies)
-                .AddClasses(c => c.AssignableTo(typeof(IEventHandler<>)))
+                .AddClasses(c => c.AssignableTo(typeof(IEventHandler<>))
+                    .WithoutAttribute<DecoratorAttribute>())                   
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
 

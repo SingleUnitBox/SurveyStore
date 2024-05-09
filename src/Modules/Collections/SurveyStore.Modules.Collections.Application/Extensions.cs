@@ -1,6 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SurveyStore.Modules.Collections.Application.Decorators.Events;
+using SurveyStore.Modules.Collections.Application.Events.External;
+using SurveyStore.Modules.Collections.Application.Events.External.Handlers;
 using SurveyStore.Modules.Collections.Application.Policies;
 using SurveyStore.Modules.Collections.Application.Services;
+using SurveyStore.Shared.Abstractions.Events;
 
 namespace SurveyStore.Modules.Collections.Application
 {
@@ -10,6 +14,8 @@ namespace SurveyStore.Modules.Collections.Application
         {
             services.AddSingleton<IEventMapper, EventMapper>();
             services.AddSingleton<IFreeCollectionRemovalPolicy, FreeCollectionRemovalPolicy>();
+
+            services.Decorate<IEventHandler<KitCreated>, KitCreatedHandlerDecorator>();
 
             return services;
         }
