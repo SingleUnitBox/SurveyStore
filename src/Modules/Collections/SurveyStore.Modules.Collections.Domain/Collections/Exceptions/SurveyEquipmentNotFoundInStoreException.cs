@@ -8,7 +8,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Exceptions
     {
         public Guid Id { get; }
         public SurveyEquipmentNotFoundInStoreException(AggregateId id)
-            : base($"Survey equipment with id '{id.Value}' not found in store.")
+            : base($"Survey equipment with id '{id.Value}' was not found in store.")
         {
             Id = id;
         }
