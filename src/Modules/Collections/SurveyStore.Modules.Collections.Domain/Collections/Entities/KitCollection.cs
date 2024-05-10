@@ -21,7 +21,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
             KitId = kitId;
         }
 
-        public void ChangeCollectionStore(StoreId storeId)
+        public void ChangeCollectionStoreId(StoreId storeId)
         {
             CollectionStoreId = storeId;
             IncrementVersion();

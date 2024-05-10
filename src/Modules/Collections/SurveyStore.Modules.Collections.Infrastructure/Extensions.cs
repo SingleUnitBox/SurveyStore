@@ -18,6 +18,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure
             services.AddScoped<IKitRepository, PostgresKitRepository>();
             services.AddScoped<ISurveyorRepository, PostgresSurveyorRepository>();
             services.AddScoped<ICollectionRepository, PostgresCollectionRepository>();
+            services.AddScoped<IKitCollectionRepository, PostgresKitCollectionRepository>();
 
             services.AddApiClients();
             services.AddUnitOfWork<ICollectionsUnitOfWork, CollectionsUnitOfWork>();
