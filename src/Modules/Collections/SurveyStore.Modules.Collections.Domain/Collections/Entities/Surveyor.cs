@@ -9,7 +9,9 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
         public SurveyorId Id { get; private set; }
         public string FullName { get; private set; }
         public IEnumerable<Collection> Collections => _collections;
+        public IEnumerable<KitCollection> KitCollections => _kitCollections;
         private readonly ICollection<Collection> _collections = new List<Collection>();
+        private readonly ICollection<KitCollection> _kitCollections = new List<KitCollection>();
 
         private Surveyor()
         {

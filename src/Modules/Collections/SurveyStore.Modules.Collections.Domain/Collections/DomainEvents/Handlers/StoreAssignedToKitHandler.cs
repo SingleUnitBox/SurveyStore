@@ -18,8 +18,9 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainEvents.Handle
 
         public async Task HandleAsync(StoreAssignedToKit @event)
         {
-            var kitCollections = await _kitCollectionRepository.BrowseKitCollectionsAsync(@event.Kit.Id);
-            var kitCollection = kitCollections.SingleOrDefault(k => !k.CollectedAt.HasValue);
+            //var kitCollections = await _kitCollectionRepository.BrowseKitCollectionsAsync(@event.Kit.Id);
+            //var kitCollection = kitCollections.SingleOrDefault(k => !k.CollectedAt.HasValue);
+            var kitCollection = await _kitCollectionRepository.GetFreeByKitAsync(@event.Kit.Id);
             if (kitCollection is not null)
             {
                 kitCollection.ChangeCollectionStoreId(@event.StoreId);
