@@ -32,6 +32,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
         }
         public async Task<IEnumerable<KitCollection>> BrowseKitCollectionsAsync(AggregateId kitId)
             => await _kitCollections
+                .Include(c => c.Surveyor)
                 .Where(c => c.KitId == kitId)
                 .ToListAsync();
 

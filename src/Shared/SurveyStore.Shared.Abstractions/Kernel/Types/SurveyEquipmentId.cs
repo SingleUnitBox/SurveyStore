@@ -10,5 +10,8 @@ namespace SurveyStore.Shared.Abstractions.Kernel.Types
 
         public static implicit operator SurveyEquipmentId(Guid id) => new SurveyEquipmentId(id);
         public static implicit operator Guid(SurveyEquipmentId id) => id.Value;
+
+        public override string ToString()
+            => this.Value.ToString();
     }
 }

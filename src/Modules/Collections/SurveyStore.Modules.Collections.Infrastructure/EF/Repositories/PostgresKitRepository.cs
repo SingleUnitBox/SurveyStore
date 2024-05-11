@@ -23,6 +23,12 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task UpdateAsync(Kit kit)
+        {
+            _kit.Update(kit);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public Task<Kit> GetAsync(AggregateId id)
             => _kit.SingleOrDefaultAsync(k => k.Id == id);
 

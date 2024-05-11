@@ -2,6 +2,7 @@
 using SurveyStore.Modules.Collections.Application.Services;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
+using SurveyStore.Shared.Abstractions.Kernel.Types;
 using SurveyStore.Shared.Abstractions.Messaging;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             var kitCollection = await _kitCollectionRepository.GetOpenByKitAsync(command.KitId);
             if (kitCollection is not null)
             {
-                throw new CannotAssignStoreException(command.KitId);
+                throw new CannotAssignStoreException(new KitId(command.KitId));
             }
 
             var kit = await _kitRepository.GetAsync(command.KitId);

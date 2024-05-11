@@ -8,7 +8,7 @@ namespace SurveyStore.Modules.Collections.Application.Exceptions
     {
         public Guid Id { get; }
         public FreeCollectionAlreadyExistsException(SurveyEquipmentId id)
-            : base($"Free collection already exists for survey equipment with id '{id.Value}'.")
+            : base($"Free collection already exists for survey equipment with id '{id}'.")
         {
             Id = id;
         }
