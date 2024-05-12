@@ -14,7 +14,7 @@ namespace SurveyStore.Modules.Collections.Api.Controllers
     [Authorize(Policy = Policy)]
     public class CollectionsController : BaseController
     {
-        public const string Policy = "collections";
+        //public const string Policy = "collections";
         private readonly ICommandDispatcher _commandDispatcher;
         private readonly IQueryDispatcher _queryDispatcher;
 
