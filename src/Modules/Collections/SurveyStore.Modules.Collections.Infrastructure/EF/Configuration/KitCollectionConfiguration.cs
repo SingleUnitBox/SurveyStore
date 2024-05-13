@@ -19,7 +19,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Configuration
             builder.Property(c => c.Version)
                 .IsConcurrencyToken();
             builder.Property(c => c.KitId)
-                .HasConversion(c => c.Value, c => new());
+                .HasConversion(c => c.Value, c => new(c));
             builder.HasOne(c => c.Surveyor)
                 .WithMany(s => s.KitCollections);
         }

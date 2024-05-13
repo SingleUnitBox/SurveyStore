@@ -1,8 +1,7 @@
 @url = http://localhost:5000/collections-module
-@url2 = http://localhost:5000/collections-module/kit
 
 @equipmentId = 5a2f8dc4-a44d-40b7-8416-dff498b09608
-@kitId = 
+@kitId = fb15a9e2-8c72-4df7-a83d-5a4d69d37c38
 
 @store1Id = 9b55bfb9-63c1-4532-9549-2cd31d1cc62c
 @store2Id = c6762acf-b304-4025-bb6e-acce7bb27402
@@ -10,7 +9,7 @@
 @surveyorId1 = 5a8b5e86-6168-47e6-92ab-1f11a0e63c3b
 @surveyorId2 = ce62dacaba2845079b8bf099f4bfd8ca
 
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YThiNWU4NjYxNjg0N2U2OTJhYjFmMTFhMGU2M2MzYiIsInVuaXF1ZV9uYW1lIjoiNWE4YjVlODY2MTY4NDdlNjkyYWIxZjExYTBlNjNjM2IiLCJqdGkiOiI1MTVlNzg2YS04NmRiLTQ5OTgtYmU3MC0xZDY5YjYzMGUwNTciLCJpYXQiOiIxNzE1NDE4NDE3ODQzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxNTQxODQxNywiZXhwIjoxNzE1NTAxMjE3LCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.ogkIXJda2xUdID-uyDch-RhqI09SsvI5GX5XpLfz4NA
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YThiNWU4NjYxNjg0N2U2OTJhYjFmMTFhMGU2M2MzYiIsInVuaXF1ZV9uYW1lIjoiNWE4YjVlODY2MTY4NDdlNjkyYWIxZjExYTBlNjNjM2IiLCJqdGkiOiJlODdjNDFiNi1jNTYzLTRhZjQtYjY5OS04NmVmOTA2YmRmOWUiLCJpYXQiOiIxNzE1NTgwNjI4MjM4IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxNTU4MDYyOCwiZXhwIjoxNzE1NjYzNDI4LCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.zCbnflCeVoBouZD5JHhya2ZJZvKl0cLu-rOh2evvD3w
 
 ###
 GET {{url}}
@@ -65,10 +64,10 @@ Content-Type: application/json
 }
 
 ###
-POST {{url2}}/kit/{{kitId}}
+POST {{url}}/kit/{{kitId}}/assign-store
 Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
-    
+    "storeId": "{{store2Id}}"
 }

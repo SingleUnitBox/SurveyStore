@@ -36,12 +36,19 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
                 .Where(c => c.KitId == kitId)
                 .ToListAsync();
 
-        public Task<KitCollection> GetFreeByKitAsync(AggregateId kitId)
-            => _kitCollections
+        public async Task<KitCollection> GetFreeByKitAsync(AggregateId kitId)
+            //=> await _kitCollections
+            //    .Include(c => c.Kit)
+            //    .SingleOrDefaultAsync(c => c.KitId == kitId
+            //    && c.CollectedAt == null
+            //    && c.ReturnedAt == null);
+
+            => await _kitCollections
+                .Where(c => c.KitId == kitId
+                            && c.ReturnStoreId == null
+                            && c.CollectedAt == null)
                 .Include(c => c.Kit)
-                .SingleOrDefaultAsync(c => c.KitId == kitId
-                && c.CollectedAt == null
-                && c.ReturnedAt == null);
+                .SingleOrDefaultAsync();
 
         public Task<KitCollection> GetOpenByKitAsync(AggregateId kitId)
             => _kitCollections
