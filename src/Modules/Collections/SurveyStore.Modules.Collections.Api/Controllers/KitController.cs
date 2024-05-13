@@ -21,7 +21,7 @@ namespace SurveyStore.Modules.Collections.Api.Controllers
             _queryDispatcher = queryDispatcher;
         }
 
-        [HttpPost("{kitId:guid}")]
+        [HttpPost("{kitId:guid}/assign-store")]
         public async Task<ActionResult> Post(Guid kitId, AssignStoreToKit command)
         {
             await _commandDispatcher.DispatchAsync(command with { KitId = kitId });
