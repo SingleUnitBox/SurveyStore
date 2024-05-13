@@ -9,7 +9,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
         void Collect(IEnumerable<Collection> openCollections, Surveyor surveyor,
             Collection toBeCollected, DateTime now);
 
-        void CollectSet(IEnumerable<Collection> openCollections, IEnumerable<KitCollection> freeKitCollections,
+        void CollectTraverseSet(IEnumerable<Collection> openCollections, IEnumerable<KitCollection> freeKitCollections,
             Surveyor surveyor, Collection toBeCollected, DateTime now);
     }
 }

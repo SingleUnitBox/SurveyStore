@@ -10,6 +10,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
     public class CollectSurveyEquipmentHandler : ICommandHandler<CollectSurveyEquipment>
     {
         private readonly ICollectionRepository _collectionRepository;
+        private readonly IKitCollectionRepository _kitCollectionRepository;
         private readonly ISurveyorRepository _surveyorRepository;
         private readonly IClock _clock;
         private readonly ISurveyEquipmentRepository _surveyEquipmentRepository;
@@ -45,7 +46,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             //collection.Collect(surveyor, _clock.Current());
             var openCollections = await _collectionRepository.BrowseOpenCollectionsBySurveyorIdAsync(command.SurveyorId);
             var now = _clock.Current();
-            _collectionService.Collect(openCollections, surveyor, collection, now);
+            _collectionService.CollectTraverseSet(openCollections, surveyor, collection, now);
             await _collectionRepository.UpdateAsync(collection);
 
             var surveyEquipment = await _surveyEquipmentRepository.GetByIdAsync(command.SurveyEquipmentId);

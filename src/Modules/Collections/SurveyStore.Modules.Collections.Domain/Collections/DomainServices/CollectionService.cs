@@ -41,29 +41,26 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
         public void CollectTraverseSet(IEnumerable<Collection> openCollections, IEnumerable<KitCollection> freeKitCollections,
             Surveyor surveyor, Collection toBeCollected, DateTime now)
         {
-            if (_kitCollectionPolicy.CanBeCollected(freeKitCollections, KitTypes.Tripod.ToString(), 3))
+            if (_kitCollectionPolicy.IsEnoughKit(freeKitCollections, KitTypes.Tripod.ToString(), 3))
             {
                 throw new NotEnoughKitAvailableToFormSetException(KitTypes.Tripod);
             }
 
-            if (_kitCollectionPolicy.CanBeCollected(freeKitCollections, KitTypes.TraversePrism.ToString(), 2))
+            if (_kitCollectionPolicy.IsEnoughKit(freeKitCollections, KitTypes.TraversePrism.ToString(), 2))
             {
                 throw new NotEnoughKitAvailableToFormSetException(KitTypes.TraversePrism);
             }
 
-            var tripods = freeKitCollections
-                .Where(k => k.Kit.Type == KitTypes.Tripod
-                && k.CollectionStoreId == toBeCollected.CollectionStoreId)
-                .Take(3);
+            var collectionStoreId = toBeCollected.CollectionStoreId;
+            var tripods = _kitCollectionPolicy.KitToBeCollected(freeKitCollections, KitTypes.Tripod.ToString(),
+                collectionStoreId, 3);
             foreach (var tripod in tripods)
             {
                 tripod.Collect(surveyor, now);
             }
 
-            var prisms = freeKitCollections
-                .Where(k => k.Kit.Type == KitTypes.TraversePrism
-                && k.CollectionStoreId == toBeCollected.CollectionStoreId)
-                .Take(2);
+            var prisms = _kitCollectionPolicy.KitToBeCollected(freeKitCollections, KitTypes.TraversePrism.ToString(),
+                collectionStoreId, 2);
             foreach (var prism in prisms)
             {
                 prism.Collect(surveyor, now);
