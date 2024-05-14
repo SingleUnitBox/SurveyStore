@@ -103,6 +103,7 @@ Content-Type: application/json
 {
         "brand": "Trimble",
         "model": "Tri300",
-        "serialNumber": "4567",
-        "purchasedAt": "2023-01-01"
+        "serialNumber": "45645",
+        "purchasedAt": "2023-01-01", 
+        "KitType": "Tripo"
 }

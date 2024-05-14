@@ -34,7 +34,7 @@ namespace SurveyStore.Modules.Equipment.Api.Controllers
             => OkOrNotFound(await _queryDispatcher.QueryAsync(new GetKit(id)));
 
         [HttpPost]
-        public async Task<ActionResult> Post(AddTripod command)
+        public async Task<ActionResult> Post(AddKit command)
         {
             await _commandDispatcher.DispatchAsync(command);
             return CreatedAtAction(nameof(Get), new { id = command.Id }, null);

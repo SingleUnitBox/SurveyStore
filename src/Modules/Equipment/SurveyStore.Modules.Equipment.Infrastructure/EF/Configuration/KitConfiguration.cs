@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SurveyStore.Modules.Equipment.Domain.Kit.Entities;
-using System;
+using SurveyStore.Shared.Abstractions.Types;
 
 namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Configuration
 {
@@ -15,10 +15,10 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Configuration
             builder.Property(k => k.Version)
                 .IsConcurrencyToken();
             builder.HasDiscriminator<string>("Type")
-                .HasValue<Tripod>(nameof(Tripod))
-                .HasValue<DetailPole>(nameof(DetailPole));
+                .HasValue<Tripod>(KitTypes.Tripod)
+                .HasValue<DetailPole>(KitTypes.DetailPole);
                 //.HasValue<GNSSPole>(nameof(GNSSPole))
-                //.HasValue<TraversePrism>(nameof(TraversePrism));
+                //.HasValue<TraversePrism>(KitTypes.TraversePrism);
             builder.HasIndex(k => k.SerialNumber)
                 .IsUnique();
         }

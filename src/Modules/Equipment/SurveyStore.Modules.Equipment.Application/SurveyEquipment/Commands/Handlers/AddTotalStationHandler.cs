@@ -1,10 +1,10 @@
 ﻿using SurveyStore.Modules.Equipment.Application.SurveyEquipment.Events;
 using SurveyStore.Modules.Equipment.Application.SurveyEquipment.Exceptions;
 using SurveyStore.Modules.Equipment.Application.SurveyEquipment.Mappings;
-using SurveyStore.Modules.Equipment.Application.SurveyEquipment.Types;
 using SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
 using SurveyStore.Shared.Abstractions.Messaging;
+using SurveyStore.Shared.Abstractions.Types;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Equipment.Application.SurveyEquipment.Commands.Handlers
@@ -33,7 +33,8 @@ namespace SurveyStore.Modules.Equipment.Application.SurveyEquipment.Commands.Han
 
             await _repository.AddAsync(totalStation);
             await _messageBroker.PublishAsync(new SurveyEquipmentCreated(
-                totalStation.Id, totalStation.SerialNumber, totalStation.Brand, totalStation.Model, SurveyEquipmentTypes.TotalStation));
+                totalStation.Id, totalStation.SerialNumber, totalStation.Brand,
+                totalStation.Model, SurveyEquipmentTypes.TotalStation));
         }
     }
 }

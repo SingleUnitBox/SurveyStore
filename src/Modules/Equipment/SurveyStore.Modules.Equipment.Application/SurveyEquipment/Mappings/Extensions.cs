@@ -1,7 +1,7 @@
 ﻿using SurveyStore.Modules.Equipment.Application.SurveyEquipment.Commands;
 using SurveyStore.Modules.Equipment.Application.SurveyEquipment.DTO;
-using SurveyStore.Modules.Equipment.Application.SurveyEquipment.Types;
 using SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Entities;
+using SurveyStore.Shared.Abstractions.Types;
 
 namespace SurveyStore.Modules.Equipment.Application.SurveyEquipment.Mappings
 {
@@ -29,7 +29,7 @@ namespace SurveyStore.Modules.Equipment.Application.SurveyEquipment.Mappings
                     GNSS => SurveyEquipmentTypes.GNSS,
                     FieldController => SurveyEquipmentTypes.FieldController,
                     GroundPenetratingRadar => SurveyEquipmentTypes.GroundPenetratingRadar,
-                    CableAvoidanceTool => SurveyEquipmentTypes.CAT,
+                    CableAvoidanceTool =>SurveyEquipmentTypes.CAT,
                     _ => null
                 }
             };

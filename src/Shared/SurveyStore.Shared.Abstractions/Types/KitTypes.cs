@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata;
-
-namespace SurveyStore.Modules.Collections.Domain.Collections.Types
+﻿namespace SurveyStore.Shared.Abstractions.Types
 {
     public class KitTypes
     {
@@ -8,6 +6,5 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Types
         public const string TraversePrism = nameof(TraversePrism);
         public const string DetailPole = nameof(DetailPole);
         public const string GNSSPole = nameof(GNSSPole);
-
     }
 }

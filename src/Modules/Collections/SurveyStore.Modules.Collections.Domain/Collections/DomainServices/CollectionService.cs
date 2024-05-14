@@ -1,7 +1,7 @@
 ﻿using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using SurveyStore.Modules.Collections.Domain.Collections.Exceptions;
 using SurveyStore.Modules.Collections.Domain.Collections.Policies;
-using SurveyStore.Modules.Collections.Domain.Collections.Types;
+using SurveyStore.Shared.Abstractions.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;

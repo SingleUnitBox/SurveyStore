@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SurveyStore.Modules.Equipment.Application.SurveyEquipment.Types;
 using SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Entities;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
+using SurveyStore.Shared.Abstractions.Types;
 
 namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Configuration
 {
