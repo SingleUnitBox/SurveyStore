@@ -30,5 +30,15 @@ namespace SurveyStore.Modules.Collections.Application.Mappings
                 Model = surveyEquipment.Model,
                 Store = surveyEquipment?.Store?.AsDto()
             };
+
+        public static KitDto AsDto(this Kit kit)
+            => new()
+            {
+                Id = kit.Id,
+                Brand = kit.Brand,
+                Model = kit.Model,
+                SerialNumber = kit.SerialNumber,
+                Type = kit.Type,
+            };
     }
 }

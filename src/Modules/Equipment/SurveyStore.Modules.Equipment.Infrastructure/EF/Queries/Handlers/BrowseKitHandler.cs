@@ -17,6 +17,7 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Queries.Handlers
         {
             _kit = dbContext.Kit;
         }
+
         public async Task<IReadOnlyCollection<KitDto>> HandleAsync(BrowseKit query)
             => await _kit
                 .AsNoTracking()
