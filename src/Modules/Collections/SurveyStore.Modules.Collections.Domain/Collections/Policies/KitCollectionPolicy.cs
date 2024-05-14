@@ -12,7 +12,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Policies
         public bool IsEnoughKit(IEnumerable<KitCollection> freeKitCollections, string kitType, int requiredAmount)
         {
             var freeKitTypes = freeKitCollections.Select(k => k.Kit.Type);
-            if (freeKitTypes.Count(t => t == kitType) < requiredAmount)
+            if (freeKitTypes.Count(t => t == kitType) > requiredAmount)
             {
                 return false;
             }

@@ -17,16 +17,18 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
         private readonly ICollectionService _collectionService;
 
         public CollectSurveyEquipmentHandler(ICollectionRepository collectionRepository,
+            IKitCollectionRepository kitCollectionRepository,
             ISurveyorRepository surveyorRepository,
             IClock clock,
             ISurveyEquipmentRepository surveyEquipmentRepository,
             ICollectionService collectionService)
         {
             _collectionRepository = collectionRepository;
+            _kitCollectionRepository = kitCollectionRepository;
             _surveyorRepository = surveyorRepository;
             _clock = clock;
             _surveyEquipmentRepository = surveyEquipmentRepository;
-            _collectionService = collectionService;
+            _collectionService = collectionService;            
         }
 
         public async Task HandleAsync(CollectSurveyEquipment command)

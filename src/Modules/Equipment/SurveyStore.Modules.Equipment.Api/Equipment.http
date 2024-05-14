@@ -4,7 +4,7 @@
 
 @kitId = 2d650bfa-fae0-4e30-b123-6096024410ab
 
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YThiNWU4NjYxNjg0N2U2OTJhYjFmMTFhMGU2M2MzYiIsInVuaXF1ZV9uYW1lIjoiNWE4YjVlODY2MTY4NDdlNjkyYWIxZjExYTBlNjNjM2IiLCJqdGkiOiI1MTVlNzg2YS04NmRiLTQ5OTgtYmU3MC0xZDY5YjYzMGUwNTciLCJpYXQiOiIxNzE1NDE4NDE3ODQzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxNTQxODQxNywiZXhwIjoxNzE1NTAxMjE3LCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.ogkIXJda2xUdID-uyDch-RhqI09SsvI5GX5XpLfz4NA
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YThiNWU4NjYxNjg0N2U2OTJhYjFmMTFhMGU2M2MzYiIsInVuaXF1ZV9uYW1lIjoiNWE4YjVlODY2MTY4NDdlNjkyYWIxZjExYTBlNjNjM2IiLCJqdGkiOiI4MGMwNTNhZC1jNzI1LTQ3N2QtOGM5OS1kZTIzNWM5NTUxMjciLCJpYXQiOiIxNzE1NjgxNjgwNjM4IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxNTY4MTY4MCwiZXhwIjoxNzE1NzY0NDgwLCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.zpojvR4yv5DVQMxnnO_TruHuinnfYWfPZjdCakrlMdY
 ###
 GET {{url}}
 
@@ -88,6 +88,10 @@ Content-Type: application/json
 }
 
 ###
+GET {{url}}/kit
+Authorization: Bearer {{accessToken}}
+
+###
 GET {{url}}/kit/{{kitId}}
 Authorization: Bearer {{accessToken}}
 
@@ -99,6 +103,6 @@ Content-Type: application/json
 {
         "brand": "Trimble",
         "model": "Tri300",
-        "serialNumber": "45678",
+        "serialNumber": "4567",
         "purchasedAt": "2023-01-01"
 }

@@ -6,6 +6,7 @@ using SurveyStore.Modules.Equipment.Application.Kit.Queries;
 using SurveyStore.Shared.Abstractions.Commands;
 using SurveyStore.Shared.Abstractions.Queries;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Equipment.Api.Controllers
@@ -23,6 +24,10 @@ namespace SurveyStore.Modules.Equipment.Api.Controllers
             _commandDispatcher = commandDispatcher;
             _queryDispatcher = queryDispatcher;
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IReadOnlyCollection<KitDto>>> Get()
+            => Ok(await _queryDispatcher.QueryAsync(new BrowseKit()));
 
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<KitDto>> Get(Guid id)
