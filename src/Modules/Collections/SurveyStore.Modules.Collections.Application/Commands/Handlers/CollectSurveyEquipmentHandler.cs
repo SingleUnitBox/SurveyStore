@@ -46,8 +46,14 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             //collection.Collect(surveyor, _clock.Current());
             var openCollections = await _collectionRepository.BrowseOpenCollectionsBySurveyorIdAsync(command.SurveyorId);
             var now = _clock.Current();
-            _collectionService.CollectTraverseSet(openCollections, surveyor, collection, now);
+            
+            _collectionService.CanBeCollected(openCollections, surveyor, collection, now);
+
+            var freeKitCollections = await _kitCollectionRepository.BrowseFreeKitCollectionsAsync();
+            _collectionService.CollectTraverseSet(freeKitCollections, surveyor, collection, now);
+
             await _collectionRepository.UpdateAsync(collection);
+            await _kitCollectionRepository.UpdateRangeAsync(freeKitCollections);
 
             var surveyEquipment = await _surveyEquipmentRepository.GetByIdAsync(command.SurveyEquipmentId);
             if (surveyEquipment is null)

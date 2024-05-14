@@ -25,11 +25,26 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
             await _kitCollections.AddAsync(kitCollection);
             await _dbContext.SaveChangesAsync();
         }
+
         public async Task UpdateAsync(KitCollection kitCollection)
         {
             _kitCollections.Update(kitCollection);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task UpdateRangeAsync(IEnumerable<KitCollection> kitCollections)
+        {
+            _kitCollections.UpdateRange(kitCollections);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<KitCollection>> BrowseFreeKitCollectionsAsync()
+            => await _kitCollections
+                .Include(c => c.Kit)
+                .Where(c => c.CollectedAt == null
+                    && c.ReturnStoreId == null)
+                .ToListAsync();
+
         public async Task<IEnumerable<KitCollection>> BrowseKitCollectionsAsync(AggregateId kitId)
             => await _kitCollections
                 .Include(c => c.Surveyor)

@@ -9,8 +9,10 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Repositories
     {
         Task AddAsync(KitCollection kitCollection);
         Task UpdateAsync(KitCollection kitCollection);
+        Task UpdateRangeAsync(IEnumerable<KitCollection> kitCollections);
         Task<KitCollection> GetFreeByKitAsync(AggregateId kitId);
         Task<KitCollection> GetOpenByKitAsync(AggregateId kitId);
+        Task<IEnumerable<KitCollection>> BrowseFreeKitCollectionsAsync();
         Task<IEnumerable<KitCollection>> BrowseKitCollectionsAsync(AggregateId kitId);
     }
 }

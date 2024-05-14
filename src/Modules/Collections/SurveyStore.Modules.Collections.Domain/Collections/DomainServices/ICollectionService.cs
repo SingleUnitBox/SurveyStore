@@ -6,10 +6,10 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
 {
     public interface ICollectionService
     {
-        void Collect(IEnumerable<Collection> openCollections, Surveyor surveyor,
+        void CanBeCollected(IEnumerable<Collection> openCollections, Surveyor surveyor,
             Collection toBeCollected, DateTime now);
 
-        void CollectTraverseSet(IEnumerable<Collection> openCollections, IEnumerable<KitCollection> freeKitCollections,
+        void CollectTraverseSet(IEnumerable<KitCollection> freeKitCollections,
             Surveyor surveyor, Collection toBeCollected, DateTime now);
     }
 }

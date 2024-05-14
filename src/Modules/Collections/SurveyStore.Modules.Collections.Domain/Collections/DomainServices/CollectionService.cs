@@ -23,7 +23,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
             _kitCollectionPolicy = kitCollectionPolicy;
         }
 
-        public void Collect(IEnumerable<Collection> openCollections, Surveyor surveyor, Collection toBeCollected, DateTime now)
+        public void CanBeCollected(IEnumerable<Collection> openCollections, Surveyor surveyor, Collection toBeCollected, DateTime now)
         {
             var surveyEquipmentTypes = openCollections.Select(c => c.SurveyEquipment.Type);
             foreach (var surveyEquipmentType in surveyEquipmentTypes)
@@ -35,10 +35,10 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
                 }
             }
 
-            toBeCollected.Collect(surveyor, now);
+            //toBeCollected.Collect(surveyor, now);
         }
 
-        public void CollectTraverseSet(IEnumerable<Collection> openCollections, IEnumerable<KitCollection> freeKitCollections,
+        public void CollectTraverseSet(IEnumerable<KitCollection> freeKitCollections,
             Surveyor surveyor, Collection toBeCollected, DateTime now)
         {
             if (_kitCollectionPolicy.IsEnoughKit(freeKitCollections, KitTypes.Tripod.ToString(), 3))
