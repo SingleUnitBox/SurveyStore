@@ -7,7 +7,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Policies
 {
     public interface IKitCollectionPolicy
     {
-        bool IsEnoughKit(IEnumerable<KitCollection> freeKitCollections, string kitType, int requiredAmount);
+        (bool, int) IsEnoughKit(IEnumerable<KitCollection> freeKitCollections, string kitType, int requiredAmount);
         IEnumerable<KitCollection> KitToBeCollected(IEnumerable<KitCollection> freeKitCollections, string kitType,
             StoreId collectionStoreId, int requiredAmount);
     }

@@ -10,6 +10,9 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
 {
     internal class CollectionService : ICollectionService
     {
+        private readonly int _tripodRequiredAmount = 3;
+        private readonly int _prismRequiredAmount = 2;
+
         private readonly string[] limitedSurveyEquipmentTypes = new[]
             {
                 "total station",
@@ -41,26 +44,30 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
         public void CollectTraverseSet(IEnumerable<KitCollection> freeKitCollections,
             Surveyor surveyor, Collection toBeCollected, DateTime now)
         {
-            if (_kitCollectionPolicy.IsEnoughKit(freeKitCollections, KitTypes.Tripod.ToString(), 3))
+            var (isEnough, actualAmount) = _kitCollectionPolicy
+                .IsEnoughKit(freeKitCollections, KitTypes.Tripod.ToString(), _tripodRequiredAmount);
+            if (!isEnough)
             {
-                throw new NotEnoughKitAvailableToFormSetException(KitTypes.Tripod);
+                throw new NotEnoughKitAvailableToFormSetException(KitTypes.Tripod, _tripodRequiredAmount, actualAmount);
             }
 
-            if (_kitCollectionPolicy.IsEnoughKit(freeKitCollections, KitTypes.TraversePrism.ToString(), 2))
+            (isEnough, actualAmount) = _kitCollectionPolicy
+                .IsEnoughKit(freeKitCollections, KitTypes.TraversePrism.ToString(), _prismRequiredAmount);
+            if (!isEnough)
             {
-                throw new NotEnoughKitAvailableToFormSetException(KitTypes.TraversePrism);
+                throw new NotEnoughKitAvailableToFormSetException(KitTypes.TraversePrism, _prismRequiredAmount, actualAmount);
             }
 
             var collectionStoreId = toBeCollected.CollectionStoreId;
             var tripods = _kitCollectionPolicy.KitToBeCollected(freeKitCollections, KitTypes.Tripod.ToString(),
-                collectionStoreId, 3);
+                collectionStoreId, _tripodRequiredAmount);
             foreach (var tripod in tripods)
             {
                 tripod.Collect(surveyor, now);
             }
 
             var prisms = _kitCollectionPolicy.KitToBeCollected(freeKitCollections, KitTypes.TraversePrism.ToString(),
-                collectionStoreId, 2);
+                collectionStoreId, _prismRequiredAmount);
             foreach (var prism in prisms)
             {
                 prism.Collect(surveyor, now);

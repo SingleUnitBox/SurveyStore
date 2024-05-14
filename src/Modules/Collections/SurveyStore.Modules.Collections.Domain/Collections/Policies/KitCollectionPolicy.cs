@@ -9,15 +9,16 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Policies
 {
     public class KitCollectionPolicy : IKitCollectionPolicy
     {
-        public bool IsEnoughKit(IEnumerable<KitCollection> freeKitCollections, string kitType, int requiredAmount)
-        {
+        public (bool, int) IsEnoughKit(IEnumerable<KitCollection> freeKitCollections, string kitType, int requiredAmount)
+        {            
             var freeKitTypes = freeKitCollections.Select(k => k.Kit.Type);
-            if (freeKitTypes.Count(t => t == kitType) > requiredAmount)
+            var freeKitAmount = freeKitTypes.Count(t => t == kitType);
+            if (freeKitAmount < requiredAmount)
             {
-                return false;
+                return (false, freeKitAmount);
             }
 
-            return true;
+            return (true, freeKitAmount);
         }
 
         public IEnumerable<KitCollection> KitToBeCollected(IEnumerable<KitCollection> freeKitCollections, string kitType,
