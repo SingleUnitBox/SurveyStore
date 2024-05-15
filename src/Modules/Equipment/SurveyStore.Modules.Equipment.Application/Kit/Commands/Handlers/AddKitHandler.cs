@@ -16,6 +16,7 @@ namespace SurveyStore.Modules.Equipment.Application.Kit.Commands.Handlers
                 throw new InvalidKitTypeException(command.KitType);
             }
 
+
             return;
         }
     }
