@@ -1,5 +1,6 @@
 ﻿using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,7 +25,8 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Policies
         {
             var preferredStoreKit = freeKitCollections
                 .Where(k => k.Kit.Type == kitType
-                && k.CollectionStoreId == collectionStoreId);
+                && k.CollectionStoreId == collectionStoreId)
+                .ToList();
 
             var kitToBeCollected = new List<KitCollection>();
             foreach (var kit in preferredStoreKit)
@@ -42,8 +44,10 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Policies
             if (requiredAmount > kitToBeCollected.Count)
             {
                 var otherStoresKit = freeKitCollections
-                    .Where(k => k.Kit.Type == kitType)
-                    .OrderBy(k => k.CollectionStoreId);
+                    .Where(k => k.Kit.Type == kitType
+                    && k.CollectionStoreId != collectionStoreId)
+                    .OrderBy(k => k.CollectionStoreId.Value)
+                    .ToList();
                 foreach (var kit in otherStoresKit)
                 {
                     if (requiredAmount > kitToBeCollected.Count)
