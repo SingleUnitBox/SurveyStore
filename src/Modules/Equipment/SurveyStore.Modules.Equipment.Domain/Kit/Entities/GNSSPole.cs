@@ -8,6 +8,7 @@ namespace SurveyStore.Modules.Equipment.Domain.Kit.Entities
     {
         public GNSSPole(AggregateId id) : base(id)
         {
+
         }
 
         public static GNSSPole Create(Guid id, string brand, string model, string serialNumber, DateTime purchasedAt)
