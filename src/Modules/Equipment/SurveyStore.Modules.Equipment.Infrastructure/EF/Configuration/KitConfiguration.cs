@@ -16,9 +16,9 @@ namespace SurveyStore.Modules.Equipment.Infrastructure.EF.Configuration
                 .IsConcurrencyToken();
             builder.HasDiscriminator<string>("Type")
                 .HasValue<Tripod>(KitTypes.Tripod)
-                .HasValue<DetailPole>(KitTypes.DetailPole);
-                //.HasValue<GNSSPole>(nameof(GNSSPole))
-                //.HasValue<TraversePrism>(KitTypes.TraversePrism);
+                .HasValue<DetailPole>(KitTypes.DetailPole)
+                .HasValue<GNSSPole>(nameof(GNSSPole))
+                .HasValue<TraversePrism>(KitTypes.TraversePrism);
             builder.HasIndex(k => k.SerialNumber)
                 .IsUnique();
         }
