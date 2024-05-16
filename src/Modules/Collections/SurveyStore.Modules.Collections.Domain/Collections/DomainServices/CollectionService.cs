@@ -41,7 +41,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
             //toBeCollected.Collect(surveyor, now);
         }
 
-        public void CollectTraverseSet(IEnumerable<KitCollection> freeKitCollections,
+        public IEnumerable<Kit> CollectTraverseSet(IEnumerable<KitCollection> freeKitCollections,
             Surveyor surveyor, Collection toBeCollected, DateTime now)
         {
             var (isEnough, actualAmount) = _kitCollectionPolicy
@@ -73,7 +73,13 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
                 prism.Collect(surveyor, now);
             }
 
+            var kit = new List<Kit>();
+            kit.AddRange(tripods.Select(t => t.Kit));
+            kit.AddRange(prisms.Select(p => p.Kit));
+            
             toBeCollected.Collect(surveyor, now);
+
+            return kit;
         }
     }
 }

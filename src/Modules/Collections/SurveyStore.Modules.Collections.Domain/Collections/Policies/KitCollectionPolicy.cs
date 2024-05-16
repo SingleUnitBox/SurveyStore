@@ -63,7 +63,6 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Policies
             }
             
             return kitToBeCollected;
-
         }
     }
 }

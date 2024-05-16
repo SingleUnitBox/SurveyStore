@@ -14,6 +14,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
         private readonly ISurveyorRepository _surveyorRepository;
         private readonly IClock _clock;
         private readonly ISurveyEquipmentRepository _surveyEquipmentRepository;
+        private readonly IKitRepository _kitRepository;
         private readonly ICollectionService _collectionService;
 
         public CollectSurveyEquipmentHandler(ICollectionRepository collectionRepository,
@@ -21,6 +22,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             ISurveyorRepository surveyorRepository,
             IClock clock,
             ISurveyEquipmentRepository surveyEquipmentRepository,
+            IKitRepository kitRepository,
             ICollectionService collectionService)
         {
             _collectionRepository = collectionRepository;
@@ -28,7 +30,8 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             _surveyorRepository = surveyorRepository;
             _clock = clock;
             _surveyEquipmentRepository = surveyEquipmentRepository;
-            _collectionService = collectionService;            
+            _kitRepository = kitRepository;
+            _collectionService = collectionService;           
         }
 
         public async Task HandleAsync(CollectSurveyEquipment command)
@@ -52,7 +55,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             _collectionService.CanBeCollected(openCollections, surveyor, collection, now);
 
             var freeKitCollections = await _kitCollectionRepository.BrowseFreeKitCollectionsAsync();
-            _collectionService.CollectTraverseSet(freeKitCollections, surveyor, collection, now);
+            var kitSet = _collectionService.CollectTraverseSet(freeKitCollections, surveyor, collection, now);
 
             await _collectionRepository.UpdateAsync(collection);
             await _kitCollectionRepository.UpdateRangeAsync(freeKitCollections);
@@ -65,6 +68,12 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 
             surveyEquipment.UnassignStore();
             await _surveyEquipmentRepository.UpdateAsync(surveyEquipment);
+
+            foreach (var kit in kitSet)
+            {
+                kit.UnassignStore();
+            }
+            await _kitRepository.UpdateRangeAsync(kitSet);
         }
     }
 }
