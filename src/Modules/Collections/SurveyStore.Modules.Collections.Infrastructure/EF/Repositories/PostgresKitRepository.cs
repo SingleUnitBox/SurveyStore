@@ -2,6 +2,7 @@
 using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
@@ -29,10 +30,16 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task UpdateRangeAsync(IEnumerable<Kit> kit)
+        {
+            _kit.UpdateRange(kit);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public Task<Kit> GetAsync(AggregateId id)
             => _kit.SingleOrDefaultAsync(k => k.Id == id);
 
         public Task<Kit> GetBySerialNumberAsync(string serialNumber)
-            => _kit.SingleOrDefaultAsync(k => k.SerialNumber == serialNumber);
+            => _kit.SingleOrDefaultAsync(k => k.SerialNumber == serialNumber);        
     }
 }
