@@ -174,7 +174,7 @@ namespace SurveyStore.Shared.Infrastructure
             {
                 return string.Empty;
             }
-
+            
             return type.Namespace.StartsWith("SurveyStore.Modules.")
                 ? type.Namespace.Split(".")[2].ToLowerInvariant()
                 : string.Empty;
