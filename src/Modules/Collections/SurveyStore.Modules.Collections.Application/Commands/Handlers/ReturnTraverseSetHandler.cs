@@ -1,4 +1,5 @@
 ﻿using SurveyStore.Modules.Collections.Application.Exceptions;
+using SurveyStore.Modules.Collections.Domain.Collections.Policies;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
 using System.Threading.Tasks;
@@ -13,13 +14,15 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
         private readonly ISurveyorRepository _surveyorRepository;
         private readonly ICollectionRepository _collectionRepository;
         private readonly IKitCollectionRepository _kitCollectionRepository;
+        private readonly ICollectionPolicy _collectionPolicy;
 
         public ReturnTraverseSetHandler(ISurveyEquipmentRepository surveyEquipmentRepository,
             IKitRepository kitRepository,
             IStoreRepository storeRepository,
             ISurveyorRepository surveyorRepository,
             ICollectionRepository collectionRepository,
-            IKitCollectionRepository kitCollectionRepository)
+            IKitCollectionRepository kitCollectionRepository,
+            ICollectionPolicy collectionPolicy)
         {
             _surveyEquipmentRepository = surveyEquipmentRepository;
             _kitRepository = kitRepository;
@@ -27,6 +30,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             _surveyorRepository = surveyorRepository;
             _collectionRepository = collectionRepository;
             _kitCollectionRepository = kitCollectionRepository;
+            _collectionPolicy = collectionPolicy;
         }
 
         public async Task HandleAsync(ReturnTraverseSet command)
@@ -55,12 +59,13 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
                 throw new OpenCollectionNotFoundException(command.SurveyEquipmentId);
             }
 
-            if (collection.Surveyor.Id != surveyor.Id)
+            if (!_collectionPolicy.CanBeReturned(collection, surveyor))
             {
                 throw new ReturningOtherCollectionException(collection.Id, surveyor.Id);
             }
 
-            collection.
+            var kitCollections = await _kitCollectionRepository.BrowseOpenKitCollectionsBySurveyorAsync(surveyor.Id);
+            _collectionPolicy.IsTraverseSetFullForReturn(collection, kitCollections, surveyor);
         }
     }
 }

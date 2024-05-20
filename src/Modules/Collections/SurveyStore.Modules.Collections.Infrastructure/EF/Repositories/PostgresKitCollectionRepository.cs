@@ -38,6 +38,15 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<IEnumerable<KitCollection>> BrowseOpenKitCollectionsBySurveyorAsync(SurveyorId surveyorId)
+            => await _kitCollections
+                .Include(k => k.Surveyor)
+                .Include(k => k.Kit)
+                .Where(k => k.Surveyor.Id == surveyorId
+                && k.CollectedAt != null
+                && k.ReturnedAt == null)
+                .ToListAsync();
+
         public async Task<IEnumerable<KitCollection>> BrowseFreeKitCollectionsAsync()
             => await _kitCollections
                 .Include(c => c.Kit)

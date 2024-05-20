@@ -12,6 +12,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Repositories
         Task UpdateRangeAsync(IEnumerable<KitCollection> kitCollections);
         Task<KitCollection> GetFreeByKitAsync(AggregateId kitId);
         Task<KitCollection> GetOpenByKitAsync(AggregateId kitId);
+        Task<IEnumerable<KitCollection>> BrowseOpenKitCollectionsBySurveyorAsync(SurveyorId surveyorId);
         Task<IEnumerable<KitCollection>> BrowseFreeKitCollectionsAsync();
         Task<IEnumerable<KitCollection>> BrowseKitCollectionsAsync(AggregateId kitId);
     }

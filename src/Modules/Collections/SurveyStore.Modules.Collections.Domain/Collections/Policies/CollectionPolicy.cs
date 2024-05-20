@@ -6,7 +6,12 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Policies
     {
         public bool CanBeReturned(Collection collection, Surveyor surveyor)
         {
-            throw new System.NotImplementedException();
+            if (collection.Surveyor.Id != surveyor.Id)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
