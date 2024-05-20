@@ -12,6 +12,7 @@ namespace SurveyStore.Modules.Collections.Domain
         {
             services.AddSingleton<ICollectionService, CollectionService>();
             services.AddSingleton<IKitCollectionPolicy, KitCollectionPolicy>();
+            services.AddSingleton<ICollectionPolicy, CollectionPolicy>();
 
             return services;
         }
