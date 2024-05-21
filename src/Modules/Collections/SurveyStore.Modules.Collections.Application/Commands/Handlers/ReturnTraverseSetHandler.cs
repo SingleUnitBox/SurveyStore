@@ -65,7 +65,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             var isFull = _kitCollectionService.IsTraverseSetFullForReturn(openKitCollections);
             if (!isFull.isFull)
             {
-                var kitType = isFull.kitCollection.FirstOrDefault().Kit.Type;
+                var kitType = isFull.kitCollection.First().Kit.Type;
                 var requiredAmount = kitType == KitTypes.Tripod
                     ? KitConstants.TripodRequiredAmount
                     : KitConstants.PrismRequiredAmount;
@@ -73,25 +73,12 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
                 throw new IncompleteTraverseSetException(kitType, requiredAmount, actualAmount);
             }
 
-            var now = _clock.Current();
-            collection.Return(command.ReturnStoreId, now);
-            await _collectionRepository.UpdateAsync(collection);
-
-            surveyEquipment.AssignStore(command.ReturnStoreId);
-            await _surveyEquipmentRepository.UpdateAsync(surveyEquipment);
-
-            foreach (var kitCollection in isFull.kitCollection)
-            {
-                kitCollection.Return(command.ReturnStoreId, now);
-            }
-            await _kitCollectionRepository.UpdateRangeAsync(isFull.kitCollection);
+            await ReturnCollectionAsync(collection, command.ReturnStoreId);
+            await AssignSurveyEquipmentAsync(surveyEquipment, command.ReturnStoreId);
+            await ReturnKitCollectionsAsync(isFull.kitCollection, command.ReturnStoreId);
 
             var kit = isFull.kitCollection.Select(k => k.Kit);
-            foreach (var k in kit)
-            {
-                k.AssignStore(command.ReturnStoreId);
-            }
-            await _kitRepository.UpdateRangeAsync(kit);
+            await AssignKitAsync(kit, command.ReturnStoreId);
         }
 
         private async Task<Surveyor> GetSurveyorAsync(Guid surveyorId)
@@ -136,6 +123,40 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             }
 
             return collection;
+        }
+
+        private async Task ReturnCollectionAsync(Collection collection, Guid returnStoreId)
+        {
+            var now = _clock.Current();
+            collection.Return(returnStoreId, now);
+            await _collectionRepository.UpdateAsync(collection);
+        }
+
+        private async Task ReturnKitCollectionsAsync(IEnumerable<KitCollection> kitCollections, Guid returnStoreId)
+        {
+            var now = _clock.Current();
+            foreach (var kitCollection in kitCollections)
+            {
+                kitCollection.Return(returnStoreId, now);
+            }
+
+            await _kitCollectionRepository.UpdateRangeAsync(kitCollections);
+        }
+
+        private async Task AssignSurveyEquipmentAsync(SurveyEquipment surveyEquipment, Guid returnStoreId)
+        {
+            surveyEquipment.AssignStore(returnStoreId);
+            await _surveyEquipmentRepository.UpdateAsync(surveyEquipment);
+        }
+
+        private async Task AssignKitAsync(IEnumerable<Kit> kit, Guid returnStoreId)
+        {
+            foreach (var k in kit)
+            {
+                k.AssignStore(returnStoreId);
+            }
+
+            await _kitRepository.UpdateRangeAsync(kit);
         }
     }
 }
