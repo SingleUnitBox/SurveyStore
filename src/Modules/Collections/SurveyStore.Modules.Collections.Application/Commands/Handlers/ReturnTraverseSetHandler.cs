@@ -1,4 +1,5 @@
 ﻿using SurveyStore.Modules.Collections.Application.Exceptions;
+using SurveyStore.Modules.Collections.Domain.Collections.DomainServices;
 using SurveyStore.Modules.Collections.Domain.Collections.Policies;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
@@ -8,13 +9,14 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 {
     public class ReturnTraverseSetHandler : ICommandHandler<ReturnTraverseSet>
     {
-        private readonly ISurveyEquipmentRepository _surveyEquipmentRepository;
-        private readonly IKitRepository _kitRepository;
+        private readonly ISurveyEquipmentRepository _surveyEquipmentRepository;       
         private readonly IStoreRepository _storeRepository;
         private readonly ISurveyorRepository _surveyorRepository;
-        private readonly ICollectionRepository _collectionRepository;
-        private readonly IKitCollectionRepository _kitCollectionRepository;
+        private readonly ICollectionRepository _collectionRepository;       
         private readonly ICollectionPolicy _collectionPolicy;
+        private readonly IKitRepository _kitRepository;
+        private readonly IKitCollectionRepository _kitCollectionRepository;
+        private readonly IKitCollectionService _kitCollectionService;
 
         public ReturnTraverseSetHandler(ISurveyEquipmentRepository surveyEquipmentRepository,
             IKitRepository kitRepository,
@@ -22,7 +24,8 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             ISurveyorRepository surveyorRepository,
             ICollectionRepository collectionRepository,
             IKitCollectionRepository kitCollectionRepository,
-            ICollectionPolicy collectionPolicy)
+            ICollectionPolicy collectionPolicy,
+            IKitCollectionService kitCollectionService)
         {
             _surveyEquipmentRepository = surveyEquipmentRepository;
             _kitRepository = kitRepository;
@@ -31,6 +34,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             _collectionRepository = collectionRepository;
             _kitCollectionRepository = kitCollectionRepository;
             _collectionPolicy = collectionPolicy;
+            _kitCollectionService = kitCollectionService;
         }
 
         public async Task HandleAsync(ReturnTraverseSet command)
@@ -64,8 +68,14 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
                 throw new ReturningOtherCollectionException(collection.Id, surveyor.Id);
             }
 
-            var kitCollections = await _kitCollectionRepository.BrowseOpenKitCollectionsBySurveyorAsync(surveyor.Id);
-            _collectionPolicy.IsTraverseSetFullForReturn(collection, kitCollections, surveyor);
+            var openKitCollections = await _kitCollectionRepository
+                .BrowseOpenKitCollectionsBySurveyorAsync(surveyor.Id);
+
+            var (tripodsBool, tripods) = _kitCollectionService.IsTraverseSetFullForReturn(openKitCollections);
+            if (!_kitCollectionService.IsTraverseSetFullForReturn(openKitCollections))
+            {
+                throw new IncompleteTraverseSetException();
+            }
         }
     }
 }
