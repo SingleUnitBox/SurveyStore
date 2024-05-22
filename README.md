@@ -20,4 +20,4 @@ Commit your changes and push to your fork.
 Submit a pull request, detailing the changes you've made and any relevant information.
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. See the LICENSE file for details.
