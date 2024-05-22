@@ -1,7 +1,7 @@
 @url = http://localhost:5000/collections-module
 
 @equipmentId = 5453f6f3-3bf0-49ae-b527-84e133ac9bf1
-@kitId = 8c17bd56-488a-40d9-9e3b-d38ea041b8ce
+@kitId = d829853d-2908-4395-afd9-e3708d6cd3aa
 
 @store1Id = 9b55bfb9-63c1-4532-9549-2cd31d1cc62c
 @store2Id = c6762acf-b304-4025-bb6e-acce7bb27402
@@ -45,7 +45,7 @@ Content-Type: application/json
 }
 
 ###
-PUT {{url}}/collections/equipment/{{equipmentId}}/collect
+PUT {{url}}/collections/equipment/{{equipmentId}}/collectTraverseSet
 Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
@@ -54,7 +54,7 @@ Content-Type: application/json
 }
 
 ###
-PUT {{url}}/collections/equipment/{{equipmentId}}/return
+PUT {{url}}/collections/equipment/{{equipmentId}}/returnTraverseSet
 Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 

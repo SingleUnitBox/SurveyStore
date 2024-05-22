@@ -1,10 +1,12 @@
 ﻿using SurveyStore.Modules.Collections.Application.Exceptions;
+using SurveyStore.Modules.Collections.Application.Services;
 using SurveyStore.Modules.Collections.Domain.Collections.Consts;
 using SurveyStore.Modules.Collections.Domain.Collections.DomainServices;
 using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using SurveyStore.Modules.Collections.Domain.Collections.Policies;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
+using SurveyStore.Shared.Abstractions.Messaging;
 using SurveyStore.Shared.Abstractions.Time;
 using SurveyStore.Shared.Abstractions.Types;
 using System;
@@ -25,8 +27,10 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
         private readonly IKitCollectionRepository _kitCollectionRepository;
         private readonly IKitCollectionService _kitCollectionService;
         private readonly IClock _clock;
+        private readonly IEventMapper _eventMapper;
+        private readonly IMessageBroker _messageBroker;
 
-        public ReturnTraverseSetHandler(ISurveyEquipmentRepository surveyEquipmentRepository,           
+        public ReturnTraverseSetHandler(ISurveyEquipmentRepository surveyEquipmentRepository,
             IStoreRepository storeRepository,
             ISurveyorRepository surveyorRepository,
             ICollectionRepository collectionRepository,
@@ -34,7 +38,9 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             IKitRepository kitRepository,
             IKitCollectionRepository kitCollectionRepository,
             IKitCollectionService kitCollectionService,
-            IClock clock)
+            IClock clock,
+            IEventMapper eventMapper,
+            IMessageBroker messageBroker)
         {
             _surveyEquipmentRepository = surveyEquipmentRepository;
             _kitRepository = kitRepository;
@@ -45,6 +51,8 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             _collectionPolicy = collectionPolicy;
             _kitCollectionService = kitCollectionService;
             _clock = clock;
+            _eventMapper = eventMapper;
+            _messageBroker = messageBroker;
         }
 
         public async Task HandleAsync(ReturnTraverseSet command)
@@ -79,6 +87,18 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 
             var kit = isFull.kitCollection.Select(k => k.Kit);
             await AssignKitAsync(kit, command.ReturnStoreId);
+
+
+            var surveyEquipmentEvents = _eventMapper
+                .MapAll(surveyEquipment.Events)
+                .ToArray();
+            var kitEvents = isFull.kitCollection
+                .SelectMany(k => k.Kit.Events)
+                .Select(_eventMapper.Map)
+                .ToArray();
+
+            await _messageBroker.PublishAsync(surveyEquipmentEvents);
+            await _messageBroker.PublishAsync(kitEvents);
         }
 
         private async Task<Surveyor> GetSurveyorAsync(Guid surveyorId)
