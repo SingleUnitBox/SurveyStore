@@ -1,6 +1,6 @@
 ﻿namespace SurveyStore.Modules.Collections.Domain.Collections.Consts
 {
-    public class KitConst
+    public class KitConstOptions
     {
         public int TripodRequiredAmount { get; set; }
         public int PrismRequiredAmount { get; set; }

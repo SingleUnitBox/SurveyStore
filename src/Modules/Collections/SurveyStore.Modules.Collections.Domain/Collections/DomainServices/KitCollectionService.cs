@@ -8,16 +8,23 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
 {
     public class KitCollectionService : IKitCollectionService
     {
+        private readonly KitConstOptions _kitConstOptions;
+
+        public KitCollectionService(KitConstOptions kitConstOptions)
+        {
+            _kitConstOptions = kitConstOptions;
+        }
+
         public (bool, IEnumerable<KitCollection>) IsTraverseSetFullForReturn(IEnumerable<KitCollection> openKitCollections)
         {
-            var tripods = FilterAndValidateKit(openKitCollections, KitTypes.Tripod, KitConstants.TripodRequiredAmount);
+            var tripods = FilterAndValidateKit(openKitCollections, KitTypes.Tripod, _kitConstOptions.TripodRequiredAmount);
             if (!tripods.areEnough)
             {
                 return (false, tripods.filteredKit);
             }
 
             var prisms = FilterAndValidateKit(openKitCollections,
-                KitTypes.TraversePrism, KitConstants.PrismRequiredAmount);
+                KitTypes.TraversePrism, _kitConstOptions.PrismRequiredAmount);
             if (!prisms.areEnough)
             {
                 return (false, prisms.filteredKit);

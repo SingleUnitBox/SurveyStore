@@ -29,6 +29,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
         private readonly IClock _clock;
         private readonly IEventMapper _eventMapper;
         private readonly IMessageBroker _messageBroker;
+        private readonly KitConstOptions _kitConstOptions;
 
         public ReturnTraverseSetHandler(ISurveyEquipmentRepository surveyEquipmentRepository,
             IStoreRepository storeRepository,
@@ -40,7 +41,8 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             IKitCollectionService kitCollectionService,
             IClock clock,
             IEventMapper eventMapper,
-            IMessageBroker messageBroker)
+            IMessageBroker messageBroker,
+            KitConstOptions kitConstOptions)
         {
             _surveyEquipmentRepository = surveyEquipmentRepository;
             _kitRepository = kitRepository;
@@ -53,6 +55,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             _clock = clock;
             _eventMapper = eventMapper;
             _messageBroker = messageBroker;
+            _kitConstOptions = kitConstOptions;
         }
 
         public async Task HandleAsync(ReturnTraverseSet command)
@@ -75,8 +78,8 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             {
                 var kitType = isFull.kitCollection.First().Kit.Type;
                 var requiredAmount = kitType == KitTypes.Tripod
-                    ? KitConstants.TripodRequiredAmount
-                    : KitConstants.PrismRequiredAmount;
+                    ? _kitConstOptions.TripodRequiredAmount
+                    : _kitConstOptions.PrismRequiredAmount;
                 var actualAmount = isFull.kitCollection.Count();
                 throw new IncompleteTraverseSetException(kitType, requiredAmount, actualAmount);
             }
