@@ -41,4 +41,4 @@ This project is licensed under the MIT License. See the LICENSE file for details
 If you encounter any issues or have questions about SurveyStore, please reach out through the project's issue tracker on GitHub.
 
 ## Acknowledgements
-Special thanks to DevMentors for their "100commitow" challenge and the continuous support and contributions from the developer community.
+Special thanks to [DevMentors](https://github.com/devmentors) for their "100commitow" challenge and the continuous support and contributions from the developer community.
