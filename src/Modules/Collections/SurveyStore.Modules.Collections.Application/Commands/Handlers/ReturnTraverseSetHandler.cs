@@ -26,13 +26,13 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
         private readonly IKitCollectionService _kitCollectionService;
         private readonly IClock _clock;
 
-        public ReturnTraverseSetHandler(ISurveyEquipmentRepository surveyEquipmentRepository,
-            IKitRepository kitRepository,
+        public ReturnTraverseSetHandler(ISurveyEquipmentRepository surveyEquipmentRepository,           
             IStoreRepository storeRepository,
             ISurveyorRepository surveyorRepository,
             ICollectionRepository collectionRepository,
-            IKitCollectionRepository kitCollectionRepository,
             ICollectionPolicy collectionPolicy,
+            IKitRepository kitRepository,
+            IKitCollectionRepository kitCollectionRepository,
             IKitCollectionService kitCollectionService,
             IClock clock)
         {
@@ -51,7 +51,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
         {
             var surveyor = await GetSurveyorAsync(command.SurveyorId);
             var store = await GetStoreAsync(command.ReturnStoreId);
-            var surveyEquipment = await GetSurveyEquipmentAsync(command.SurveyorId);
+            var surveyEquipment = await GetSurveyEquipmentAsync(command.SurveyEquipmentId);
             var collection = await GetOpenCollectionAsync(command.SurveyEquipmentId);
 
             if (!_collectionPolicy.CanBeReturned(collection, surveyor))
