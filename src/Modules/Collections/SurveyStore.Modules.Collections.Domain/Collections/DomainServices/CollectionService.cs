@@ -26,7 +26,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
             var surveyEquipmentTypes = openCollections.Select(c => c.SurveyEquipment.Type);
             foreach (var surveyEquipmentType in surveyEquipmentTypes)
             {
-                if (KitConstants.LimitedSurveyEquipmentTypes.Contains(surveyEquipmentType)
+                if (_kitConstOptions.LimitedSurveyEquipmentTypes.Contains(surveyEquipmentType)
                     && toBeCollected.SurveyEquipment.Type == surveyEquipmentType)
                 {
                     throw new CannotCollectSurveyEquipmentException(surveyEquipmentType);
