@@ -17,6 +17,14 @@ SurveyStore is built using modern technologies to ensure reliability, scalabilit
   
 These technologies collectively contribute to the robustness, scalability, and performance of SurveyStore.
 
+## Installation
+To get started with SurveyStore, follow these steps:
+
+- Clone the Repository: Clone the SurveyStore repository from GitHub to your local machine.
+- Install Dependencies: Navigate to the project directory and install the necessary dependencies using your preferred package manager.
+- Configure Database: Set up PostgreSQL and configure the connection string in the application settings.
+- Run the Application: Use the .NET CLI to build and run the application.
+
 ## Contributing
 Contributions to the SurveyStore project are welcomed and greatly appreciated. Whether you're interested in fixing bugs, adding new features, or improving documentation, your contributions help make SurveyStore better for everyone. To contribute, please follow these steps:
 
@@ -28,3 +36,9 @@ Submit a pull request, detailing the changes you've made and any relevant inform
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Support
+If you encounter any issues or have questions about SurveyStore, please reach out through the project's issue tracker on GitHub.
+
+## Acknowledgements
+Special thanks to DevMentors for their "100commitow" challenge and the continuous support and contributions from the developer community.
