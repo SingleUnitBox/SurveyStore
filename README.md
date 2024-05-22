@@ -10,10 +10,10 @@ SurveyStore is an application to help professionals keep track of their survey e
 ## Technology
 SurveyStore is built using modern technologies to ensure reliability, scalability, and performance. Some key technologies used in the development include:
 
-.NET 5.0: This cross-platform framework provides a high-performance, flexible, and open-source platform for building modern applications. .NET 5.0 is designed for building a wide range of applications, from web and mobile to desktop and cloud.
-Entity Framework: An object-relational mapper (ORM) for .NET, Entity Framework allows developers to work with a database using .NET objects, eliminating the need for most of the data-access code that developers typically need to write.
-PostgreSQL: A powerful, open-source relational database system known for its robustness, scalability, and support for advanced data types and performance optimization features. PostgreSQL ensures that SurveyStore's data storage is both efficient and reliable.
-Git: A distributed version control system that allows developers to track changes in the source code during software development. Git facilitates collaboration, code management, and version tracking, ensuring that the development process is smooth and organized.
+- .NET 5.0: This cross-platform framework provides a high-performance, flexible, and open-source platform for building modern applications. .NET 5.0 is designed for building a wide range of applications, from web and mobile to desktop and cloud.
+- Entity Framework: An object-relational mapper (ORM) for .NET, Entity Framework allows developers to work with a database using .NET objects, eliminating the need for most of the data-access code that developers typically need to write.
+- PostgreSQL: A powerful, open-source relational database system known for its robustness, scalability, and support for advanced data types and performance optimization features. PostgreSQL ensures that SurveyStore's data storage is both efficient and reliable.
+- Git: A distributed version control system that allows developers to track changes in the source code during software development. Git facilitates collaboration, code management, and version tracking, ensuring that the development process is smooth and organized.
 These technologies collectively contribute to the robustness, scalability, and performance of SurveyStore.
 
 ## Contributing
