@@ -11,7 +11,13 @@ SurveyStore is an application to help professionals keep track of their survey e
 SurveyStore is built using modern technologies to ensure reliability, scalability, and performance. Some key technologies used in the development include:
 
 ## Contributing
-Contributions to SurveyStore project are welcomed.
+Contributions to the SurveyStore project are welcomed and greatly appreciated. Whether you're interested in fixing bugs, adding new features, or improving documentation, your contributions help make SurveyStore better for everyone. To contribute, please follow these steps:
+
+Fork the repository and clone it to your local machine.
+Create a new branch for your feature or bug fix.
+Make your changes and test thoroughly.
+Commit your changes and push to your fork.
+Submit a pull request, detailing the changes you've made and any relevant information.
 
 ## License
 This project is licensed under the MIT License.
