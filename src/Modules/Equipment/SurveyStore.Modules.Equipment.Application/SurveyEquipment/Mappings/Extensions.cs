@@ -2,6 +2,7 @@
 using SurveyStore.Modules.Equipment.Application.SurveyEquipment.DTO;
 using SurveyStore.Modules.Equipment.Domain.SurveyEquipment.Entities;
 using SurveyStore.Shared.Abstractions.Types;
+using System.Runtime.CompilerServices;
 
 namespace SurveyStore.Modules.Equipment.Application.SurveyEquipment.Mappings
 {
@@ -41,5 +42,9 @@ namespace SurveyStore.Modules.Equipment.Application.SurveyEquipment.Mappings
         public static GNSS AsEntity(this AddGNSS command)
             => GNSS.Create(command.Id, command.Brand, command.Model, command.Description, command.SerialNumber,
                 command.PurchasedAt, command.IsActive);
+
+        public static FieldController AsEntity(this AddFieldController command)
+            => FieldController.Create(command.Id, command.Brand, command.Model, command.Description, command.SerialNumber,
+                command.PurchasedAt, command.ScreenSize);
     }
 }

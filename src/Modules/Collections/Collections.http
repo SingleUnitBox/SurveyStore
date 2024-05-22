@@ -1,6 +1,6 @@
 @url = http://localhost:5000/collections-module
 
-@equipmentId = 5453f6f3-3bf0-49ae-b527-84e133ac9bf1
+@equipmentId = fb4d1d7b-7a19-491b-a8ce-758b96c52854
 @kitId = d829853d-2908-4395-afd9-e3708d6cd3aa
 
 @store1Id = 9b55bfb9-63c1-4532-9549-2cd31d1cc62c
