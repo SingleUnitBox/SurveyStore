@@ -4,4 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SurveyStore.Modules.SurveyJobs.Domain\SurveyStore.Modules.SurveyJobs.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
