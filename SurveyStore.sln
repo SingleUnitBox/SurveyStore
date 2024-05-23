@@ -101,6 +101,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.SurveyJ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.SurveyJobs.Infrastructure", "src\Modules\SurveyJobs\SurveyStore.Modules.SurveyJobs.Infrastructure\SurveyStore.Modules.SurveyJobs.Infrastructure.csproj", "{8422886D-80FC-452B-8A23-F3F43428F2AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.SurveyJobs.Api", "src\Modules\SurveyJobs\SurveyStore.Modules.SurveyJobs.Api\SurveyStore.Modules.SurveyJobs.Api.csproj", "{7ADB8C5D-5044-4E0B-9BD8-DC5E25259421}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -239,6 +241,10 @@ Global
 		{8422886D-80FC-452B-8A23-F3F43428F2AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8422886D-80FC-452B-8A23-F3F43428F2AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8422886D-80FC-452B-8A23-F3F43428F2AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ADB8C5D-5044-4E0B-9BD8-DC5E25259421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ADB8C5D-5044-4E0B-9BD8-DC5E25259421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ADB8C5D-5044-4E0B-9BD8-DC5E25259421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ADB8C5D-5044-4E0B-9BD8-DC5E25259421}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -291,6 +297,7 @@ Global
 		{B1402492-7730-449F-93EE-446E233049EF} = {91A97A41-655D-4A9D-AE9C-8F5E9399200C}
 		{AE1F6575-A16C-43ED-8EE2-F7F666519E09} = {91A97A41-655D-4A9D-AE9C-8F5E9399200C}
 		{8422886D-80FC-452B-8A23-F3F43428F2AB} = {91A97A41-655D-4A9D-AE9C-8F5E9399200C}
+		{7ADB8C5D-5044-4E0B-9BD8-DC5E25259421} = {91A97A41-655D-4A9D-AE9C-8F5E9399200C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C381337B-40C7-45CC-8FB7-1F8E39A37BE8}
