@@ -97,6 +97,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SurveyJobs", "SurveyJobs", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.SurveyJobs.Domain", "src\Modules\SurveyJobs\SurveyStore.Modules.SurveyJobs.Domain\SurveyStore.Modules.SurveyJobs.Domain.csproj", "{B1402492-7730-449F-93EE-446E233049EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.SurveyJobs.Application", "src\Modules\SurveyJobs\SurveyStore.Modules.SurveyJobs.Application\SurveyStore.Modules.SurveyJobs.Application.csproj", "{AE1F6575-A16C-43ED-8EE2-F7F666519E09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -227,6 +229,10 @@ Global
 		{B1402492-7730-449F-93EE-446E233049EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1402492-7730-449F-93EE-446E233049EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1402492-7730-449F-93EE-446E233049EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE1F6575-A16C-43ED-8EE2-F7F666519E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE1F6575-A16C-43ED-8EE2-F7F666519E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE1F6575-A16C-43ED-8EE2-F7F666519E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE1F6575-A16C-43ED-8EE2-F7F666519E09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -277,6 +283,7 @@ Global
 		{272AD0E3-575D-427B-8624-DA06CCF30C49} = {2648F90B-8DAE-4109-9D1F-F17A904B6522}
 		{91A97A41-655D-4A9D-AE9C-8F5E9399200C} = {FD42E17F-29F4-4A79-8DAE-490EBBE6A081}
 		{B1402492-7730-449F-93EE-446E233049EF} = {91A97A41-655D-4A9D-AE9C-8F5E9399200C}
+		{AE1F6575-A16C-43ED-8EE2-F7F666519E09} = {91A97A41-655D-4A9D-AE9C-8F5E9399200C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C381337B-40C7-45CC-8FB7-1F8E39A37BE8}
