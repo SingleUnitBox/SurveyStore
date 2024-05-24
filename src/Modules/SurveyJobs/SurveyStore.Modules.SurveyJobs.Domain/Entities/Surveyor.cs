@@ -10,7 +10,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         public string FirstName { get; private set; }
         public string Surname { get; private set; }
 
-        internal Surveyor(Guid id)
+        private Surveyor(Guid id)
         {
             Id = id;
         }
