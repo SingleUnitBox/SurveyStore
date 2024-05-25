@@ -1,16 +1,15 @@
 ﻿using SurveyStore.Modules.SurveyJobs.Domain.Exceptions;
+using SurveyStore.Modules.SurveyJobs.Domain.ValueObjects;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
-using SurveyStore.Shared.Abstractions.Types;
 using System;
 using System.Linq;
-using System.Reflection;
 
 namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
 {
     public class Document
     {
         public DocumentId Id { get; private set; }
-        public DocumentTypes DocumentType { get; private set; }
+        public DocumentType DocumentType { get; private set; }
         public string Link { get; private set; }
 
         private Document(Guid id)
@@ -20,22 +19,14 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
 
         public void ChangeDocumentType(string documentType)
         {
-            var documentTypes = typeof(DocumentTypes)
-                .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
-                .Where(field => field.IsLiteral && !field.IsInitOnly)
-                .Select(field => field.GetValue(null).ToString());
-
-            if (!documentTypes.Contains(documentType))
-            {
-                throw new InvalidDocumentTypeException(documentType);
-            }
-
-            DocumentType = documentType;
+            var docType = DocumentType.Create(documentType);
+            DocumentType = docType;
         }
-
+         
         public static Document Create(Guid id, string documentType, string link)
         {
             var document = new Document(id);
+            document.ChangeDocumentType(documentType);
 
             return document;
         }
