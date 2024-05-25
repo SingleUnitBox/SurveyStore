@@ -10,6 +10,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         public DocumentId Id { get; private set; }
         public DocumentType DocumentType { get; private set; }
         public string Link { get; private set; }
+        public SurveyJob SurveyJob { get; private set; }
 
         private Document(Guid id)
         {
@@ -30,6 +31,11 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
             }
 
             Link = link;
+        }
+
+        public void ChangeSurveyJob(SurveyJob surveyJob)
+        {
+            SurveyJob = surveyJob;
         }
          
         public static Document Create(Guid id, string documentType, string link)
