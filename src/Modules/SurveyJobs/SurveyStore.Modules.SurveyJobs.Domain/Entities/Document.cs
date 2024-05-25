@@ -2,7 +2,6 @@
 using SurveyStore.Modules.SurveyJobs.Domain.ValueObjects;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System;
-using System.Linq;
 
 namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
 {
@@ -22,11 +21,22 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
             var docType = DocumentType.Create(documentType);
             DocumentType = docType;
         }
+
+        public void ChangeLink(string link)
+        {
+            if (!link.StartsWith("http://"))
+            {
+                throw new InvalidLinkException(link);
+            }
+
+            Link = link;
+        }
          
         public static Document Create(Guid id, string documentType, string link)
         {
             var document = new Document(id);
             document.ChangeDocumentType(documentType);
+            document.ChangeLink(link);
 
             return document;
         }
