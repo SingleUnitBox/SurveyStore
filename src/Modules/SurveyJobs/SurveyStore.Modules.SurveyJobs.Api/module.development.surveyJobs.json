@@ -1,0 +1,8 @@
+{
+  "surveyJobs": {
+    "module": {
+      "name": "SurveyJobs",
+      "enabled": true
+    }
+  }
+}
