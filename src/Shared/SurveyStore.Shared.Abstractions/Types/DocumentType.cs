@@ -1,6 +1,6 @@
 ﻿namespace SurveyStore.Shared.Abstractions.Types
 {
-    public class DocumentTypes
+    public class DocumentType
     {
         public const string Photo = nameof(Photo);
         public const string DynamicRiskAssessment = nameof(DynamicRiskAssessment);
