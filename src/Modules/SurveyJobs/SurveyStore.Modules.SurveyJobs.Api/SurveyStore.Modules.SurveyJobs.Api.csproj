@@ -6,9 +6,13 @@
 
   <ItemGroup>
     <None Remove="module.development.surveyJobs.json" />
+    <None Remove="module.surveyJobs.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="module.surveyJobs.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="module.development.surveyJobs.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

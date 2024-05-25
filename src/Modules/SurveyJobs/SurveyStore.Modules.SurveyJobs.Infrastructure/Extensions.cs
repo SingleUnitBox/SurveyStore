@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SurveyStore.Modules.SurveyJobs.Domain.Repositories;
+using SurveyStore.Modules.SurveyJobs.Infrastructure.Clients;
 using SurveyStore.Modules.SurveyJobs.Infrastructure.EF;
 using SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Repositories;
 using SurveyStore.Shared.Infrastructure.Postgres;
@@ -16,6 +17,7 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure
             services.AddScoped<ISurveyorRepository, PostgresSurveyorRepository>();
             services.AddScoped<IDocumentRepository, PostgresDocumentRepository>();
             services.AddScoped<ISurveyJobRepository, PostgresSurveyJobRepository>();
+            services.AddApiClients();
 
             return services;
         }
