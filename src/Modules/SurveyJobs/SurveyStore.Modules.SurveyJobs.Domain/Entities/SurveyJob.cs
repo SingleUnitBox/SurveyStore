@@ -12,7 +12,11 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         public string SurveyType { get; private set; }
         public IEnumerable<Document> Documents => _documents;
         private readonly IEnumerable<Document> _documents = new List<Document>();
-        
+
+        private SurveyJob()
+        {
+            
+        }
         private SurveyJob(Guid id)
         {
             Id = id;

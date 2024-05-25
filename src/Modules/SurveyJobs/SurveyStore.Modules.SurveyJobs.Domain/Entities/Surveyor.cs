@@ -10,6 +10,11 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         public string FirstName { get; private set; }
         public string Surname { get; private set; }
 
+        private Surveyor()
+        {
+            
+        }
+
         private Surveyor(Guid id)
         {
             Id = id;

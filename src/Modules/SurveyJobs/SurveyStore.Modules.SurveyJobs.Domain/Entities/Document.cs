@@ -12,6 +12,11 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         public string Link { get; private set; }
         public SurveyJob SurveyJob { get; private set; }
 
+        private Document()
+        {
+            
+        }
+
         private Document(Guid id)
         {
             Id = id;
