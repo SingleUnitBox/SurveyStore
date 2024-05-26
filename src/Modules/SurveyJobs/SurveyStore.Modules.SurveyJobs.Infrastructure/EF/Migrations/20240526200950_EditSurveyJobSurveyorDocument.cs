@@ -3,12 +3,28 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
 {
-    public partial class AddSurveyJobsDocumentSurveyor : Migration
+    public partial class EditSurveyJobSurveyorDocument : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
                 name: "surveyJobs");
+
+            migrationBuilder.CreateTable(
+                name: "SurveyJobs",
+                schema: "surveyJobs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    BriefIssued = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DueDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    SurveyType = table.Column<string>(type: "text", nullable: true),
+                    Version = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SurveyJobs", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Surveyors",
@@ -24,30 +40,6 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Surveyors", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SurveyJobs",
-                schema: "surveyJobs",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    SurveyorId = table.Column<Guid>(type: "uuid", nullable: true),
-                    BriefIssued = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    DueDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    SurveyType = table.Column<string>(type: "text", nullable: true),
-                    Version = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SurveyJobs", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SurveyJobs_Surveyors_SurveyorId",
-                        column: x => x.SurveyorId,
-                        principalSchema: "surveyJobs",
-                        principalTable: "Surveyors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,6 +64,33 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "SurveyJobSurveyor",
+                schema: "surveyJobs",
+                columns: table => new
+                {
+                    SurveyJobsId = table.Column<Guid>(type: "uuid", nullable: false),
+                    SurveyorsId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SurveyJobSurveyor", x => new { x.SurveyJobsId, x.SurveyorsId });
+                    table.ForeignKey(
+                        name: "FK_SurveyJobSurveyor_SurveyJobs_SurveyJobsId",
+                        column: x => x.SurveyJobsId,
+                        principalSchema: "surveyJobs",
+                        principalTable: "SurveyJobs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SurveyJobSurveyor_Surveyors_SurveyorsId",
+                        column: x => x.SurveyorsId,
+                        principalSchema: "surveyJobs",
+                        principalTable: "Surveyors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Documents_SurveyJobId",
                 schema: "surveyJobs",
@@ -79,16 +98,20 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
                 column: "SurveyJobId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SurveyJobs_SurveyorId",
+                name: "IX_SurveyJobSurveyor_SurveyorsId",
                 schema: "surveyJobs",
-                table: "SurveyJobs",
-                column: "SurveyorId");
+                table: "SurveyJobSurveyor",
+                column: "SurveyorsId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Documents",
+                schema: "surveyJobs");
+
+            migrationBuilder.DropTable(
+                name: "SurveyJobSurveyor",
                 schema: "surveyJobs");
 
             migrationBuilder.DropTable(

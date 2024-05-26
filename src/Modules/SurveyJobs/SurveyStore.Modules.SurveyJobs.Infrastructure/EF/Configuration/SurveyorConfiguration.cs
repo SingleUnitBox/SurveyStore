@@ -11,6 +11,8 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Configuration
             builder.HasKey(s => s.Id);
             builder.Property(s => s.Id)
                 .HasConversion(s => s.Value, s => new(s));
+            builder.HasMany(s => s.SurveyJobs)
+                .WithMany(sj => sj.Surveyors);
             builder.Property(s => s.Version)
                 .IsConcurrencyToken();
         }

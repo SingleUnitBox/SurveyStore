@@ -35,7 +35,7 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Repositories
 
         public Task<SurveyJob> GetByIdAsync(AggregateId id)
             => _surveyJobs
-                .Include(sj => sj.Surveyor)
+                .Include(sj => sj.Surveyors)
                 .Include(sj => sj.Documents)
                 .FirstOrDefaultAsync(sj => sj.Id == id);
     }

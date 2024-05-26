@@ -10,8 +10,8 @@ using SurveyStore.Modules.SurveyJobs.Infrastructure.EF;
 namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(SurveyJobsDbContext))]
-    [Migration("20240525213145_AddSurveyJobsDocumentSurveyor")]
-    partial class AddSurveyJobsDocumentSurveyor
+    [Migration("20240526200950_EditSurveyJobSurveyorDocument")]
+    partial class EditSurveyJobSurveyorDocument
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,21 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+            modelBuilder.Entity("SurveyJobSurveyor", b =>
+                {
+                    b.Property<Guid>("SurveyJobsId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SurveyorsId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("SurveyJobsId", "SurveyorsId");
+
+                    b.HasIndex("SurveyorsId");
+
+                    b.ToTable("SurveyJobSurveyor");
+                });
 
             modelBuilder.Entity("SurveyStore.Modules.SurveyJobs.Domain.Entities.Document", b =>
                 {
@@ -57,16 +72,11 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
                     b.Property<string>("SurveyType")
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("SurveyorId")
-                        .HasColumnType("uuid");
-
                     b.Property<int>("Version")
                         .IsConcurrencyToken()
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SurveyorId");
 
                     b.ToTable("SurveyJobs");
                 });
@@ -94,6 +104,21 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
                     b.ToTable("Surveyors");
                 });
 
+            modelBuilder.Entity("SurveyJobSurveyor", b =>
+                {
+                    b.HasOne("SurveyStore.Modules.SurveyJobs.Domain.Entities.SurveyJob", null)
+                        .WithMany()
+                        .HasForeignKey("SurveyJobsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SurveyStore.Modules.SurveyJobs.Domain.Entities.Surveyor", null)
+                        .WithMany()
+                        .HasForeignKey("SurveyorsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("SurveyStore.Modules.SurveyJobs.Domain.Entities.Document", b =>
                 {
                     b.HasOne("SurveyStore.Modules.SurveyJobs.Domain.Entities.SurveyJob", "SurveyJob")
@@ -101,15 +126,6 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
                         .HasForeignKey("SurveyJobId");
 
                     b.Navigation("SurveyJob");
-                });
-
-            modelBuilder.Entity("SurveyStore.Modules.SurveyJobs.Domain.Entities.SurveyJob", b =>
-                {
-                    b.HasOne("SurveyStore.Modules.SurveyJobs.Domain.Entities.Surveyor", "Surveyor")
-                        .WithMany()
-                        .HasForeignKey("SurveyorId");
-
-                    b.Navigation("Surveyor");
                 });
 
             modelBuilder.Entity("SurveyStore.Modules.SurveyJobs.Domain.Entities.SurveyJob", b =>

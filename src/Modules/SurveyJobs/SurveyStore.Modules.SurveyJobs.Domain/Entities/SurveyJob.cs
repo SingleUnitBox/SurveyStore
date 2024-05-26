@@ -1,15 +1,14 @@
 ﻿using SurveyStore.Modules.SurveyJobs.Domain.ValueObjects;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
-using SurveyStore.Shared.Abstractions.Types;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
 {
     public class SurveyJob : AggregateRoot
     {
-        public Surveyor Surveyor { get; private set; }
+        public IEnumerable<Surveyor> Surveyors => _surveyors;
+        private readonly List<Surveyor> _surveyors = new List<Surveyor>();
         public DateTime BriefIssued { get; private set; }
         public DateTime DueDate { get; private set; }
         public SurveyType SurveyType { get; private set; }
@@ -25,9 +24,9 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
             Id = id;
         }
 
-        public void ChangeSurveyor(Surveyor surveyor)
+        public void AddSurveyor(Surveyor surveyor)
         {
-            Surveyor = surveyor;
+            _surveyors.Add(surveyor);
         }
 
         public void ChangeBriefIssued(DateTime briefIssued)
