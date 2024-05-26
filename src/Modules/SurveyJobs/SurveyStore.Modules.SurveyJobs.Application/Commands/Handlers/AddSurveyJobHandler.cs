@@ -27,7 +27,7 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
                 throw new SurveyJobAlreadyExistsException(command.Id);
             }
 
-            surveyJob = SurveyJob.Create(command.Id, command.BriefIssued, command.DueDate, command.SurveyType);
+            surveyJob = SurveyJob.Create(command.Id, command.Name, command.BriefIssued, command.DueDate, command.SurveyType);
             if (command.DocumentLinks is not null)
             {
                 await AddDocuments(surveyJob, command.DocumentLinks);              

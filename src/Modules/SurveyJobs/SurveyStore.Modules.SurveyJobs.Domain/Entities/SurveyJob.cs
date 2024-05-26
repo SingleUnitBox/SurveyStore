@@ -7,11 +7,12 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
 {
     public class SurveyJob : AggregateRoot
     {
-        public IEnumerable<Surveyor> Surveyors => _surveyors;
-        private readonly List<Surveyor> _surveyors = new List<Surveyor>();
+        public SurveyJobName Name { get; private set; }
         public DateTime BriefIssued { get; private set; }
         public DateTime DueDate { get; private set; }
         public SurveyType SurveyType { get; private set; }
+        public IEnumerable<Surveyor> Surveyors => _surveyors;
+        private readonly List<Surveyor> _surveyors = new List<Surveyor>();
         public IEnumerable<Document> Documents => _documents;
         private readonly List<Document> _documents = new List<Document>();
 
@@ -24,9 +25,9 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
             Id = id;
         }
 
-        public void AddSurveyor(Surveyor surveyor)
+        public void ChangeSurveyJobName(string name)
         {
-            _surveyors.Add(surveyor);
+            Name = SurveyJobName.Create(name);
         }
 
         public void ChangeBriefIssued(DateTime briefIssued)
@@ -44,14 +45,21 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
             SurveyType = SurveyType.Create(surveyType);
         }
 
+        public void AddSurveyor(Surveyor surveyor)
+        {
+            _surveyors.Add(surveyor);
+        }
+
         public void AddDocument(Document document)
         {
             _documents.Add(document);
         }
 
-        public static SurveyJob Create(Guid id, DateTime briefIssued, DateTime dueDate, string surveyType)
+        public static SurveyJob Create(Guid id, string name, DateTime briefIssued,
+            DateTime dueDate, string surveyType)
         {
             var surveyJob = new SurveyJob(id);
+            surveyJob.ChangeSurveyJobName(name);
             surveyJob.ChangeBriefIssued(briefIssued);
             surveyJob.ChangeDueDate(dueDate);
             surveyJob.ChangeSurveyType(surveyType);

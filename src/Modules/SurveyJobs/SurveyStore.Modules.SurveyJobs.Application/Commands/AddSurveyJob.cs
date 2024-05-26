@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SurveyStore.Modules.SurveyJobs.Application.Commands
 {
-    public record AddSurveyJob(DateTime BriefIssued,
+    public record AddSurveyJob(string Name, DateTime BriefIssued,
         DateTime DueDate, string SurveyType, IEnumerable<string> DocumentLinks = null) : ICommand
     {
         public Guid Id => Guid.NewGuid();
