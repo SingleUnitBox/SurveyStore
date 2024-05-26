@@ -40,7 +40,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
 
         public void ChangeSurveyJob(SurveyJob surveyJob)
         {
-            SurveyJob = surveyJob;
+            SurveyJob = surveyJob;           
         }
          
         public static Document Create(Guid id, string documentType, string link)

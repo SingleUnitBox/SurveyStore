@@ -1,6 +1,7 @@
 ﻿using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
 {
@@ -35,6 +36,11 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         public void ChangeDueDate(DateTime dueDate)
         {
             DueDate = dueDate;
+        }
+
+        public void AddDocument(Document document)
+        {
+            _documents.Append(document);
         }
 
         public static SurveyJob Create(Guid id, DateTime briefIssued, DateTime dueDate)
