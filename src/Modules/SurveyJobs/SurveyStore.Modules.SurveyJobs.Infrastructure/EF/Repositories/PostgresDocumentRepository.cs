@@ -36,5 +36,10 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Repositories
             => _documents
                 .Include(d => d.SurveyJob)
                 .FirstOrDefaultAsync(d => d.Id == id);
+
+        public Task<Document> GetByLinkAsync(string link)
+            => _documents
+                .Include(d => d.SurveyJob)
+                .FirstOrDefaultAsync(d => d.Link == link);
     }
 }

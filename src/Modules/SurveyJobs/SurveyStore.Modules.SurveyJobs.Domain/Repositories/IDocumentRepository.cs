@@ -10,6 +10,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Repositories
         Task AddAsync(Document document);
         Task UpdateAsync(Document document);
         Task<Document> GetByIdAsync(DocumentId id);
+        Task<Document> GetByLinkAsync(string link);
         Task<IReadOnlyCollection<Document>> BrowseAsync();
     }
 }

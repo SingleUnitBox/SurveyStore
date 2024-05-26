@@ -16,6 +16,7 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
 
         public async Task HandleAsync(AddDocument command)
         {
+            var document = await _documentRepository.GetByIdAsync(command.Id);
             var document = Document.Create(command.Id, command.DocumentType.ToLowerInvariant(), command.Link);
 
             await _documentRepository.AddAsync(document);    
