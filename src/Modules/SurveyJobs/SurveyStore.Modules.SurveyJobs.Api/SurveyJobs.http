@@ -2,15 +2,30 @@
 
 @surveyJobId = 1986694d-4f2f-426e-808a-da9d36ae7dc0
 
+@surveyorEmail = user2@gmail.com
+
 ###
 GET {{url}}
 
 ###
-POST {{url}}
+GET {{url}}/surveyJobs
 Content-Type: application/json
 
 {
+    "email": "{{surveyorEmail}}"
+}
 
+###
+POST {{url}}/surveyJobs
+Content-Type: application/json
+
+{
+    "name": "GAR",
+    "briefIssued": "2024-05-26",
+    "dueDate": "2024-06-26",
+    "surveyType": "topo",
+    "documentLinks": ["http://photo1", "http://photo2"],
+    "surveyorEmails": ["{{surveyorEmail}}"]
 }
 
 ###
@@ -19,6 +34,5 @@ Content-Type: application/json
 
 {
     "documentType": "photo",
-    "link": "http://myphoto12",
-    "surveyJobId": 
+    "link": "http://photo1"
 }

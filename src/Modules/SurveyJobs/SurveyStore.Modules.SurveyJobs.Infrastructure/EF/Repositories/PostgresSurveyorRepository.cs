@@ -35,5 +35,8 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Repositories
 
         public Task<Surveyor> GetByIdAsync(AggregateId id)
             => _surveyors.FirstOrDefaultAsync(s => s.Id == id);
+
+        public Task<Surveyor> GetByEmailAsync(string email)
+            => _surveyors.FirstOrDefaultAsync(s => s.Email == email);
     }
 }

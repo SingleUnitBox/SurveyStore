@@ -10,6 +10,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Repositories
         Task AddAsync(Surveyor surveyor);
         Task UpdateAsync(Surveyor surveyor);
         Task<Surveyor> GetByIdAsync(AggregateId id);
+        Task<Surveyor> GetByEmailAsync(string email);
         Task<IReadOnlyCollection<Surveyor>> BrowseAsync();
     }
 }

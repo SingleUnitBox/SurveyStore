@@ -18,7 +18,7 @@ Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
-    "email": "user@gmail.com",
+    "email": "user2@gmail.com",
     "firstName": "Jogn",
     "surname": "Brow",
     "position": "surveyor"

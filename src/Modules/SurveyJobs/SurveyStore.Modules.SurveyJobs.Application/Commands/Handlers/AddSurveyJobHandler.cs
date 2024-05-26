@@ -11,12 +11,15 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
     {
         private readonly ISurveyJobRepository _surveyJobRepository;
         private readonly IDocumentRepository _documentRepository;
+        private readonly ISurveyorRepository _surveyorRepository;
 
         public AddSurveyJobHandler(ISurveyJobRepository surveyJobRepository,
-            IDocumentRepository documentRepository)
+            IDocumentRepository documentRepository,
+            ISurveyorRepository surveyorRepository)
         {
             _surveyJobRepository = surveyJobRepository;
             _documentRepository = documentRepository;
+            _surveyorRepository = surveyorRepository;
         }
 
         public async Task HandleAsync(AddSurveyJob command)
@@ -31,6 +34,11 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
             if (command.DocumentLinks is not null)
             {
                 await AddDocuments(surveyJob, command.DocumentLinks);              
+            }
+
+            if (command.SurveyorEmails is not null)
+            {
+                await AssignSurveyors(surveyJob, command.SurveyorEmails);
             }
 
             await _surveyJobRepository.AddAsync(surveyJob);
@@ -49,6 +57,23 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
                     }
 
                     surveyJob.AddDocument(document);
+                }
+            }
+        }
+
+        private async Task AssignSurveyors(SurveyJob surveyJob, IEnumerable<string> surveyorEmails)
+        {
+            foreach (var email in surveyorEmails)
+            {
+                if (!string.IsNullOrWhiteSpace(email))
+                {
+                    var surveyor = await _surveyorRepository.GetByEmailAsync(email);
+                    if (surveyor is null)
+                    {
+                        throw new SurveyorNotFoundException(email);
+                    }
+
+                    surveyJob.AddSurveyor(surveyor);
                 }
             }
         }
