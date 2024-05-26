@@ -37,10 +37,9 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
             DueDate = dueDate;
         }
 
-        public static SurveyJob Create(Guid id, Surveyor surveyor, DateTime briefIssued, DateTime dueDate)
+        public static SurveyJob Create(Guid id, DateTime briefIssued, DateTime dueDate)
         {
             var surveyJob = new SurveyJob(id);
-            surveyJob.ChangeSurveyor(surveyor);
             surveyJob.ChangeBriefIssued(briefIssued);
             surveyJob.ChangeDueDate(dueDate);
 
