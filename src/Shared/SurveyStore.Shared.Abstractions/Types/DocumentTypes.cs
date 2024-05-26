@@ -21,8 +21,10 @@ namespace SurveyStore.Shared.Abstractions.Types
         {
             var documentTypes = typeof(DocumentTypes)
                 .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
-                .Where(field => field.IsLiteral && !field.IsInitOnly)
-                .Select(field => field.GetValue(null).ToString());
+                .Where(field => field.IsInitOnly && field.FieldType == typeof(DocumentTypes))
+                //.Select(field => field.GetValue(null).ToString())
+                .Select(field => field.Name.ToLowerInvariant())
+                .ToList();
 
             return documentTypes;
         }

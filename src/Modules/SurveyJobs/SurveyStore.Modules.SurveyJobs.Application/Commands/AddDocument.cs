@@ -3,8 +3,7 @@ using System;
 
 namespace SurveyStore.Modules.SurveyJobs.Application.Commands
 {
-    public record AddSurveyJob(DateTime BriefIssued,
-        DateTime DueDate, string SurveyType) : ICommand
+    public record AddDocument(string DocumentType, string Link) : ICommand
     {
         public Guid Id => Guid.NewGuid();
     }

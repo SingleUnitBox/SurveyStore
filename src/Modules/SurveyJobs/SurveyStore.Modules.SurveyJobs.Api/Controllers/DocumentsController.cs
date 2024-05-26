@@ -6,22 +6,21 @@ using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.SurveyJobs.Api.Controllers
 {
-    public class SurveyJobsController : BaseController
+    public class DocumentsController : BaseController
     {
         private readonly ICommandDispatcher _commandDispatcher;
 
-
-        public SurveyJobsController(ICommandDispatcher commandDispatcher)
+        public DocumentsController(ICommandDispatcher commandDispatcher)
         {
             _commandDispatcher = commandDispatcher;
         }
 
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<string>> Get(Guid id)
-            => OkOrNotFound("it's test - OK");
+            => OkOrNotFound($"this is document id: {id}");
 
         [HttpPost]
-        public async Task<ActionResult> Post(AddSurveyJob command)
+        public async Task<ActionResult> Post(AddDocument command)
         {
             await _commandDispatcher.DispatchAsync(command);
             return CreatedAtAction(nameof(Get), new { Id = command.Id }, null);

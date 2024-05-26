@@ -3,7 +3,7 @@
 namespace SurveyStore.Modules.SurveyJobs.Api.Controllers
 {
     [ApiController]
-    [Route(SurveyJobsModule.BasePath + "[/controller]")]
+    [Route(SurveyJobsModule.BasePath + "/[controller]")]
     public class BaseController : ControllerBase
     {
         public ActionResult<T> OkOrNotFound<T>(T model)
