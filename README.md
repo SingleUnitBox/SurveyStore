@@ -15,7 +15,7 @@ SurveyStore is an application to help professionals keep track of their survey e
 ## Technology
 SurveyStore is built using modern technologies to ensure reliability, scalability, and performance. Some key technologies used in the development include:
 
-- Clean Architecture with Domain-Driven Design (DDD): Clean Architecture, combined with Domain-Driven Design, ensures that the application's structure is maintainable, scalable, and testable. This approach separates concerns by organizing the codebase into layers (e.g., Domain, Application, Infrastructure, Presentation) and focuses on the core business logic.
+- Domain-Driven Design (DDD) with Clean Architecture: Domain-Driven Design, combined with Clean Architecture, ensures that the application's structure is maintainable, scalable, and testable. This approach separates concerns by organizing the codebase into layers (e.g., Domain, Application, Infrastructure, Presentation) and focuses on the core business logic.
 - .NET 5.0: This cross-platform framework provides a high-performance, flexible, and open-source platform for building modern applications. .NET 5.0 is designed for building a wide range of applications, from web and mobile to desktop and cloud.
 - Entity Framework: An object-relational mapper (ORM) for .NET, Entity Framework allows developers to work with a database using .NET objects, eliminating the need for most of the data-access code that developers typically need to write.
 - PostgreSQL: A powerful, open-source relational database system known for its robustness, scalability, and support for advanced data types and performance optimization features. PostgreSQL ensures that SurveyStore's data storage is both efficient and reliable.
