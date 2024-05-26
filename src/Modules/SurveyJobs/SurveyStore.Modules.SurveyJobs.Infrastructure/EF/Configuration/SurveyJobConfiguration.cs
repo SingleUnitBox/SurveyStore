@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SurveyStore.Modules.SurveyJobs.Domain.Entities;
+using SurveyStore.Modules.SurveyJobs.Domain.ValueObjects;
 using System;
 
 namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Configuration
@@ -12,6 +13,8 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Configuration
             builder.HasKey(sj => sj.Id);
             builder.Property(sj => sj.Id)
                 .HasConversion(sj => sj.Value, sj => new(sj));
+            builder.Property(sj => sj.SurveyType)
+                .HasConversion(st => st.Value, st => SurveyType.Create(st));
             builder.HasOne(sj => sj.Surveyor);
             builder.HasMany(sj => sj.Documents)
                 .WithOne(d => d.SurveyJob);

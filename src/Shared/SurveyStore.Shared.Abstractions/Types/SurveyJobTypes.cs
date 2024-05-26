@@ -17,8 +17,8 @@ namespace SurveyStore.Shared.Abstractions.Types
         public static IEnumerable<string> GetSurveyTypes()
         {
             var surveyTypes = typeof(SurveyJobTypes)
-                .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
-                .Where(field => field.IsPublic && field.IsInitOnly)
+                .GetFields(BindingFlags.Public | BindingFlags.Static |BindingFlags.FlattenHierarchy)
+                .Where(field => field.IsLiteral && !field.IsInitOnly)
                 .Select(field => field.GetValue(null).ToString().ToLowerInvariant())
                 .ToList();
 
