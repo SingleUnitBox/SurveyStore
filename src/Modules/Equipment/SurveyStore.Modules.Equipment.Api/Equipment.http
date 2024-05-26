@@ -50,9 +50,9 @@ Content-Type: application/json
 
 {
         "brand": "Trimble",
-        "model": "S5",
+        "model": "S7",
         "description": "Lorem ipsum",
-        "serialNumber": "ABC123",
+        "serialNumber": "ABC1235",
         "purchasedAt": "2023-01-01",
         //"storeName": "TBH",
         "accuracy": 2.0,
@@ -75,6 +75,7 @@ Content-Type: application/json
 
 ###
 POST {{url}}/equipment/field-controller
+Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {

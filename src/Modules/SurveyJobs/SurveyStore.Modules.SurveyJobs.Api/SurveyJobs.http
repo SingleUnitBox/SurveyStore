@@ -1,4 +1,24 @@
 @url = http://localhost:5000/jobs-module
 
+@surveyJobId = 1986694d-4f2f-426e-808a-da9d36ae7dc0
+
 ###
 GET {{url}}
+
+###
+POST {{url}}
+Content-Type: application/json
+
+{
+
+}
+
+###
+POST {{url}}/documents
+Content-Type: application/json
+
+{
+    "documentType": "photo",
+    "link": "http://myphoto12",
+    "surveyJobId": 
+}

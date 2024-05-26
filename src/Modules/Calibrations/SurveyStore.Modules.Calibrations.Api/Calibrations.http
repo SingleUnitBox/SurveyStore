@@ -1,5 +1,5 @@
 @url = http://localhost:5000/calibrations-module
-@serialNumber = ABC123
+@serialNumber = QWE123
 
 ###
 GET {{url}}

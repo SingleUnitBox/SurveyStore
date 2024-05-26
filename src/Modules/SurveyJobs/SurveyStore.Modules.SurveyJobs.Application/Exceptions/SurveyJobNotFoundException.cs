@@ -7,7 +7,7 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Exceptions
     {
         public Guid SurveyJobId { get; }
         public SurveyJobNotFoundException(Guid surveyJobId)
-            : base($"Survey job with id '' was not found.")
+            : base($"Survey job with id '{surveyJobId}' was not found.")
         {
             SurveyJobId = surveyJobId;
         }

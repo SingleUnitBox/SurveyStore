@@ -1,4 +1,5 @@
-﻿using SurveyStore.Shared.Abstractions.Kernel.Types;
+﻿using SurveyStore.Modules.SurveyJobs.Domain.ValueObjects;
+using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         public Surveyor Surveyor { get; private set; }
         public DateTime BriefIssued { get; private set; }
         public DateTime DueDate { get; private set; }
-        public string SurveyType { get; private set; }
+        public SurveyType SurveyType { get; private set; }
         public IEnumerable<Document> Documents => _documents;
         private readonly IEnumerable<Document> _documents = new List<Document>();
 
@@ -36,6 +37,11 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         public void ChangeDueDate(DateTime dueDate)
         {
             DueDate = dueDate;
+        }
+
+        public void ChangeSurveyType(string surveyType)
+        {
+
         }
 
         public void AddDocument(Document document)
