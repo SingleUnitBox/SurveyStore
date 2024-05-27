@@ -10,6 +10,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         public SurveyJobName Name { get; private set; }
         public DateTime BriefIssued { get; private set; }
         public DateTime DueDate { get; private set; }
+        public Money Budget { get; private set; }
         public SurveyType SurveyType { get; private set; }
         public IEnumerable<Surveyor> Surveyors => _surveyors;
         private readonly List<Surveyor> _surveyors = new List<Surveyor>();
@@ -40,6 +41,11 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
             DueDate = dueDate;
         }
 
+        public void SetBudget(int value)
+        {
+            Budget = Money.Create(value);
+        }
+
         public void ChangeSurveyType(string surveyType)
         {
             SurveyType = SurveyType.Create(surveyType);
@@ -56,13 +62,17 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         }
 
         public static SurveyJob Create(Guid id, string name, DateTime briefIssued,
-            DateTime dueDate, string surveyType)
+            DateTime dueDate, string surveyType, int? value = null)
         {
             var surveyJob = new SurveyJob(id);
             surveyJob.ChangeSurveyJobName(name);
             surveyJob.ChangeBriefIssued(briefIssued);
             surveyJob.ChangeDueDate(dueDate);
             surveyJob.ChangeSurveyType(surveyType);
+            if (value.HasValue)
+            {
+                surveyJob.SetBudget(value.Value);
+            }
 
             return surveyJob;
         }
