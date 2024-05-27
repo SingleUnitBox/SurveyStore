@@ -28,5 +28,8 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.ValueObjects
 
             return surveyJobName;
         }
+
+        public static implicit operator SurveyJobName(string name) => Create(name);
+        public static implicit operator string(SurveyJobName surveyJobName) => surveyJobName.Name;
     }
 }

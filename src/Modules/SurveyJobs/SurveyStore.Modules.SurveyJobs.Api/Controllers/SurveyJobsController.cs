@@ -23,8 +23,12 @@ namespace SurveyStore.Modules.SurveyJobs.Api.Controllers
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<ActionResult<string>> Get(Guid id)
-            => OkOrNotFound("it's test - OK");
+        public async Task<ActionResult<SurveyJobDto>> Get(Guid id)
+            => OkOrNotFound(await _queryDispatcher.QueryAsync(new GetSurveyJobById(id)));
+
+        [HttpGet("{name}")]
+        public async Task<ActionResult<SurveyJobDto>> GetByNameAsync(string name)
+            => OkOrNotFound(await _queryDispatcher.QueryAsync(new GetSurveyJobByName(name)));
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SurveyJobDto>>> BrowseSurveyJobsBySurveyor(BrowseSurveyJobsBySurveyor query)

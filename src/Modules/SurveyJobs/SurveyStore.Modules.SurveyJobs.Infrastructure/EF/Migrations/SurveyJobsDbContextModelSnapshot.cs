@@ -67,6 +67,9 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
                     b.Property<int?>("Budget")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("CostToDeliver")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("timestamp without time zone");
 

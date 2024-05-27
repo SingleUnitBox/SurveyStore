@@ -11,6 +11,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         public DateTime BriefIssued { get; private set; }
         public DateTime DueDate { get; private set; }
         public Money Budget { get; private set; }
+        public Money CostToDeliver { get; private set; }
         public SurveyType SurveyType { get; private set; }
         public IEnumerable<Surveyor> Surveyors => _surveyors;
         private readonly List<Surveyor> _surveyors = new List<Surveyor>();
@@ -44,6 +45,11 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         public void SetBudget(int value)
         {
             Budget = new Money(value);
+        }
+
+        public void SetCostToDeliver(int cost)
+        {
+            CostToDeliver = new Money(cost);
         }
 
         public void ChangeSurveyType(string surveyType)

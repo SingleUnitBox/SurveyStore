@@ -1,11 +1,19 @@
 @url = http://localhost:5000/jobs-module
 
-@surveyJobId = 1986694d-4f2f-426e-808a-da9d36ae7dc0
 
-@surveyorEmail = user2@gmail.com
+@surveyJobName = GAR
+@surveyJobId = 7b3a5a67-fb45-471f-b5d5-8e95d93787f3
+
+@surveyorEmail = user1@gmail.com
 
 ###
 GET {{url}}
+
+###
+GET {{url}}/surveyJobs/{{surveyJobId}}
+
+###
+GET {{url}}/surveyJobs/{{surveyJobName}}
 
 ###
 GET {{url}}/surveyJobs
@@ -23,9 +31,10 @@ Content-Type: application/json
     "name": "GAR",
     "briefIssued": "2024-05-26",
     "dueDate": "2024-06-26",
+    "budget": "1",
     "surveyType": "topo",
     "documentLinks": ["http://photo1", "http://photo2"],
-    "surveyorEmails": ["{{surveyorEmail}}"]
+    "surveyorEmails": ["{{surveyorEmail}}", "user1@gmail.com"]
 }
 
 ###

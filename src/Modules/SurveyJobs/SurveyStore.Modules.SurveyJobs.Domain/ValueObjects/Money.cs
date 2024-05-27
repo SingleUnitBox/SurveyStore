@@ -8,7 +8,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.ValueObjects
 
         public Money(int value)
         {
-            if (value <= 0 || value > 100000)
+            if (value < 0 || value > 100000)
             {
                 throw new InvalidMoneyValueException(value);
             }
