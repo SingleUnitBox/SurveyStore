@@ -43,7 +43,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
 
         public void SetBudget(int value)
         {
-            Budget = Money.Create(value);
+            Budget = new Money(value);
         }
 
         public void ChangeSurveyType(string surveyType)
@@ -62,7 +62,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         }
 
         public static SurveyJob Create(Guid id, string name, DateTime briefIssued,
-            DateTime dueDate, string surveyType, int? value = null)
+            DateTime dueDate, string surveyType, int? value)
         {
             var surveyJob = new SurveyJob(id);
             surveyJob.ChangeSurveyJobName(name);

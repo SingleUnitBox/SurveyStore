@@ -17,7 +17,7 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Configuration
             builder.Property(sj => sj.SurveyType)
                 .HasConversion(st => st.Value, st => SurveyType.Create(st));
             builder.Property(sj => sj.Budget)
-                .HasConversion(sj => sj.Value, sj => Money.Create(sj));
+                .HasConversion(sj => sj.Value, sj => new(sj));
             builder.HasMany(sj => sj.Surveyors)
                 .WithMany(s => s.SurveyJobs);
             builder.HasMany(sj => sj.Documents)
