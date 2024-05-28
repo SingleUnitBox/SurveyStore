@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
 {
-    public partial class EditSurveyJobSurveyorDocument : Migration
+    public partial class AddNameValueAsShadowProperty : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,9 +16,13 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true),
                     BriefIssued = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     DueDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Budget = table.Column<int>(type: "integer", nullable: true),
+                    CostToDeliver = table.Column<int>(type: "integer", nullable: true),
                     SurveyType = table.Column<string>(type: "text", nullable: true),
+                    NameValue = table.Column<string>(type: "text", nullable: true),
                     Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -96,6 +100,13 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
                 schema: "surveyJobs",
                 table: "Documents",
                 column: "SurveyJobId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SurveyJobs_NameValue",
+                schema: "surveyJobs",
+                table: "SurveyJobs",
+                column: "NameValue",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_SurveyJobSurveyor_SurveyorsId",

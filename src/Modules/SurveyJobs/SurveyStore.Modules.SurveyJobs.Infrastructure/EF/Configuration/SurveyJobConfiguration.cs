@@ -14,8 +14,6 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Configuration
                 .HasConversion(sj => sj.Value, sj => new(sj));
             builder.Property(sj => sj.Name)
                 .HasConversion(n => n.Name, n => SurveyJobName.Create(n));
-            builder.HasIndex(sj => sj.Name.Name)
-                .IsUnique();
             builder.Property(sj => sj.SurveyType)
                 .HasConversion(st => st.Value, st => SurveyType.Create(st));
             builder.Property(sj => sj.Budget)
@@ -28,6 +26,9 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Configuration
                 .WithOne(d => d.SurveyJob);
             builder.Property(sj => sj.Version)
                 .IsConcurrencyToken();
+
+            builder.HasIndex(sj => sj.Name)
+                .IsUnique();
         }
     }
 }

@@ -85,6 +85,9 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("SurveyJobs");
                 });
 

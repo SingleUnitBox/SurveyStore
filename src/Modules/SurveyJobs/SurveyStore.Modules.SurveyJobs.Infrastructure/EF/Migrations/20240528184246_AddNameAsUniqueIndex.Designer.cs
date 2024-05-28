@@ -10,8 +10,8 @@ using SurveyStore.Modules.SurveyJobs.Infrastructure.EF;
 namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(SurveyJobsDbContext))]
-    [Migration("20240527192519_AddCostToDeliverToSSurveyJob")]
-    partial class AddCostToDeliverToSSurveyJob
+    [Migration("20240528184246_AddNameAsUniqueIndex")]
+    partial class AddNameAsUniqueIndex
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,6 +86,9 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("SurveyJobs");
                 });

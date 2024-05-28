@@ -4,7 +4,7 @@
 
 @surveyorEmail = user@gmail.com
 
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YThiNWU4NjYxNjg0N2U2OTJhYjFmMTFhMGU2M2MzYiIsInVuaXF1ZV9uYW1lIjoiNWE4YjVlODY2MTY4NDdlNjkyYWIxZjExYTBlNjNjM2IiLCJqdGkiOiJjNjc5N2MzMC0xNmFjLTQ1OTYtOGIyOS04NjQ2YTc1ODk5MDQiLCJpYXQiOiIxNzE2Njc1MzQzMDUzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxNjY3NTM0MywiZXhwIjoxNzE2NzU4MTQzLCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.WTl3wCWM7pZEJYZYsrHV3n03bFeaPEGXQ3g05Is3Kso
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YThiNWU4NjYxNjg0N2U2OTJhYjFmMTFhMGU2M2MzYiIsInVuaXF1ZV9uYW1lIjoiNWE4YjVlODY2MTY4NDdlNjkyYWIxZjExYTBlNjNjM2IiLCJqdGkiOiIxYmFmMzJkMC04YjlkLTRjNzQtYWViNC00YzcyNjJiNTU3MTIiLCJpYXQiOiIxNzE2OTIxODk3MDE3IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxNjkyMTg5NywiZXhwIjoxNzE3MDA0Njk3LCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.nkVybSQT5475CRiM4UryRjVNavlHGrcTvSxIVOltgqw
 
 ###
 GET {{url}}
@@ -18,9 +18,9 @@ Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
-    "email": "user2@gmail.com",
-    "firstName": "Jogn",
-    "surname": "Brow",
+    "email": "user1@gmail.com",
+    "firstName": "Jon",
+    "surname": "Brw",
     "position": "surveyor"
 }
 

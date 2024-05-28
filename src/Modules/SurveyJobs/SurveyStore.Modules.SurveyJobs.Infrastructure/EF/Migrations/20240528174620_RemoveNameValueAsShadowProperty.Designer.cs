@@ -10,8 +10,8 @@ using SurveyStore.Modules.SurveyJobs.Infrastructure.EF;
 namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(SurveyJobsDbContext))]
-    [Migration("20240527125220_EditSurveyJobToAddBudget")]
-    partial class EditSurveyJobToAddBudget
+    [Migration("20240528174620_RemoveNameValueAsShadowProperty")]
+    partial class RemoveNameValueAsShadowProperty
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,6 +67,9 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<int?>("Budget")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("CostToDeliver")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("DueDate")

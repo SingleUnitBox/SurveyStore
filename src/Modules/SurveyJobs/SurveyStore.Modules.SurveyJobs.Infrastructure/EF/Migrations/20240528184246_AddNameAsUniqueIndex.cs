@@ -2,22 +2,22 @@
 
 namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
 {
-    public partial class EditSurveyJobToAddBudget : Migration
+    public partial class AddNameAsUniqueIndex : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "Budget",
+            migrationBuilder.CreateIndex(
+                name: "IX_SurveyJobs_Name",
                 schema: "surveyJobs",
                 table: "SurveyJobs",
-                type: "integer",
-                nullable: true);
+                column: "Name",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Budget",
+            migrationBuilder.DropIndex(
+                name: "IX_SurveyJobs_Name",
                 schema: "surveyJobs",
                 table: "SurveyJobs");
         }
