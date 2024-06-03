@@ -51,6 +51,7 @@ namespace SurveyStore.Bootstrapper
                 endpoints.MapGet("/", context
                     => context.Response.WriteAsync("SurveyStore API"));
                 endpoints.MapModuleInfo();
+
             });
 
             //app.UseConvey();
