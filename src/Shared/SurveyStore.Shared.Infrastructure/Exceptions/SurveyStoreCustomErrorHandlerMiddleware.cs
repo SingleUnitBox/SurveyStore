@@ -12,12 +12,15 @@ namespace SurveyStore.Shared.Infrastructure.Exceptions
     {
         private readonly ILogger<SurveyStoreCustomErrorHandlerMiddleware> _logger;
         private readonly IExceptionCompositionRoot _exceptionCompositionRoot;
+        private readonly ICustomErrorMapper _customErrorMapper;
 
         public SurveyStoreCustomErrorHandlerMiddleware(ILogger<SurveyStoreCustomErrorHandlerMiddleware> logger,
-            IExceptionCompositionRoot exceptionCompositionRoot)
+            IExceptionCompositionRoot exceptionCompositionRoot,
+            ICustomErrorMapper customErrorMapper)
         {
             _logger = logger;
             _exceptionCompositionRoot = exceptionCompositionRoot;
+            _customErrorMapper = customErrorMapper;
         }
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
@@ -29,21 +32,21 @@ namespace SurveyStore.Shared.Infrastructure.Exceptions
             catch (Exception ex)
             {
                 //_logger.LogError(ex, ex.Message, "this is custom error");
-                var result = _exceptionCompositionRoot.Map(ex);
-                await context.Response.WriteAsJsonAsync(HandleExceptionAsync(ex, context));
+                await HandleExceptionAsync(ex, context);
             }
         }
 
         private async Task HandleExceptionAsync(Exception exception, HttpContext context)
         {
-            var (statusCode, error) = exception switch
-            {
-                SurveyStoreException => (StatusCodes.Status400BadRequest, exception.Message),
-                _ => (StatusCodes.Status500InternalServerError, "There was an error")
-            };
+            var exceptionResponse = _customErrorMapper.Map(exception);
+            context.Response.StatusCode = (int)(exceptionResponse?.StatusCode ?? HttpStatusCode.InternalServerError);
+            //var response = exceptionResponse?.Response;
+            //if (response is null)
+            //{
+            //    return;
+            //}
 
-            var response = new ExceptionResponse(new ErrorsResponse(new Error(statusCode.ToString(), error)), (HttpStatusCode)statusCode);
-            await Task.FromResult(response);
+            await context.Response.WriteAsJsonAsync(exceptionResponse);
         }
     }
 }

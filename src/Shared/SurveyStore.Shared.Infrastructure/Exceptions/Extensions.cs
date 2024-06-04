@@ -16,6 +16,8 @@ namespace SurveyStore.Shared.Infrastructure.Exceptions
         {
             //services.AddScoped<ErrorHandlerMiddleware>();
             services.AddScoped<SurveyStoreCustomErrorHandlerMiddleware>();
+            services.AddSingleton<ICustomErrorMapper, CustomErrorMapper>();
+
             services.AddSingleton<IExceptionToResponseMapper, ExceptionToResponseMapper>();
             services.AddSingleton<IExceptionCompositionRoot, ExceptionCompositionRoot>();
 
