@@ -117,14 +117,14 @@ namespace SurveyStore.Shared.Infrastructure
                     manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
                 });
 
-            //services
-            //    .AddConvey()
-            //    .AddRabbitMq()
-            //    .AddEventHandlers()
-            //    .AddInMemoryEventDispatcher()
-            //    .Build();
+                //services
+                //    .AddConvey()
+                //    .AddRabbitMq()
+                //    .AddEventHandlers()
+                //    .AddInMemoryEventDispatcher()
+                //    .Build();
 
-            return services;
+                return services;
         }
 
         public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)

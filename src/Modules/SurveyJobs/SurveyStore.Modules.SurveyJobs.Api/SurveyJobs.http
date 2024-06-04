@@ -28,13 +28,13 @@ POST {{url}}/surveyJobs
 Content-Type: application/json
 
 {
-    "name": "GAR",
+    "name": "GAR1",
     "briefIssued": "2024-05-26",
     "dueDate": "2024-06-26",
-    "budget": "1",
+    //"budget": "1",
     "surveyType": "topo",
     "documentLinks": ["http://photo1", "http://photo2"],
-    "surveyorEmails": ["{{surveyorEmail}}", "user1@gmail.com"]
+    "surveyorEmails": ["{{surveyorEmail}}"]
 }
 
 ###
@@ -43,5 +43,5 @@ Content-Type: application/json
 
 {
     "documentType": "photo",
-    "link": "http://photo1"
+    "link": "http://photo2"
 }

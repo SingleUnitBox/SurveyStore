@@ -14,7 +14,8 @@ namespace SurveyStore.Shared.Infrastructure.Exceptions
     {
         public static IServiceCollection AddErrorHandling(this IServiceCollection services)
         {
-            services.AddScoped<ErrorHandlerMiddleware>();
+            //services.AddScoped<ErrorHandlerMiddleware>();
+            services.AddScoped<SurveyStoreCustomErrorHandlerMiddleware>();
             services.AddSingleton<IExceptionToResponseMapper, ExceptionToResponseMapper>();
             services.AddSingleton<IExceptionCompositionRoot, ExceptionCompositionRoot>();
 
@@ -23,7 +24,8 @@ namespace SurveyStore.Shared.Infrastructure.Exceptions
 
         public static IApplicationBuilder UseErrorHandling(this IApplicationBuilder app)
         {
-            app.UseMiddleware<ErrorHandlerMiddleware>();
+            //app.UseMiddleware<ErrorHandlerMiddleware>();
+            app.UseMiddleware<SurveyStoreCustomErrorHandlerMiddleware>();
 
             return app;
         }
