@@ -13,7 +13,8 @@ namespace SurveyStore.Shared.Infrastructure.Exceptions
             {
                 SurveyStoreException => new ExceptionResponse(new ErrorsResponse(
                     new Error(exception.GetType().Name, exception.Message)), HttpStatusCode.BadRequest),
-                _ => new ExceptionResponse(new Error("error", "there was an error"), HttpStatusCode.InternalServerError)
+                _ => new ExceptionResponse(new ErrorsResponse(
+                    new Error("error", "there was an error")), HttpStatusCode.InternalServerError)
             };
 
             return exceptionResponse;

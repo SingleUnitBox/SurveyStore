@@ -40,13 +40,13 @@ namespace SurveyStore.Shared.Infrastructure.Exceptions
         {
             var exceptionResponse = _customErrorMapper.Map(exception);
             context.Response.StatusCode = (int)(exceptionResponse?.StatusCode ?? HttpStatusCode.InternalServerError);
-            //var response = exceptionResponse?.Response;
-            //if (response is null)
-            //{
-            //    return;
-            //}
+            var response = exceptionResponse?.Response;
+            if (response is null)
+            {
+                return;
+            }
 
-            await context.Response.WriteAsJsonAsync(exceptionResponse);
+            await context.Response.WriteAsJsonAsync(exceptionResponse.Response);
         }
     }
 }
