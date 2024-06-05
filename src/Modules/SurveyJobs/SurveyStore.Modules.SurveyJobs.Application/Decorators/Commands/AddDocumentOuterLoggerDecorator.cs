@@ -1,20 +1,17 @@
 ﻿using Microsoft.Extensions.Logging;
 using SurveyStore.Modules.SurveyJobs.Application.Commands;
-using SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers;
 using SurveyStore.Shared.Abstractions.Commands;
-using SurveyStore.Shared.Infrastructure.Postgres.Decorators;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.SurveyJobs.Application.Decorators.Commands
 {
-    [Decorator]
-    internal sealed class AddDocumentLoggerDecorator : ICommandHandler<AddDocument>
+    internal sealed class AddDocumentOuterLoggerDecorator : ICommandHandler<AddDocument>
     {
         private readonly ICommandHandler<AddDocument> _commandHandler;
-        private readonly ILogger<AddDocumentLoggerDecorator> _logger;
+        private readonly ILogger<AddDocumentOuterLoggerDecorator> _logger;
 
-        public AddDocumentLoggerDecorator(ICommandHandler<AddDocument> commandHandler,
-            ILogger<AddDocumentLoggerDecorator> logger)
+        public AddDocumentOuterLoggerDecorator(ICommandHandler<AddDocument> commandHandler,
+            ILogger<AddDocumentOuterLoggerDecorator> logger)
         {
             _commandHandler = commandHandler;
             _logger = logger;
@@ -23,7 +20,7 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Decorators.Commands
         public async Task HandleAsync(AddDocument command)
         {
             await _commandHandler.HandleAsync(command);
-            _logger.LogInformation($"Document with id '{command.Id}' has been created.");
+            _logger.LogInformation($"Document with id '{command.Id}' has been created. - outer logger.");
         }
     }
 }

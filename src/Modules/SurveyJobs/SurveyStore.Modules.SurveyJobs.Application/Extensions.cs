@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SurveyStore.Modules.SurveyJobs.Application.Commands;
+using SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers;
 using SurveyStore.Modules.SurveyJobs.Application.Decorators.Commands;
 using SurveyStore.Shared.Abstractions.Commands;
 using System.Runtime.CompilerServices;
@@ -11,7 +12,10 @@ namespace SurveyStore.Modules.SurveyJobs.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddScoped<ICommandHandler<AddDocument>, AddDocumentLoggerDecorator>();
+            //services.AddScoped<AddDocumentHandler>();
+            services.AddScoped<ICommandHandler<AddDocument>, AddDocumentHandler>();
+            services.Decorate<ICommandHandler<AddDocument>, AddDocumentLoggerDecorator>();
+            services.Decorate<ICommandHandler<AddDocument>, AddDocumentOuterLoggerDecorator>();
 
             return services;
         }

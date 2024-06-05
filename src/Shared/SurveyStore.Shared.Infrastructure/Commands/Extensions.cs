@@ -11,11 +11,11 @@ namespace SurveyStore.Shared.Infrastructure.Commands
         public static IServiceCollection AddCommands(this IServiceCollection services, IEnumerable<Assembly> assemblies)
         {
             services.AddSingleton<ICommandDispatcher, CommandDispatcher>();
-            services.Scan(a => a.FromAssemblies(assemblies)
-                .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>))
-                    .WithoutAttribute<DecoratorAttribute>())
-                .AsImplementedInterfaces()
-                .WithScopedLifetime());
+            //services.Scan(a => a.FromAssemblies(assemblies)
+            //    .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>))
+            //        .WithoutAttribute<DecoratorAttribute>())
+            //    .AsImplementedInterfaces()
+            //    .WithScopedLifetime());
 
             return services;
         }

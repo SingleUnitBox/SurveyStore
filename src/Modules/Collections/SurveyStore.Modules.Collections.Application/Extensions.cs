@@ -16,9 +16,9 @@ namespace SurveyStore.Modules.Collections.Application
             services.AddSingleton<IFreeCollectionRemovalPolicy, FreeCollectionRemovalPolicy>();
 
             //single handlerDecorator
-            //services.Decorate<IEventHandler<KitCreated>, KitCreatedHandlerDecorator>();
+            services.Decorate<IEventHandler<KitCreated>, KitCreatedHandlerDecorator>();
             //global
-            services.Decorate(typeof(IEventHandler<>), typeof(EventHandlerDecorator<>));
+            //services.Decorate(typeof(IEventHandler<>), typeof(EventHandlerDecorator<>));
 
             return services;
         }
