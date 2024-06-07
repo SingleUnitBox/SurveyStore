@@ -27,7 +27,7 @@ namespace SurveyStore.Modules.SurveyJobs.Application
             //services.AddScoped<AddDocumentLoggerDecorator>();
             //services.AddScoped<ICommandHandler<AddDocument>, AddDocumentOuterLoggerDecorator>();
 
-            services.AddScoped<ICommandHandler<AddDocument>, AddDocumentHandler>();
+            //services.AddScoped<ICommandHandler<AddDocument>, AddDocumentHandler>();
             //looks like registration is not required
             //services.AddScoped(typeof(IGenericOuterLoggerDecorator<>), typeof(GenericOuterLoggerDecorator<>));
             services.Decorate<ICommandHandler<AddDocument>, AddDocumentLoggerDecorator>();
