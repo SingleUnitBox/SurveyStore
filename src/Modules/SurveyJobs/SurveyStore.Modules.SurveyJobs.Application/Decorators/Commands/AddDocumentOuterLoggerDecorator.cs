@@ -20,7 +20,7 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Decorators.Commands
         public async Task HandleAsync(AddDocument command)
         {
             await _commandHandler.HandleAsync(command);
-            _logger.LogInformation($"Document with id '{command.Id}' has been created. - outer logger.");
+            _logger.LogInformation($"Document with id '{command.Id}' has been created. - outer logger decorator.");
         }
     }
 }

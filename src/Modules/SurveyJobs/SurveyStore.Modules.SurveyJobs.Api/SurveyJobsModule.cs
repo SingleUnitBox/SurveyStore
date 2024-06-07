@@ -22,12 +22,12 @@ namespace SurveyStore.Modules.SurveyJobs.Api
         {
             services.AddDomain();
             services.AddApplication();
-            services.AddInfrastrucutre();
+            services.AddInfrastructure();
         }
 
         public void Use(IApplicationBuilder app)
         {
-            
+            app.UseInfrastructure();
         }
     }
 }
