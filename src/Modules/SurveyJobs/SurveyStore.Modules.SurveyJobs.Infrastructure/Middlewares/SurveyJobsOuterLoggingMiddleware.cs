@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using SurveyStore.Shared.Abstractions.Commands;
-using System;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace SurveyStore.Modules.SurveyJobs.Infrastructure.Middlewares
 {

@@ -10,6 +10,7 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.Middlewares
         {
             services.AddScoped<SurveyJobsOuterLoggingMiddleware>();
             services.AddScoped<SurveyJobsInnerLoggingMiddleware>();
+            //services.AddScoped<SurveyJobsBranchingMiddleware>();
 
             return services;
         }
@@ -18,6 +19,13 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.Middlewares
         {
             app.UseMiddleware<SurveyJobsOuterLoggingMiddleware>();
             app.UseMiddleware<SurveyJobsInnerLoggingMiddleware>();
+
+            return app;
+        }
+
+        public static IApplicationBuilder UseSurveyJobsBranchingMiddleware(this IApplicationBuilder app)
+        {
+            app.UseMiddleware<SurveyJobsBranchingMiddleware>();
 
             return app;
         }
