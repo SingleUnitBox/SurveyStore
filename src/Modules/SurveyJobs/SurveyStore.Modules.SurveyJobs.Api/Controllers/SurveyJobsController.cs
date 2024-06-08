@@ -34,6 +34,10 @@ namespace SurveyStore.Modules.SurveyJobs.Api.Controllers
         public async Task<ActionResult<IEnumerable<SurveyJobDto>>> BrowseSurveyJobsBySurveyor(BrowseSurveyJobsBySurveyor query)
             => Ok(await _queryDispatcher.QueryAsync(query));
 
+        [HttpGet("free")]
+        public async Task<ActionResult<IReadOnlyCollection<SurveyJobDto>>> BrowseFreeSurveyJobs()
+            => Ok(await _queryDispatcher.QueryAsync(new BrowseFreeSurveyJobs()));
+
         [HttpPost]
         public async Task<ActionResult> Post(AddSurveyJob command)
         {
