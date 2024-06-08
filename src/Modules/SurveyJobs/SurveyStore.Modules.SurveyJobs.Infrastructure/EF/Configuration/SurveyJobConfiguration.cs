@@ -15,11 +15,7 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Configuration
             builder.Property(sj => sj.Id)
                 .HasConversion(sj => sj.Value, sj => new(sj));
 
-            //builder.Property(sj => sj.Name)
-            //    .HasConversion(n => n.Name, n => SurveyJobName.Create(n));
-            var surveyJobNameConverter = new ValueConverter<SurveyJobName, string>(x => x.Name,
-                x => SurveyJobName.Create(x));
-            builder.Property(typeof(SurveyJobName), "Name")
+            builder.Property(sj => sj.Name)
                 .HasConversion(SurveyJobNameConverter.ValueConverter);
 
             builder.Property(sj => sj.SurveyType)
