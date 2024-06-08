@@ -41,7 +41,7 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure
                     endpoints.MapControllers();
                     //endpoints.MapGet("/", context
                     //    => context.Response.WriteAsync("SurveyStore API"));
-                    //endpoints.MapModuleInfo();
+                    endpoints.MapModuleInfo();
                 });
             });
 

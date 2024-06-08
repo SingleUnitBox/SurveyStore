@@ -15,9 +15,9 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.Middlewares
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
-            _logger.LogInformation($"Executing delegate '{context.Request.Path}' from outer middleware in next step");           
+            _logger.LogInformation($"Executing delegate '{context.Request.Path.Value}' from outer middleware in next step");           
             await next(context);
-            _logger.LogInformation($"Success! Executed delegate '{context.Request.Path}' from outer middleware.");                    
+            _logger.LogInformation($"Success! Executed delegate '{context.Request.Path.Value}' from outer middleware.");                    
         }
     }
 }

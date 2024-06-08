@@ -31,5 +31,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.ValueObjects
 
             return surveyType;
         }
+
+        public static implicit operator SurveyType(string surveyType) => Create(surveyType);
     }
 }

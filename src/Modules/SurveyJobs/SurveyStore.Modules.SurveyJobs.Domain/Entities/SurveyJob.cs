@@ -22,9 +22,19 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         {
             
         }
+
         private SurveyJob(Guid id)
         {
             Id = id;
+        }
+
+        private SurveyJob(Guid id, string name, DateTime briefIssued,
+            DateTime dueDate, string surveyType) : this(id)
+        {
+            Name = name;
+            BriefIssued = briefIssued;
+            DueDate = dueDate;
+            SurveyType = surveyType;
         }
 
         public void ChangeSurveyJobName(string name)
@@ -68,16 +78,16 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         }
 
         public static SurveyJob Create(Guid id, string name, DateTime briefIssued,
-            DateTime dueDate, string surveyType, int? value)
+            DateTime dueDate, string surveyType, int? budget)
         {
             var surveyJob = new SurveyJob(id);
             surveyJob.ChangeSurveyJobName(name);
             surveyJob.ChangeBriefIssued(briefIssued);
             surveyJob.ChangeDueDate(dueDate);
             surveyJob.ChangeSurveyType(surveyType);
-            if (value.HasValue)
+            if (budget.HasValue)
             {
-                surveyJob.SetBudget(value.Value);
+                surveyJob.SetBudget(budget.Value);
             }
 
             return surveyJob;
