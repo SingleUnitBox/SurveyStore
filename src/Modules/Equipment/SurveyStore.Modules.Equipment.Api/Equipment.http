@@ -5,6 +5,7 @@
 @kitId = d4e39cea-a6b3-4191-8eaf-a9a4312ad696
 
 @accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YThiNWU4NjYxNjg0N2U2OTJhYjFmMTFhMGU2M2MzYiIsInVuaXF1ZV9uYW1lIjoiNWE4YjVlODY2MTY4NDdlNjkyYWIxZjExYTBlNjNjM2IiLCJqdGkiOiJiODMyOWYzMy03NDY1LTRhM2ItOGUxNi1mOWZmYWQ2Y2U4ZWYiLCJpYXQiOiIxNzE3NjIyNTIwOTU5IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxNzYyMjUyMCwiZXhwIjoxNzE3NzA1MzIwLCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.K00wbVuJ3f0-k5aNG49eCgbaP7epfP7KiyZlKFcbG30
+
 ###
 GET {{url}}
 
@@ -40,7 +41,7 @@ Content-Type: application/json
         "isActive": true
         //"screenSize": "",
         //"frequency": "",
-//"offRoadMode": ""
+        //"offRoadMode": ""
 }
 
 ###
@@ -50,9 +51,9 @@ Content-Type: application/json
 
 {
         "brand": "Trimble",
-        "model": "S7",
+        "model": "S8",
         "description": "Lorem ipsum",
-        "serialNumber": "ABC1235",
+        "serialNumber": "ABC12333",
         "purchasedAt": "2023-01-01",
         //"storeName": "TBH",
         "accuracy": 2.0,
@@ -104,7 +105,7 @@ Content-Type: application/json
 {
         "brand": "Trimble",
         "model": "TR3",
-        "serialNumber": "45",
+        "serialNumber": "4566",
         "purchasedAt": "2023-01-01", 
         "KitType": "TraversePrism"
 }

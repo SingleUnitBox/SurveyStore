@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using System.Runtime.CompilerServices;
 
@@ -10,7 +11,7 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.Middlewares
         {
             services.AddScoped<SurveyJobsOuterLoggingMiddleware>();
             services.AddScoped<SurveyJobsInnerLoggingMiddleware>();
-            //services.AddScoped<SurveyJobsBranchingMiddleware>();
+            services.AddScoped<SurveyJobsBranchingMiddleware>();
 
             return services;
         }

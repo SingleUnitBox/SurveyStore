@@ -39,6 +39,8 @@ using Convey.CQRS.Events;
 [assembly: InternalsVisibleTo("SurveyStore.Services.Stores.Api")]
 [assembly: InternalsVisibleTo("SurveyStore.Services.Stores.Core")]
 
+[assembly: InternalsVisibleTo("SurveyStore.Modules.SurveyJobs.Infrastructure")]
+
 namespace SurveyStore.Shared.Infrastructure
 {
     internal static class Extensions
