@@ -17,9 +17,8 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Configuration
 
             builder.Property(sj => sj.Name)
                 .HasConversion(SurveyJobNameConverter.ValueConverter);
-
             builder.Property(sj => sj.SurveyType)
-                .HasConversion(st => st.Value, st => SurveyType.Create(st));
+                .HasConversion(SurveyTypeConverter.ValueConverter);
             builder.Property(sj => sj.Budget)
                 .HasConversion(b => b.Value, b => new(b));
             builder.Property(sj => sj.CostToDeliver)
@@ -31,6 +30,7 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Configuration
             builder.Property(sj => sj.Version)
                 .IsConcurrencyToken();
 
+            //adding sj.BriefIssued to index can potentially cause some issues?
             builder.HasIndex(sj => new { sj.Name, sj.BriefIssued })
                 .IsUnique();
         }

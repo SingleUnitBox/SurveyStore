@@ -10,9 +10,9 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         public SurveyJobName Name { get; private set; }
         public DateTime BriefIssued { get; private set; }
         public DateTime DueDate { get; private set; }
-        public Money Budget { get; private set; }
-        public Money CostToDeliver { get; private set; }
         public SurveyType SurveyType { get; private set; }
+        public Money Budget { get; private set; }
+        public Money CostToDeliver { get; private set; }        
         public IEnumerable<Surveyor> Surveyors => _surveyors;
         private readonly List<Surveyor> _surveyors = new List<Surveyor>();
         public IEnumerable<Document> Documents => _documents;
@@ -29,52 +29,61 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         }
 
         private SurveyJob(Guid id, string name, DateTime briefIssued,
-            DateTime dueDate, string surveyType) : this(id)
+            DateTime dueDate, string surveyType, int budget) : this(id)
         {
             Name = name;
             BriefIssued = briefIssued;
             DueDate = dueDate;
             SurveyType = surveyType;
+            Budget = budget;
         }
 
         public void ChangeSurveyJobName(string name)
         {
             Name = SurveyJobName.Create(name);
+            IncrementVersion();
         }
 
         public void ChangeBriefIssued(DateTime briefIssued)
         {
             BriefIssued = briefIssued;
+            IncrementVersion();
         }
 
         public void ChangeDueDate(DateTime dueDate)
         {
             DueDate = dueDate;
+            IncrementVersion();
         }
 
         public void SetBudget(int value)
         {
             Budget = new Money(value);
+            IncrementVersion();
         }
 
-        public void SetCostToDeliver(int cost)
+        public void ChangeCostToDeliver(int cost)
         {
             CostToDeliver = new Money(cost);
+            IncrementVersion();
         }
 
         public void ChangeSurveyType(string surveyType)
         {
             SurveyType = SurveyType.Create(surveyType);
+            IncrementVersion();
         }
 
         public void AddSurveyor(Surveyor surveyor)
         {
             _surveyors.Add(surveyor);
+            IncrementVersion();
         }
 
         public void AddDocument(Document document)
         {
             _documents.Add(document);
+            IncrementVersion();
         }
 
         public static SurveyJob Create(Guid id, string name, DateTime briefIssued,

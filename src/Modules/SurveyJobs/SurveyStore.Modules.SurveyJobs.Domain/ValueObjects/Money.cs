@@ -15,5 +15,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.ValueObjects
 
             Value = value;
         }
+
+        public static implicit operator Money(int value) => new Money(value);
     }
 }
