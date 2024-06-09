@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SurveyStore.Modules.SurveyJobs.Domain.DomainServices;
 using SurveyStore.Modules.SurveyJobs.Domain.Policies;
 using System.Runtime.CompilerServices;
 
@@ -10,6 +11,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain
         public static IServiceCollection AddDomain(this IServiceCollection services)
         {
             services.AddPolicies();
+            services.AddDomainServices();
 
             return services;
         }

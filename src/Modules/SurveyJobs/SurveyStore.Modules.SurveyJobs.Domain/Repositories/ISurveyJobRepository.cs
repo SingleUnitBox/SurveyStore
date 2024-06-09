@@ -1,5 +1,6 @@
 ﻿using SurveyStore.Modules.SurveyJobs.Domain.Entities;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Repositories
         Task AddAsync(SurveyJob surveyJob);
         Task UpdateAsync(SurveyJob surveyJob);
         Task<SurveyJob> GetByIdAsync(AggregateId id);
-        Task<IReadOnlyCollection<SurveyJob>> BrowseAsync();
+        Task<IEnumerable<SurveyJob>> BrowseAsync();
+        Task<IReadOnlyCollection<SurveyJob>> BrowseForSurveyorAsync(Guid surveyorId);
     }
 }

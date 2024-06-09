@@ -1,4 +1,5 @@
 ﻿using SurveyStore.Modules.SurveyJobs.Application.Exceptions;
+using SurveyStore.Modules.SurveyJobs.Domain.DomainServices;
 using SurveyStore.Modules.SurveyJobs.Domain.Entities;
 using SurveyStore.Modules.SurveyJobs.Domain.Policies;
 using SurveyStore.Modules.SurveyJobs.Domain.Repositories;
@@ -13,13 +14,17 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
         private readonly ISurveyJobRepository _surveyJobRepository;
         private readonly ISurveyorRepository _surveyorRepository;
         private readonly ISurveyJobAssigningPolicy _policy;
+        private readonly ISurveyJobsDomainService _assignSurveyorService;
+
         public AssignSurveyorsHandler(ISurveyJobRepository surveyJobRepository,
             ISurveyorRepository surveyorRepository,
-            ISurveyJobAssigningPolicy policy)
+            ISurveyJobAssigningPolicy policy,
+            ISurveyJobsDomainService assignSurveyorService)
         {
             _surveyJobRepository = surveyJobRepository;
             _surveyorRepository = surveyorRepository;
             _policy = policy;
+            _assignSurveyorService = assignSurveyorService;
         }
         public async Task HandleAsync(AssignSurveyors command)
         {
@@ -48,7 +53,8 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
 
             foreach (var surveyor in surveyors)
             {
-                surveyJob.AddSurveyor(surveyor);
+                var openSurveyJobs = await _surveyJobRepository.BrowseForSurveyorAsync(surveyor.Id);
+                _assignSurveyorService.AssignSurveyor(surveyJob, openSurveyJobs, surveyor);
             }
             
             await _surveyJobRepository.UpdateAsync(surveyJob);

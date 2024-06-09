@@ -74,7 +74,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
             IncrementVersion();
         }
 
-        public void AddSurveyor(Surveyor surveyor)
+        internal void AddSurveyor(Surveyor surveyor)
         {
             _surveyors.Add(surveyor);
             IncrementVersion();

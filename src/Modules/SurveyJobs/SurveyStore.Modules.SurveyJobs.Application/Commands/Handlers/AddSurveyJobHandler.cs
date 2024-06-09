@@ -1,4 +1,5 @@
 ﻿using SurveyStore.Modules.SurveyJobs.Application.Exceptions;
+using SurveyStore.Modules.SurveyJobs.Domain.DomainServices;
 using SurveyStore.Modules.SurveyJobs.Domain.Entities;
 using SurveyStore.Modules.SurveyJobs.Domain.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
@@ -12,14 +13,17 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
         private readonly ISurveyJobRepository _surveyJobRepository;
         private readonly IDocumentRepository _documentRepository;
         private readonly ISurveyorRepository _surveyorRepository;
+        private readonly ISurveyJobsDomainService _surveyJobsDomainService;
 
         public AddSurveyJobHandler(ISurveyJobRepository surveyJobRepository,
             IDocumentRepository documentRepository,
-            ISurveyorRepository surveyorRepository)
+            ISurveyorRepository surveyorRepository,
+            ISurveyJobsDomainService surveyJobsDomainService)
         {
             _surveyJobRepository = surveyJobRepository;
             _documentRepository = documentRepository;
             _surveyorRepository = surveyorRepository;
+            _surveyJobsDomainService = surveyJobsDomainService;
         }
 
         public async Task HandleAsync(AddSurveyJob command)
@@ -74,7 +78,8 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
                         throw new SurveyorNotFoundException(email);
                     }
 
-                    surveyJob.AddSurveyor(surveyor);
+                    var openSurveyJobs = await _surveyJobRepository.BrowseForSurveyorAsync(surveyor.Id);
+                    _surveyJobsDomainService.AssignSurveyor(surveyJob, openSurveyJobs, surveyor);
                 }
             }
         }
