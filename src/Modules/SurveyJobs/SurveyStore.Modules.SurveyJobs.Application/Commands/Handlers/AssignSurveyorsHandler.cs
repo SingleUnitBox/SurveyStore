@@ -5,6 +5,7 @@ using SurveyStore.Modules.SurveyJobs.Domain.Policies;
 using SurveyStore.Modules.SurveyJobs.Domain.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
@@ -14,17 +15,17 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
         private readonly ISurveyJobRepository _surveyJobRepository;
         private readonly ISurveyorRepository _surveyorRepository;
         private readonly ISurveyJobAssigningPolicy _policy;
-        private readonly ISurveyJobsDomainService _assignSurveyorService;
+        private readonly ISurveyJobsDomainService _surveyJobsDomainService;
 
         public AssignSurveyorsHandler(ISurveyJobRepository surveyJobRepository,
             ISurveyorRepository surveyorRepository,
             ISurveyJobAssigningPolicy policy,
-            ISurveyJobsDomainService assignSurveyorService)
+            ISurveyJobsDomainService surveyJobsDomainService)
         {
             _surveyJobRepository = surveyJobRepository;
             _surveyorRepository = surveyorRepository;
             _policy = policy;
-            _assignSurveyorService = assignSurveyorService;
+            _surveyJobsDomainService = surveyJobsDomainService;
         }
         public async Task HandleAsync(AssignSurveyors command)
         {
@@ -46,15 +47,16 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
                 surveyors.Add(surveyor);
             }
 
-            if (!_policy.CanJobBeAssign(surveyJob, surveyors))
+            if (!_policy.CanJobBeAssigned(surveyJob, surveyors))
             {
                 throw new SurveyJobBudgetExceededException(command.SurveyJobId);
             }
 
             foreach (var surveyor in surveyors)
             {
-                var openSurveyJobs = await _surveyJobRepository.BrowseForSurveyorAsync(surveyor.Id);
-                _assignSurveyorService.AssignSurveyor(surveyJob, openSurveyJobs, surveyor);
+                var openSurveyJobs = (await _surveyJobRepository.BrowseForSurveyorAsync(surveyor.Id))
+                    .Where(sj => sj.IssuedAt is null);
+                _surveyJobsDomainService.AssignSurveyor(surveyJob, openSurveyJobs, surveyor);
             }
             
             await _surveyJobRepository.UpdateAsync(surveyJob);

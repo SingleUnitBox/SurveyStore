@@ -2,7 +2,7 @@
 
 
 @surveyJobName = GAR
-@surveyJobId = 5c8dca37-0355-4e45-b803-068ef9d0ebde
+@surveyJobId = 6add9a13-fbdf-40c5-a02e-ae25696ba7b6
 
 @surveyorEmail = user1@gmail.com
 @surveyorEmail2 = user2@gmail.com
@@ -32,12 +32,13 @@ POST {{url}}/surveyJobs
 Content-Type: application/json
 
 {
-    "name": "GAR1",
+    "name": "GAR3",
     "briefIssued": "2024-05-27",
     "dueDate": "2024-06-26",
-    "budget": "3000",
+    "budget": "30000",
     "surveyType": "topo"
     //"documentLinks": ["http://photo1", "http://photo2"]
+    //"surveyorEmails": ["{{surveyorEmail}}", "{{surveyorEmail2}}"]
     //"surveyorEmails": ["{{surveyorEmail}}"]
 }
 

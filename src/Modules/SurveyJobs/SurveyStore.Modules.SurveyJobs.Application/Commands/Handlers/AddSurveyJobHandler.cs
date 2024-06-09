@@ -1,9 +1,11 @@
 ﻿using SurveyStore.Modules.SurveyJobs.Application.Exceptions;
 using SurveyStore.Modules.SurveyJobs.Domain.DomainServices;
 using SurveyStore.Modules.SurveyJobs.Domain.Entities;
+using SurveyStore.Modules.SurveyJobs.Domain.Policies;
 using SurveyStore.Modules.SurveyJobs.Domain.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
@@ -14,16 +16,19 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
         private readonly IDocumentRepository _documentRepository;
         private readonly ISurveyorRepository _surveyorRepository;
         private readonly ISurveyJobsDomainService _surveyJobsDomainService;
+        private readonly ISurveyJobAssigningPolicy _surveyJobAssigningPolicy;
 
         public AddSurveyJobHandler(ISurveyJobRepository surveyJobRepository,
             IDocumentRepository documentRepository,
             ISurveyorRepository surveyorRepository,
-            ISurveyJobsDomainService surveyJobsDomainService)
+            ISurveyJobsDomainService surveyJobsDomainService,
+            ISurveyJobAssigningPolicy surveyJobAssigningPolicy)
         {
             _surveyJobRepository = surveyJobRepository;
             _documentRepository = documentRepository;
             _surveyorRepository = surveyorRepository;
             _surveyJobsDomainService = surveyJobsDomainService;
+            _surveyJobAssigningPolicy = surveyJobAssigningPolicy;
         }
 
         public async Task HandleAsync(AddSurveyJob command)
@@ -35,7 +40,7 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
             }
 
             surveyJob = SurveyJob.Create(command.Id, command.Name, command.BriefIssued,
-                command.DueDate, command.SurveyType, command.Budget);
+                command.DueDate, command.SurveyType, command.Budget, command.CostToDeliver);
             if (command.DocumentLinks is not null)
             {
                 await AddDocuments(surveyJob, command.DocumentLinks);              
@@ -68,9 +73,10 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
 
         private async Task AssignSurveyors(SurveyJob surveyJob, IEnumerable<string> surveyorEmails)
         {
+            var surveyors = new HashSet<Surveyor>();
             foreach (var email in surveyorEmails)
             {
-                if (!string.IsNullOrWhiteSpace(email))
+                if (!string.IsNullOrEmpty(email))
                 {
                     var surveyor = await _surveyorRepository.GetByEmailAsync(email);
                     if (surveyor is null)
@@ -78,9 +84,20 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
                         throw new SurveyorNotFoundException(email);
                     }
 
-                    var openSurveyJobs = await _surveyJobRepository.BrowseForSurveyorAsync(surveyor.Id);
-                    _surveyJobsDomainService.AssignSurveyor(surveyJob, openSurveyJobs, surveyor);
+                    surveyors.Add(surveyor);
                 }
+            }
+
+            if (!_surveyJobAssigningPolicy.CanJobBeAssigned(surveyJob, surveyors))
+            {
+                throw new SurveyJobBudgetExceededException(surveyJob.Id);
+            }
+
+            foreach (var surveyor in surveyors)
+            {
+                var openSurveyJobs = (await _surveyJobRepository.BrowseForSurveyorAsync(surveyor.Id))
+                    .Where(sj => sj.IssuedAt is null);
+                _surveyJobsDomainService.AssignSurveyor(surveyJob, openSurveyJobs, surveyor);
             }
         }
     }

@@ -5,6 +5,6 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Policies
 {
     public interface ISurveyJobAssigningPolicy
     {
-        bool CanJobBeAssign(SurveyJob surveyJob, HashSet<Surveyor> surveyors);
+        bool CanJobBeAssigned(SurveyJob surveyJob, HashSet<Surveyor> surveyors);
     }
 }

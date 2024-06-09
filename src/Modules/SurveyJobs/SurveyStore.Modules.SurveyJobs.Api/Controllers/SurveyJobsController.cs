@@ -52,6 +52,13 @@ namespace SurveyStore.Modules.SurveyJobs.Api.Controllers
             return NoContent();
         }
 
+        [HttpPut("{id:guid}/issue")]
+        public async Task<ActionResult> Issue(Guid id, IssueSurveyJob command)
+        {
+            await _commandDispatcher.DispatchAsync(command with { SurveyJobId = id });
+            return NoContent();
+        }
+
         [HttpPut("{id:guid}/surveyors")]
         public async Task<ActionResult> AssignSurveyor(Guid id, AssignSurveyors command)
         {

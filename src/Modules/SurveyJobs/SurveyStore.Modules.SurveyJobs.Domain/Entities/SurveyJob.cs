@@ -57,7 +57,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
             IncrementVersion();
         }
          
-        public void ChangeIssuedDate(DateTime issuedAt)
+        public void ChangeIssuedAt(DateTime issuedAt)
         {
             IssuedAt = issuedAt;
             IncrementVersion();
@@ -94,7 +94,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         }
 
         public static SurveyJob Create(Guid id, string name, DateTime briefIssued,
-            DateTime dueDate, string surveyType, int? budget)
+            DateTime dueDate, string surveyType, int? budget, int? costToDeliver)
         {
             var surveyJob = new SurveyJob(id);
             surveyJob.ChangeSurveyJobName(name);
@@ -104,6 +104,11 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
             if (budget.HasValue)
             {
                 surveyJob.SetBudget(budget.Value);
+            }
+
+            if (costToDeliver.HasValue)
+            {
+                surveyJob.ChangeCostToDeliver(costToDeliver.Value);
             }
 
             surveyJob.Version = 0;
