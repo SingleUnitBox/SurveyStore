@@ -14,11 +14,16 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Configuration
             builder.HasKey(sj => sj.Id);
             builder.Property(sj => sj.Id)
                 .HasConversion(sj => sj.Value, sj => new(sj));
-
             builder.Property(sj => sj.Name)
                 .HasConversion(SurveyJobNameConverter.ValueConverter);
             builder.Property(sj => sj.SurveyType)
                 .HasConversion(SurveyTypeConverter.ValueConverter);
+            builder.Property(sj => sj.BriefIssued)
+                .HasConversion(DateConverter.ValueConverter);
+            builder.Property(sj => sj.DueDate)
+                .HasConversion(d => d.Value, dt => Date.Create(dt));
+            builder.Property(sj => sj.IssuedAt)
+                .HasConversion(DateConverter.ValueConverter);
             builder.Property(sj => sj.Budget)
                 .HasConversion(b => b.Value, b => new(b));
             builder.Property(sj => sj.CostToDeliver)

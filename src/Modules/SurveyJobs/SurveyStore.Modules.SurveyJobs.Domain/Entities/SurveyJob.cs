@@ -10,7 +10,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         public SurveyJobName Name { get; private set; }
         public Date BriefIssued { get; private set; }
         public Date DueDate { get; private set; }
-        public Date IssuedDate { get; private set; }
+        public Date IssuedAt { get; private set; }
         public SurveyType SurveyType { get; private set; }
         public Money Budget { get; private set; }
         public Money CostToDeliver { get; private set; }        
@@ -57,9 +57,9 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
             IncrementVersion();
         }
          
-        public void ChangeIssuedDate(DateTime issuedDate)
+        public void ChangeIssuedDate(DateTime issuedAt)
         {
-            IssuedDate = issuedDate;
+            IssuedAt = issuedAt;
             IncrementVersion();
         }
 

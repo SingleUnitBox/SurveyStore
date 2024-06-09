@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SurveyStore.Modules.SurveyJobs.Infrastructure.EF;
@@ -9,9 +10,10 @@ using SurveyStore.Modules.SurveyJobs.Infrastructure.EF;
 namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(SurveyJobsDbContext))]
-    partial class SurveyJobsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240609141526_EditSurveyJobConfiguration6")]
+    partial class EditSurveyJobConfiguration6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
