@@ -30,7 +30,7 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
             }
 
             var surveyors = new HashSet<Surveyor>();
-            foreach (var email in command.Emails)
+            foreach (var email in command.SurveyorEmails)
             {
                 var surveyor = await _surveyorRepository.GetByEmailAsync(email);
                 if (surveyor is null)

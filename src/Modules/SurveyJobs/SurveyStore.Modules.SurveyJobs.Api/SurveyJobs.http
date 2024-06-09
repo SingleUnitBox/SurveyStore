@@ -2,7 +2,7 @@
 
 
 @surveyJobName = GAR
-@surveyJobId = 650301c2-6a41-4a37-831d-9de958e13eec
+@surveyJobId = 7b091212-a65d-4864-aa87-bdfd7d690b71
 
 @surveyorEmail = user1@gmail.com
 
@@ -53,7 +53,7 @@ PUT {{url}}/surveyJobs/{{surveyJobId}}/surveyors
 Content-Type: application/json
 
 {
-    "email": "{{surveyorEmail}}"
+    "surveyorEmails": ["{{surveyorEmail}}"]
 }
 
 ###

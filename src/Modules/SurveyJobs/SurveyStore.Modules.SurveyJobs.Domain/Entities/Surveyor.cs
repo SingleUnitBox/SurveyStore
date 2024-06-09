@@ -26,6 +26,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         public void ChangeEmail(string email)
         {
             Email = email;
+            IncrementVersion();
         }
 
         public void ChangeFirstName(string firstName)
@@ -36,6 +37,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
             }
 
             FirstName = firstName;
+            IncrementVersion();
         }
 
         public void ChangeSurname(string surname)
@@ -46,11 +48,13 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
             }
 
             Surname = surname;
+            IncrementVersion();
         }
 
         public void AddSurveyJob(SurveyJob surveyJob)
         {
             _surveyJobs.Add(surveyJob);
+            IncrementVersion();
         }
 
         public static Surveyor Create(Guid id, string email, string firstName, string surname)
@@ -59,6 +63,9 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
             surveyor.ChangeEmail(email);
             surveyor.ChangeFirstName(firstName);
             surveyor.ChangeSurname(surname);
+
+            surveyor.Version = 0;
+            surveyor.ClearEvents();
 
             return surveyor;
         }

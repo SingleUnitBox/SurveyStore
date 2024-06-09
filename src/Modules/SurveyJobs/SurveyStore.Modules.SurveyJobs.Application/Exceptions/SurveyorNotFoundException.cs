@@ -15,7 +15,7 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Exceptions
         }
 
         public SurveyorNotFoundException(string email)
-            : base($"Surveyor with id '{email}' was not found.")
+            : base($"Surveyor with email '{email}' was not found.")
         {
             Email = email;
         }
