@@ -8,6 +8,6 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands
         DateTime DueDate, int? Budget, string SurveyType, IEnumerable<string> DocumentLinks = null,
         IEnumerable<string> SurveyorEmails = null) : ICommand
     {
-        public Guid Id => Guid.NewGuid();
+        public Guid Id { get; } = Guid.NewGuid();
     }
 }

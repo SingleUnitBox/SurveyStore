@@ -99,6 +99,9 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
                 surveyJob.SetBudget(budget.Value);
             }
 
+            surveyJob.Version = 0;
+            surveyJob.ClearEvents();
+
             return surveyJob;
         }
     }

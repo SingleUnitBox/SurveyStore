@@ -22,6 +22,8 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Queries
         {
             var surveyJobs = await _surveyJobs
                 .AsNoTracking()
+                .Include(sj => sj.Documents)
+                .Include(sj => sj.Surveyors)
                 .Where(sj => !sj.Surveyors.Any())
                 .Select(sj => sj.AsDto())
                 .ToListAsync();

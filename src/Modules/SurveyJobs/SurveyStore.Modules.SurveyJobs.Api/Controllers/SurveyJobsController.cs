@@ -44,5 +44,19 @@ namespace SurveyStore.Modules.SurveyJobs.Api.Controllers
             await _commandDispatcher.DispatchAsync(command);
             return CreatedAtAction(nameof(Get), new { Id = command.Id }, null);
         }
+
+        [HttpPut("{id:guid}/budget")]
+        public async Task<ActionResult> SetBudget(Guid id, SetSurveyJobBudget command)
+        {
+            await _commandDispatcher.DispatchAsync(command with { SurveyJobId = id });
+            return NoContent();
+        }
+
+        [HttpPut("{id:guid}/surveyors")]
+        public async Task<ActionResult> AssignSurveyor(Guid id, AssignSurveyors command)
+        {
+            await _commandDispatcher.DispatchAsync(command with { SurveyJobId = id });
+            return NoContent();
+        }
     }
 }

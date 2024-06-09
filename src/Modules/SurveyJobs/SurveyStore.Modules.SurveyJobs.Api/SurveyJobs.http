@@ -2,12 +2,15 @@
 
 
 @surveyJobName = GAR
-@surveyJobId = 7b3a5a67-fb45-471f-b5d5-8e95d93787f3
+@surveyJobId = 650301c2-6a41-4a37-831d-9de958e13eec
 
 @surveyorEmail = user1@gmail.com
 
 ###
 GET {{url}}
+
+###
+GET {{url}}/surveyJobs/free
 
 ###
 GET {{url}}/surveyJobs/{{surveyJobId}}
@@ -32,9 +35,25 @@ Content-Type: application/json
     "briefIssued": "2024-05-26",
     "dueDate": "2024-06-26",
     //"budget": "1",
-    "surveyType": "topo",
-    "documentLinks": ["http://photo1", "http://photo2"],
-    "surveyorEmails": ["{{surveyorEmail}}"]
+    "surveyType": "topo"
+    //"documentLinks": ["http://photo1", "http://photo2"]
+    //"surveyorEmails": ["{{surveyorEmail}}"]
+}
+
+###
+PUT {{url}}/surveyJobs/{{surveyJobId}}/budget
+Content-Type: application/json
+
+{
+    "budget": 9000
+}
+
+###
+PUT {{url}}/surveyJobs/{{surveyJobId}}/surveyors
+Content-Type: application/json
+
+{
+    "email": "{{surveyorEmail}}"
 }
 
 ###
@@ -43,5 +62,5 @@ Content-Type: application/json
 
 {
     "documentType": "photo",
-    "link": "http://photo2"
+    "link": "http://photo3"
 }
