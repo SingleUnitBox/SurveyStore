@@ -4,6 +4,8 @@ using SurveyStore.Modules.SurveyJobs.Domain.Policies;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("SurveyStore.Modules.SurveyJobs.Api")]
+[assembly: InternalsVisibleTo("SurveyStore.Modules.SurveyJobs.Tests.Unit")]
+
 namespace SurveyStore.Modules.SurveyJobs.Domain
 {
     internal static class Extensions
