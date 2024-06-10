@@ -34,6 +34,7 @@ using Convey.CQRS.Events;
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Stores.Api")]
 [assembly: InternalsVisibleTo("SurveyStore.Shared.Tests")]
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Users.Tests.Integration")]
+[assembly: InternalsVisibleTo("SurveyStore.Modules.SurveyJobs.Tests.Unit")]
 [assembly: InternalsVisibleTo("SurveyStore.Modules.Stores.Tests.Unit")]
 [assembly: InternalsVisibleTo("SurveyStore.Bootstrapper")]
 [assembly: InternalsVisibleTo("SurveyStore.Services.Stores.Api")]
