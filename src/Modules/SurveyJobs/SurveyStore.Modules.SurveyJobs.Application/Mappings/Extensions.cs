@@ -11,7 +11,7 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Mappings
             var surveyJobDto = new SurveyJobDto()
             {
                 Id = surveyJob.Id,
-                Name = surveyJob.Name.Name,
+                //Name = surveyJob.Name.Name,
                 BriefIssued = surveyJob.BriefIssued,
                 DueDate = surveyJob.DueDate,
                 SurveyType = surveyJob.SurveyType.Value,
