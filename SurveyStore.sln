@@ -105,6 +105,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Modules.SurveyJ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.SurveyJobs.Tests.Unit", "tests\SurveyStore.Modules.SurveyJobs.Tests.Unit\SurveyStore.Modules.SurveyJobs.Tests.Unit.csproj", "{3C45DCEC-081C-4AE8-901B-8EDC8502EDC5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payments", "Payments", "{1AE9DAA4-993B-4E81-B3AA-E12D8406F8D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.Payments.Domain", "src\Modules\Payments\SurveyStore.Payments.Domain\SurveyStore.Modules.Payments.Domain.csproj", "{9FE54DFF-02A7-43D2-827E-318DD6593694}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.Payments.Application", "src\Modules\Payments\SurveyStore.Payments.Application\SurveyStore.Modules.Payments.Application.csproj", "{C25F39D9-6E62-47DA-91CD-B26967AFC462}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.Payments.Infrastructure", "src\Modules\Payments\SurveyStore.Payments.Infrastructure\SurveyStore.Modules.Payments.Infrastructure.csproj", "{28BE36E5-BDE1-44A2-8612-C98193D2086F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.Payments.Api", "src\Modules\Payments\SurveyStore.Payments.Api\SurveyStore.Modules.Payments.Api.csproj", "{8A8CFEB4-6EDA-4105-9BBF-7EAFE5773BD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -251,6 +261,22 @@ Global
 		{3C45DCEC-081C-4AE8-901B-8EDC8502EDC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C45DCEC-081C-4AE8-901B-8EDC8502EDC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C45DCEC-081C-4AE8-901B-8EDC8502EDC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FE54DFF-02A7-43D2-827E-318DD6593694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FE54DFF-02A7-43D2-827E-318DD6593694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FE54DFF-02A7-43D2-827E-318DD6593694}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FE54DFF-02A7-43D2-827E-318DD6593694}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C25F39D9-6E62-47DA-91CD-B26967AFC462}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C25F39D9-6E62-47DA-91CD-B26967AFC462}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C25F39D9-6E62-47DA-91CD-B26967AFC462}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C25F39D9-6E62-47DA-91CD-B26967AFC462}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28BE36E5-BDE1-44A2-8612-C98193D2086F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28BE36E5-BDE1-44A2-8612-C98193D2086F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28BE36E5-BDE1-44A2-8612-C98193D2086F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28BE36E5-BDE1-44A2-8612-C98193D2086F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A8CFEB4-6EDA-4105-9BBF-7EAFE5773BD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A8CFEB4-6EDA-4105-9BBF-7EAFE5773BD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A8CFEB4-6EDA-4105-9BBF-7EAFE5773BD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A8CFEB4-6EDA-4105-9BBF-7EAFE5773BD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -305,6 +331,11 @@ Global
 		{8422886D-80FC-452B-8A23-F3F43428F2AB} = {91A97A41-655D-4A9D-AE9C-8F5E9399200C}
 		{7ADB8C5D-5044-4E0B-9BD8-DC5E25259421} = {91A97A41-655D-4A9D-AE9C-8F5E9399200C}
 		{3C45DCEC-081C-4AE8-901B-8EDC8502EDC5} = {771C4F8D-80AE-438C-917C-54E35E50A289}
+		{1AE9DAA4-993B-4E81-B3AA-E12D8406F8D0} = {FD42E17F-29F4-4A79-8DAE-490EBBE6A081}
+		{9FE54DFF-02A7-43D2-827E-318DD6593694} = {1AE9DAA4-993B-4E81-B3AA-E12D8406F8D0}
+		{C25F39D9-6E62-47DA-91CD-B26967AFC462} = {1AE9DAA4-993B-4E81-B3AA-E12D8406F8D0}
+		{28BE36E5-BDE1-44A2-8612-C98193D2086F} = {1AE9DAA4-993B-4E81-B3AA-E12D8406F8D0}
+		{8A8CFEB4-6EDA-4105-9BBF-7EAFE5773BD4} = {1AE9DAA4-993B-4E81-B3AA-E12D8406F8D0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C381337B-40C7-45CC-8FB7-1F8E39A37BE8}

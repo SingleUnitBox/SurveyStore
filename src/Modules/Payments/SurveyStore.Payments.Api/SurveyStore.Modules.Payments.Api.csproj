@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="module.development.payments.json" />
+    <None Remove="module.payments.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="module.development.payments.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="module.payments.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SurveyStore.Payments.Infrastructure\SurveyStore.Modules.Payments.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

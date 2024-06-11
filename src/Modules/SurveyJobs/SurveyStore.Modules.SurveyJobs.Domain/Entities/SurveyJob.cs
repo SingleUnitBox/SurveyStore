@@ -7,8 +7,8 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
 {
     public class SurveyJob : AggregateRoot
     {
-        private string _name;
-        //public SurveyJobName Name { get; private set; }
+        //private string _name;
+        public SurveyJobName Name { get; private set; }
         public Date BriefIssued { get; private set; }
         public Date DueDate { get; private set; }
         public Date IssuedAt { get; private set; }
@@ -20,7 +20,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
         public IEnumerable<Document> Documents => _documents;
         private readonly List<Document> _documents = new List<Document>();
 
-        public SurveyJob()
+        private SurveyJob()
         {
             
         }
@@ -42,7 +42,7 @@ namespace SurveyStore.Modules.SurveyJobs.Domain.Entities
 
         public void ChangeSurveyJobName(string name)
         {
-            _name = SurveyJobName.Create(name);
+            Name = SurveyJobName.Create(name);
             IncrementVersion();
         }
 

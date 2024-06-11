@@ -1,8 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Internal;
+﻿using Shouldly;
 using SurveyStore.Modules.SurveyJobs.Domain.Entities;
 using SurveyStore.Shared.Tests;
 using System;
-using System.Reflection;
 using Xunit;
 
 namespace SurveyStore.Modules.SurveyJobs.Tests.Unit.Entities
@@ -14,12 +13,10 @@ namespace SurveyStore.Modules.SurveyJobs.Tests.Unit.Entities
         [Fact]
         public void correct_input_should_change_survey_job_name()
         {
-            Act("SurveyJobNewName");
+            var newName = "newSurveyJobName";
+            Act(newName);
 
-            var myClass = new SurveyJob();
-            var type = myClass.GetType();
-
-            var name = type.GetField("_name", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(myClass);
+            _surveyJob.Name.Name.ShouldBe(newName);
         }
 
         public SurveyJob_ChangeSurveyJobName_Tests()

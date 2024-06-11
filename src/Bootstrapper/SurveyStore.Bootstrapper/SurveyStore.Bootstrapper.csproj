@@ -15,6 +15,7 @@
     <ProjectReference Include="..\..\Modules\Calibrations\SurveyStore.Modules.Calibrations.Api\SurveyStore.Modules.Calibrations.Api.csproj" />
     <ProjectReference Include="..\..\Modules\Collections\SurveyStore.Modules.Collections.Api\SurveyStore.Modules.Collections.Api.csproj" />
     <ProjectReference Include="..\..\Modules\Equipment\SurveyStore.Modules.Equipment.Api\SurveyStore.Modules.Equipment.Api.csproj" />
+    <ProjectReference Include="..\..\Modules\Payments\SurveyStore.Payments.Api\SurveyStore.Modules.Payments.Api.csproj" />
     <ProjectReference Include="..\..\Modules\Saga\SurveyStore.Modules.Saga\SurveyStore.Modules.Saga.csproj" />
     <ProjectReference Include="..\..\Modules\Stores\SurveyStore.Modules.Stores.Api\SurveyStore.Modules.Stores.Api.csproj" />
     <ProjectReference Include="..\..\Modules\SurveyJobs\SurveyStore.Modules.SurveyJobs.Api\SurveyStore.Modules.SurveyJobs.Api.csproj" />
