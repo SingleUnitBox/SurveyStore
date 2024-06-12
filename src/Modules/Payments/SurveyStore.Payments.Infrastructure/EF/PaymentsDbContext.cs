@@ -3,7 +3,7 @@ using SurveyStore.Modules.Payments.Domain.Entities;
 
 namespace SurveyStore.Modules.Payments.Infrastructure.EF
 {
-    public class PaymentsDbContext : DbContext
+    internal sealed class PaymentsDbContext : DbContext
     {
         public DbSet<SurveyJob> SurveyJobs { get; set; }
         public PaymentsDbContext(DbContextOptions<PaymentsDbContext> dbOptions)
