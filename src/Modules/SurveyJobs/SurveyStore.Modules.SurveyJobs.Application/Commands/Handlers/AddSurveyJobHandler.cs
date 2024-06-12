@@ -1,9 +1,11 @@
-﻿using SurveyStore.Modules.SurveyJobs.Application.Exceptions;
+﻿using SurveyStore.Modules.SurveyJobs.Application.Events;
+using SurveyStore.Modules.SurveyJobs.Application.Exceptions;
 using SurveyStore.Modules.SurveyJobs.Domain.DomainServices;
 using SurveyStore.Modules.SurveyJobs.Domain.Entities;
 using SurveyStore.Modules.SurveyJobs.Domain.Policies;
 using SurveyStore.Modules.SurveyJobs.Domain.Repositories;
 using SurveyStore.Shared.Abstractions.Commands;
+using SurveyStore.Shared.Abstractions.Messaging;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +19,7 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
         private readonly ISurveyorRepository _surveyorRepository;
         private readonly ISurveyJobsDomainService _surveyJobsDomainService;
         private readonly ISurveyJobAssigningPolicy _surveyJobAssigningPolicy;
+        private readonly IMessageBroker _messageBroker;
 
         public AddSurveyJobHandler(ISurveyJobRepository surveyJobRepository,
             IDocumentRepository documentRepository,
@@ -52,6 +55,7 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
             }
 
             await _surveyJobRepository.AddAsync(surveyJob);
+            await _messageBroker.PublishAsync(new SurveyJobCreated(surveyJob.Id));
         }
 
         private async Task AddDocuments(SurveyJob surveyJob, IEnumerable<string> documentLinks)
