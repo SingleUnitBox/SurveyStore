@@ -39,7 +39,7 @@ using Convey.CQRS.Events;
 [assembly: InternalsVisibleTo("SurveyStore.Bootstrapper")]
 [assembly: InternalsVisibleTo("SurveyStore.Services.Stores.Api")]
 [assembly: InternalsVisibleTo("SurveyStore.Services.Stores.Core")]
-
+[assembly: InternalsVisibleTo("SurveyStore.Modules.SurveyJobs.Api")]
 [assembly: InternalsVisibleTo("SurveyStore.Modules.SurveyJobs.Infrastructure")]
 
 namespace SurveyStore.Shared.Infrastructure

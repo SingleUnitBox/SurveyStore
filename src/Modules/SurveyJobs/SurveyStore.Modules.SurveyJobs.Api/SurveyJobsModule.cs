@@ -5,6 +5,10 @@ using SurveyStore.Modules.SurveyJobs.Domain;
 using SurveyStore.Modules.SurveyJobs.Infrastructure;
 using SurveyStore.Shared.Abstractions.Modules;
 using System.Collections.Generic;
+using SurveyStore.Shared.Infrastructure.Modules;
+using SurveyStore.Modules.SurveyJobs.Application.DTO;
+using SurveyStore.Modules.SurveyJobs.Application.Queries;
+using SurveyStore.Shared.Abstractions.Queries;
 
 namespace SurveyStore.Modules.SurveyJobs.Api
 {
@@ -28,6 +32,9 @@ namespace SurveyStore.Modules.SurveyJobs.Api
         public void Use(IApplicationBuilder app)
         {
             app.UseInfrastructure();
+            app.UseModuleRequests()
+                .Subscribe<GetSurveyJobById, SurveyJobDto>("surveyJobs/get",
+                (query, sp) => sp.GetRequiredService<IQueryDispatcher>().QueryAsync(query));
         }
     }
 }

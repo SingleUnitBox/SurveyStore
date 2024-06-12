@@ -25,13 +25,15 @@ namespace SurveyStore.Modules.SurveyJobs.Application.Commands.Handlers
             IDocumentRepository documentRepository,
             ISurveyorRepository surveyorRepository,
             ISurveyJobsDomainService surveyJobsDomainService,
-            ISurveyJobAssigningPolicy surveyJobAssigningPolicy)
+            ISurveyJobAssigningPolicy surveyJobAssigningPolicy,
+            IMessageBroker messageBroker)
         {
             _surveyJobRepository = surveyJobRepository;
             _documentRepository = documentRepository;
             _surveyorRepository = surveyorRepository;
             _surveyJobsDomainService = surveyJobsDomainService;
             _surveyJobAssigningPolicy = surveyJobAssigningPolicy;
+            _messageBroker = messageBroker;
         }
 
         public async Task HandleAsync(AddSurveyJob command)

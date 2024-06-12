@@ -1,7 +1,7 @@
 ﻿using SurveyStore.Shared.Abstractions.Events;
-using SurveyStore.Shared.Abstractions.Kernel.Types;
+using System;
 
 namespace SurveyStore.Modules.SurveyJobs.Application.Events
 {
-    public record SurveyJobCreated(AggregateId Id) : IEvent;
+    public record SurveyJobCreated(Guid Id) : IEvent;
 }
