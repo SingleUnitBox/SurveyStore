@@ -5,7 +5,7 @@
 </div>
 
 ## Overview
-SurveyStore is an application to help professionals keep track of their survey equipment and tasks related to the daily routine. It is a part of the "100commitow" challenge by [DevMentors](https://github.com/devmentors). 
+SurveyStore is an application to help professionals keep track of their survey equipment and tasks related to the daily routine. It is a part of the "100commitow" challenge by [DevMentors](https://github.com/devmentors).
 
 ## Features
 - Equipment Management: Track and manage all your survey equipment efficiently.
