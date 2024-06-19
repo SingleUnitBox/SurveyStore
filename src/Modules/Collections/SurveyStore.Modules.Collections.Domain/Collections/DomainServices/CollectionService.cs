@@ -23,15 +23,15 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
 
         public void CanBeCollected(IEnumerable<Collection> openCollections, Surveyor surveyor, Collection toBeCollected, DateTime now)
         {
-            var surveyEquipmentTypes = openCollections.Select(c => c.SurveyEquipment.Type);
-            foreach (var surveyEquipmentType in surveyEquipmentTypes)
-            {
-                if (_kitConstOptions.LimitedSurveyEquipmentTypes.Contains(surveyEquipmentType)
-                    && toBeCollected.SurveyEquipment.Type == surveyEquipmentType)
-                {
-                    throw new CannotCollectSurveyEquipmentException(surveyEquipmentType);
-                }
-            }
+            //var surveyEquipmentTypes = openCollections.Select(c => c.SurveyEquipment.Type);
+            //foreach (var surveyEquipmentType in surveyEquipmentTypes)
+            //{
+            //    if (_kitConstOptions.LimitedSurveyEquipmentTypes.Contains(surveyEquipmentType)
+            //        && toBeCollected.SurveyEquipment.Type == surveyEquipmentType)
+            //    {
+            //        throw new CannotCollectSurveyEquipmentException(surveyEquipmentType);
+            //    }
+            //}
 
             //toBeCollected.Collect(surveyor, now);
         }

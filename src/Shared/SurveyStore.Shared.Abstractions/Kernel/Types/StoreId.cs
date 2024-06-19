@@ -6,7 +6,7 @@ namespace SurveyStore.Shared.Abstractions.Kernel.Types
     {
         public StoreId(Guid value) : base(value)
         {
-            
+
         }
 
         public static implicit operator Guid(StoreId id) => id.Value;

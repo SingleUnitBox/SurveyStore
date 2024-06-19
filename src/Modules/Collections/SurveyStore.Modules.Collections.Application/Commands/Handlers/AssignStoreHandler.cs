@@ -35,17 +35,18 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 
         public async Task HandleAsync(AssignStore command)
         {
+            //should I check different module???
             var calibration = await _calibrationsApiClient.GetCalibrationAsync(command.SurveyEquipmentId);
             if (calibration?.CalibrationStatus.ToString() == "ToBeReturnForCalibration")
             {
                 throw new SurveyEquipmentToBeCalibratedException(command.SurveyEquipmentId);
             }
             
-            var collection = await _collectionRepository.GetOpenBySurveyEquipmentAsync(command.SurveyEquipmentId);
-            if (collection is not null)
-            {
-                throw new CannotAssignStoreException(command.SurveyEquipmentId);
-            }
+            //var collection = await _collectionRepository.GetOpenBySurveyEquipmentAsync(command.SurveyEquipmentId);
+            //if (collection is not null)
+            //{
+            //    throw new CannotAssignStoreException(command.SurveyEquipmentId);
+            //}
 
             var surveyEquipment = await _surveyEquipmentRepository.GetByIdAsync(command.SurveyEquipmentId);
             if (surveyEquipment is null)
@@ -61,20 +62,23 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 
             surveyEquipment.AssignStore(command.StoreId);
             await _surveyEquipmentRepository.UpdateAsync(surveyEquipment);
+
+            var events = _eventMapper.MapAll(surveyEquipment.Events);
+            await _messageBroker.PublishAsync(events.ToArray());
             
-            collection = await _collectionRepository.GetFreeBySurveyEquipmentAsync(command.SurveyEquipmentId);
-            if (collection is not null)
-            {
-                collection.ChangeCollectionStoreId(command.StoreId);
-                await _collectionRepository.UpdateAsync(collection);
-            }
-            else
-            {
-                //collection = Collection.Create(Guid.NewGuid(), command.SurveyEquipmentId);
-                //await _collectionRepository.AddAsync(collection);
-                var events = _eventMapper.MapAll(surveyEquipment.Events);
-                await _messageBroker.PublishAsync(events.ToArray());
-            }           
+            //collection = await _collectionRepository.GetFreeBySurveyEquipmentAsync(command.SurveyEquipmentId);
+            //if (collection is not null)
+            //{
+            //    collection.ChangeCollectionStoreId(command.StoreId);
+            //    await _collectionRepository.UpdateAsync(collection);
+            //}
+            //else
+            //{
+            //    //collection = Collection.Create(Guid.NewGuid(), command.SurveyEquipmentId);
+            //    //await _collectionRepository.AddAsync(collection);
+            //    var events = _eventMapper.MapAll(surveyEquipment.Events);
+            //    await _messageBroker.PublishAsync(events.ToArray());
+            //}           
         }
     }
 }

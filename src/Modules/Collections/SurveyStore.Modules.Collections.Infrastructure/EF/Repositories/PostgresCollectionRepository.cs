@@ -38,15 +38,15 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
         // do not let to create multiple OPEN collections for same equipment
         public async Task<Collection> GetFreeBySurveyEquipmentAsync(AggregateId surveyEquipmentId)
             => await _collections
-                .Where(c => c.SurveyEquipmentId == surveyEquipmentId
+                .Where(c => c.SurveyEquipmentId == surveyEquipmentId.Value
                             && c.ReturnStoreId == null
                             && c.CollectedAt == null)
-                .Include(c => c.SurveyEquipment)
+                //.Include(c => c.SurveyEquipment)
                 .SingleOrDefaultAsync();
 
         public async Task<Collection> GetOpenBySurveyEquipmentAsync(AggregateId surveyEquipmentId)
             => await _collections
-                .Where(c => c.SurveyEquipmentId == surveyEquipmentId
+                .Where(c => c.SurveyEquipmentId == surveyEquipmentId.Value
                     && c.ReturnStoreId == null
                     && c.CollectedAt != null)
                 .Include(c => c.Surveyor)
@@ -54,7 +54,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
 
         public async Task<Collection> GetCompletedBySurveyEquipmentAsync(AggregateId surveyEquipmentId)
             => await _collections
-                .Where(c => c.SurveyEquipmentId == surveyEquipmentId
+                .Where(c => c.SurveyEquipmentId == surveyEquipmentId.Value
                             && c.ReturnStoreId == null
                             && c.ReturnedAt != null)
                 .OrderBy(c => c.ReturnedAt)
@@ -64,12 +64,12 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
         public async Task<IEnumerable<Collection>> BrowseCollectionsAsync(AggregateId surveyEquipmentId)
             => await _collections
                 .Include(c => c.Surveyor)
-                .Where(c => c.SurveyEquipmentId == surveyEquipmentId)
+                .Where(c => c.SurveyEquipmentId == surveyEquipmentId.Value)
                 .ToListAsync();
 
         public async Task<IEnumerable<Collection>> BrowseOpenCollectionsBySurveyorIdAsync(SurveyorId surveyorId)
             => await _collections
-                .Include(c => c.SurveyEquipment)
+                //.Include(c => c.SurveyEquipment)
                 .Where(c => c.Surveyor.Id == surveyorId
                 && c.CollectedAt != null
                 && c.ReturnedAt == null)

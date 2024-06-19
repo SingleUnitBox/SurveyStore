@@ -1,8 +1,8 @@
 @url = http://localhost:5000/jobs-module
 
 
-@surveyJobName = GAR
-@surveyJobId = 6add9a13-fbdf-40c5-a02e-ae25696ba7b6
+@surveyJobName = GAR3
+@surveyJobId = 09fbea3b-fb88-49c0-8102-61952d393220
 
 @surveyorEmail = user1@gmail.com
 @surveyorEmail2 = user2@gmail.com
@@ -32,13 +32,13 @@ POST {{url}}/surveyJobs
 Content-Type: application/json
 
 {
-    "name": "GAR3",
+    "name": "GAR",
     "briefIssued": "2024-05-27",
     "dueDate": "2024-06-26",
     "budget": "30000",
-    "surveyType": "topo"
+    "surveyType": "topo",
     //"documentLinks": ["http://photo1", "http://photo2"]
-    //"surveyorEmails": ["{{surveyorEmail}}", "{{surveyorEmail2}}"]
+    "surveyorEmails": ["{{surveyorEmail}}", "{{surveyorEmail2}}"]
     //"surveyorEmails": ["{{surveyorEmail}}"]
 }
 
@@ -48,6 +48,14 @@ Content-Type: application/json
 
 {
     "budget": 90000
+}
+
+###
+PUT {{url}}/surveyJobs/{{surveyJobId}}/issue
+Content-Type: application/json
+
+{
+    "issuedAt": "2024-06-09"
 }
 
 ###

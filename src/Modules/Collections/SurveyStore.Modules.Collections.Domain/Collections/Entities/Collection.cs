@@ -10,12 +10,12 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
         public Surveyor Surveyor { get; private set; }
         public StoreId CollectionStoreId { get; private set; }
         public StoreId ReturnStoreId { get; private set; }
-        public SurveyEquipment SurveyEquipment { get; private set; }
-        public AggregateId SurveyEquipmentId { get; private set; }
+        //public SurveyEquipment SurveyEquipment { get; private set; }
+        public SurveyEquipmentId SurveyEquipmentId { get; private set; }
         public DateTime? CollectedAt { get; private set; }
         public DateTime? ReturnedAt { get; private set; }
 
-        public Collection(AggregateId id, AggregateId surveyEquipmentId)
+        private Collection(AggregateId id, SurveyEquipmentId surveyEquipmentId)
         {
             Id = id;
             SurveyEquipmentId = surveyEquipmentId;
@@ -24,6 +24,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
         public void ChangeCollectionStoreId(StoreId collectionStoreId)
         {
             CollectionStoreId = collectionStoreId;
+            //SurveyEquipment.AssignStore(collectionStoreId);
             IncrementVersion();
         }
 
@@ -36,6 +37,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
 
             Surveyor = surveyor;
             CollectedAt = collectedAt;
+            //SurveyEquipment.UnassignStore();
             IncrementVersion();
         }
 
