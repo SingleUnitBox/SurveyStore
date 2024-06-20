@@ -31,6 +31,11 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
 
         public void AssignStore(StoreId storeId)
         {
+            if (StoreId == storeId)
+            {
+                return;
+            }
+
             StoreId = storeId;
             AddEvent(new StoreAssigned(this, storeId));
         }
