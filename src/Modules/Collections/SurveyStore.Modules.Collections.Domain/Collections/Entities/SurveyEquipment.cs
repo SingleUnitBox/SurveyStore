@@ -38,7 +38,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
         public void UnassignStore()
         {
             StoreId = null;
-            //IncrementVersion();
+            IncrementVersion();
         }
 
         public static SurveyEquipment Create(Guid id, string serialNumber, string brand, string model, string type)
