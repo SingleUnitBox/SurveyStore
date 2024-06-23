@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SurveyStore.Modules.Payments.Domain.ValueObjects
+namespace SurveyStore.Shared.Abstractions.Kernel.Types
 {
     public class Date
     {

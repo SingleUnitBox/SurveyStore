@@ -20,15 +20,17 @@ namespace SurveyStore.Modules.Collections.Application.Events.Handlers
 
         public async Task HandleAsync(CollectionCreated @event)
         {
-            var collections = await _collectionRepository.BrowseCollectionsAsync(new AggregateId(@event.SurveyEquipmentId));
-            if (collections.Any(c => c.CollectedAt is null
-            && c.ReturnedAt is null
-            && c.Surveyor is null))
+            var collection = await _collectionRepository.GetFreeBySurveyEquipmentAsync(new AggregateId(@event.SurveyEquipmentId));
+            //var collections = await _collectionRepository.BrowseCollectionsAsync(new AggregateId(@event.SurveyEquipmentId));
+            //if (collections.Any(c => c.CollectedAt is null
+            //&& c.ReturnedAt is null
+            //&& c.Surveyor is null))
+            if (collection is not null)
             {
                 throw new FreeCollectionAlreadyExistsException(@event.SurveyEquipmentId);
             }
 
-            var collection = Collection.Create(Guid.NewGuid(), @event.SurveyEquipmentId);
+            collection = Collection.Create(Guid.NewGuid(), @event.SurveyEquipmentId);
             collection.ChangeCollectionStoreId(@event.CollectionStoreId);
             
             await _collectionRepository.AddAsync(collection);

@@ -13,24 +13,24 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
     {
         private readonly ISurveyEquipmentRepository _surveyEquipmentRepository;
         private readonly IStoreRepository _storeRepository;
-        private readonly ICollectionRepository _collectionRepository;
         private readonly ICalibrationsApiClient _calibrationsApiClient;
+        private readonly ICollectionRepository _collectionRepository;
         private readonly IEventMapper _eventMapper;
         private readonly IMessageBroker _messageBroker;
 
         public AssignStoreHandler(ISurveyEquipmentRepository surveyEquipmentRepository,
             IStoreRepository storeRepository,
-            ICollectionRepository collectionRepository,
             IEventMapper eventMapper,
             IMessageBroker messageBroker,
-            ICalibrationsApiClient calibrationsApiClient)
+            ICalibrationsApiClient calibrationsApiClient,
+            ICollectionRepository collectionRepository)
         {
             _surveyEquipmentRepository = surveyEquipmentRepository;
             _storeRepository = storeRepository;
-            _collectionRepository = collectionRepository;
             _eventMapper = eventMapper;
             _messageBroker = messageBroker;
             _calibrationsApiClient = calibrationsApiClient;
+            _collectionRepository = collectionRepository;
         }
 
         public async Task HandleAsync(AssignStore command)
@@ -41,12 +41,12 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             {
                 throw new SurveyEquipmentToBeCalibratedException(command.SurveyEquipmentId);
             }
-            
-            //var collection = await _collectionRepository.GetOpenBySurveyEquipmentAsync(command.SurveyEquipmentId);
-            //if (collection is not null)
-            //{
-            //    throw new CannotAssignStoreException(command.SurveyEquipmentId);
-            //}
+
+            var collection = await _collectionRepository.GetOpenBySurveyEquipmentAsync(command.SurveyEquipmentId);
+            if (collection is not null)
+            {
+                throw new CannotAssignStoreException(command.SurveyEquipmentId);
+            }
 
             var surveyEquipment = await _surveyEquipmentRepository.GetByIdAsync(command.SurveyEquipmentId);
             if (surveyEquipment is null)
@@ -64,21 +64,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             await _surveyEquipmentRepository.UpdateAsync(surveyEquipment);
 
             var events = _eventMapper.MapAll(surveyEquipment.Events);
-            await _messageBroker.PublishAsync(events.ToArray());
-            
-            //collection = await _collectionRepository.GetFreeBySurveyEquipmentAsync(command.SurveyEquipmentId);
-            //if (collection is not null)
-            //{
-            //    collection.ChangeCollectionStoreId(command.StoreId);
-            //    await _collectionRepository.UpdateAsync(collection);
-            //}
-            //else
-            //{
-            //    //collection = Collection.Create(Guid.NewGuid(), command.SurveyEquipmentId);
-            //    //await _collectionRepository.AddAsync(collection);
-            //    var events = _eventMapper.MapAll(surveyEquipment.Events);
-            //    await _messageBroker.PublishAsync(events.ToArray());
-            //}           
+            await _messageBroker.PublishAsync(events.ToArray());        
         }
     }
 }

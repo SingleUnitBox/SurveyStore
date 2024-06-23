@@ -15,6 +15,8 @@ namespace SurveyStore.Modules.Collections.Application.Services
             => domainEvent switch
             {
                 StoreAssigned de => new CollectionUpdated(new SurveyEquipmentId(de.SurveyEquipment.Id.Value), de.StoreId),
+                SurveyEquipmentCollected de => new StoreUnassigned(de.SurveyEquipmentId, de.CollectionStoreId),
+
                 StoreAssignedToKit de => new KitCollectionCreated(new KitId(de.Kit.Id.Value), de.StoreId),
                 _ => null
             };

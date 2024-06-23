@@ -38,6 +38,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
             Surveyor = surveyor;
             CollectedAt = collectedAt;
             //SurveyEquipment.UnassignStore();
+            AddEvent(new SurveyEquipmentCollected(SurveyEquipmentId, CollectionStoreId));
             IncrementVersion();
         }
 

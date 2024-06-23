@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SurveyStore.Modules.SurveyJobs.Domain.Entities;
 using SurveyStore.Modules.SurveyJobs.Domain.ValueObjects;
 using SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Configuration.ValueConverters;
+using SurveyStore.Shared.Abstractions.Kernel.Types;
 
 namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Configuration
 {
@@ -21,7 +22,7 @@ namespace SurveyStore.Modules.SurveyJobs.Infrastructure.EF.Configuration
             builder.Property(sj => sj.BriefIssued)
                 .HasConversion(DateConverter.ValueConverter);
             builder.Property(sj => sj.DueDate)
-                .HasConversion(d => d.Value, dt => Date.Create(dt));
+                .HasConversion(d => d.Value, dt => new Date(dt));
             builder.Property(sj => sj.IssuedAt)
                 .HasConversion(DateConverter.ValueConverter);
             builder.Property(sj => sj.Budget)
