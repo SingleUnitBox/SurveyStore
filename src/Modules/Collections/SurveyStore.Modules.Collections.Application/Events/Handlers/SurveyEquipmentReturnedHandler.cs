@@ -1,24 +1,28 @@
-﻿using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
+﻿using Microsoft.EntityFrameworkCore.Query.Internal;
 using SurveyStore.Modules.Collections.Application.Exceptions;
-using SurveyStore.Shared.Abstractions.Events;
-using System.Threading.Tasks;
 using SurveyStore.Modules.Collections.Application.Services;
+using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
+using SurveyStore.Shared.Abstractions.Events;
 using SurveyStore.Shared.Abstractions.Messaging;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Collections.Application.Events.Handlers
 {
-    public class StoreUnassignedHandler : IEventHandler<SurveyEquipmentReturned>
+    public class SurveyEquipmentReturnedHandler : IEventHandler<SurveyEquipmentReturned>
     {
         private readonly ISurveyEquipmentRepository _surveyEquipmentRepository;
+        private readonly IStoreRepository _storeRepository;
         private readonly IEventMapper _eventMapper;
         private readonly IMessageBroker _messageBroker;
 
-        public StoreUnassignedHandler(ISurveyEquipmentRepository surveyEquipmentRepository,
+        public SurveyEquipmentReturnedHandler(ISurveyEquipmentRepository surveyEquipmentRepository,
+            IStoreRepository storeRepository,
             IEventMapper eventMapper,
             IMessageBroker messageBroker)
         {
             _surveyEquipmentRepository = surveyEquipmentRepository;
+            _storeRepository = storeRepository;
             _eventMapper = eventMapper;
             _messageBroker = messageBroker;
         }
@@ -31,8 +35,13 @@ namespace SurveyStore.Modules.Collections.Application.Events.Handlers
                 throw new SurveyEquipmentNotFoundException(@event.SurveyEquipmentId);
             }
 
-            surveyEquipment.AssignStore(@event.StoreId);
-            await _surveyEquipmentRepository.UpdateAsync(surveyEquipment);
+            var store = await _storeRepository.GetByIdAsync(@event.StoreId);
+            if (store is null)
+            {
+                throw new StoreNotFoundException(@event.StoreId);
+            }
+
+            surveyEquipment.AssignStore(store.Id);
 
             var events = _eventMapper.MapAll(surveyEquipment.Events);
             await _messageBroker.PublishAsync(events.ToArray());

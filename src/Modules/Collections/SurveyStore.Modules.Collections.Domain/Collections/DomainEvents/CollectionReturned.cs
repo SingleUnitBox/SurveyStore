@@ -4,5 +4,5 @@ using SurveyStore.Shared.Abstractions.Kernel.Types;
 
 namespace SurveyStore.Modules.Collections.Domain.Collections.DomainEvents
 {
-    public record SurveyEquipmentCollected(SurveyEquipmentId SurveyEquipmentId, StoreId CollectionStoreId) : IDomainEvent;
+    public record CollectionReturned(SurveyEquipmentId SurveyEquipmentId, StoreId ReturnStoreId) : IDomainEvent;
 }

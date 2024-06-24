@@ -37,8 +37,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
 
             Surveyor = surveyor;
             CollectedAt = collectedAt;
-            //SurveyEquipment.UnassignStore();
-            AddEvent(new SurveyEquipmentCollected(SurveyEquipmentId, CollectionStoreId));
+            AddEvent(new CollectionCollected(SurveyEquipmentId, CollectionStoreId));
             IncrementVersion();
         }
 
@@ -46,7 +45,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
         {
             ReturnStoreId = returnStoreId;
             ReturnedAt = returnAt;
-            AddEvent(new ReturnStoreAssigned(ReturnStoreId?.Value));
+            AddEvent(new CollectionReturned(SurveyEquipmentId, ReturnStoreId?.Value));
             IncrementVersion();
         }
 

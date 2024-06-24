@@ -67,7 +67,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 
             if (!_collectionPolicy.CanBeReturned(collection, surveyor))
             {
-                throw new ReturningOtherCollectionException(collection.Id, surveyor.Id);
+                throw new CollectionDoesNotBelongToSurveyorException(collection.Id, surveyor.Id);
             }
 
             var openKitCollections = await _kitCollectionRepository

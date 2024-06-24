@@ -59,8 +59,15 @@ namespace SurveyStore.Modules.Collections.Api.Controllers
             return NoContent();
         }
 
+        [HttpPut("equipment/{id:guid}/return")]
+        public async Task<ActionResult> ReturnAsync(Guid id, ReturnSurveyEquipment command)
+        {
+            await _commandDispatcher.DispatchAsync(command with { SurveyEquipmentId = id });
+            return NoContent();
+        }
+
         [HttpPut("equipment/{id:guid}/returnTraverseSet")]
-        public async Task<ActionResult> ReturnAsync(Guid id, ReturnTraverseSet command)
+        public async Task<ActionResult> ReturnSetAsync(Guid id, ReturnTraverseSet command)
         {
             await _commandDispatcher.DispatchAsync(command with { SurveyEquipmentId = id });
             return NoContent();

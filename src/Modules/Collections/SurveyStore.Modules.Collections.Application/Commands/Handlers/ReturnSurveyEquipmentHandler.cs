@@ -46,7 +46,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 
             if (command.SurveyorId != collection.Surveyor.Id)
             {
-                throw new ReturningOtherCollectionException(collection.Id, command.SurveyorId);
+                throw new CollectionDoesNotBelongToSurveyorException(collection.Id, command.SurveyorId);
             }
 
             var surveyor = await _surveyorRepository.GetAsync(command.SurveyorId);
@@ -64,17 +64,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             collection.Return(returnStore.Id, _clock.Current());
             await _collectionRepository.UpdateAsync(collection);
 
-            //should be here?
-            var surveyEquipment = await _surveyEquipmentRepository.GetByIdAsync(command.SurveyEquipmentId);
-            if (surveyEquipment is null)
-            {
-                throw new SurveyEquipmentNotFoundException(command.SurveyEquipmentId);
-            }
-            surveyEquipment.AssignStore(command.ReturnStoreId);
-            await _surveyEquipmentRepository.UpdateAsync(surveyEquipment);
-
-
-            var events = _eventMapper.MapAll(surveyEquipment.Events);
+            var events = _eventMapper.MapAll(collection.Events);
             await _messageBroker.PublishAsync(events.ToArray());
         }
     }
