@@ -106,7 +106,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 
         private async Task<Surveyor> GetSurveyorAsync(Guid surveyorId)
         {
-            var surveyor = await _surveyorRepository.GetAsync(surveyorId);
+            var surveyor = await _surveyorRepository.GetByIdAsync(surveyorId);
             if (surveyor is null)
             {
                 throw new SurveyorNotFoundException(surveyorId);

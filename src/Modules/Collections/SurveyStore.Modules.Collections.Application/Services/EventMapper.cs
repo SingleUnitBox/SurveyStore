@@ -20,7 +20,7 @@ namespace SurveyStore.Modules.Collections.Application.Services
 
                 StoreAssignedToKit de => new KitCollectionUpdated(de.Kit.Id.Value, de.StoreId),
                 KitCollectionCollected de => new KitCollected(de.KitId),
-                KitCollectionReturned de => 
+                KitCollectionReturned de => new KitReturned(de.KitId, de.ReturnStoreId),
                 _ => null
             };
 

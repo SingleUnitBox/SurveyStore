@@ -7,6 +7,6 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Repositories
     public interface ISurveyorRepository
     {
         Task AddAsync(Surveyor surveyor);
-        Task<Surveyor> GetAsync(SurveyorId id);
+        Task<Surveyor> GetByIdAsync(SurveyorId id);
     }
 }

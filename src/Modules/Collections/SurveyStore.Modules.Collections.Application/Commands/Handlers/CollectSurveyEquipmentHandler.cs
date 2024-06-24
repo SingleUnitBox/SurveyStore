@@ -48,7 +48,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 
         public async Task HandleAsync(CollectSurveyEquipment command)
         {
-            var surveyor = await _surveyorRepository.GetAsync(command.SurveyorId);
+            var surveyor = await _surveyorRepository.GetByIdAsync(command.SurveyorId);
             if (surveyor is null)
             {
                 throw new SurveyorNotFoundException(command.SurveyorId);

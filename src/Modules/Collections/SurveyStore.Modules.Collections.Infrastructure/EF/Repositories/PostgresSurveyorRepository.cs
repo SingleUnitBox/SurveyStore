@@ -23,7 +23,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Surveyor> GetAsync(SurveyorId id)
+        public async Task<Surveyor> GetByIdAsync(SurveyorId id)
             => await _surveyors.SingleOrDefaultAsync(s => s.Id == id);
     }
 }

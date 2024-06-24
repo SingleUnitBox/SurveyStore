@@ -49,7 +49,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
                 throw new CollectionDoesNotBelongToSurveyorException(collection.Id, command.SurveyorId);
             }
 
-            var surveyor = await _surveyorRepository.GetAsync(command.SurveyorId);
+            var surveyor = await _surveyorRepository.GetByIdAsync(command.SurveyorId);
             if (surveyor is null)
             {
                 throw new SurveyorNotFoundException(command.SurveyorId);

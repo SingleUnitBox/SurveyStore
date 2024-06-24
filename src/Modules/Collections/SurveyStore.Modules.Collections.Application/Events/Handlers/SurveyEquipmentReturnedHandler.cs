@@ -42,6 +42,7 @@ namespace SurveyStore.Modules.Collections.Application.Events.Handlers
             }
 
             surveyEquipment.AssignStore(store.Id);
+            await _surveyEquipmentRepository.UpdateAsync(surveyEquipment);
 
             var events = _eventMapper.MapAll(surveyEquipment.Events);
             await _messageBroker.PublishAsync(events.ToArray());
