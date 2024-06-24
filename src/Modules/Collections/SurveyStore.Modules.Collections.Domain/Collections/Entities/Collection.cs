@@ -23,8 +23,11 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
 
         public void ChangeCollectionStoreId(StoreId collectionStoreId)
         {
+            if (CollectionStoreId == collectionStoreId)
+            {
+                return;
+            }
             CollectionStoreId = collectionStoreId;
-            //SurveyEquipment.AssignStore(collectionStoreId);
             IncrementVersion();
         }
 
@@ -38,7 +41,6 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
             Surveyor = surveyor;
             CollectedAt = collectedAt;
             AddEvent(new CollectionCollected(SurveyEquipmentId, CollectionStoreId));
-            IncrementVersion();
         }
 
         public void Return(StoreId returnStoreId, DateTime returnAt)
@@ -46,7 +48,6 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
             ReturnStoreId = returnStoreId;
             ReturnedAt = returnAt;
             AddEvent(new CollectionReturned(SurveyEquipmentId, ReturnStoreId?.Value));
-            IncrementVersion();
         }
 
         public void ReturnForCalibration(StoreId returnStoreId, DateTime returnAt)

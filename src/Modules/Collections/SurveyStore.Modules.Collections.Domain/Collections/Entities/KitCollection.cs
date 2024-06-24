@@ -10,12 +10,11 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
         public Surveyor Surveyor { get; private set; }
         public StoreId CollectionStoreId { get; private set; }
         public StoreId ReturnStoreId { get; private set; }
-        public Kit Kit { get; private set; }
-        public AggregateId KitId { get; private set; }
+        public KitId KitId { get; private set; }
         public DateTime? CollectedAt { get; private set; }
         public DateTime? ReturnedAt { get; private set; }
 
-        internal KitCollection(AggregateId id, AggregateId kitId)
+        internal KitCollection(AggregateId id, KitId kitId)
         {
             Id = id;
             KitId = kitId;
@@ -35,7 +34,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
             }
             Surveyor = surveyor;
             CollectedAt = collectedAt;
-            IncrementVersion();
+            AddEvent(new KitCollectionCollected(KitId, CollectionStoreId));
         }
 
         public void Return(StoreId returnStoreId, DateTime returnedAt)

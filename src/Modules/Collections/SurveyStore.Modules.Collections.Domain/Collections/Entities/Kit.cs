@@ -22,17 +22,12 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
             Type = type;
         }
 
-        public static Kit Create(Guid id, string brand, string model, string serialNumber, string type)
-        {
-            var kit = new Kit(id, brand, model, serialNumber, type);
-            kit.ClearEvents();
-            kit.Version = 0;
-
-            return kit;
-        }
-
         public void AssignStore(StoreId storeId)
         {
+            if (StoreId == storeId)
+            {
+                return;
+            }
             StoreId = storeId;
             AddEvent(new StoreAssignedToKit(this, storeId));
         }
@@ -41,6 +36,15 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
         {
             StoreId = null;
             IncrementVersion();
+        }
+
+        public static Kit Create(Guid id, string brand, string model, string serialNumber, string type)
+        {
+            var kit = new Kit(id, brand, model, serialNumber, type);
+            kit.ClearEvents();
+            kit.Version = 0;
+
+            return kit;
         }
     }
 }

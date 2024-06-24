@@ -14,11 +14,13 @@ namespace SurveyStore.Modules.Collections.Application.Services
         public IMessage Map(IDomainEvent domainEvent)
             => domainEvent switch
             {
-                StoreAssigned de => new CollectionUpdated(new SurveyEquipmentId(de.SurveyEquipment.Id.Value), de.StoreId),
-                CollectionCollected de => new SurveyEquipmentCollected(de.SurveyEquipmentId, de.CollectionStoreId),
+                StoreAssigned de => new CollectionUpdated(de.SurveyEquipment.Id.Value, de.StoreId),
+                CollectionCollected de => new SurveyEquipmentCollected(de.SurveyEquipmentId),
                 CollectionReturned de => new SurveyEquipmentReturned(de.SurveyEquipmentId, de.ReturnStoreId),
 
-                StoreAssignedToKit de => new KitCollectionCreated(new KitId(de.Kit.Id.Value), de.StoreId),
+                StoreAssignedToKit de => new KitCollectionUpdated(de.Kit.Id.Value, de.StoreId),
+                KitCollectionCollected de => new KitCollected(de.KitId),
+                KitCollectionReturned de => 
                 _ => null
             };
 
