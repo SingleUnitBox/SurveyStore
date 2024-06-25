@@ -1,5 +1,6 @@
 ﻿using SurveyStore.Modules.Collections.Application.Clients.Calibrations;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
+using SurveyStore.Modules.Collections.Domain.Collections.Specifications;
 using SurveyStore.Shared.Abstractions.Events;
 using SurveyStore.Shared.Abstractions.Time;
 using System;
@@ -35,7 +36,8 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
             {
                 if (LessThanThreeDaysToCalibrationDate(calibration.CalibrationDueDate.Value, _clock.Current()))
                 {
-                    var collection = await _collectionRepository.GetFreeBySurveyEquipmentAsync(calibration.SurveyEquipmentId);
+                    var collection = await _collectionRepository
+                        .GetBySurveyEquipmentIdAsPredicateExpressionAsync(new IsFreeCollection(calibration.SurveyEquipmentId));
                     if (collection is not null)
                     {
                         collection.ReturnForCalibration(collection.CollectionStoreId, _clock.Current());

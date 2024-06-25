@@ -9,7 +9,7 @@
 @surveyorId1 = 5a8b5e86-6168-47e6-92ab-1f11a0e63c3b
 @surveyorId2 = ce62dacaba2845079b8bf099f4bfd8ca
 
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YThiNWU4NjYxNjg0N2U2OTJhYjFmMTFhMGU2M2MzYiIsInVuaXF1ZV9uYW1lIjoiNWE4YjVlODY2MTY4NDdlNjkyYWIxZjExYTBlNjNjM2IiLCJqdGkiOiJmODgyYTY0Yy03OTdmLTRhNDUtOWZmMi05N2MxMTdiMmU1NjgiLCJpYXQiOiIxNzE5MTM4Mzc4NDA4IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxOTEzODM3OCwiZXhwIjoxNzE5MjIxMTc4LCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.MPl9DV3dMORNNLc2ndO_eenZu5pPzr4xLBOLB8Nmdng
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YThiNWU4NjYxNjg0N2U2OTJhYjFmMTFhMGU2M2MzYiIsInVuaXF1ZV9uYW1lIjoiNWE4YjVlODY2MTY4NDdlNjkyYWIxZjExYTBlNjNjM2IiLCJqdGkiOiJiOTdhNDgyNi00NmIzLTQ2MzMtYTJjOC00MGJmMzZmYjVlOWUiLCJpYXQiOiIxNzE5MjY3MjQwMjA2IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxOTI2NzI0MCwiZXhwIjoxNzE5MzUwMDQwLCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.9CsQfO4QjK-ImNjMszu1vWV2FehqZ2NN39mMTYwZbYU
 
 ###
 GET {{url}}
@@ -60,6 +60,16 @@ Content-Type: application/json
 
 {
     "surveyorId": "{{surveyorId1}}"
+}
+
+###
+PUT {{url}}/collections/equipment/{{equipmentId}}/return
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+    "surveyorId": "{{surveyorId1}}",
+    "returnStoreId": "{{store2Id}}"
 }
 
 ###

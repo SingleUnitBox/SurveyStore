@@ -41,7 +41,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
         public async Task<IEnumerable<KitCollection>> BrowseOpenKitCollectionsBySurveyorAsync(SurveyorId surveyorId)
             => await _kitCollections
                 .Include(k => k.Surveyor)
-                .Include(k => k.Kit)
+                //.Include(k => k.Kit)
                 .Where(k => k.Surveyor.Id == surveyorId
                 && k.CollectedAt != null
                 && k.ReturnedAt == null)
@@ -49,7 +49,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
 
         public async Task<IEnumerable<KitCollection>> BrowseFreeKitCollectionsAsync()
             => await _kitCollections
-                .Include(c => c.Kit)
+                //.Include(c => c.Kit)
                 .Where(c => c.CollectedAt == null
                     && c.ReturnStoreId == null)
                 .ToListAsync();
@@ -57,7 +57,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
         public async Task<IEnumerable<KitCollection>> BrowseKitCollectionsAsync(AggregateId kitId)
             => await _kitCollections
                 .Include(c => c.Surveyor)
-                .Where(c => c.KitId == kitId)
+                //.Where(c => c.KitId == kitId)
                 .ToListAsync();
 
         public async Task<KitCollection> GetFreeByKitAsync(AggregateId kitId)
@@ -68,16 +68,16 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
             //    && c.ReturnedAt == null);
 
             => await _kitCollections
-                .Where(c => c.KitId == kitId
+                .Where(c => c.KitId.Value == kitId
                             && c.ReturnStoreId == null
                             && c.CollectedAt == null)
-                .Include(c => c.Kit)
+                //.Include(c => c.Kit)
                 .SingleOrDefaultAsync();
 
         public Task<KitCollection> GetOpenByKitAsync(AggregateId kitId)
             => _kitCollections
-                .Include(c => c.Kit)
-                .SingleOrDefaultAsync(c => c.KitId == kitId
+                //.Include(c => c.Kit)
+                .SingleOrDefaultAsync(c => c.KitId.Value == kitId
                 && c.CollectedAt != null
                 && c.ReturnedAt == null);
     }

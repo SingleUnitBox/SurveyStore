@@ -11,11 +11,11 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
         //void CanBeCollected(IEnumerable<Collection> openCollections, Surveyor surveyor,
         //    Collection toBeCollected, DateTime now);
 
-        void Collect(Collection collection, Surveyor surveyor, Date collectedAt);
-        void CanBeCollected(IEnumerable<SurveyEquipmentType> surveyEquipmentTypes,
-            SurveyEquipmentType toBeCollected);
+        //void Collect(Collection collection, Surveyor surveyor, Date collectedAt);
+        //void CanBeCollected(IEnumerable<SurveyEquipmentType> surveyEquipmentTypes,
+        //    SurveyEquipmentType toBeCollected);
 
-        IEnumerable<Kit> CollectTraverseSet(IEnumerable<KitCollection> freeKitCollections,
-            Surveyor surveyor, Collection toBeCollected, DateTime now);
+        //IEnumerable<Kit> CollectTraverseSet(IEnumerable<KitCollection> freeKitCollections,
+        //    Surveyor surveyor, Collection toBeCollected, DateTime now);
     }
 }

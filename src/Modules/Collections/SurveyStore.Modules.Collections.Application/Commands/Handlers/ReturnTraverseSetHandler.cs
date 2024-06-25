@@ -60,48 +60,48 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 
         public async Task HandleAsync(ReturnTraverseSet command)
         {
-            var surveyor = await GetSurveyorAsync(command.SurveyorId);
-            var store = await GetStoreAsync(command.ReturnStoreId);
-            var surveyEquipment = await GetSurveyEquipmentAsync(command.SurveyEquipmentId);
-            var collection = await GetOpenCollectionAsync(command.SurveyEquipmentId);
+            //var surveyor = await GetSurveyorAsync(command.SurveyorId);
+            //var store = await GetStoreAsync(command.ReturnStoreId);
+            //var surveyEquipment = await GetSurveyEquipmentAsync(command.SurveyEquipmentId);
+            //var collection = await GetOpenCollectionAsync(command.SurveyEquipmentId);
 
-            if (!_collectionPolicy.CanBeReturned(collection, surveyor))
-            {
-                throw new CollectionDoesNotBelongToSurveyorException(collection.Id, surveyor.Id);
-            }
+            //if (!_collectionPolicy.CanBeReturned(collection, surveyor))
+            //{
+            //    throw new CollectionDoesNotBelongToSurveyorException(collection.Id, surveyor.Id);
+            //}
 
-            var openKitCollections = await _kitCollectionRepository
-                .BrowseOpenKitCollectionsBySurveyorAsync(surveyor.Id);
+            //var openKitCollections = await _kitCollectionRepository
+            //    .BrowseOpenKitCollectionsBySurveyorAsync(surveyor.Id);
 
-            var isFull = _kitCollectionService.IsTraverseSetFullForReturn(openKitCollections);
-            if (!isFull.isFull)
-            {
-                var kitType = isFull.kitCollection.First().Kit.Type;
-                var requiredAmount = kitType == KitTypes.Tripod
-                    ? _kitConstOptions.TripodRequiredAmount
-                    : _kitConstOptions.PrismRequiredAmount;
-                var actualAmount = isFull.kitCollection.Count();
-                throw new IncompleteTraverseSetException(kitType, requiredAmount, actualAmount);
-            }
+            //var isFull = _kitCollectionService.IsTraverseSetFullForReturn(openKitCollections);
+            //if (!isFull.isFull)
+            //{
+            //    var kitType = isFull.kitCollection.First().Kit.Type;
+            //    var requiredAmount = kitType == KitTypes.Tripod
+            //        ? _kitConstOptions.TripodRequiredAmount
+            //        : _kitConstOptions.PrismRequiredAmount;
+            //    var actualAmount = isFull.kitCollection.Count();
+            //    throw new IncompleteTraverseSetException(kitType, requiredAmount, actualAmount);
+            //}
 
-            await ReturnCollectionAsync(collection, command.ReturnStoreId);
-            await AssignSurveyEquipmentAsync(surveyEquipment, command.ReturnStoreId);
-            await ReturnKitCollectionsAsync(isFull.kitCollection, command.ReturnStoreId);
+            //await ReturnCollectionAsync(collection, command.ReturnStoreId);
+            //await AssignSurveyEquipmentAsync(surveyEquipment, command.ReturnStoreId);
+            //await ReturnKitCollectionsAsync(isFull.kitCollection, command.ReturnStoreId);
 
-            var kit = isFull.kitCollection.Select(k => k.Kit);
-            await AssignKitAsync(kit, command.ReturnStoreId);
+            //var kit = isFull.kitCollection.Select(k => k.Kit);
+            //await AssignKitAsync(kit, command.ReturnStoreId);
 
 
-            var surveyEquipmentEvents = _eventMapper
-                .MapAll(surveyEquipment.Events)
-                .ToArray();
-            var kitEvents = isFull.kitCollection
-                .SelectMany(k => k.Kit.Events)
-                .Select(_eventMapper.Map)
-                .ToArray();
+            //var surveyEquipmentEvents = _eventMapper
+            //    .MapAll(surveyEquipment.Events)
+            //    .ToArray();
+            //var kitEvents = isFull.kitCollection
+            //    .SelectMany(k => k.Kit.Events)
+            //    .Select(_eventMapper.Map)
+            //    .ToArray();
 
-            await _messageBroker.PublishAsync(surveyEquipmentEvents);
-            await _messageBroker.PublishAsync(kitEvents);
+            //await _messageBroker.PublishAsync(surveyEquipmentEvents);
+            //await _messageBroker.PublishAsync(kitEvents);
         }
 
         private async Task<Surveyor> GetSurveyorAsync(Guid surveyorId)

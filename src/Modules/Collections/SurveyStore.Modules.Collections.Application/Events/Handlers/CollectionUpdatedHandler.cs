@@ -1,5 +1,6 @@
 ﻿using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
+using SurveyStore.Modules.Collections.Domain.Collections.Specifications;
 using SurveyStore.Shared.Abstractions.Events;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System;
@@ -19,7 +20,8 @@ namespace SurveyStore.Modules.Collections.Application.Events.Handlers
         public async Task HandleAsync(CollectionUpdated @event)
         {
             var surveyEquipmentId = new AggregateId(@event.SurveyEquipmentId);
-            var collection = await _collectionRepository.GetFreeBySurveyEquipmentAsync(surveyEquipmentId);
+            var collection = await _collectionRepository
+                .GetBySurveyEquipmentIdAsPredicateExpressionAsync(new IsFreeCollection(surveyEquipmentId));
             if (collection is null)
             {
                 collection = Collection.Create(Guid.NewGuid(), surveyEquipmentId);

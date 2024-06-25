@@ -22,7 +22,7 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
 
         public async Task HandleAsync(KitCreated @event)
         {
-            var kit = await _kitRepository.GetAsync(@event.Id);
+            var kit = await _kitRepository.GetByIdAsync(@event.Id);
             if (kit is not null)
             {
                 return;

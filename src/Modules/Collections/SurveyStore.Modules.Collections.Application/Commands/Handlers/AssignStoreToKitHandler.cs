@@ -38,7 +38,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
                 throw new CannotAssignStoreException(new KitId(command.KitId));
             }
 
-            var kit = await _kitRepository.GetAsync(command.KitId);
+            var kit = await _kitRepository.GetByIdAsync(command.KitId);
             if (kit is null)
             {
                 throw new KitNotFoundException(command.KitId);

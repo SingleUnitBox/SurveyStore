@@ -3,12 +3,15 @@ using SurveyStore.Modules.Collections.Application.Services;
 using SurveyStore.Modules.Collections.Domain.Collections.DomainServices;
 using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
+using SurveyStore.Modules.Collections.Domain.Collections.Specifications;
 using SurveyStore.Modules.Collections.Domain.Collections.ValueObjects;
 using SurveyStore.Shared.Abstractions.Commands;
 using SurveyStore.Shared.Abstractions.Messaging;
 using SurveyStore.Shared.Abstractions.Time;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
@@ -54,7 +57,8 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
                 throw new SurveyorNotFoundException(command.SurveyorId);
             }
 
-            var collection = await _collectionRepository.GetFreeBySurveyEquipmentAsync(command.SurveyEquipmentId);
+            var collection = await _collectionRepository
+                .GetBySurveyEquipmentIdAsPredicateExpressionAsync(new IsFreeCollection(command.SurveyEquipmentId));
             if (collection is null)
             {
                 throw new FreeCollectionNotFoundException(command.SurveyEquipmentId);
@@ -68,7 +72,6 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 
             var openCollections = await _collectionRepository.BrowseOpenCollectionsBySurveyorIdAsync(command.SurveyorId);
             var surveyEquipmentTypes = await GetSurveyEquipmentTypes(openCollections);
-            
 
             _collectionService.CanBeCollected(surveyEquipmentTypes, surveyEquipment.Type);
             var now = _clock.Current();
@@ -77,7 +80,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 
             var events = _eventMapper.MapAll(collection.Events);
             await _messageBroker.PublishAsync(events.ToArray());
-
+            /////////////////////////////////////////
             //var freeKitCollections = await _kitCollectionRepository.BrowseFreeKitCollectionsAsync();
             //
             //var kitSet = _collectionService.CollectTraverseSet(freeKitCollections, surveyor, collection, now);

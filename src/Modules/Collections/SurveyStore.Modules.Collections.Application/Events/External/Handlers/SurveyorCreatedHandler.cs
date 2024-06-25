@@ -22,7 +22,7 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
 
         public async Task HandleAsync(SurveyorCreated @event)
         {
-            var surveyor = await _surveyorRepository.GetAsync(@event.Id);
+            var surveyor = await _surveyorRepository.GetByIdAsync(@event.Id);
             if (surveyor is not null)
             {
                 return;

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
+using SurveyStore.Shared.Abstractions.Specification;
 
 namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
 {
@@ -35,15 +36,6 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        // do not let to create multiple OPEN collections for same equipment
-        public async Task<Collection> GetFreeBySurveyEquipmentAsync(AggregateId surveyEquipmentId)
-            => await _collections
-                .Where(c => c.SurveyEquipmentId == surveyEquipmentId.Value
-                            && c.ReturnStoreId == null
-                            && c.CollectedAt == null)
-                //.Include(c => c.SurveyEquipment)
-                .SingleOrDefaultAsync();
-
         public async Task<Collection> GetOpenBySurveyEquipmentAsync(AggregateId surveyEquipmentId)
             => await _collections
                 .Where(c => c.SurveyEquipmentId == surveyEquipmentId.Value
@@ -60,6 +52,8 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
                 .OrderBy(c => c.ReturnedAt)
                 .SingleOrDefaultAsync();
 
+        public async Task<Collection> GetBySurveyEquipmentIdAsPredicateExpressionAsync(Specification<Collection> specification)
+            => await _collections.SingleOrDefaultAsync(specification);
 
         public async Task<IEnumerable<Collection>> BrowseCollectionsAsync(AggregateId surveyEquipmentId)
             => await _collections
