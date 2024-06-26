@@ -3,20 +3,20 @@ using SurveyStore.Shared.Abstractions.Specification;
 using System;
 using System.Linq.Expressions;
 
-namespace SurveyStore.Modules.Collections.Domain.Collections.Specifications
+namespace SurveyStore.Modules.Collections.Domain.Collections.Specifications.Collections
 {
-    public class IsCompletedCollection : Specification<Collection>
+    public class IsOpenCollection : Specification<Collection>
     {
-        private readonly Guid _surveyEquipmentId;
-        public IsCompletedCollection(Guid surveyEquipmentId)
+        private Guid _surveyEquipmentId;
+        public IsOpenCollection(Guid surveyEquipmentId)
         {
             _surveyEquipmentId = surveyEquipmentId;
         }
         protected override Expression<Func<Collection, bool>> AsPredicateExpression()
         {
-            return collection => collection.SurveyEquipmentId.Value == _surveyEquipmentId
+            return collection => collection.SurveyEquipmentId == _surveyEquipmentId
                                 && collection.CollectedAt != null
-                                && collection.ReturnStoreId != null;
+                                && collection.ReturnStoreId == null;
         }
     }
 }

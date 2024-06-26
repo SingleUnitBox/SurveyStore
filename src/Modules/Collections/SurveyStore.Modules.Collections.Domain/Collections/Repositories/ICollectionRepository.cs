@@ -16,5 +16,6 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Repositories
         Task<Collection> GetBySurveyEquipmentIdAsPredicateExpressionAsync(Specification<Collection> specification);
         Task<IEnumerable<Collection>> BrowseCollectionsAsync(AggregateId surveyEquipmentId);
         Task<IEnumerable<Collection>> BrowseOpenCollectionsBySurveyorIdAsync(SurveyorId surveyorId);
+        Task<IEnumerable<Collection>> BrowseBySurveyorIdAsPredicateExpressionAsync(Specification<Collection> specification);
     }
 }

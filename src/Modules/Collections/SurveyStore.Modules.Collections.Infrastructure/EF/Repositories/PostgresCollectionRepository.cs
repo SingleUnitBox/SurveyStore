@@ -68,5 +68,10 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
                 && c.CollectedAt != null
                 && c.ReturnedAt == null)
                 .ToListAsync();
+
+        public async Task<IEnumerable<Collection>> BrowseBySurveyorIdAsPredicateExpressionAsync(Specification<Collection> specification)
+            => await _collections
+                .Where(specification)
+                .ToListAsync();
     }
 }
