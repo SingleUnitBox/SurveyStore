@@ -25,7 +25,7 @@ namespace SurveyStore.Modules.Equipment.Application.Kit.Commands.Handlers
 
         public async Task HandleAsync(AddKit command)
         {
-            var kitTypes = typeof(KitTypes).GetFields().Select(t => t.Name);
+            var kitTypes = KitTypes.GetKitTypes();
             if (!kitTypes.Contains(command.KitType))
             {
                 throw new InvalidKitTypeException(command.KitType);
