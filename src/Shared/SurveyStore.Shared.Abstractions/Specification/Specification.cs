@@ -11,6 +11,6 @@ namespace SurveyStore.Shared.Abstractions.Specification
             => specification.AsPredicateExpression();
 
         public static AndSpecification<T> operator &(Specification<T> left, Specification<T> right)
-            => left.And(right)
+            => left.And(right);
     }
 }

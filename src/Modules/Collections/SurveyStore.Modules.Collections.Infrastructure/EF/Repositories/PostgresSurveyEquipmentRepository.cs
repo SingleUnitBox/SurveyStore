@@ -19,7 +19,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<SurveyEquipment> GetByIdAsync(AggregateId id)
+        public async Task<SurveyEquipment> GetByIdAsync(SurveyEquipmentId id)
             => await _surveyEquipment.SingleOrDefaultAsync(s => s.Id == id);
 
         public async Task<SurveyEquipment> GetBySerialNumberAsync(string serialNumber)

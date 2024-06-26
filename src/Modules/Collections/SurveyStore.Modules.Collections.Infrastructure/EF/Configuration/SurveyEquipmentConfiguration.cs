@@ -12,10 +12,6 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Configuration
             builder.HasKey(s => s.Id);
             builder.Property(s => s.Id)
                 .HasConversion(s => s.Value, s => new(s));
-            builder.Property(s => s.Version)
-                .IsConcurrencyToken();
-            builder.Property(s => s.StoreId)
-                .HasConversion(s => s.Value, s => new(s));
             builder.Property(s => s.SerialNumber)
                 .HasConversion(sn => sn.Value, sn => new(sn));
             builder.Property(s => s.Brand)

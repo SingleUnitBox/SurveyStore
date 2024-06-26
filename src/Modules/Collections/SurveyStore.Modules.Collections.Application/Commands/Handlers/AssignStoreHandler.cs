@@ -1,9 +1,13 @@
 ﻿using SurveyStore.Modules.Collections.Application.Clients.Calibrations;
 using SurveyStore.Modules.Collections.Application.Exceptions;
 using SurveyStore.Modules.Collections.Application.Services;
+using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
+using SurveyStore.Modules.Collections.Domain.Collections.Specifications.Collections;
 using SurveyStore.Shared.Abstractions.Commands;
 using SurveyStore.Shared.Abstractions.Messaging;
+using SurveyStore.Shared.Abstractions.Specification;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -42,12 +46,6 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
                 throw new SurveyEquipmentToBeCalibratedException(command.SurveyEquipmentId);
             }
 
-            var collection = await _collectionRepository.GetOpenBySurveyEquipmentAsync(command.SurveyEquipmentId);
-            if (collection is not null)
-            {
-                throw new CannotAssignStoreException(command.SurveyEquipmentId);
-            }
-
             var surveyEquipment = await _surveyEquipmentRepository.GetByIdAsync(command.SurveyEquipmentId);
             if (surveyEquipment is null)
             {
@@ -60,11 +58,19 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
                 throw new StoreNotFoundException(command.StoreId);
             }
 
-            surveyEquipment.AssignStore(command.StoreId);
-            await _surveyEquipmentRepository.UpdateAsync(surveyEquipment);
-
-            var events = _eventMapper.MapAll(surveyEquipment.Events);
-            await _messageBroker.PublishAsync(events.ToArray());        
+            var collection = await _collectionRepository
+                .GetBySurveyEquipmentIdAsPredicateExpressionAsync(new IsFreeCollection(surveyEquipment.Id));
+            if (collection is not null)
+            {
+                collection.AssignStore(store.Id);
+                await _collectionRepository.UpdateAsync(collection);
+            }
+            else
+            {
+                collection = Collection.Create(Guid.NewGuid(), surveyEquipment.Id);
+                collection.AssignStore(store.Id);
+                await _collectionRepository.AddAsync(collection);
+            }                     
         }
     }
 }

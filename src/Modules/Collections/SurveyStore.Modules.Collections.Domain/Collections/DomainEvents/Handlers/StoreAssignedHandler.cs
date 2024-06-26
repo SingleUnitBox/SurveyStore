@@ -19,21 +19,21 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainEvents.Handle
 
         public async Task HandleAsync(StoreAssigned @event)
         {
-            var surveyEquipmentId = new AggregateId(@event.SurveyEquipment.Id);
-            var collections = await _collectionRepository.BrowseCollectionsAsync(surveyEquipmentId);
-            var collection = collections.SingleOrDefault(c => !c.CollectedAt.HasValue);
-            if (collection is not null)
-            {
-                collection.ChangeCollectionStoreId(@event.StoreId);
-                await _collectionRepository.UpdateAsync(collection);
-            }
-            else
-            {
-                collection = Collection.Create(Guid.NewGuid(), @event.SurveyEquipment.Id);
-                collection.ChangeCollectionStoreId(@event.StoreId);
+            //var surveyEquipmentId = new AggregateId(@event.SurveyEquipment.Id);
+            //var collections = await _collectionRepository.BrowseCollectionsAsync(surveyEquipmentId);
+            //var collection = collections.SingleOrDefault(c => !c.CollectedAt.HasValue);
+            //if (collection is not null)
+            //{
+            //    collection.ChangeCollectionStoreId(@event.StoreId);
+            //    await _collectionRepository.UpdateAsync(collection);
+            //}
+            //else
+            //{
+            //    collection = Collection.Create(Guid.NewGuid(), @event.SurveyEquipment.Id);
+            //    collection.ChangeCollectionStoreId(@event.StoreId);
 
-                await _collectionRepository.AddAsync(collection);
-            }
+            //    await _collectionRepository.AddAsync(collection);
+            //}
         }
     }
 }

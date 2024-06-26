@@ -41,11 +41,8 @@ namespace SurveyStore.Modules.Collections.Application.Events.Handlers
                 throw new StoreNotFoundException(@event.StoreId);
             }
 
-            surveyEquipment.AssignStore(store.Id);
+            //surveyEquipment.AssignStore(store.Id);
             await _surveyEquipmentRepository.UpdateAsync(surveyEquipment);
-
-            var events = _eventMapper.MapAll(surveyEquipment.Events);
-            await _messageBroker.PublishAsync(events.ToArray());
         }
     }
 }

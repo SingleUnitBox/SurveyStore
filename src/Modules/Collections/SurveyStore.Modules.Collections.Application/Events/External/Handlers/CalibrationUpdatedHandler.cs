@@ -1,6 +1,6 @@
 ﻿using SurveyStore.Modules.Collections.Application.Clients.Calibrations;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
-using SurveyStore.Modules.Collections.Domain.Collections.Specifications;
+using SurveyStore.Modules.Collections.Domain.Collections.Specifications.Collections;
 using SurveyStore.Shared.Abstractions.Events;
 using SurveyStore.Shared.Abstractions.Time;
 using System;
@@ -46,7 +46,7 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
                         var surveyEquipment = await _surveyEquipmentRepository.GetByIdAsync(calibration.SurveyEquipmentId);
                         if (surveyEquipment is not null)
                         {
-                            surveyEquipment.UnassignStore();
+                            //surveyEquipment.UnassignStore();
                             await _surveyEquipmentRepository.UpdateAsync(surveyEquipment);
                         }
                         return;
@@ -63,7 +63,7 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
 
                             if (surveyEquipment is not null)
                             {
-                                surveyEquipment.UnassignStore();
+                                //surveyEquipment.UnassignStore();
                                 await _surveyEquipmentRepository.UpdateAsync(surveyEquipment);
                             }
                             return;

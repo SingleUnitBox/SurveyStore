@@ -1,6 +1,6 @@
 ﻿using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
-using SurveyStore.Modules.Collections.Domain.Collections.Specifications;
+using SurveyStore.Modules.Collections.Domain.Collections.Specifications.Collections;
 using SurveyStore.Shared.Abstractions.Events;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System;
@@ -25,12 +25,12 @@ namespace SurveyStore.Modules.Collections.Application.Events.Handlers
             if (collection is null)
             {
                 collection = Collection.Create(Guid.NewGuid(), surveyEquipmentId);
-                collection.ChangeCollectionStoreId(@event.StoreId);
+                collection.AssignStore(@event.StoreId);
                 await _collectionRepository.AddAsync(collection);
             }
             else
             {
-                collection.ChangeCollectionStoreId(@event.StoreId);
+                collection.AssignStore(@event.StoreId);
                 await _collectionRepository.UpdateAsync(collection);
             }           
         }

@@ -8,7 +8,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Repositories
 {
     public interface ISurveyEquipmentRepository
     {
-        Task<SurveyEquipment> GetByIdAsync(AggregateId id);
+        Task<SurveyEquipment> GetByIdAsync(SurveyEquipmentId id);
         Task<SurveyEquipment> GetBySerialNumberAsync(string serialNumber);
         Task<IReadOnlyCollection<SurveyEquipment>> BrowseAsync();
         Task AddAsync(SurveyEquipment equipment);

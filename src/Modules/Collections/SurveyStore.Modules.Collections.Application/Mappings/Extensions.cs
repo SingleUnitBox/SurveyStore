@@ -28,7 +28,7 @@ namespace SurveyStore.Modules.Collections.Application.Mappings
                 SerialNumber = surveyEquipment.SerialNumber,
                 Brand = surveyEquipment.Brand,
                 Model = surveyEquipment.Model,
-                Store = surveyEquipment?.Store?.AsDto()
+                //Store = surveyEquipment?.Store?.AsDto()
             };
 
         public static KitDto AsDto(this Kit kit)

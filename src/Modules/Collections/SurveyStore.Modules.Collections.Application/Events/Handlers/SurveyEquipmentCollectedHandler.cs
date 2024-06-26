@@ -22,7 +22,7 @@ namespace SurveyStore.Modules.Collections.Application.Events.Handlers
                 throw new SurveyEquipmentNotFoundException(@event.SurveyEquipmentId);
             }
 
-            surveyEquipment.UnassignStore();
+            //surveyEquipment.UnassignStore();
             await _surveyEquipmentRepository.UpdateAsync(surveyEquipment);
         }
     }

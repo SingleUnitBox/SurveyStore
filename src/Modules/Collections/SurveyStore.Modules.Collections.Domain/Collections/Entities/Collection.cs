@@ -7,11 +7,11 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
 {
     public class Collection : AggregateRoot
     {
+        public SurveyEquipment SurveyEquipment { get; private set; }
+        public SurveyEquipmentId SurveyEquipmentId { get; private set; }
         public Surveyor Surveyor { get; private set; }
         public StoreId CollectionStoreId { get; private set; }
         public StoreId ReturnStoreId { get; private set; }
-        //public SurveyEquipment SurveyEquipment { get; private set; }
-        public SurveyEquipmentId SurveyEquipmentId { get; private set; }
         public DateTime? CollectedAt { get; private set; }
         public DateTime? ReturnedAt { get; private set; }
 
@@ -21,7 +21,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
             SurveyEquipmentId = surveyEquipmentId;
         }
 
-        public void ChangeCollectionStoreId(StoreId collectionStoreId)
+        public void AssignStore(StoreId collectionStoreId)
         {
             if (CollectionStoreId == collectionStoreId)
             {

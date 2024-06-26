@@ -12,7 +12,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Specifications.Coll
         {
             _surveyEquipmentId = surveyEquipmentId;
         }
-        protected override Expression<Func<Collection, bool>> AsPredicateExpression()
+        public override Expression<Func<Collection, bool>> AsPredicateExpression()
         {
             return collection => collection.SurveyEquipmentId.Value == _surveyEquipmentId
                                 && collection.CollectedAt != null

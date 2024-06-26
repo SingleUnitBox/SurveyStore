@@ -11,7 +11,8 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
         //void CanBeCollected(IEnumerable<Collection> openCollections, Surveyor surveyor,
         //    Collection toBeCollected, DateTime now);
 
-        //void Collect(Collection collection, Surveyor surveyor, Date collectedAt);
+        //void Collect(IEnumerable<Collection> openCollections, Collection toBeCollected,
+        //    Surveyor surveyor, Date collectedAt);
         //void CanBeCollected(IEnumerable<SurveyEquipmentType> surveyEquipmentTypes,
         //    SurveyEquipmentType toBeCollected);
 

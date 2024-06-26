@@ -168,7 +168,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 
         private async Task AssignSurveyEquipmentAsync(SurveyEquipment surveyEquipment, Guid returnStoreId)
         {
-            surveyEquipment.AssignStore(returnStoreId);
+            //surveyEquipment.AssignStore(returnStoreId);
             await _surveyEquipmentRepository.UpdateAsync(surveyEquipment);
         }
 
