@@ -59,7 +59,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             }
 
             var collection = await _collectionRepository
-                .GetBySurveyEquipmentIdAsPredicateExpressionAsync(new IsFreeCollection(surveyEquipment.Id));
+                .GetAsPredicateExpressionAsync(new IsFreeCollection(surveyEquipment.Id));
             if (collection is not null)
             {
                 collection.AssignStore(store.Id);
@@ -67,6 +67,12 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             }
             else
             {
+                collection = await _collectionRepository.GetAsPredicateExpressionAsync(new IsOpenCollection(surveyEquipment.Id));
+                if (collection is not null)
+                {
+                    throw new CannotAssignStoreException(surveyEquipment.Id);
+                }
+
                 collection = Collection.Create(Guid.NewGuid(), surveyEquipment.Id);
                 collection.AssignStore(store.Id);
                 await _collectionRepository.AddAsync(collection);

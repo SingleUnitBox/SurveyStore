@@ -8,13 +8,8 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
 {
     public interface ICollectionService
     {
-        //void CanBeCollected(IEnumerable<Collection> openCollections, Surveyor surveyor,
-        //    Collection toBeCollected, DateTime now);
-
-        //void Collect(IEnumerable<Collection> openCollections, Collection toBeCollected,
-        //    Surveyor surveyor, Date collectedAt);
-        //void CanBeCollected(IEnumerable<SurveyEquipmentType> surveyEquipmentTypes,
-        //    SurveyEquipmentType toBeCollected);
+        void Collect(IEnumerable<Collection> openCollections, Collection toBeCollected,
+            Surveyor surveyor, Date collectedAt);
 
         //IEnumerable<Kit> CollectTraverseSet(IEnumerable<KitCollection> freeKitCollections,
         //    Surveyor surveyor, Collection toBeCollected, DateTime now);

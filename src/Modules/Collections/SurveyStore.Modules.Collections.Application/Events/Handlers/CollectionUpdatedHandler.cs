@@ -21,7 +21,7 @@ namespace SurveyStore.Modules.Collections.Application.Events.Handlers
         {
             var surveyEquipmentId = new AggregateId(@event.SurveyEquipmentId);
             var collection = await _collectionRepository
-                .GetBySurveyEquipmentIdAsPredicateExpressionAsync(new IsFreeCollection(surveyEquipmentId));
+                .GetAsPredicateExpressionAsync(new IsFreeCollection(surveyEquipmentId));
             if (collection is null)
             {
                 collection = Collection.Create(Guid.NewGuid(), surveyEquipmentId);

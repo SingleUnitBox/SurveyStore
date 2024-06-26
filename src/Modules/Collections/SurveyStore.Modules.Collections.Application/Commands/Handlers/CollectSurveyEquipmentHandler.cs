@@ -1,15 +1,11 @@
 ﻿using SurveyStore.Modules.Collections.Application.Exceptions;
 using SurveyStore.Modules.Collections.Application.Services;
 using SurveyStore.Modules.Collections.Domain.Collections.DomainServices;
-using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Modules.Collections.Domain.Collections.Specifications.Collections;
-using SurveyStore.Modules.Collections.Domain.Collections.ValueObjects;
 using SurveyStore.Shared.Abstractions.Commands;
 using SurveyStore.Shared.Abstractions.Messaging;
-using SurveyStore.Shared.Abstractions.Specification;
 using SurveyStore.Shared.Abstractions.Time;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -57,7 +53,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             }
 
             var collection = await _collectionRepository
-                .GetBySurveyEquipmentIdAsPredicateExpressionAsync(new IsFreeCollection(command.SurveyEquipmentId));
+                .GetAsPredicateExpressionAsync(new IsFreeCollection(command.SurveyEquipmentId));
             if (collection is null)
             {
                 throw new FreeCollectionNotFoundException(command.SurveyEquipmentId);
@@ -69,36 +65,16 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
                 throw new SurveyEquipmentNotFoundException(command.SurveyEquipmentId);
             }
 
-            var collectionSpecifications = new Specification<Collection>[]
-            {
-                new IsOpenCollection(command.SurveyEquipmentId),
-                new IsSurveyorCollection(command.SurveyEquipmentId, command.SurveyorId)
-            };
+           var openCollections = await _collectionRepository
+                .BrowseAsPredicateExpressionAsync(new IsSurveyorCollection(command.SurveyorId));
 
-            var openCollections = await GetOpenCollections(collectionSpecifications);
-            var surveyEquipmentTypes = await GetSurveyEquipmentTypes(openCollections);
-
-            //_collectionService.CanBeCollected(surveyEquipmentTypes, surveyEquipment.Type);
-            //var now = _clock.Current();
-            //_collectionService.Collect(collection, surveyor, now);
+            var now = _clock.Current();
+            _collectionService.Collect(openCollections, collection, surveyor, now);
 
             await _collectionRepository.UpdateAsync(collection);
 
             var events = _eventMapper.MapAll(collection.Events);
             await _messageBroker.PublishAsync(events.ToArray());
-        }
-
-        private async Task<IEnumerable<Collection>> GetOpenCollections(params Specification<Collection>[] specifications)
-            => await _collectionRepository
-            .BrowseBySurveyorIdAsPredicateExpressionAsync(new AndSpecification<Collection>(specifications));
-
-        private async Task<IEnumerable<SurveyEquipmentType>> GetSurveyEquipmentTypes(IEnumerable<Collection> openCollections)
-        {
-            var tasks = openCollections.Select(c => _surveyEquipmentRepository.GetByIdAsync(c.SurveyEquipmentId.Value));
-            var result = await Task.WhenAll(tasks);
-            var surveyEquipmentTypes = result.Select(s => s.Type);
-
-            return surveyEquipmentTypes;
         }
     }
 }

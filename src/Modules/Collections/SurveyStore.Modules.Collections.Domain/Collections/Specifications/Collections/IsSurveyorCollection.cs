@@ -7,17 +7,14 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Specifications.Coll
 {
     public class IsSurveyorCollection : Specification<Collection>
     {
-        private readonly Guid _surveyEquipmentId;
         private readonly Guid _surveyorId;
 
-        public IsSurveyorCollection(Guid surveyEquipmentId, Guid surveyorId)
+        public IsSurveyorCollection(Guid surveyorId)
         {
-            _surveyEquipmentId = surveyEquipmentId;
             _surveyorId = surveyorId;
         }
 
         public override Expression<Func<Collection, bool>> AsPredicateExpression()
-            => collection => collection.SurveyEquipmentId == _surveyEquipmentId
-                            && collection.Surveyor.Id == _surveyorId;
+            => collection => collection.Surveyor.Id == _surveyorId;
     }
 }

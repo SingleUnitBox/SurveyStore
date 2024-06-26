@@ -3,11 +3,11 @@ using System.Linq.Expressions;
 
 namespace SurveyStore.Shared.Abstractions.Specification
 {
-    public class AndSpecification<T> : Specification<T>
+    public class OrSpecification<T> : Specification<T>
     {
         private readonly Specification<T>[] _specifications;
 
-        public AndSpecification(params Specification<T>[] specifications)
+        public OrSpecification(params Specification<T>[] specifications)
         {
             _specifications = specifications ?? throw new ArgumentNullException(nameof(specifications));
         }
@@ -41,7 +41,7 @@ namespace SurveyStore.Shared.Abstractions.Specification
             var right = rightVisitor.Visit(rightExpression.Body);
 
             return Expression.Lambda<Func<T, bool>>(
-                Expression.And(left, right), parameter);
+                Expression.Or(left, right), parameter);
         }
 
         private class ReplaceExpressionVisitor
@@ -59,9 +59,7 @@ namespace SurveyStore.Shared.Abstractions.Specification
             public override Expression Visit(Expression node)
             {
                 if (node == _oldValue)
-                {
                     return _newValue;
-                }                    
                 return base.Visit(node);
             }
         }

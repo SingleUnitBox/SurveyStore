@@ -52,7 +52,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
                 .OrderBy(c => c.ReturnedAt)
                 .SingleOrDefaultAsync();
 
-        public async Task<Collection> GetBySurveyEquipmentIdAsPredicateExpressionAsync(Specification<Collection> specification)
+        public async Task<Collection> GetAsPredicateExpressionAsync(Specification<Collection> specification)
             => await _collections.SingleOrDefaultAsync(specification);
 
         public async Task<IEnumerable<Collection>> BrowseCollectionsAsync(AggregateId surveyEquipmentId)
@@ -69,8 +69,9 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
                 && c.ReturnedAt == null)
                 .ToListAsync();
 
-        public async Task<IEnumerable<Collection>> BrowseBySurveyorIdAsPredicateExpressionAsync(Specification<Collection> specification)
+        public async Task<IEnumerable<Collection>> BrowseAsPredicateExpressionAsync(Specification<Collection> specification)
             => await _collections
+                .Include(c => c.SurveyEquipment)
                 .Where(specification)
                 .ToListAsync();
     }

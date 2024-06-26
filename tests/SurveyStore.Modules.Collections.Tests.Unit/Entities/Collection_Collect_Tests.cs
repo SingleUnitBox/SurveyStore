@@ -29,7 +29,7 @@ namespace SurveyStore.Modules.Collections.Tests.Unit.Entities
             var surveyor = GetSurveyor();
             var collectedAt = DateTime.UtcNow;
             var collectionStoreId = new StoreId(Guid.NewGuid());
-            _collection.ChangeCollectionStoreId(collectionStoreId);
+            _collection.AssignStore(collectionStoreId);
 
             var exception = Record.Exception(() => Act(surveyor, collectedAt));
 

@@ -37,7 +37,7 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
                 if (LessThanThreeDaysToCalibrationDate(calibration.CalibrationDueDate.Value, _clock.Current()))
                 {
                     var collection = await _collectionRepository
-                        .GetBySurveyEquipmentIdAsPredicateExpressionAsync(new IsFreeCollection(calibration.SurveyEquipmentId));
+                        .GetAsPredicateExpressionAsync(new IsFreeCollection(calibration.SurveyEquipmentId));
                     if (collection is not null)
                     {
                         collection.ReturnForCalibration(collection.CollectionStoreId, _clock.Current());

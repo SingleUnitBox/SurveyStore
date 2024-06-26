@@ -2,9 +2,7 @@
 using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using SurveyStore.Modules.Collections.Domain.Collections.Exceptions;
 using SurveyStore.Modules.Collections.Domain.Collections.Policies;
-using SurveyStore.Modules.Collections.Domain.Collections.ValueObjects;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
-using SurveyStore.Shared.Abstractions.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,36 +21,20 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
             _kitConstOptions = kitConstOptions;
         }
 
-        public void Collect(Collection collection, Surveyor surveyor, Date collectedAt)
+        public void Collect(IEnumerable<Collection> openCollections, Collection toBeCollected, Surveyor surveyor,
+            Date collectedAt)
         {
-            collection.Collect(surveyor, collectedAt);
-        }
-
-        //public void CanBeCollected(IEnumerable<Collection> openCollections, Surveyor surveyor, Collection toBeCollected, DateTime now)
-        //{
-        //    foreach (var surveyEquipmentType in surveyEquipmentTypes)
-        //    {
-        //        if (_kitConstOptions.LimitedSurveyEquipmentTypes.Contains(surveyEquipmentType.Value)
-        //            && toBeCollected == surveyEquipmentType)
-        //        {
-        //            throw new CannotCollectSurveyEquipmentException(surveyEquipmentType);
-        //        }
-        //    }
-
-        //    toBeCollected.Collect(surveyor, now);
-        //}
-
-        public void CanBeCollected(IEnumerable<SurveyEquipmentType> surveyEquipmentTypes,
-            SurveyEquipmentType toBeCollected)
-        {
+            var surveyEquipmentTypes = openCollections.Select(c => c.SurveyEquipment?.Type);
             foreach (var surveyEquipmentType in surveyEquipmentTypes)
             {
                 if (_kitConstOptions.LimitedSurveyEquipmentTypes.Contains(surveyEquipmentType.Value)
-                    && toBeCollected == surveyEquipmentType)
+                    && toBeCollected.SurveyEquipment.Type.Equals(surveyEquipmentType))
                 {
                     throw new CannotCollectSurveyEquipmentException(surveyEquipmentType);
-                }
+                }               
             }
+
+            toBeCollected.Collect(surveyor, collectedAt);
         }
 
         //public IEnumerable<Kit> CollectTraverseSet(IEnumerable<KitCollection> freeKitCollections,

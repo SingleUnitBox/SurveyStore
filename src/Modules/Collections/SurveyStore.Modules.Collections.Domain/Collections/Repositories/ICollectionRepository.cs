@@ -13,9 +13,9 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Repositories
         Task DeleteAsync(Collection collection);
         Task<Collection> GetOpenBySurveyEquipmentAsync(AggregateId surveyEquipmentId);
         Task<Collection> GetCompletedBySurveyEquipmentAsync(AggregateId surveyEquipmentId);
-        Task<Collection> GetBySurveyEquipmentIdAsPredicateExpressionAsync(Specification<Collection> specification);
+        Task<Collection> GetAsPredicateExpressionAsync(Specification<Collection> specification);
         Task<IEnumerable<Collection>> BrowseCollectionsAsync(AggregateId surveyEquipmentId);
         Task<IEnumerable<Collection>> BrowseOpenCollectionsBySurveyorIdAsync(SurveyorId surveyorId);
-        Task<IEnumerable<Collection>> BrowseBySurveyorIdAsPredicateExpressionAsync(Specification<Collection> specification);
+        Task<IEnumerable<Collection>> BrowseAsPredicateExpressionAsync(Specification<Collection> specification);
     }
 }

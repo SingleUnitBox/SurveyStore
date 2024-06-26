@@ -1,15 +1,19 @@
 @url = http://localhost:5000/collections-module
 
-@equipmentId = 735f7cdd-30c2-49ad-94a4-88c3562c0731
+@equipmentId1 = 735f7cdd-30c2-49ad-94a4-88c3562c0731
+@equipmentId2 = fb4d1d7b-7a19-491b-a8ce-758b96c52854
+@equipmentId3 = 8619030d-838c-47b9-b75c-4d2e59ef2db0
+
+
 @kitId = d4e39cea-a6b3-4191-8eaf-a9a4312ad696
 
 @store1Id = 9b55bfb9-63c1-4532-9549-2cd31d1cc62c
 @store2Id = c6762acf-b304-4025-bb6e-acce7bb27402
 
-@surveyorId1 = 5a8b5e86-6168-47e6-92ab-1f11a0e63c3b
-@surveyorId2 = ce62dacaba2845079b8bf099f4bfd8ca
+@surveyorId1 = 709b1e98-e8cf-4453-9a9d-dcc402b08923
+@surveyorId2 = f4e207b7-3385-4980-96d1-84447c5ed580
 
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YThiNWU4NjYxNjg0N2U2OTJhYjFmMTFhMGU2M2MzYiIsInVuaXF1ZV9uYW1lIjoiNWE4YjVlODY2MTY4NDdlNjkyYWIxZjExYTBlNjNjM2IiLCJqdGkiOiI5OTg5YTFkMy00NTY0LTRhMDQtYTNhMS1mYTcxZWM2Y2RjY2MiLCJpYXQiOiIxNzE5NDE4MzgwOTA1IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxOTQxODM4MCwiZXhwIjoxNzE5NTAxMTgwLCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.q-xgY-dPS7B1bGJJ88bc5BkK0NJl8r_3TUHtiJNzfy4
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmNGUyMDdiNzMzODU0OTgwOTZkMTg0NDQ3YzVlZDU4MCIsInVuaXF1ZV9uYW1lIjoiZjRlMjA3YjczMzg1NDk4MDk2ZDE4NDQ0N2M1ZWQ1ODAiLCJqdGkiOiI0M2QyNmI4MS0wNmUwLTQzZWMtYWQ5MS0xNDNmNjgyMWZkNWYiLCJpYXQiOiIxNzE5NDM3MjU1NTIzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxOTQzNzI1NSwiZXhwIjoxNzE5NTIwMDU1LCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.anW1LrQZT3ES6rbdK4-98xIIOLmmFa695eOf6hlVYss
 
 ###
 GET {{url}}
@@ -27,7 +31,7 @@ GET {{url}}/collections/equipment/{{surveyorId1}}/collected
 Authorization: Bearer {{accessToken}}
 
 ###
-POST {{url}}/collections/equipment/{{equipmentId}}/assign-store
+POST {{url}}/collections/equipment/{{equipmentId2}}/assign-store
 Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
@@ -36,16 +40,7 @@ Content-Type: application/json
 }
 
 ###
-POST {{url}}/collections/equipment/{{equipmentId}}
-Authorization: Bearer {{accessToken}}
-Content-Type: application/json
-
-{
-    "collectionStoreId": "{{store1Id}}"
-}
-
-###
-PUT {{url}}/collections/equipment/{{equipmentId}}/collect
+PUT {{url}}/collections/equipment/{{equipmentId3}}/collect
 Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
@@ -54,7 +49,7 @@ Content-Type: application/json
 }
 
 ###
-PUT {{url}}/collections/equipment/{{equipmentId}}/collectTraverseSet
+PUT {{url}}/collections/equipment/{{equipmentId1}}/collectTraverseSet
 Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
@@ -63,7 +58,7 @@ Content-Type: application/json
 }
 
 ###
-PUT {{url}}/collections/equipment/{{equipmentId}}/return
+PUT {{url}}/collections/equipment/{{equipmentId1}}/return
 Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
@@ -73,7 +68,7 @@ Content-Type: application/json
 }
 
 ###
-PUT {{url}}/collections/equipment/{{equipmentId}}/returnTraverseSet
+PUT {{url}}/collections/equipment/{{equipmentId1}}/returnTraverseSet
 Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
