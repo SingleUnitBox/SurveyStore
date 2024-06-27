@@ -10,7 +10,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Repositories
         Task AddAsync(Kit kit);
         Task UpdateAsync(Kit kit);
         Task UpdateRangeAsync(IEnumerable<Kit> kit);
-        Task<Kit> GetByIdAsync(AggregateId id);
+        Task<Kit> GetByIdAsync(KitId id);
         Task<Kit> GetBySerialNumberAsync(string serialNumber);
     }
 }

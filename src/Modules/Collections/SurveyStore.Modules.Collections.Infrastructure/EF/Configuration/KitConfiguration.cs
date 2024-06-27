@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SurveyStore.Modules.Collections.Domain.Collections.Entities;
+using SurveyStore.Modules.Collections.Infrastructure.EF.Configuration.ValueConverters;
 
 namespace SurveyStore.Modules.Collections.Infrastructure.EF.Configuration
 {
@@ -10,15 +11,20 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Configuration
         {
             builder.HasKey(k => k.Id);
             builder.Property(k => k.Id)
-                .HasConversion(k => k.Value, k => new(k));
-            builder.Property(k => k.StoreId)
-                .HasConversion(k => k.Value, k => new(k));
-            builder.Property(k => k.Version)
-                .IsConcurrencyToken();
+                .HasConversion(id => id.Value, value => new(value));
+            builder.Property(k => k.Brand)
+                .HasConversion(BrandValueConverter.ValueConverter);
+            builder.Property(k => k.Model)
+                .HasConversion(ModelValueConverter.ValueConverter);
+            builder.Property(k => k.SerialNumber)
+                .HasConversion(SerialNumberConverter.ValueConverter);
             builder.HasIndex(k => k.SerialNumber)
                 .IsUnique();
-            builder.HasOne(k => k.Store)
-                .WithMany();
+            builder.Property(k => k.Type)
+                .HasConversion(KitTypeValueConverter.ValueConverter);
+            builder.Property(k => k.Id)
+                .HasConversion(k => k.Value, k => new(k));
+
         }
     }
 }

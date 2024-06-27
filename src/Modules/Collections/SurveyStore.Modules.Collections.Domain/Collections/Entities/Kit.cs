@@ -12,6 +12,10 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
         public SerialNumber SerialNumber { get; private set; }
         public KitType Type { get; private set; }
 
+        private Kit()
+        {
+            
+        }
         protected Kit(KitId id, string brand, string model, string serialNumber, string type)
         {
             Id = id;

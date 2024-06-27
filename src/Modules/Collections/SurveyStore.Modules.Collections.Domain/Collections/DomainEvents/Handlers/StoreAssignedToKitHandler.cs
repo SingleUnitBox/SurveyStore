@@ -1,5 +1,6 @@
 ﻿using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
+using SurveyStore.Modules.Collections.Domain.Collections.Specifications.KitCollections;
 using SurveyStore.Shared.Abstractions.Kernel;
 using System;
 using System.Linq;
@@ -20,16 +21,17 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainEvents.Handle
         {
             //var kitCollections = await _kitCollectionRepository.BrowseKitCollectionsAsync(@event.Kit.Id);
             //var kitCollection = kitCollections.SingleOrDefault(k => !k.CollectedAt.HasValue);
-            var kitCollection = await _kitCollectionRepository.GetFreeByKitAsync(@event.Kit.Id);
+            var kitCollection = await _kitCollectionRepository
+                .GetAsPredicateExpression(new IsFreeKitCollection(@event.Kit.Id));
             if (kitCollection is not null)
             {
-                kitCollection.ChangeCollectionStoreId(@event.StoreId);
+                kitCollection.AssignStore(@event.StoreId);
                 await _kitCollectionRepository.UpdateAsync(kitCollection);
             }
             else
             {
                 kitCollection = KitCollection.Create(Guid.NewGuid(), @event.Kit.Id);
-                kitCollection.ChangeCollectionStoreId(@event.StoreId);
+                kitCollection.AssignStore(@event.StoreId);
 
                 await _kitCollectionRepository.AddAsync(kitCollection);
             }

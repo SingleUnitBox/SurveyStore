@@ -22,7 +22,7 @@ namespace SurveyStore.Modules.Collections.Application.Events.Handlers
                 throw new KitNotFoundException(@event.KitId);
             }
 
-            kit.UnassignStore();
+            //kit.UnassignStore();
             await _kitRepository.UpdateAsync(kit);
         }
     }

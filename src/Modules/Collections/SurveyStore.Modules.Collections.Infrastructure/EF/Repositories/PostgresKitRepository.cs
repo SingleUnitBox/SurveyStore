@@ -36,7 +36,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public Task<Kit> GetByIdAsync(AggregateId id)
+        public Task<Kit> GetByIdAsync(KitId id)
             => _kit.SingleOrDefaultAsync(k => k.Id == id);
 
         public Task<Kit> GetBySerialNumberAsync(string serialNumber)

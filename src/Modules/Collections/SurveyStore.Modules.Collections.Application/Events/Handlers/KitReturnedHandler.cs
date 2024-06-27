@@ -40,11 +40,11 @@ namespace SurveyStore.Modules.Collections.Application.Events.Handlers
                 throw new StoreNotFoundException(@event.ReturnStoreId);
             }
 
-            kit.AssignStore(@event.ReturnStoreId);
+            //kit.AssignStore(@event.ReturnStoreId);
             await _kitRepository.UpdateAsync(kit);
 
-            var events = _eventMapper.MapAll(kit.Events);
-            await _messageBroker.PublishAsync(events.ToArray());
+            //var events = _eventMapper.MapAll(kit.Events);
+            //await _messageBroker.PublishAsync(events.ToArray());
         }
     }
 }

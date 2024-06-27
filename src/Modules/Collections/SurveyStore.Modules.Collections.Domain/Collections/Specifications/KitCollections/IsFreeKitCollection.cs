@@ -15,7 +15,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Specifications.KitC
 
         public override Expression<Func<KitCollection, bool>> AsPredicateExpression()
         {
-            return kitCollection => kitCollection.Id == _kitId
+            return kitCollection => kitCollection.KitId == _kitId
                                     && kitCollection.CollectedAt == null
                                     && kitCollection.ReturnedAt == null;
         }

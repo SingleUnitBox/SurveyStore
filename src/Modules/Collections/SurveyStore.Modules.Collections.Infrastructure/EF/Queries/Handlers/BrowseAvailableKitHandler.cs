@@ -20,8 +20,6 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Queries.Handlers
         public async Task<IReadOnlyCollection<KitDto>> HandleAsync(BrowseAvailableKit query)
             => await _kit
                 .AsNoTracking()
-                .Include(k => k.Store)
-                .Where(k => k.StoreId != null)
                 .Select(k => k.AsDto())
                 .ToListAsync();
     }
