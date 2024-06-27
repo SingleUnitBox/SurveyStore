@@ -1,10 +1,11 @@
 ﻿using SurveyStore.Modules.Collections.Application.Exceptions;
 using SurveyStore.Modules.Collections.Application.Services;
+using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
+using SurveyStore.Modules.Collections.Domain.Collections.Specifications.KitCollections;
 using SurveyStore.Shared.Abstractions.Commands;
-using SurveyStore.Shared.Abstractions.Kernel.Types;
 using SurveyStore.Shared.Abstractions.Messaging;
-using System.Linq;
+using System;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
@@ -32,12 +33,6 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 
         public async Task HandleAsync(AssignStoreToKit command)
         {
-            var kitCollection = await _kitCollectionRepository.GetOpenByKitAsync(command.KitId);
-            if (kitCollection is not null)
-            {
-                throw new CannotAssignStoreException(new KitId(command.KitId));
-            }
-
             var kit = await _kitRepository.GetByIdAsync(command.KitId);
             if (kit is null)
             {
@@ -50,20 +45,26 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
                 throw new StoreNotFoundException(command.StoreId);
             }
 
-            kit.AssignStore(command.StoreId);
-            await _kitRepository.UpdateAsync(kit);
-
-            kitCollection = await _kitCollectionRepository.GetFreeByKitAsync(command.KitId);
+            var kitCollection = await _kitCollectionRepository
+                .GetAsPredicateExpression(new IsFreeKitCollection(command.KitId));
             if (kitCollection is not null)
             {
-                kitCollection.ChangeCollectionStoreId(command.StoreId);
+                kitCollection.AssignStore(command.StoreId);
                 await _kitCollectionRepository.UpdateAsync(kitCollection);
             }
             else
             {
-                var events = _eventMapper.MapAll(kit.Events);
-                await _messageBroker.PublishAsync(events.ToArray());
-            }           
+                kitCollection = await _kitCollectionRepository
+                    .GetAsPredicateExpression(new IsOpenKitCollection(command.KitId));                
+                if (kitCollection is not null)
+                {
+                    throw new CannotAssignStoreException(command.KitId);
+                }
+                
+                kitCollection = KitCollection.Create(Guid.NewGuid(), command.KitId);
+                kitCollection.AssignStore(command.StoreId);
+                await _kitCollectionRepository.AddAsync(kitCollection);
+            }
         }
     }
 }

@@ -13,7 +13,7 @@
 @surveyorId1 = 709b1e98-e8cf-4453-9a9d-dcc402b08923
 @surveyorId2 = f4e207b7-3385-4980-96d1-84447c5ed580
 
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmNGUyMDdiNzMzODU0OTgwOTZkMTg0NDQ3YzVlZDU4MCIsInVuaXF1ZV9uYW1lIjoiZjRlMjA3YjczMzg1NDk4MDk2ZDE4NDQ0N2M1ZWQ1ODAiLCJqdGkiOiI0M2QyNmI4MS0wNmUwLTQzZWMtYWQ5MS0xNDNmNjgyMWZkNWYiLCJpYXQiOiIxNzE5NDM3MjU1NTIzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxOTQzNzI1NSwiZXhwIjoxNzE5NTIwMDU1LCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.anW1LrQZT3ES6rbdK4-98xIIOLmmFa695eOf6hlVYss
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmNGUyMDdiNzMzODU0OTgwOTZkMTg0NDQ3YzVlZDU4MCIsInVuaXF1ZV9uYW1lIjoiZjRlMjA3YjczMzg1NDk4MDk2ZDE4NDQ0N2M1ZWQ1ODAiLCJqdGkiOiIzODFmNTgxMy1kMjVkLTQ0MGMtODQwYy0xNjNhMDQ1NjRjYmIiLCJpYXQiOiIxNzE5NTE5MzAxNTI5IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsInBlcm1pc3Npb25zIjpbInN0b3JlcyIsInVzZXJzIiwic3VydmV5b3JzIiwiZXF1aXBtZW50IiwiY29sbGVjdGlvbnMiLCJjYWxpYnJhdGlvbnMiLCJzYWdhIl0sIm5iZiI6MTcxOTUxOTMwMSwiZXhwIjoxNzE5NjAyMTAxLCJpc3MiOiJzdXJ2ZXlzdG9yZSJ9.WFbTfzjJPCk3WiCEAvV38meU2bt91lGoE2i28iJ7Cws
 
 ###
 GET {{url}}
@@ -40,12 +40,12 @@ Content-Type: application/json
 }
 
 ###
-PUT {{url}}/collections/equipment/{{equipmentId3}}/collect
+PUT {{url}}/collections/equipment/{{equipmentId2}}/collect
 Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
-    "surveyorId": "{{surveyorId1}}"
+    "surveyorId": "{{surveyorId2}}"
 }
 
 ###

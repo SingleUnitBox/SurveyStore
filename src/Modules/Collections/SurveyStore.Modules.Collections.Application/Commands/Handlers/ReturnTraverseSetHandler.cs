@@ -174,10 +174,10 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 
         private async Task AssignKitAsync(IEnumerable<Kit> kit, Guid returnStoreId)
         {
-            foreach (var k in kit)
-            {
-                k.AssignStore(returnStoreId);
-            }
+            //foreach (var k in kit)
+            //{
+            //    k.AssignStore(returnStoreId);
+            //}
 
             await _kitRepository.UpdateRangeAsync(kit);
         }

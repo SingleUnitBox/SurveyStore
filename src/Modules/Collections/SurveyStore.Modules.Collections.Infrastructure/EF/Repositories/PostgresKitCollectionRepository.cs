@@ -2,6 +2,7 @@
 using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
+using SurveyStore.Shared.Abstractions.Specification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,25 +61,9 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
                 //.Where(c => c.KitId == kitId)
                 .ToListAsync();
 
-        public async Task<KitCollection> GetFreeByKitAsync(AggregateId kitId)
-            //=> await _kitCollections
-            //    .Include(c => c.Kit)
-            //    .SingleOrDefaultAsync(c => c.KitId == kitId
-            //    && c.CollectedAt == null
-            //    && c.ReturnedAt == null);
-
-            => await _kitCollections
-                .Where(c => c.KitId.Value == kitId
-                            && c.ReturnStoreId == null
-                            && c.CollectedAt == null)
-                //.Include(c => c.Kit)
-                .SingleOrDefaultAsync();
-
-        public Task<KitCollection> GetOpenByKitAsync(AggregateId kitId)
+        public Task<KitCollection> GetAsPredicateExpression(Specification<KitCollection> specification)
             => _kitCollections
-                //.Include(c => c.Kit)
-                .SingleOrDefaultAsync(c => c.KitId.Value == kitId
-                && c.CollectedAt != null
-                && c.ReturnedAt == null);
+            .Include(k => k.Kit)
+            .SingleOrDefaultAsync(specification);
     }
 }

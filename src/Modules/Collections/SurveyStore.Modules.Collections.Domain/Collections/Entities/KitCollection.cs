@@ -7,10 +7,11 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
 {
     public class KitCollection : AggregateRoot
     {
+        public Kit Kit { get; private set; }
+        public KitId KitId { get; private set; }
         public Surveyor Surveyor { get; private set; }
         public StoreId CollectionStoreId { get; private set; }
         public StoreId ReturnStoreId { get; private set; }
-        public KitId KitId { get; private set; }
         public DateTime? CollectedAt { get; private set; }
         public DateTime? ReturnedAt { get; private set; }
 
@@ -20,8 +21,12 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
             KitId = kitId;
         }
 
-        public void ChangeCollectionStoreId(StoreId storeId)
+        public void AssignStore(StoreId storeId)
         {
+            if (CollectionStoreId == storeId)
+            {
+                return;
+            }
             CollectionStoreId = storeId;
             IncrementVersion();
         }
