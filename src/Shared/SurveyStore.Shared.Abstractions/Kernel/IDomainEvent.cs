@@ -1,6 +1,8 @@
-﻿namespace SurveyStore.Shared.Abstractions.Kernel
+﻿using SurveyStore.Shared.Abstractions.Messaging;
+
+namespace SurveyStore.Shared.Abstractions.Kernel
 {
-    public interface IDomainEvent
+    public interface IDomainEvent : IMessage
     {
     }
 }

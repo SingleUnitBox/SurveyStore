@@ -6,6 +6,7 @@ using SurveyStore.Modules.Collections.Application.Services;
 using SurveyStore.Shared.Abstractions.Messaging;
 using SurveyStore.Shared.Abstractions.Time;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
+using SurveyStore.Modules.Collections.Domain.Collections.Exceptions;
 
 namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 {
@@ -64,7 +65,10 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             collection.Return(returnStore.Id, _clock.Current());
             await _collectionRepository.UpdateAsync(collection);
 
-            var events = _eventMapper.MapAll(collection.Events);
+            //var events = _eventMapper.MapAll(collection.Events);
+            //await _messageBroker.PublishAsync(events.ToArray());
+
+            var events = collection.Events.ToList();
             await _messageBroker.PublishAsync(events.ToArray());
         }
     }

@@ -1,6 +1,7 @@
 ﻿using SurveyStore.Modules.Collections.Application.Exceptions;
 using SurveyStore.Modules.Collections.Application.Services;
 using SurveyStore.Modules.Collections.Domain.Collections.DomainServices;
+using SurveyStore.Modules.Collections.Domain.Collections.Exceptions;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Modules.Collections.Domain.Collections.Specifications.Collections;
 using SurveyStore.Shared.Abstractions.Commands;
@@ -66,15 +67,15 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             }
 
            var openCollections = await _collectionRepository
-                .BrowseAsPredicateExpressionAsync(new IsSurveyorCollection(command.SurveyorId));
+                .BrowseAsPredicateExpressionAsync(new IsSurveyorCollection(command.SurveyorId) & new IsOpenCollection(command.SurveyEquipmentId));
 
             var now = _clock.Current();
             _collectionService.Collect(openCollections, collection, surveyor, now);
 
             await _collectionRepository.UpdateAsync(collection);
 
-            var events = _eventMapper.MapAll(collection.Events);
-            await _messageBroker.PublishAsync(events.ToArray());
+            //var events = _eventMapper.MapAll(collection.Events);
+            //await _messageBroker.PublishAsync(events.ToArray());
         }
     }
 }

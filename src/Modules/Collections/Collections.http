@@ -45,7 +45,7 @@ Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
-    "surveyorId": "{{surveyorId2}}"
+    "surveyorId": "{{surveyorId1}}"
 }
 
 ###
@@ -94,4 +94,23 @@ Content-Type: application/json
 
 {
     "storeId": "{{store1Id}}"
+}
+
+###
+POST {{url}}/kit/{{kitId}}/collect
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+    "surveyorId": "{{surveyorId1}}"
+}
+
+###
+PUT {{url}}/kit/{{kitId}}/return
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+    "sureyorId": "{{surveyorId2}}",
+    "returnStoreId": "{{store1Id}}"
 }

@@ -5,16 +5,18 @@ using System.Linq.Expressions;
 
 namespace SurveyStore.Modules.Collections.Domain.Collections.Specifications.KitCollections
 {
-    public class IsOpenKitCollection : Specification<KitCollection>
+    public class IsSurveyorKitCollection : Specification<KitCollection>
     {
-        private readonly Guid _kitId;
-        public IsOpenKitCollection(Guid kitId)
+        private readonly Guid _surveyorId;
+
+        public IsSurveyorKitCollection(Guid surveyorId)
         {
-            _kitId = kitId;
+            _surveyorId = surveyorId;
         }
         public override Expression<Func<KitCollection, bool>> AsPredicateExpression()
-            => kitCollection => kitCollection.KitId == _kitId
-                                && kitCollection.CollectedAt != null
-                                && kitCollection.ReturnedAt == null;
+        {
+            return kitCollection => kitCollection.Surveyor.Id == _surveyorId;
+
+        }
     }
 }

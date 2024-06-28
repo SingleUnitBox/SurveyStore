@@ -2,13 +2,12 @@
 using SurveyStore.Modules.Collections.Application.Exceptions;
 using SurveyStore.Modules.Collections.Application.Services;
 using SurveyStore.Modules.Collections.Domain.Collections.Entities;
+using SurveyStore.Modules.Collections.Domain.Collections.Exceptions;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Modules.Collections.Domain.Collections.Specifications.Collections;
 using SurveyStore.Shared.Abstractions.Commands;
 using SurveyStore.Shared.Abstractions.Messaging;
-using SurveyStore.Shared.Abstractions.Specification;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
