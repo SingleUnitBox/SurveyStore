@@ -7,6 +7,8 @@ using SurveyStore.Shared.Abstractions.Messaging;
 using SurveyStore.Shared.Abstractions.Time;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Modules.Collections.Domain.Collections.Exceptions;
+using SurveyStore.Shared.Abstractions.Events;
+using SurveyStore.Shared.Abstractions.Kernel;
 
 namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 {
@@ -15,26 +17,22 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
         private readonly ICollectionRepository _collectionRepository;
         private readonly ISurveyorRepository _surveyorRepository;
         private readonly IStoreRepository _storeRepository;
-        private readonly ISurveyEquipmentRepository _surveyEquipmentRepository;
         private readonly IClock _clock;
-        private readonly IEventMapper _eventMapper;
-        private readonly IMessageBroker _messageBroker;
+        private readonly IDomainEventDispatcher _domainEventDispatcher;
 
         public ReturnSurveyEquipmentHandler(ICollectionRepository collectionRepository,
             ISurveyorRepository surveyorRepository,
             IStoreRepository storeRepository,
-            ISurveyEquipmentRepository surveyEquipmentRepository,
             IClock clock,
             IEventMapper eventMapper,
-            IMessageBroker messageBroker)
+            IMessageBroker messageBroker,
+            IDomainEventDispatcher domainEventDispatcher)
         {
             _collectionRepository = collectionRepository;
             _surveyorRepository = surveyorRepository;
             _storeRepository = storeRepository;
-            _surveyEquipmentRepository = surveyEquipmentRepository;
             _clock = clock;
-            _eventMapper = eventMapper;
-            _messageBroker = messageBroker;
+            _domainEventDispatcher = domainEventDispatcher;
         }
 
         public async Task HandleAsync(ReturnSurveyEquipment command)
@@ -65,11 +63,8 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             collection.Return(returnStore.Id, _clock.Current());
             await _collectionRepository.UpdateAsync(collection);
 
-            //var events = _eventMapper.MapAll(collection.Events);
-            //await _messageBroker.PublishAsync(events.ToArray());
-
-            var events = collection.Events.ToList();
-            await _messageBroker.PublishAsync(events.ToArray());
+            var @event = collection.Events.FirstOrDefault();
+            await _domainEventDispatcher.DispatchAsync(@event);
         }
     }
 }

@@ -3,7 +3,9 @@ using SurveyStore.Modules.Collections.Domain.Collections.Exceptions;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Modules.Collections.Domain.Collections.Specifications.KitCollections;
 using SurveyStore.Shared.Abstractions.Commands;
+using SurveyStore.Shared.Abstractions.Kernel;
 using SurveyStore.Shared.Abstractions.Time;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
@@ -15,18 +17,21 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
         private readonly IStoreRepository _storeRepository;
         private readonly ISurveyorRepository _surveyRepository;
         private readonly IClock _clock;
+        private readonly IDomainEventDispatcher _domainEventDispatcher;
 
         public ReturnKitHandler(IKitCollectionRepository kitCollectionRepository,
             IKitRepository kitRepository,
             IStoreRepository storeRepository,
             ISurveyorRepository surveyRepository,
-            IClock clock)
+            IClock clock,
+            IDomainEventDispatcher domainEventDispatcher)
         {
             _kitCollectionRepository = kitCollectionRepository;
             _kitRepository = kitRepository;
             _storeRepository = storeRepository;
             _surveyRepository = surveyRepository;
             _clock = clock;
+            _domainEventDispatcher = domainEventDispatcher;
         }
 
         public async Task HandleAsync(ReturnKit command)
@@ -59,6 +64,8 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 
             kitCollection.Return(store.Id, _clock.Current());
             await _kitCollectionRepository.UpdateAsync(kitCollection);
+
+            await _domainEventDispatcher.DispatchAsync(kitCollection.Events.ToArray());
         }
     }
 }

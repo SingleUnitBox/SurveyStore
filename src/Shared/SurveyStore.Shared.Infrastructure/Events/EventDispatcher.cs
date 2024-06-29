@@ -1,8 +1,8 @@
-﻿using SurveyStore.Shared.Abstractions.Events;
+﻿using Microsoft.Extensions.DependencyInjection;
+using SurveyStore.Shared.Abstractions.Events;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace SurveyStore.Shared.Infrastructure.Events
 {
@@ -20,8 +20,8 @@ namespace SurveyStore.Shared.Infrastructure.Events
             using var scope = _serviceProvider.CreateScope();
             {
                 var handlers = scope.ServiceProvider.GetServices<IEventHandler<TEvent>>();
-                var tasks = handlers.Select(h => h.HandleAsync(@event));
 
+                var tasks = handlers.Select(h => h.HandleAsync(@event));
                 await Task.WhenAll(tasks);
             }
         }

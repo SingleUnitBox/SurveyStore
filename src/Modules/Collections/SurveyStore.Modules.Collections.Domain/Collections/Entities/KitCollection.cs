@@ -46,7 +46,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
         {
             ReturnStoreId = returnStoreId;
             ReturnedAt = returnedAt;
-            AddEvent(new ReturnStoreAssignedToKit(returnStoreId));
+            AddEvent(new KitCollectionReturned(KitId, ReturnStoreId));
             IncrementVersion();
         }
 
