@@ -55,7 +55,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             }
 
             var kitCollection = await _kitCollectionRepository
-                .GetAsPredicateExpression(new IsOpenKitCollection(command.KitId) & new IsSurveyorKitCollection(command.SurveyorId));
+                .GetAsPredicateExpression(new IsOpenKitCollectionById(command.KitId) & new IsSurveyorKitCollection(command.SurveyorId));
 
             if (kitCollection is null)
             {

@@ -66,7 +66,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             }
             else
             {
-                collection = await _collectionRepository.GetAsPredicateExpressionAsync(new IsOpenCollection(surveyEquipment.Id));
+                collection = await _collectionRepository.GetAsPredicateExpressionAsync(new IsOpenCollectionById(surveyEquipment.Id));
                 if (collection is not null)
                 {
                     throw new CannotAssignStoreException(surveyEquipment.Id);

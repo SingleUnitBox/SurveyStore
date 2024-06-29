@@ -1,10 +1,13 @@
 ﻿using SurveyStore.Modules.Collections.Domain.Collections.Entities;
+using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
 {
     public interface IKitCollectionService
     {
-        //(bool isFull, IEnumerable<KitCollection> kitCollection) IsTraverseSetFullForReturn(IEnumerable<KitCollection> openKitCollections);
+        Task<IEnumerable<KitCollection>> GatherTraverseSet(IEnumerable<KitCollection> openKitCollections,
+            Surveyor surveyor, Date collectedAt);
     }
 }

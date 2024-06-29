@@ -15,16 +15,18 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainEvents.Handle
         private readonly IKitRepository _kitRepository;
 
         public KitCollectionReturnedHandler(IKitCollectionRepository kitCollectionRepository,
-            IStoreRepository storeRepository)
+            IStoreRepository storeRepository,
+            IKitRepository kitRepository)
         {
             _kitCollectionRepository = kitCollectionRepository;
             _storeRepository = storeRepository;
+            _kitRepository = kitRepository;
         }
 
         public async Task HandleAsync(KitCollectionReturned @event)
         {
             var kitCollection = await _kitCollectionRepository
-                .GetAsPredicateExpression(new IsFreeKitCollection(@event.KitId));
+                .GetAsPredicateExpression(new IsFreeKitCollectionById(@event.KitId));
             if (kitCollection is not null)
             {
                 return;

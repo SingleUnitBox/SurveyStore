@@ -14,11 +14,9 @@ namespace SurveyStore.Modules.Collections.Application.Services
         public IMessage Map(IDomainEvent domainEvent)
             => domainEvent switch
             {
-                StoreAssigned de => new CollectionUpdated(de.SurveyEquipment.Id.Value, de.StoreId),
                 CollectionCollected de => new SurveyEquipmentCollected(de.SurveyEquipmentId),
                 CollectionReturned de => new SurveyEquipmentReturned(de.SurveyEquipmentId, de.ReturnStoreId),
 
-                StoreAssignedToKit de => new KitCollectionUpdated(de.Kit.Id.Value, de.StoreId),
                 KitCollectionCollected de => new KitCollected(de.KitId),
                 KitCollectionReturned de => new KitReturned(de.KitId, de.ReturnStoreId),
                 _ => null

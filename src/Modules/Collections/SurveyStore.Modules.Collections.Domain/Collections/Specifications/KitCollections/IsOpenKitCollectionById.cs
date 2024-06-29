@@ -5,10 +5,16 @@ using System.Linq.Expressions;
 
 namespace SurveyStore.Modules.Collections.Domain.Collections.Specifications.KitCollections
 {
-    public class IsFreeKitCollection : Specification<KitCollection>
+    public class IsOpenKitCollectionById : Specification<KitCollection>
     {
+        private readonly Guid _kitId;
+        public IsOpenKitCollectionById(Guid kitId)
+        {
+            _kitId = kitId;
+        }
         public override Expression<Func<KitCollection, bool>> AsPredicateExpression()
-            => kitCollection => kitCollection.CollectedAt == null
+            => kitCollection => kitCollection.KitId == _kitId
+                                && kitCollection.CollectedAt != null
                                 && kitCollection.ReturnedAt == null;
     }
 }

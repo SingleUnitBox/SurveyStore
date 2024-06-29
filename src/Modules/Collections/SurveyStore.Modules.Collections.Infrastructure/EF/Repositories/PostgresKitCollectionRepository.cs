@@ -21,6 +21,11 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
             _dbContext = dbContext;
         }
 
+        public void Detach(KitCollection kitCollection)
+        {
+            _dbContext.Entry(kitCollection).State = EntityState.Detached;
+        }
+
         public async Task AddAsync(KitCollection kitCollection)
         {
             await _kitCollections.AddAsync(kitCollection);
@@ -60,6 +65,12 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
                 .Include(c => c.Surveyor)
                 //.Where(c => c.KitId == kitId)
                 .ToListAsync();
+
+        public async Task<IEnumerable<KitCollection>> BrowseAsPredicateExpression(Specification<KitCollection> specification)
+            => _kitCollections
+                .Include(c => c.Kit)
+                .Include(c => c.Surveyor)
+                .Where(specification);
 
         public Task<KitCollection> GetAsPredicateExpression(Specification<KitCollection> specification)
             => _kitCollections

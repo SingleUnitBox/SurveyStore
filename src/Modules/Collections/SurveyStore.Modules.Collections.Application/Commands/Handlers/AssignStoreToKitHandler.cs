@@ -47,7 +47,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             }
 
             var kitCollection = await _kitCollectionRepository
-                .GetAsPredicateExpression(new IsFreeKitCollection(command.KitId));
+                .GetAsPredicateExpression(new IsFreeKitCollectionById(command.KitId));
             if (kitCollection is not null)
             {
                 kitCollection.AssignStore(command.StoreId);
@@ -56,7 +56,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             else
             {
                 kitCollection = await _kitCollectionRepository
-                    .GetAsPredicateExpression(new IsOpenKitCollection(command.KitId));                
+                    .GetAsPredicateExpression(new IsOpenKitCollectionById(command.KitId));                
                 if (kitCollection is not null)
                 {
                     throw new CannotAssignStoreException(command.KitId);

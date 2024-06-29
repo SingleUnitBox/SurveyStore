@@ -67,7 +67,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             }
 
            var openCollections = await _collectionRepository
-                .BrowseAsPredicateExpressionAsync(new IsSurveyorCollection(command.SurveyorId) & new IsOpenCollection(command.SurveyEquipmentId));
+                .BrowseAsPredicateExpressionAsync(new IsOpenCollectionById(command.SurveyEquipmentId) & new IsSurveyorCollection(command.SurveyorId));
 
             var now = _clock.Current();
             _collectionService.Collect(openCollections, collection, surveyor, now);

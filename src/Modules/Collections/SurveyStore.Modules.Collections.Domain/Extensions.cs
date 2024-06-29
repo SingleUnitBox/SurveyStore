@@ -12,7 +12,7 @@ namespace SurveyStore.Modules.Collections.Domain
         public static IServiceCollection AddCore(this IServiceCollection services)
         {
             services.AddSingleton<ICollectionService, CollectionService>();
-            services.AddSingleton<IKitCollectionService, KitCollectionService>();
+            services.AddScoped<IKitCollectionService, KitCollectionService>();
             services.AddSingleton<ICollectionPolicy, CollectionPolicy>();
             services.AddSingleton<IKitCollectionPolicy, KitCollectionPolicy>();
             

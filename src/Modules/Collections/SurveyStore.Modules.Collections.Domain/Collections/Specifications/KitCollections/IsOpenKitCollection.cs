@@ -7,14 +7,8 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Specifications.KitC
 {
     public class IsOpenKitCollection : Specification<KitCollection>
     {
-        private readonly Guid _kitId;
-        public IsOpenKitCollection(Guid kitId)
-        {
-            _kitId = kitId;
-        }
         public override Expression<Func<KitCollection, bool>> AsPredicateExpression()
-            => kitCollection => kitCollection.KitId == _kitId
-                                && kitCollection.CollectedAt != null
+            => kitCollection => kitCollection.CollectedAt != null
                                 && kitCollection.ReturnedAt == null;
     }
 }

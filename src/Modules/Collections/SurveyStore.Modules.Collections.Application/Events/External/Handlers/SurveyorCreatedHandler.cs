@@ -1,6 +1,6 @@
 ﻿using SurveyStore.Modules.Collections.Application.Clients.Surveyors;
-using SurveyStore.Modules.Collections.Application.Exceptions;
 using SurveyStore.Modules.Collections.Domain.Collections.Entities;
+using SurveyStore.Modules.Collections.Domain.Collections.Exceptions;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Shared.Abstractions.Events;
 using System;

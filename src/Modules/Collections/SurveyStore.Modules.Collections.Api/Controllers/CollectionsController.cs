@@ -53,7 +53,7 @@ namespace SurveyStore.Modules.Collections.Api.Controllers
         }
 
         [HttpPut("equipment/{id:guid}/collectTraverseSet")]
-        public async Task<ActionResult> CollectSetAsync(Guid id, CollectSurveyEquipment command)
+        public async Task<ActionResult> CollectSetAsync(Guid id, CollectTraverseSet command)
         {
             await _commandDispatcher.DispatchAsync(command with { SurveyEquipmentId = id });
             return NoContent();

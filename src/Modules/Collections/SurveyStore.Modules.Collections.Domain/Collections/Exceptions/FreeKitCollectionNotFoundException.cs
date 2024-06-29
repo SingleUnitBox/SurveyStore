@@ -2,7 +2,7 @@
 using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System;
 
-namespace SurveyStore.Modules.Collections.Application.Exceptions
+namespace SurveyStore.Modules.Collections.Domain.Collections.Exceptions
 {
     public class FreeKitCollectionNotFoundException : SurveyStoreException
     {

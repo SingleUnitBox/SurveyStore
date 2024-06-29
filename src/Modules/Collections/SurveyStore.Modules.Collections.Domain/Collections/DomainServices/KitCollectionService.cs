@@ -1,54 +1,62 @@
 ﻿using SurveyStore.Modules.Collections.Domain.Collections.Consts;
 using SurveyStore.Modules.Collections.Domain.Collections.Entities;
+using SurveyStore.Modules.Collections.Domain.Collections.Exceptions;
+using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
+using SurveyStore.Modules.Collections.Domain.Collections.Specifications.KitCollections;
+using SurveyStore.Shared.Abstractions.Kernel.Types;
 using SurveyStore.Shared.Abstractions.Types;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
 {
     public class KitCollectionService : IKitCollectionService
     {
-        private readonly KitConstOptions _kitConstOptions;
+        private readonly KitConstOptions _kitOptions;
+        private readonly IKitCollectionRepository _kitCollectionRepository;
 
-        public KitCollectionService(KitConstOptions kitConstOptions)
+        public KitCollectionService(KitConstOptions kitOptions,
+            IKitCollectionRepository kitCollectionRepository)
         {
-            _kitConstOptions = kitConstOptions;
+            _kitOptions = kitOptions;
+            _kitCollectionRepository = kitCollectionRepository;
         }
+        public async Task<IEnumerable<KitCollection>> GatherTraverseSet(IEnumerable<KitCollection> openKitCollections, Surveyor surveyor, Date collectedAt)
+        {
+            var tripodsToBeCollected = new List<KitCollection>();
+            var freeKitCollections = await _kitCollectionRepository
+                .BrowseAsPredicateExpression(new IsFreeKitCollection());
+                
+            var openTripodsAmount = openKitCollections
+                .Where(k => k.Kit.Type == KitTypes.Tripod)
+                .Count();
+            if (openTripodsAmount < _kitOptions.TripodRequiredAmount)
+            {
+                var freeTripods = freeKitCollections.Where(k => k.Kit.Type == KitTypes.Tripod);
+                var availableTripodAmount = freeTripods.Count() + openTripodsAmount;
+                if (availableTripodAmount < _kitOptions.TripodRequiredAmount)
+                {
+                    throw new NotEnoughKitAvailableToFormSetException(
+                        KitTypes.Tripod, _kitOptions.TripodRequiredAmount, availableTripodAmount);
+                }
+                
+                foreach (var tripod in freeTripods)
+                {
+                    if (tripodsToBeCollected.Count() + openTripodsAmount < _kitOptions.TripodRequiredAmount)
+                    {
+                        tripodsToBeCollected.Add(tripod);
+                        _kitCollectionRepository.Detach(tripod);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
 
-        //public (bool, IEnumerable<KitCollection>) IsTraverseSetFullForReturn(IEnumerable<KitCollection> openKitCollections)
-        //{
-        //    var tripods = FilterAndValidateKit(openKitCollections, KitTypes.Tripod, _kitConstOptions.TripodRequiredAmount);
-        //    if (!tripods.areEnough)
-        //    {
-        //        return (false, tripods.filteredKit);
-        //    }
-
-        //    var prisms = FilterAndValidateKit(openKitCollections,
-        //        KitTypes.TraversePrism, _kitConstOptions.PrismRequiredAmount);
-        //    if (!prisms.areEnough)
-        //    {
-        //        return (false, prisms.filteredKit);
-        //    }
-
-        //    var traverseSet = new List<KitCollection>();
-        //    traverseSet.AddRange(tripods.filteredKit);
-        //    traverseSet.AddRange(prisms.filteredKit);
-
-        //    return (true, traverseSet);
-        //}
-
-        //private (bool areEnough, List<KitCollection> filteredKit) FilterAndValidateKit(IEnumerable<KitCollection> kitCollection,
-        //    string kitType, int requiredAmount)
-        //{
-        //    var filteredKit = kitCollection
-        //        .Where(k => k.Kit.Type == kitType)
-        //        .ToList();
-        //    if (filteredKit.Count < requiredAmount)
-        //    {
-        //        return (false, filteredKit);
-        //    }
-
-        //    return (true, filteredKit);
-        //}
+            return tripodsToBeCollected;
+            var openTraversePrisms = openKitCollections.Where(k => k.Kit.Type == KitTypes.TraversePrism);
+        }
     }
 }

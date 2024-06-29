@@ -19,7 +19,7 @@ namespace SurveyStore.Modules.Collections.Application.Events.Handlers
         public async Task HandleAsync(KitCollectionUpdated @event)
         {
             var kitCollection = await _kitCollectionRepository
-                .GetAsPredicateExpression(new IsFreeKitCollection(@event.KitId.Value));
+                .GetAsPredicateExpression(new IsFreeKitCollectionById(@event.KitId.Value));
             if (kitCollection is not null)
             {
                 kitCollection.AssignStore(@event.CollectionStoreId);

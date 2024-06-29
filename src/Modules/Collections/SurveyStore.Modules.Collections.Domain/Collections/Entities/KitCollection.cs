@@ -39,7 +39,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
             }
             Surveyor = surveyor;
             CollectedAt = collectedAt;
-            AddEvent(new KitCollectionCollected(KitId, CollectionStoreId));
+            AddEvent(new KitCollectionCollected(KitId, Surveyor.Id));
         }
 
         public void Return(StoreId returnStoreId, DateTime returnedAt)
