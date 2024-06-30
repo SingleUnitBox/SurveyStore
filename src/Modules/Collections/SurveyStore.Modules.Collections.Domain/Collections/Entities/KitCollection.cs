@@ -12,8 +12,8 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
         public Surveyor Surveyor { get; private set; }
         public StoreId CollectionStoreId { get; private set; }
         public StoreId ReturnStoreId { get; private set; }
-        public DateTime? CollectedAt { get; private set; }
-        public DateTime? ReturnedAt { get; private set; }
+        public Date CollectedAt { get; private set; }
+        public Date ReturnedAt { get; private set; }
 
         internal KitCollection(AggregateId id, KitId kitId)
         {

@@ -23,4 +23,8 @@
     <ProjectReference Include="..\..\src\Shared\SurveyStore.Shared.Tests\SurveyStore.Shared.Tests.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\Handlers\" />
+  </ItemGroup>
+
 </Project>

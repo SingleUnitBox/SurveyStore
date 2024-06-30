@@ -24,7 +24,6 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Configuration
                 .HasConversion(KitTypeValueConverter.ValueConverter);
             builder.Property(k => k.Id)
                 .HasConversion(k => k.Value, k => new(k));
-
         }
     }
 }

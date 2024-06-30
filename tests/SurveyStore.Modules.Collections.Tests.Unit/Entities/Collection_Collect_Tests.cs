@@ -27,7 +27,7 @@ namespace SurveyStore.Modules.Collections.Tests.Unit.Entities
         public void given_valid_input_collect_should_succeed()
         {
             var surveyor = GetSurveyor();
-            var collectedAt = DateTime.UtcNow;
+            var collectedAt = new Date(DateTime.UtcNow);
             var collectionStoreId = new StoreId(Guid.NewGuid());
             _collection.AssignStore(collectionStoreId);
 

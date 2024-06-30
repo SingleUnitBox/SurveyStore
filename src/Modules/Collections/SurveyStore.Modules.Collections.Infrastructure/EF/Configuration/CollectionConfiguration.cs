@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SurveyStore.Modules.Collections.Domain.Collections.Entities;
+using SurveyStore.Shared.Abstractions.Kernel.Types;
 
 namespace SurveyStore.Modules.Collections.Infrastructure.EF.Configuration
 {
@@ -19,6 +20,10 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Configuration
                 .HasConversion(c => c.Value, c => new(c));
             builder.Property(c => c.SurveyEquipmentId)
                 .HasConversion(c => c.Value, c => new(c));
+            builder.Property(c => c.CollectedAt)
+                .HasConversion(c => c.Value, value => new Date(value));
+            builder.Property(c => c.ReturnedAt)
+                .HasConversion(c => c.Value, value => new Date(value));
         }
     }
 }
