@@ -11,13 +11,10 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
 {
     internal class CollectionService : ICollectionService
     {
-        private readonly IKitCollectionPolicy _kitCollectionPolicy;
         private readonly KitConstOptions _kitConstOptions;
 
-        public CollectionService(IKitCollectionPolicy kitCollectionPolicy,
-            KitConstOptions kitConstOptions)
+        public CollectionService(KitConstOptions kitConstOptions)
         {
-            _kitCollectionPolicy = kitCollectionPolicy;
             _kitConstOptions = kitConstOptions;
         }
 
