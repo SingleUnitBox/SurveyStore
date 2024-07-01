@@ -1,16 +1,18 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SurveyStore.Shared.Abstractions.Events;
+using SurveyStore.Shared.Abstractions.Modules;
+using SurveyStore.Shared.Abstractions.Moduless;
+using SurveyStore.Shared.Infrastructure.Moduless;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.DependencyInjection;
-using SurveyStore.Shared.Abstractions.Events;
-using SurveyStore.Shared.Abstractions.Modules;
 
 namespace SurveyStore.Shared.Infrastructure.Modules
 {
@@ -62,7 +64,9 @@ namespace SurveyStore.Shared.Infrastructure.Modules
         {
             services.AddModuleRegistry(assemblies);
             services.AddSingleton<IModuleClient, ModuleClient>();
+            services.AddSingleton<IModulessClient, ModulessClient>();
             services.AddSingleton<IModuleSerializer, JsonModuleSerializer>();
+            services.AddSingleton<IModuleSerializer, JsonModuleSserializer>();
             services.AddSingleton<IModuleSubscriber, ModuleSubscriber>();
 
             return services;
@@ -74,7 +78,8 @@ namespace SurveyStore.Shared.Infrastructure.Modules
         private static void AddModuleRegistry(this IServiceCollection services, IEnumerable<Assembly> assemblies)
         {
             var registry = new ModuleRegistry();
-            var types = assemblies.SelectMany(a => a.GetTypes().ToArray());
+
+            var types = assemblies.SelectMany(a => a.GetTypes()).ToArray();
             var eventTypes = types
                 .Where(t => t.IsClass && typeof(IEvent).IsAssignableFrom(t))
                 .ToArray();
@@ -87,12 +92,37 @@ namespace SurveyStore.Shared.Infrastructure.Modules
                 foreach (var eventType in eventTypes)
                 {
                     registry.AddBroadcastAction(eventType, @event =>
-                            (Task)eventDispatcherType.GetMethod(nameof(eventDispatcher.PublishAsync))
-                            ?.MakeGenericMethod(eventType)
-                            .Invoke(eventDispatcher, new[] {@event}));
+                        (Task)eventDispatcherType.GetMethod(nameof(eventDispatcher.PublishAsync))
+                        ?.MakeGenericMethod(eventType)
+                        .Invoke(eventDispatcher, new[] { @event }));
                 }
 
                 return registry;
+            });
+        }
+
+        private static void AddMyModuleRegistry(this IServiceCollection services, IEnumerable<Assembly> assemblies)
+        {
+            var myRegistry = new MyModuleRegistry();
+            var types = assemblies.SelectMany(a => a.GetTypes());
+            var eventTypes = types
+                .Where(e => e.IsClass && typeof(IEvent).IsAssignableFrom(e))
+                .ToArray();
+
+            services.AddSingleton<IMyModuleRegistry>(sp =>
+            {
+                var eventDispatcher = sp.GetRequiredService<IEventDispatcher>();
+                var eventDispatcherType = eventDispatcher.GetType();
+
+                foreach (var eventType in eventTypes)
+                {
+                    myRegistry.AddBroadcastAction(eventType, @event =>
+                        (Task)eventDispatcherType.GetMethod(nameof(eventDispatcher.PublishAsync))
+                        ?.MakeGenericMethod(eventTypes)
+                        .Invoke(eventDispatcher, new[] { @event }));
+                }
+
+                return myRegistry;
             });
         }
     }

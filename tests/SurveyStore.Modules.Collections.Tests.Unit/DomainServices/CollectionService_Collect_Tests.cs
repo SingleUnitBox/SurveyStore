@@ -18,7 +18,7 @@ namespace SurveyStore.Modules.Collections.Tests.Unit.DomainServices
 {
     public class CollectionService_Collect_Tests
     {
-        public void Act(IEnumerable<Collection> openCollections, Collection toBeCollected,
+        private void Act(IEnumerable<Collection> openCollections, Collection toBeCollected,
             Surveyor surveyor, Date collectedAt) => CollectionService
             .Collect(openCollections, toBeCollected, surveyor, collectedAt);
 

@@ -1,4 +1,5 @@
 ﻿using SurveyStore.Modules.Collections.Application.Clients.Calibrations;
+using SurveyStore.Modules.Collections.Application.Events;
 using SurveyStore.Modules.Collections.Application.Exceptions;
 using SurveyStore.Modules.Collections.Application.Services;
 using SurveyStore.Modules.Collections.Domain.Collections.Entities;
@@ -6,7 +7,9 @@ using SurveyStore.Modules.Collections.Domain.Collections.Exceptions;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Modules.Collections.Domain.Collections.Specifications.Collections;
 using SurveyStore.Shared.Abstractions.Commands;
+using SurveyStore.Shared.Abstractions.Events;
 using SurveyStore.Shared.Abstractions.Messaging;
+using SurveyStore.Shared.Abstractions.Moduless;
 using System;
 using System.Threading.Tasks;
 
@@ -19,14 +22,19 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
         private readonly ICalibrationsApiClient _calibrationsApiClient;
         private readonly ICollectionRepository _collectionRepository;
         private readonly IEventMapper _eventMapper;
+        private readonly IModulessClient _modulessClient;
         private readonly IMessageBroker _messageBroker;
+
+        private readonly IEventDispatcher _eventDispatcher;
 
         public AssignStoreHandler(ISurveyEquipmentRepository surveyEquipmentRepository,
             IStoreRepository storeRepository,
             IEventMapper eventMapper,
             IMessageBroker messageBroker,
             ICalibrationsApiClient calibrationsApiClient,
-            ICollectionRepository collectionRepository)
+            ICollectionRepository collectionRepository,
+            IEventDispatcher eventDispatcher,
+            IModulessClient modulessClient)
         {
             _surveyEquipmentRepository = surveyEquipmentRepository;
             _storeRepository = storeRepository;
@@ -34,6 +42,8 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             _messageBroker = messageBroker;
             _calibrationsApiClient = calibrationsApiClient;
             _collectionRepository = collectionRepository;
+            _eventDispatcher = eventDispatcher;
+            _modulessClient = modulessClient;
         }
 
         public async Task HandleAsync(AssignStore command)
@@ -75,7 +85,9 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
                 collection = Collection.Create(Guid.NewGuid(), surveyEquipment.Id);
                 collection.AssignStore(store.Id);
                 await _collectionRepository.AddAsync(collection);
-            }                     
+            }
+
+            await _modulessClient.PublishAsync(new CollectionCreated(collection.Id, collection.SurveyEquipmentId));
         }
     }
 }

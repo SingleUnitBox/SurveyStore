@@ -14,7 +14,7 @@ namespace SurveyStore.Modules.Stores.Tests.Unit.Commands.Handlers
 {
     public class DeleteStoreHandler_Tests
     {
-        public Task Act(DeleteStore command) => _commandHandler.HandleAsync(command);
+        private Task Act(DeleteStore command) => _commandHandler.HandleAsync(command);
 
         [Fact]
         public async Task given_non_existing_store_delete_async_should_fail()
