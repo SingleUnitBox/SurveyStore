@@ -62,12 +62,14 @@ namespace SurveyStore.Shared.Infrastructure.Modules
         internal static IServiceCollection AddModulesRequests(this IServiceCollection services,
             IList<Assembly> assemblies)
         {
-            services.AddModuleRegistry(assemblies);
-            services.AddSingleton<IModuleClient, ModuleClient>();
-            services.AddSingleton<IModulessClient, ModulessClient>();
-            services.AddSingleton<IModuleSerializer, JsonModuleSerializer>();
-            services.AddSingleton<IModuleSerializer, JsonModuleSserializer>();
+            services.AddModuleRegistry(assemblies);            
+            services.AddSingleton<IModulessClient, ModulessClient>();            
+            services.AddSingleton<IModuleSerializer, JsonModuleSerializer>();           
             services.AddSingleton<IModuleSubscriber, ModuleSubscriber>();
+
+            services.AddMyModuleRegistry(assemblies);
+            services.AddSingleton<IModuleClient, ModuleClient>();
+            services.AddSingleton<IModuleSerializer, JsonModuleSserializer>();
 
             return services;
         }
@@ -118,7 +120,7 @@ namespace SurveyStore.Shared.Infrastructure.Modules
                 {
                     myRegistry.AddBroadcastAction(eventType, @event =>
                         (Task)eventDispatcherType.GetMethod(nameof(eventDispatcher.PublishAsync))
-                        ?.MakeGenericMethod(eventTypes)
+                        ?.MakeGenericMethod(eventType)
                         .Invoke(eventDispatcher, new[] { @event }));
                 }
 

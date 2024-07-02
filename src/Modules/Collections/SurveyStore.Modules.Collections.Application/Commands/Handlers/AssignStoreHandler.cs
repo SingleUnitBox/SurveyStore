@@ -22,7 +22,6 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
         private readonly ICalibrationsApiClient _calibrationsApiClient;
         private readonly ICollectionRepository _collectionRepository;
         private readonly IEventMapper _eventMapper;
-        private readonly IModulessClient _modulessClient;
         private readonly IMessageBroker _messageBroker;
 
         private readonly IEventDispatcher _eventDispatcher;
@@ -33,8 +32,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             IMessageBroker messageBroker,
             ICalibrationsApiClient calibrationsApiClient,
             ICollectionRepository collectionRepository,
-            IEventDispatcher eventDispatcher,
-            IModulessClient modulessClient)
+            IEventDispatcher eventDispatcher)
         {
             _surveyEquipmentRepository = surveyEquipmentRepository;
             _storeRepository = storeRepository;
@@ -43,7 +41,6 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             _calibrationsApiClient = calibrationsApiClient;
             _collectionRepository = collectionRepository;
             _eventDispatcher = eventDispatcher;
-            _modulessClient = modulessClient;
         }
 
         public async Task HandleAsync(AssignStore command)
@@ -87,7 +84,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
                 await _collectionRepository.AddAsync(collection);
             }
 
-            await _modulessClient.PublishAsync(new CollectionCreated(collection.Id, collection.SurveyEquipmentId));
+            await _messageBroker.PublishAsync(new CollectionCreated(collection.Id, collection.SurveyEquipmentId));
         }
     }
 }

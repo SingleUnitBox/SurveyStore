@@ -6,18 +6,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using SurveyStore.Shared.Infrastructure.Messaging.Dispatchers;
 using Convey.MessageBrokers;
+using SurveyStore.Shared.Abstractions.Moduless;
 
 namespace SurveyStore.Shared.Infrastructure.Messaging.Brokers
 {
     internal sealed class MessageBroker : IMessageBroker
     {
-        private readonly IModuleClient _moduleClient;
+        private readonly IModulessClient _moduleClient;
         private readonly IAsyncMessageDispatcher _messageDispatcher;
         private readonly MessagingOptions _messagingOptions;
         private readonly ILogger<MessageBroker> _logger;
         //private readonly IBusPublisher _busPublisher;
 
-        public MessageBroker(IModuleClient moduleClient,
+        public MessageBroker(IModulessClient moduleClient,
             IAsyncMessageDispatcher messageDispatcher,
             MessagingOptions messagingOptions,
             ILogger<MessageBroker> logger)
@@ -47,11 +48,11 @@ namespace SurveyStore.Shared.Infrastructure.Messaging.Brokers
             foreach (var message in messages)
             {
                 //await _busPublisher.PublishAsync(message);
-                if (_messagingOptions.UseBackgroundDispatcher)
-                {
-                    await _messageDispatcher.PublishAsync(message);
-                    continue;
-                }
+                //if (_messagingOptions.UseBackgroundDispatcher)
+                //{
+                //    await _messageDispatcher.PublishAsync(message);
+                //    continue;
+                //}
 
                 tasks.Add(_moduleClient.PublishAsync(message));
                 _logger.LogInformation($"Publishing message: {message.GetType().Name}");
