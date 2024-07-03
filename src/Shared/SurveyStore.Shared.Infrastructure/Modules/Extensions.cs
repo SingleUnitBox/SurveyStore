@@ -6,8 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SurveyStore.Shared.Abstractions.Events;
 using SurveyStore.Shared.Abstractions.Modules;
-using SurveyStore.Shared.Abstractions.Moduless;
-using SurveyStore.Shared.Infrastructure.Moduless;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -62,14 +60,10 @@ namespace SurveyStore.Shared.Infrastructure.Modules
         internal static IServiceCollection AddModulesRequests(this IServiceCollection services,
             IList<Assembly> assemblies)
         {
-            services.AddModuleRegistry(assemblies);            
-            services.AddSingleton<IModulessClient, ModulessClient>();            
+            services.AddModuleRegistry(assemblies);
+            services.AddSingleton<IModuleClient, ModuleClient>();
             services.AddSingleton<IModuleSerializer, JsonModuleSerializer>();           
             services.AddSingleton<IModuleSubscriber, ModuleSubscriber>();
-
-            services.AddMyModuleRegistry(assemblies);
-            services.AddSingleton<IModuleClient, ModuleClient>();
-            services.AddSingleton<IModuleSerializer, JsonModuleSserializer>();
 
             return services;
         }
@@ -100,31 +94,6 @@ namespace SurveyStore.Shared.Infrastructure.Modules
                 }
 
                 return registry;
-            });
-        }
-
-        private static void AddMyModuleRegistry(this IServiceCollection services, IEnumerable<Assembly> assemblies)
-        {
-            var myRegistry = new MyModuleRegistry();
-            var types = assemblies.SelectMany(a => a.GetTypes());
-            var eventTypes = types
-                .Where(e => e.IsClass && typeof(IEvent).IsAssignableFrom(e))
-                .ToArray();
-
-            services.AddSingleton<IMyModuleRegistry>(sp =>
-            {
-                var eventDispatcher = sp.GetRequiredService<IEventDispatcher>();
-                var eventDispatcherType = eventDispatcher.GetType();
-
-                foreach (var eventType in eventTypes)
-                {
-                    myRegistry.AddBroadcastAction(eventType, @event =>
-                        (Task)eventDispatcherType.GetMethod(nameof(eventDispatcher.PublishAsync))
-                        ?.MakeGenericMethod(eventType)
-                        .Invoke(eventDispatcher, new[] { @event }));
-                }
-
-                return myRegistry;
             });
         }
     }

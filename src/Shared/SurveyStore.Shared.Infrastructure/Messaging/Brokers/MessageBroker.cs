@@ -1,24 +1,22 @@
 ﻿using Microsoft.Extensions.Logging;
 using SurveyStore.Shared.Abstractions.Messaging;
 using SurveyStore.Shared.Abstractions.Modules;
+using SurveyStore.Shared.Infrastructure.Messaging.Dispatchers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SurveyStore.Shared.Infrastructure.Messaging.Dispatchers;
-using Convey.MessageBrokers;
-using SurveyStore.Shared.Abstractions.Moduless;
 
 namespace SurveyStore.Shared.Infrastructure.Messaging.Brokers
 {
     internal sealed class MessageBroker : IMessageBroker
     {
-        private readonly IModulessClient _moduleClient;
+        private readonly IModuleClient _moduleClient;
         private readonly IAsyncMessageDispatcher _messageDispatcher;
         private readonly MessagingOptions _messagingOptions;
         private readonly ILogger<MessageBroker> _logger;
         //private readonly IBusPublisher _busPublisher;
 
-        public MessageBroker(IModulessClient moduleClient,
+        public MessageBroker(IModuleClient moduleClient,
             IAsyncMessageDispatcher messageDispatcher,
             MessagingOptions messagingOptions,
             ILogger<MessageBroker> logger)

@@ -26,6 +26,6 @@ POST {{url}}/account/sign-in
 Content-Type: application/json
 
 {
-    "email": "test2@gmail.com",
+    "email": "test1@gmail.com",
     "password": "secret"
 }

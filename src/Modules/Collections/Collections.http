@@ -33,7 +33,7 @@ GET {{url}}/collections/equipment/{{surveyorId1}}/collected
 Authorization: Bearer {{accessToken}}
 
 ###
-POST {{url}}/collections/equipment/{{equipmentId2}}/assign-store
+POST {{url}}/collections/equipment/{{equipmentId1}}/assign-store
 Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 

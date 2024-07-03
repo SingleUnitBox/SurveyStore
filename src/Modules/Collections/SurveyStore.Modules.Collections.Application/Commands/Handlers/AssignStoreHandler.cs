@@ -9,7 +9,6 @@ using SurveyStore.Modules.Collections.Domain.Collections.Specifications.Collecti
 using SurveyStore.Shared.Abstractions.Commands;
 using SurveyStore.Shared.Abstractions.Events;
 using SurveyStore.Shared.Abstractions.Messaging;
-using SurveyStore.Shared.Abstractions.Moduless;
 using System;
 using System.Threading.Tasks;
 
