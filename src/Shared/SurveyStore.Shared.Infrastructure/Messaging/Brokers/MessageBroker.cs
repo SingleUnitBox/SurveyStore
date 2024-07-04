@@ -46,11 +46,11 @@ namespace SurveyStore.Shared.Infrastructure.Messaging.Brokers
             foreach (var message in messages)
             {
                 //await _busPublisher.PublishAsync(message);
-                //if (_messagingOptions.UseBackgroundDispatcher)
-                //{
-                //    await _messageDispatcher.PublishAsync(message);
-                //    continue;
-                //}
+                if (_messagingOptions.UseBackgroundDispatcher)
+                {
+                    await _messageDispatcher.PublishAsync(message);
+                    continue;
+                }
 
                 tasks.Add(_moduleClient.PublishAsync(message));
                 _logger.LogInformation($"Publishing message: {message.GetType().Name}");

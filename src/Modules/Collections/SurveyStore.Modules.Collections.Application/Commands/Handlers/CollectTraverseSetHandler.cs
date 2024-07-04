@@ -71,7 +71,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 
             var openKitCollections = await _kitCollectionRepository
                 .BrowseAsPredicateExpression(new IsOpenKitCollection() & new IsSurveyorKitCollection(surveyor.Id));
-            var kitToBeCollected = await _kitCollectionService.GatherTraverseSet(openKitCollections, surveyor, now);
+            var kitToBeCollected = await _kitCollectionService.GatherTraverseSet(openKitCollections);
             foreach (var kit in kitToBeCollected)
             {
                 kit.Collect(surveyor, now);

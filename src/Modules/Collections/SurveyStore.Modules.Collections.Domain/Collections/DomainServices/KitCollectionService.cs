@@ -22,31 +22,47 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
             _kitOptions = kitOptions;
             _kitCollectionRepository = kitCollectionRepository;
         }
-        public async Task<IEnumerable<KitCollection>> GatherTraverseSet(IEnumerable<KitCollection> openKitCollections, Surveyor surveyor, Date collectedAt)
+        public async Task<IEnumerable<KitCollection>> GatherTraverseSet(IEnumerable<KitCollection> openKitCollections)
         {
-            var tripodsToBeCollected = new List<KitCollection>();
+            var kitToBeCollected = new List<KitCollection>();
             var freeKitCollections = await _kitCollectionRepository
                 .BrowseAsPredicateExpression(new IsFreeKitCollection());
-                
-            var openTripodsAmount = openKitCollections
-                .Where(k => k.Kit.Type == KitTypes.Tripod)
+
+            var tripodsToBeCollected = GatherRequiredKit(openKitCollections, freeKitCollections,
+                KitTypes.Tripod, _kitOptions.TripodRequiredAmount);
+            kitToBeCollected.AddRange(tripodsToBeCollected);
+
+            var prismsToBeCollected = GatherRequiredKit(openKitCollections, freeKitCollections,
+                KitTypes.TraversePrism, _kitOptions.PrismRequiredAmount);
+            kitToBeCollected.AddRange(prismsToBeCollected);
+
+            return kitToBeCollected;
+        }
+
+        private IEnumerable<KitCollection> GatherRequiredKit(IEnumerable<KitCollection> openKitCollections,
+            IEnumerable<KitCollection> freeKitCollections, string kitType, int kitRequiredAmount)
+        {
+            var kitToBeCollected = new List<KitCollection>();
+            var openKitAmount = openKitCollections
+                .Where(k => k.Kit.Type == kitType)
                 .Count();
-            if (openTripodsAmount < _kitOptions.TripodRequiredAmount)
+
+            if (openKitAmount < kitRequiredAmount)
             {
-                var freeTripods = freeKitCollections.Where(k => k.Kit.Type == KitTypes.Tripod);
-                var availableTripodAmount = freeTripods.Count() + openTripodsAmount;
-                if (availableTripodAmount < _kitOptions.TripodRequiredAmount)
+                var freeKit = freeKitCollections.Where(k => k.Kit.Type == kitType);
+                var availableKitAmount = openKitAmount + freeKit.Count();
+                if (availableKitAmount < kitRequiredAmount)
                 {
                     throw new NotEnoughKitAvailableToFormSetException(
-                        KitTypes.Tripod, _kitOptions.TripodRequiredAmount, availableTripodAmount);
+                        kitType, kitRequiredAmount, availableKitAmount);
                 }
-                
-                foreach (var tripod in freeTripods)
+
+                foreach (var kit in freeKit)
                 {
-                    if (tripodsToBeCollected.Count() + openTripodsAmount < _kitOptions.TripodRequiredAmount)
+                    if (kitToBeCollected.Count() + openKitAmount < kitRequiredAmount)
                     {
-                        tripodsToBeCollected.Add(tripod);
-                        _kitCollectionRepository.Detach(tripod);
+                        kitToBeCollected.Add(kit);
+                        _kitCollectionRepository.Detach(kit);
                     }
                     else
                     {
@@ -55,8 +71,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
                 }
             }
 
-            return tripodsToBeCollected;
-            var openTraversePrisms = openKitCollections.Where(k => k.Kit.Type == KitTypes.TraversePrism);
+            return kitToBeCollected;
         }
     }
 }
