@@ -36,24 +36,10 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Collection> GetOpenBySurveyEquipmentAsync(AggregateId surveyEquipmentId)
-            => await _collections
-                .Where(c => c.SurveyEquipmentId == surveyEquipmentId.Value
-                    && c.ReturnStoreId == null
-                    && c.CollectedAt != null)
-                .Include(c => c.Surveyor)
-                .SingleOrDefaultAsync();
-
-        public async Task<Collection> GetCompletedBySurveyEquipmentAsync(AggregateId surveyEquipmentId)
-            => await _collections
-                .Where(c => c.SurveyEquipmentId == surveyEquipmentId.Value
-                            && c.ReturnStoreId == null
-                            && c.ReturnedAt != null)
-                .OrderBy(c => c.ReturnedAt)
-                .SingleOrDefaultAsync();
-
         public async Task<Collection> GetAsPredicateExpressionAsync(Specification<Collection> specification)
-            => await _collections.SingleOrDefaultAsync(specification);
+            => await _collections
+                .Include(c => c.Surveyor)
+                .SingleOrDefaultAsync(specification);
 
         public async Task<IEnumerable<Collection>> BrowseCollectionsAsync(AggregateId surveyEquipmentId)
             => await _collections

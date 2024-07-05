@@ -22,35 +22,49 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
             _kitOptions = kitOptions;
             _kitCollectionRepository = kitCollectionRepository;
         }
-        public async Task<IEnumerable<KitCollection>> GatherTraverseSet(IEnumerable<KitCollection> openKitCollections)
+
+        public async Task<IEnumerable<KitCollection>> GatherTraverseSet(IEnumerable<KitCollection> openSurveyorKitCollections)
         {
             var kitToBeCollected = new List<KitCollection>();
             var freeKitCollections = await _kitCollectionRepository
                 .BrowseAsPredicateExpression(new IsFreeKitCollection());
 
-            var tripodsToBeCollected = GatherRequiredKit(openKitCollections, freeKitCollections,
+            var tripodsToBeCollected = GatherRequiredKit(openSurveyorKitCollections, freeKitCollections,
                 KitTypes.Tripod, _kitOptions.TripodRequiredAmount);
             kitToBeCollected.AddRange(tripodsToBeCollected);
 
-            var prismsToBeCollected = GatherRequiredKit(openKitCollections, freeKitCollections,
+            var prismsToBeCollected = GatherRequiredKit(openSurveyorKitCollections, freeKitCollections,
                 KitTypes.TraversePrism, _kitOptions.PrismRequiredAmount);
             kitToBeCollected.AddRange(prismsToBeCollected);
 
             return kitToBeCollected;
         }
 
-        private IEnumerable<KitCollection> GatherRequiredKit(IEnumerable<KitCollection> openKitCollections,
+        public IEnumerable<KitCollection> GatherTraverseSetForReturn(IEnumerable<KitCollection> openSurveyorKitCollections)
+        {
+            var kitToBeReturned = new List<KitCollection>();
+
+            var tripodsToBeReturned = CheckKitForReturn(openSurveyorKitCollections, KitTypes.Tripod, _kitOptions.TripodRequiredAmount);
+            kitToBeReturned.AddRange(tripodsToBeReturned);
+
+            var prismsToBeReturned = CheckKitForReturn(openSurveyorKitCollections, KitTypes.TraversePrism, _kitOptions.PrismRequiredAmount);
+            kitToBeReturned.AddRange(prismsToBeReturned);
+
+            return kitToBeReturned;
+        }
+
+        private IEnumerable<KitCollection> GatherRequiredKit(IEnumerable<KitCollection> openSurveyorKitCollections,
             IEnumerable<KitCollection> freeKitCollections, string kitType, int kitRequiredAmount)
         {
             var kitToBeCollected = new List<KitCollection>();
-            var openKitAmount = openKitCollections
+            var openSurveyorKitAmount = openSurveyorKitCollections
                 .Where(k => k.Kit.Type == kitType)
                 .Count();
 
-            if (openKitAmount < kitRequiredAmount)
+            if (openSurveyorKitAmount < kitRequiredAmount)
             {
                 var freeKit = freeKitCollections.Where(k => k.Kit.Type == kitType);
-                var availableKitAmount = openKitAmount + freeKit.Count();
+                var availableKitAmount = openSurveyorKitAmount + freeKit.Count();
                 if (availableKitAmount < kitRequiredAmount)
                 {
                     throw new NotEnoughKitAvailableToFormSetException(
@@ -59,7 +73,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
 
                 foreach (var kit in freeKit)
                 {
-                    if (kitToBeCollected.Count() + openKitAmount < kitRequiredAmount)
+                    if (kitToBeCollected.Count() + openSurveyorKitAmount < kitRequiredAmount)
                     {
                         kitToBeCollected.Add(kit);
                         _kitCollectionRepository.Detach(kit);
@@ -72,6 +86,35 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
             }
 
             return kitToBeCollected;
+        }
+
+        private IEnumerable<KitCollection> CheckKitForReturn(IEnumerable<KitCollection> openKitCollections,
+            string kitType, int kitRequiredAmount)
+        {
+            var kitToBeReturned = new List<KitCollection>();
+            var availableKit = openKitCollections
+                .Where(k => k.Kit.Type == kitType);
+
+            if (openKitCollections.Count() < kitRequiredAmount)
+            {
+                throw new NotEnoughKitAvailableToFormSetException(
+                        kitType, kitRequiredAmount, availableKit.Count());
+            }
+
+            foreach (var kit in availableKit)
+            {
+                if (kitToBeReturned.Count() < kitRequiredAmount)
+                {
+                    kitToBeReturned.Add(kit);
+                    _kitCollectionRepository.Detach(kit);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return kitToBeReturned;
         }
     }
 }

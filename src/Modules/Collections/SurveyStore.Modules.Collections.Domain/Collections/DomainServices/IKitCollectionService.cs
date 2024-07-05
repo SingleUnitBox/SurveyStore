@@ -6,6 +6,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
 {
     public interface IKitCollectionService
     {
-        Task<IEnumerable<KitCollection>> GatherTraverseSet(IEnumerable<KitCollection> openKitCollections);
+        Task<IEnumerable<KitCollection>> GatherTraverseSet(IEnumerable<KitCollection> openSurveyorKitCollections);
+        IEnumerable<KitCollection> GatherTraverseSetForReturn(IEnumerable<KitCollection> openKitCollections);
     }
 }

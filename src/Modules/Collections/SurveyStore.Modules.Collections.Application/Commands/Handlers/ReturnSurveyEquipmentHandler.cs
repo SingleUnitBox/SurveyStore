@@ -9,6 +9,7 @@ using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Modules.Collections.Domain.Collections.Exceptions;
 using SurveyStore.Shared.Abstractions.Events;
 using SurveyStore.Shared.Abstractions.Kernel;
+using SurveyStore.Modules.Collections.Domain.Collections.Specifications.Collections;
 
 namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 {
@@ -37,7 +38,8 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 
         public async Task HandleAsync(ReturnSurveyEquipment command)
         {
-            var collection = await _collectionRepository.GetOpenBySurveyEquipmentAsync(command.SurveyEquipmentId);
+            var collection = await _collectionRepository
+                .GetAsPredicateExpressionAsync(new IsOpenCollectionById(command.SurveyEquipmentId));
             if (collection is null)
             {
                 throw new OpenCollectionNotFoundException(command.SurveyEquipmentId);

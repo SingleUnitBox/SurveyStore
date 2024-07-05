@@ -54,7 +54,8 @@ namespace SurveyStore.Modules.Collections.Application.Events.External.Handlers
                     else
                     {
                         var surveyEquipment = await _surveyEquipmentRepository.GetByIdAsync(calibration.SurveyEquipmentId);
-                        collection = await _collectionRepository.GetOpenBySurveyEquipmentAsync(calibration.SurveyEquipmentId);
+                        collection = await _collectionRepository
+                            .GetAsPredicateExpressionAsync(new IsOpenCollectionById(calibration.SurveyEquipmentId));
                         if (collection is not null)
                         {
                             //send mail to surveyor to return for calibration, for now only return and update db

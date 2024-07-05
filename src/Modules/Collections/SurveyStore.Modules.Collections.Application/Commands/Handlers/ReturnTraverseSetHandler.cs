@@ -4,12 +4,13 @@ using SurveyStore.Modules.Collections.Domain.Collections.Consts;
 using SurveyStore.Modules.Collections.Domain.Collections.DomainServices;
 using SurveyStore.Modules.Collections.Domain.Collections.Entities;
 using SurveyStore.Modules.Collections.Domain.Collections.Exceptions;
-using SurveyStore.Modules.Collections.Domain.Collections.Policies;
 using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
+using SurveyStore.Modules.Collections.Domain.Collections.Specifications.Collections;
+using SurveyStore.Modules.Collections.Domain.Collections.Specifications.KitCollections;
 using SurveyStore.Shared.Abstractions.Commands;
+using SurveyStore.Shared.Abstractions.Kernel;
 using SurveyStore.Shared.Abstractions.Messaging;
 using SurveyStore.Shared.Abstractions.Time;
-using SurveyStore.Shared.Abstractions.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,6 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
         private readonly IStoreRepository _storeRepository;
         private readonly ISurveyorRepository _surveyorRepository;
         private readonly ICollectionRepository _collectionRepository;       
-        private readonly ICollectionPolicy _collectionPolicy;
         private readonly IKitRepository _kitRepository;
         private readonly IKitCollectionRepository _kitCollectionRepository;
         private readonly IKitCollectionService _kitCollectionService;
@@ -31,19 +31,20 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
         private readonly IEventMapper _eventMapper;
         private readonly IMessageBroker _messageBroker;
         private readonly KitConstOptions _kitConstOptions;
+        private readonly IDomainEventDispatcher _domainEventDispatcher;
 
         public ReturnTraverseSetHandler(ISurveyEquipmentRepository surveyEquipmentRepository,
             IStoreRepository storeRepository,
             ISurveyorRepository surveyorRepository,
             ICollectionRepository collectionRepository,
-            ICollectionPolicy collectionPolicy,
             IKitRepository kitRepository,
             IKitCollectionRepository kitCollectionRepository,
             IKitCollectionService kitCollectionService,
             IClock clock,
             IEventMapper eventMapper,
             IMessageBroker messageBroker,
-            KitConstOptions kitConstOptions)
+            KitConstOptions kitConstOptions,
+            IDomainEventDispatcher domainEventDispatcher)
         {
             _surveyEquipmentRepository = surveyEquipmentRepository;
             _kitRepository = kitRepository;
@@ -51,61 +52,48 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             _surveyorRepository = surveyorRepository;
             _collectionRepository = collectionRepository;
             _kitCollectionRepository = kitCollectionRepository;
-            _collectionPolicy = collectionPolicy;
             _kitCollectionService = kitCollectionService;
             _clock = clock;
             _eventMapper = eventMapper;
             _messageBroker = messageBroker;
             _kitConstOptions = kitConstOptions;
+            _domainEventDispatcher = domainEventDispatcher;
         }
 
         public async Task HandleAsync(ReturnTraverseSet command)
         {
-            //var surveyor = await GetSurveyorAsync(command.SurveyorId);
-            //var store = await GetStoreAsync(command.ReturnStoreId);
-            //var surveyEquipment = await GetSurveyEquipmentAsync(command.SurveyEquipmentId);
-            //var collection = await GetOpenCollectionAsync(command.SurveyEquipmentId);
+            var surveyor = await GetSurveyor(command.SurveyorId);
+            var store = await GetStore(command.ReturnStoreId);
+            var surveyEquipment = await GetSurveyEquipment(command.SurveyEquipmentId);
+            var collection = await GetOpenCollection(command.SurveyEquipmentId);
 
-            //if (!_collectionPolicy.CanBeReturned(collection, surveyor))
-            //{
-            //    throw new CollectionDoesNotBelongToSurveyorException(collection.Id, surveyor.Id);
-            //}
+            if (collection.Surveyor.Id != surveyor.Id)
+            {
+                throw new CollectionDoesNotBelongToSurveyorException(collection.Id, surveyor.Id);
+            }
 
-            //var openKitCollections = await _kitCollectionRepository
-            //    .BrowseOpenKitCollectionsBySurveyorAsync(surveyor.Id);
+            var openKitCollections = await _kitCollectionRepository
+                .BrowseAsPredicateExpression(new IsOpenKitCollection() & new IsSurveyorKitCollection(surveyor.Id));
 
-            //var isFull = _kitCollectionService.IsTraverseSetFullForReturn(openKitCollections);
-            //if (!isFull.isFull)
-            //{
-            //    var kitType = isFull.kitCollection.First().Kit.Type;
-            //    var requiredAmount = kitType == KitTypes.Tripod
-            //        ? _kitConstOptions.TripodRequiredAmount
-            //        : _kitConstOptions.PrismRequiredAmount;
-            //    var actualAmount = isFull.kitCollection.Count();
-            //    throw new IncompleteTraverseSetException(kitType, requiredAmount, actualAmount);
-            //}
+            var kitToBeReturned = _kitCollectionService.GatherTraverseSetForReturn(openKitCollections);
 
-            //await ReturnCollectionAsync(collection, command.ReturnStoreId);
-            //await AssignSurveyEquipmentAsync(surveyEquipment, command.ReturnStoreId);
-            //await ReturnKitCollectionsAsync(isFull.kitCollection, command.ReturnStoreId);
+            var now = _clock.Current();
+            collection.Return(store.Id, now);
+            await _collectionRepository.UpdateAsync(collection);
+            await _domainEventDispatcher.DispatchAsync(collection.Events.ToArray());
 
-            //var kit = isFull.kitCollection.Select(k => k.Kit);
-            //await AssignKitAsync(kit, command.ReturnStoreId);
+            foreach (var kit in kitToBeReturned)
+            {
+                kit.CheckForReturn(store.Id);
+            }
 
-
-            //var surveyEquipmentEvents = _eventMapper
-            //    .MapAll(surveyEquipment.Events)
-            //    .ToArray();
-            //var kitEvents = isFull.kitCollection
-            //    .SelectMany(k => k.Kit.Events)
-            //    .Select(_eventMapper.Map)
-            //    .ToArray();
-
-            //await _messageBroker.PublishAsync(surveyEquipmentEvents);
-            //await _messageBroker.PublishAsync(kitEvents);
+            var domainEvents = kitToBeReturned
+                .SelectMany(k => k.Events)
+                .ToArray();
+            await _domainEventDispatcher.DispatchAsync(domainEvents);
         }
 
-        private async Task<Surveyor> GetSurveyorAsync(Guid surveyorId)
+        private async Task<Surveyor> GetSurveyor(Guid surveyorId)
         {
             var surveyor = await _surveyorRepository.GetByIdAsync(surveyorId);
             if (surveyor is null)
@@ -116,7 +104,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             return surveyor;
         }
 
-        private async Task<Store> GetStoreAsync(Guid storeId)
+        private async Task<Store> GetStore(Guid storeId)
         {
             var store = await _storeRepository.GetByIdAsync(storeId);
             if (store is null)
@@ -127,7 +115,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             return store;
         }
 
-        private async Task<SurveyEquipment> GetSurveyEquipmentAsync(Guid surveyEquipmentId)
+        private async Task<SurveyEquipment> GetSurveyEquipment(Guid surveyEquipmentId)
         {
             var surveyEquipment = await _surveyEquipmentRepository.GetByIdAsync(surveyEquipmentId);
             if (surveyEquipment is null)
@@ -138,9 +126,11 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             return surveyEquipment;
         }
 
-        private async Task<Collection> GetOpenCollectionAsync(Guid surveyEquipmentId)
+        private async Task<Collection> GetOpenCollection(Guid surveyEquipmentId)
         {
-            var collection = await _collectionRepository.GetOpenBySurveyEquipmentAsync(surveyEquipmentId);
+            var collection = await _collectionRepository
+                .GetAsPredicateExpressionAsync(new IsOpenCollectionById(surveyEquipmentId));
+
             if (collection is null)
             {
                 throw new OpenCollectionNotFoundException(surveyEquipmentId);
@@ -165,22 +155,6 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             }
 
             await _kitCollectionRepository.UpdateRangeAsync(kitCollections);
-        }
-
-        private async Task AssignSurveyEquipmentAsync(SurveyEquipment surveyEquipment, Guid returnStoreId)
-        {
-            //surveyEquipment.AssignStore(returnStoreId);
-            await _surveyEquipmentRepository.UpdateAsync(surveyEquipment);
-        }
-
-        private async Task AssignKitAsync(IEnumerable<Kit> kit, Guid returnStoreId)
-        {
-            //foreach (var k in kit)
-            //{
-            //    k.AssignStore(returnStoreId);
-            //}
-
-            await _kitRepository.UpdateRangeAsync(kit);
         }
     }
 }

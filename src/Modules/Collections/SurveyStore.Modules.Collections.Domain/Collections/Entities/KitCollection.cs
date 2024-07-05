@@ -42,6 +42,11 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
             AddEvent(new KitCollectionCollected(KitId, Surveyor.Id));
         }
 
+        public void CheckForReturn(StoreId returnStoreId)
+        {
+            AddEvent(new KitReadyForReturn(KitId, ReturnStoreId));
+        }
+
         public void Return(StoreId returnStoreId, DateTime returnedAt)
         {
             ReturnStoreId = returnStoreId;

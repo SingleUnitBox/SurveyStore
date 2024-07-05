@@ -33,46 +33,5 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
 
             toBeCollected.Collect(surveyor, collectedAt);
         }
-
-        //public IEnumerable<Kit> CollectTraverseSet(IEnumerable<KitCollection> freeKitCollections,
-        //    Surveyor surveyor, Collection toBeCollected, DateTime now)
-        //{
-        //    var (isEnough, actualAmount) = _kitCollectionPolicy
-        //        .IsEnoughKit(freeKitCollections, KitTypes.Tripod.ToString(), _kitConstOptions.TripodRequiredAmount);
-        //    if (!isEnough)
-        //    {
-        //        throw new NotEnoughKitAvailableToFormSetException(KitTypes.Tripod, _kitConstOptions.TripodRequiredAmount, actualAmount);
-        //    }
-
-        //    (isEnough, actualAmount) = _kitCollectionPolicy
-        //        .IsEnoughKit(freeKitCollections, KitTypes.TraversePrism.ToString(), _kitConstOptions.PrismRequiredAmount);
-        //    if (!isEnough)
-        //    {
-        //        throw new NotEnoughKitAvailableToFormSetException(KitTypes.TraversePrism, _kitConstOptions.PrismRequiredAmount, actualAmount);
-        //    }
-
-        //    var collectionStoreId = toBeCollected.CollectionStoreId;
-        //    var tripods = _kitCollectionPolicy.KitToBeCollected(freeKitCollections, KitTypes.Tripod.ToString(),
-        //        collectionStoreId, _kitConstOptions.TripodRequiredAmount);
-        //    foreach (var tripod in tripods)
-        //    {
-        //        tripod.Collect(surveyor, now);
-        //    }
-
-        //    var prisms = _kitCollectionPolicy.KitToBeCollected(freeKitCollections, KitTypes.TraversePrism.ToString(),
-        //        collectionStoreId, _kitConstOptions.PrismRequiredAmount);
-        //    foreach (var prism in prisms)
-        //    {
-        //        prism.Collect(surveyor, now);
-        //    }
-
-        //    var kit = new List<Kit>();
-        //    //kit.AddRange(tripods.Select(t => t.Kit));
-        //    //kit.AddRange(prisms.Select(p => p.Kit));
-            
-        //    toBeCollected.Collect(surveyor, now);
-
-        //    return kit;
-        //}
     }
 }
