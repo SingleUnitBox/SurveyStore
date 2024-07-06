@@ -9,8 +9,8 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Repositories
 {
     public interface IKitCollectionRepository
     {
-        void Attach(KitCollection kitCollection);
-        void Detach(KitCollection kitCollection);
+        //void Attach(KitCollection kitCollection);
+        //void Detach(KitCollection kitCollection);
         Task AddAsync(KitCollection kitCollection);
         Task UpdateAsync(KitCollection kitCollection);
         Task UpdateRangeAsync(IEnumerable<KitCollection> kitCollections);

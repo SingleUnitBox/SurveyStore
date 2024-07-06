@@ -27,7 +27,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
 
         public async Task UpdateAsync(Collection collection)
         {
-            _dbContext.ChangeTracker.DetectChanges();
+            //_dbContext.ChangeTracker.DetectChanges();
 
             _collections.Update(collection);
             await _dbContext.SaveChangesAsync();
@@ -60,6 +60,7 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
         public async Task<IEnumerable<Collection>> BrowseAsPredicateExpressionAsync(Specification<Collection> specification)
             => await _collections
                 .Include(c => c.SurveyEquipment)
+                .Include(c => c.Surveyor)
                 .Where(specification)
                 .ToListAsync();
     }

@@ -7,12 +7,10 @@ using SurveyStore.Modules.Collections.Domain.Collections.Specifications.Collecti
 using SurveyStore.Modules.Collections.Domain.Collections.Specifications.KitCollections;
 using SurveyStore.Shared.Abstractions.Commands;
 using SurveyStore.Shared.Abstractions.Kernel;
-using SurveyStore.Shared.Abstractions.Kernel.Types;
 using SurveyStore.Shared.Abstractions.Time;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
 {
@@ -50,18 +48,13 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
         {
             var surveyor = await GetSurveyor(command.SurveyorId);
             var surveyEquipment = await GetSurveyEquipment(command.SurveyEquipmentId);
-            var toBeCollected = await _collectionRepository
-                .GetAsPredicateExpressionAsync(new IsFreeCollection(command.SurveyEquipmentId));
-            if (toBeCollected is null)
-            {
-                throw new FreeCollectionNotFoundException(command.SurveyEquipmentId);
-            }
-
+            var toBeCollected = await GetCollection(surveyEquipment.Id, surveyor.Id);
             var openSurveyorCollections = await _collectionRepository
                 .BrowseAsPredicateExpressionAsync(new IsOpenCollection() & new IsSurveyorCollection(surveyor.Id));
 
             var now = _clock.Current();
             _collectionService.Collect(openSurveyorCollections, toBeCollected, surveyor, now);
+            await _collectionRepository.UpdateAsync(toBeCollected);
 
             var openSurveyorKitCollections = await _kitCollectionRepository
                 .BrowseAsPredicateExpression(new IsOpenKitCollection() & new IsSurveyorKitCollection(surveyor.Id));
@@ -70,9 +63,7 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             {
                 kit.CheckForCollection(surveyor.Id, kit.CollectionStoreId);
             }
-
-            await _collectionRepository.UpdateAsync(toBeCollected);
-
+           
             var domainEvents = kitToBeCollected.SelectMany(k => k.Events);
             await _domainEventDispatcher.DispatchAsync(domainEvents.ToArray());
         }
@@ -97,6 +88,24 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
             }
 
             return surveyEquipment;
+        }
+
+        // this is domain logic, probably should exist in domain then
+        private async Task<Collection> GetCollection(Guid surveyEquipmentId, Guid surveyorId)
+        {
+            var collection = await _collectionRepository
+            .GetAsPredicateExpressionAsync(new IsOpenCollectionById(surveyEquipmentId) & new IsSurveyorCollection(surveyorId));
+            if (collection is null)
+            {
+                collection = await _collectionRepository
+                .GetAsPredicateExpressionAsync(new IsFreeCollection(surveyEquipmentId));
+                if (collection is null)
+                {
+                    throw new FreeCollectionNotFoundException(surveyEquipmentId);
+                }
+            }
+
+            return collection;
         }
     }
 }

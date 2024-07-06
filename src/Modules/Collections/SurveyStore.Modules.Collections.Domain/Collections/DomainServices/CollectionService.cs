@@ -6,6 +6,7 @@ using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 
 namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
 {
@@ -21,14 +22,16 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
         public void Collect(IEnumerable<Collection> openCollections, Collection toBeCollected, Surveyor surveyor,
             Date collectedAt)
         {
-            var surveyEquipmentTypes = openCollections.Select(c => c.SurveyEquipment?.Type);
-            foreach (var surveyEquipmentType in surveyEquipmentTypes)
+            var openSurveyEquipmentCollection = openCollections
+                .Where(c => c.SurveyEquipment?.Type == toBeCollected.SurveyEquipment.Type)
+                .SingleOrDefault();
+            if (openSurveyEquipmentCollection is not null
+                && _kitConstOptions.LimitedSurveyEquipmentTypes.Contains(openSurveyEquipmentCollection.SurveyEquipment.Type.Value))
             {
-                if (_kitConstOptions.LimitedSurveyEquipmentTypes.Contains(surveyEquipmentType.Value)
-                    && toBeCollected.SurveyEquipment.Type.Equals(surveyEquipmentType))
+                if (openSurveyEquipmentCollection.SurveyEquipmentId != toBeCollected.SurveyEquipmentId)
                 {
-                    throw new CannotCollectSurveyEquipmentException(surveyEquipmentType);
-                }               
+                    throw new CannotCollectSurveyEquipmentException(toBeCollected.SurveyEquipment.Type);
+                }
             }
 
             toBeCollected.Collect(surveyor, collectedAt);
