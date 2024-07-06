@@ -3,30 +3,34 @@ using SurveyStore.Modules.Collections.Domain.Collections.Repositories;
 using SurveyStore.Modules.Collections.Domain.Collections.Specifications.KitCollections;
 using SurveyStore.Shared.Abstractions.Kernel;
 using SurveyStore.Shared.Abstractions.Time;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Collections.Domain.Collections.DomainEvents.Handlers
 {
-    public class KitCollectionCollectedHandler : IDomainEventHandler<KitCollectionCollected>
+    public class KitReadyForCollectionHandler : IDomainEventHandler<KitReadyForCollection>
     {
         private readonly IKitCollectionRepository _kitCollectionRepository;
         private readonly ISurveyorRepository _surveyorRepository;
+        private readonly IStoreRepository _storeRepository;
         private readonly IClock _clock;
 
-        public KitCollectionCollectedHandler(IKitCollectionRepository kitCollectionRepository,
+        public KitReadyForCollectionHandler(IKitCollectionRepository kitCollectionRepository,
             ISurveyorRepository surveyorRepository,
+            IStoreRepository storeRepository,
             IClock clock)
         {
             _kitCollectionRepository = kitCollectionRepository;
             _surveyorRepository = surveyorRepository;
+            _storeRepository = storeRepository;
             _clock = clock;
         }
 
-        public async Task HandleAsync(KitCollectionCollected @event)
+        public async Task HandleAsync(KitReadyForCollection @event)
         {
-            var kitCollection = await _kitCollectionRepository
+            var kit = await _kitCollectionRepository
                 .GetAsPredicateExpression(new IsFreeKitCollectionById(@event.KitId));
-            if (kitCollection is null)
+            if (kit is null)
             {
                 throw new FreeKitCollectionNotFoundException(@event.KitId);
             }
@@ -37,8 +41,14 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainEvents.Handle
                 throw new SurveyorNotFoundException(@event.SurveyorId);
             }
 
-            kitCollection.Collect(surveyor, _clock.Current());
-            await _kitCollectionRepository.UpdateAsync(kitCollection);
+            var store = await _storeRepository.GetByIdAsync(@event.CollectionStoreId);
+            if (store is null)
+            {
+                throw new StoreNotFoundException(@event.CollectionStoreId);
+            }
+
+            kit.Collect(surveyor, _clock.Current());
+            await _kitCollectionRepository.UpdateAsync(kit);
         }
     }
 }

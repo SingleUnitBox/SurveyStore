@@ -17,7 +17,6 @@ namespace SurveyStore.Modules.Collections.Application.Services
                 CollectionCollected de => new SurveyEquipmentCollected(de.SurveyEquipmentId),
                 CollectionReturned de => new SurveyEquipmentReturned(de.SurveyEquipmentId, de.ReturnStoreId),
 
-                KitCollectionCollected de => new KitCollected(de.KitId),
                 KitCollectionReturned de => new KitReturned(de.KitId, de.ReturnStoreId),
                 _ => null
             };

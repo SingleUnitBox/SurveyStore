@@ -21,6 +21,11 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
             _dbContext = dbContext;
         }
 
+        public void Attach(KitCollection kitCollection)
+        {
+            _dbContext.Entry(kitCollection).State = EntityState.Modified;
+        }
+
         public void Detach(KitCollection kitCollection)
         {
             _dbContext.Entry(kitCollection).State = EntityState.Detached;

@@ -31,6 +31,11 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
             IncrementVersion();
         }
 
+        public void CheckForCollection(SurveyorId surveyorId, StoreId collectionStoreId)
+        {
+            AddEvent(new KitReadyForCollection(KitId, surveyorId, collectionStoreId));
+        }
+
         public void Collect(Surveyor surveyor, DateTime collectedAt)
         {
             if (CollectionStoreId is null)
@@ -39,12 +44,12 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
             }
             Surveyor = surveyor;
             CollectedAt = collectedAt;
-            AddEvent(new KitCollectionCollected(KitId, Surveyor.Id));
+            IncrementVersion();
         }
 
         public void CheckForReturn(StoreId returnStoreId)
         {
-            AddEvent(new KitReadyForReturn(KitId, ReturnStoreId));
+            AddEvent(new KitReadyForReturn(KitId, returnStoreId));
         }
 
         public void Return(StoreId returnStoreId, DateTime returnedAt)
@@ -52,7 +57,6 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Entities
             ReturnStoreId = returnStoreId;
             ReturnedAt = returnedAt;
             AddEvent(new KitCollectionReturned(KitId, ReturnStoreId));
-            IncrementVersion();
         }
 
         public static KitCollection Create(Guid id, Guid kitId)

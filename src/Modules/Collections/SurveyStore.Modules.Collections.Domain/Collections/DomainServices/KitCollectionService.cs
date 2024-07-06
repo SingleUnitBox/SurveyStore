@@ -76,7 +76,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
                     if (kitToBeCollected.Count() + openSurveyorKitAmount < kitRequiredAmount)
                     {
                         kitToBeCollected.Add(kit);
-                        _kitCollectionRepository.Detach(kit);
+                        //_kitCollectionRepository.Detach(kit);
                     }
                     else
                     {
@@ -106,7 +106,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
                 if (kitToBeReturned.Count() < kitRequiredAmount)
                 {
                     kitToBeReturned.Add(kit);
-                    _kitCollectionRepository.Detach(kit);
+                    //_kitCollectionRepository.Detach(kit);
                 }
                 else
                 {

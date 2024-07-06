@@ -27,6 +27,8 @@ namespace SurveyStore.Modules.Collections.Infrastructure.EF.Repositories
 
         public async Task UpdateAsync(Collection collection)
         {
+            _dbContext.ChangeTracker.DetectChanges();
+
             _collections.Update(collection);
             await _dbContext.SaveChangesAsync();
         }
