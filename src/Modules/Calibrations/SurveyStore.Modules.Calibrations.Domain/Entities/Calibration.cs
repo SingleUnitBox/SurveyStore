@@ -1,6 +1,7 @@
 ﻿using SurveyStore.Modules.Calibrations.Domain.Exceptions;
-using SurveyStore.Modules.Calibrations.Domain.Types;
+using SurveyStore.Modules.Calibrations.Domain.ValueObjects;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
+using SurveyStore.Shared.Abstractions.Types;
 using System;
 using System.Runtime.CompilerServices;
 
@@ -11,37 +12,27 @@ namespace SurveyStore.Modules.Calibrations.Domain.Entities
     {
         public SurveyEquipmentId SurveyEquipmentId { get; private set; }
         public SurveyEquipment SurveyEquipment { get; private set; }
-        public DateTime? CalibrationDueDate { get; private set; }
-        //public TimeSpan? CalibrationInterval { get; private set; }
-        public string CertificateNumber { get; private set; }
+        public Date CalibrationDueDate { get; private set; }
+        public CertificateNumber CertificateNumber { get; private set; }
         public CalibrationStatus CalibrationStatus { get; private set; }
 
         internal Calibration(AggregateId id, SurveyEquipmentId surveyEquipmentId)
             {
                 Id = id;
                 SurveyEquipmentId = surveyEquipmentId;
-                CalibrationStatus = CalibrationStatus.Pending;
+                CalibrationStatus = CalibrationStatuses.Unknown;
             }
 
-        internal void ChangeCalibrationDueDate(DateTime calibrationDate)
+        internal void ChangeCalibrationDueDate(DateTime calibrationDueDate)
         {
-            if (CalibrationDueDate.HasValue)
-            {
-                if (calibrationDate.Date <= CalibrationDueDate.Value.Date)
+                if (calibrationDueDate <= CalibrationDueDate)
                 {
-                    throw new InvalidCalibrationDateException(calibrationDate);
+                    throw new InvalidCalibrationDateException(calibrationDueDate);
                 }
-            }
             
-            CalibrationDueDate = calibrationDate;
+            CalibrationDueDate = calibrationDueDate;
             IncrementVersion();
         }
-
-        //public void ChangeCalibrationInterval(TimeSpan calibrationInterval)
-        //{
-        //    CalibrationInterval = calibrationInterval;
-        //    IncrementVersion();
-        //}
 
         public void ChangeCertificateNumber(string certificateNumber)
         {

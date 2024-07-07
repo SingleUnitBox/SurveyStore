@@ -1,5 +1,6 @@
 ﻿using SurveyStore.Modules.Collections.Domain.Collections.Exceptions;
-using System;
+using SurveyStore.Shared.Abstractions.Types;
+using System.Linq;
 
 namespace SurveyStore.Modules.Collections.Domain.Collections.ValueObjects
 {
@@ -12,6 +13,11 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.ValueObjects
             if (string.IsNullOrWhiteSpace(value))
             {
                 throw new EmptySurveyEquipmentTypeException();
+            }
+
+            if (!SurveyEquipmentTypes.GetSurveyEquipmentTypes().Contains(value))
+            {
+                throw new InvalidSurveyEquipmentTypeException(value);
             }
 
             Value = value;
