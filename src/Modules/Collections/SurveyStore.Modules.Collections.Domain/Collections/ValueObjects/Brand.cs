@@ -2,7 +2,7 @@
 
 namespace SurveyStore.Modules.Collections.Domain.Collections.ValueObjects
 {
-    public class Brand
+    public record Brand
     {
         public string Value { get; }
 

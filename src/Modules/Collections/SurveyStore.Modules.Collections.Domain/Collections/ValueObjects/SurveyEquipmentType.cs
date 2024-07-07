@@ -3,7 +3,7 @@ using System;
 
 namespace SurveyStore.Modules.Collections.Domain.Collections.ValueObjects
 {
-    public class SurveyEquipmentType : IEquatable<SurveyEquipmentType>
+    public record SurveyEquipmentType //: IEquatable<SurveyEquipmentType>
     {
         public string Value { get; }
 
@@ -20,9 +20,9 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.ValueObjects
         public static implicit operator SurveyEquipmentType(string value) => new(value);
         public static implicit operator string(SurveyEquipmentType serialNumber) => serialNumber.Value;
 
-        public bool Equals(SurveyEquipmentType other)
-        {
-            return Value == other.Value;
-        }
+        //public bool Equals(SurveyEquipmentType other)
+        //{
+        //    return Value == other.Value;
+        //}
     }
 }

@@ -23,6 +23,8 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.DomainServices
             Date collectedAt)
         {
             var openSurveyEquipmentCollection = openCollections
+                //.Where(c => c.SurveyEquipment?.Type == toBeCollected.SurveyEquipment.Type)
+                //.Where(c => c.SurveyEquipment.Type.Equals(toBeCollected.SurveyEquipment.Type))
                 .Where(c => c.SurveyEquipment?.Type == toBeCollected.SurveyEquipment.Type)
                 .SingleOrDefault();
             if (openSurveyEquipmentCollection is not null
