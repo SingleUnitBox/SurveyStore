@@ -15,7 +15,8 @@ namespace SurveyStore.Modules.Calibrations.Domain.ValueObjects
                 throw new EmptyCalibrationStatusException();
             }
 
-            if (!CalibrationStatusTypes.GetCalibrationStatusTypes().Contains(value))
+            var calibrationStatuses = CalibrationStatuses.GetCalibrationStatusTypes();
+            if (!calibrationStatuses.Contains(value.ToLowerInvariant()))
             {
                 throw new InvalidCalibrationStatusException(value);
             }

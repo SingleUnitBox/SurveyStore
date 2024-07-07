@@ -24,5 +24,7 @@ namespace SurveyStore.Shared.Abstractions.Specification
         {
             return AsPredicateExpression().Compile().Invoke(obj);
         }
+
+        public static implicit operator bool(Specification<T> specification) => specification != null;
     }
 }

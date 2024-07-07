@@ -1,5 +1,5 @@
 @url = http://localhost:5000/calibrations-module
-@serialNumber = QWE123
+@serialNumber = ABC12333
 
 ###
 GET {{url}}
@@ -15,6 +15,6 @@ POST {{url}}/calibrations/equipment/{{serialNumber}}/calibrate
 Content-Type: application/json
 
 {
-    "calibrationDueDate": "2025-05-23",
+    "calibrationDueDate": "2024-07-09",
     "certificateNumber": "XXX-YYY-345"
 }

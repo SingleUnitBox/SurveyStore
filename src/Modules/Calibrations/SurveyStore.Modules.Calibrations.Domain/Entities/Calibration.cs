@@ -1,6 +1,8 @@
 ﻿using SurveyStore.Modules.Calibrations.Domain.Exceptions;
+using SurveyStore.Modules.Calibrations.Domain.Specifications.Calibrations;
 using SurveyStore.Modules.Calibrations.Domain.ValueObjects;
 using SurveyStore.Shared.Abstractions.Kernel.Types;
+using SurveyStore.Shared.Abstractions.Specification;
 using SurveyStore.Shared.Abstractions.Types;
 using System;
 using System.Runtime.CompilerServices;
@@ -17,19 +19,37 @@ namespace SurveyStore.Modules.Calibrations.Domain.Entities
         public CalibrationStatus CalibrationStatus { get; private set; }
 
         internal Calibration(AggregateId id, SurveyEquipmentId surveyEquipmentId)
+        {
+            Id = id;
+            SurveyEquipmentId = surveyEquipmentId;
+            CalibrationStatus = CalibrationStatuses.Unknown;
+        }
+
+        public void ChangeCalibrationDueDate(Date calibrationDueDate, DateTime now)
+        {
+            if (calibrationDueDate <= CalibrationDueDate)
             {
-                Id = id;
-                SurveyEquipmentId = surveyEquipmentId;
-                CalibrationStatus = CalibrationStatuses.Unknown;
+                throw new InvalidCalibrationDateException(calibrationDueDate);
             }
 
-        internal void ChangeCalibrationDueDate(DateTime calibrationDueDate)
-        {
-                if (calibrationDueDate <= CalibrationDueDate)
+            if (new IsUncalibrated(calibrationDueDate, now).Check(calibrationDueDate))
+            {
+                ChangeCalibrationStatus(CalibrationStatuses.Uncalibrated);
+            }
+            else
+            {
+                if (new IsDue(calibrationDueDate, now).Check(calibrationDueDate))
                 {
-                    throw new InvalidCalibrationDateException(calibrationDueDate);
+                    ChangeCalibrationStatus(CalibrationStatuses.CalibrationDue);
                 }
+            }
             
+
+            if (new IsCalibrated(calibrationDueDate, now).Check(calibrationDueDate))
+            {
+                ChangeCalibrationStatus(CalibrationStatuses.Calibrated);
+            }
+
             CalibrationDueDate = calibrationDueDate;
             IncrementVersion();
         }
@@ -39,7 +59,7 @@ namespace SurveyStore.Modules.Calibrations.Domain.Entities
             CertificateNumber = certificateNumber;
             IncrementVersion();
         }
-        internal void ChangeCalibrationStatus(CalibrationStatus calibrationStatus)
+        private void ChangeCalibrationStatus(CalibrationStatus calibrationStatus)
         {
             CalibrationStatus = calibrationStatus;
             IncrementVersion();

@@ -7,7 +7,7 @@ namespace SurveyStore.Modules.Calibrations.Application.Exceptions
     {
         public string SerialNumber { get; }
         public CalibrationNotFoundException(string serialNumber)
-            : base($"Calibration for survey equipment with id '{serialNumber}' was not found.")
+            : base($"Calibration for survey equipment with serial number '{serialNumber}' was not found.")
         {
             SerialNumber = serialNumber;
         }

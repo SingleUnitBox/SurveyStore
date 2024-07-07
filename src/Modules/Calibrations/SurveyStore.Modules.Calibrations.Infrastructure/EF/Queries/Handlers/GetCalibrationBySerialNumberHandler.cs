@@ -18,7 +18,7 @@ namespace SurveyStore.Modules.Calibrations.Infrastructure.EF.Queries.Handlers
         public async Task<CalibrationDto> HandleAsync(GetCalibrationBySerialNumber command)
         {
             var calibration = await _calibrations
-                .SingleOrDefaultAsync(c => c.SurveyEquipment.SerialNumber == command.SerialNumber);
+                .SingleOrDefaultAsync();
 
             return calibration?.AsDto();
         }

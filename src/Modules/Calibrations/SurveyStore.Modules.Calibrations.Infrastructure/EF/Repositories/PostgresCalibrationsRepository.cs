@@ -33,9 +33,9 @@ namespace SurveyStore.Modules.Calibrations.Infrastructure.EF.Repositories
             .Where(c => c.SurveyEquipmentId == surveyEquipmentId)
             .ToListAsync();
 
-        public Task<Calibration> GetAsync(Guid id)
+        public Task<Calibration> GetByIdAsync(Guid id)
             => _calibrations
-            .Include(c => c.SurveyEquipment)
+            //.Include(c => c.SurveyEquipment)
             .SingleOrDefaultAsync(c => c.Id == id);
 
         public Task<Calibration> GetBySerialNumberAsync(string serialNumber)

@@ -9,6 +9,7 @@ namespace SurveyStore.Shared.Abstractions.Types
         public const string CalibrationDue = nameof(CalibrationDue);
         public const string UnderCalibration = nameof(UnderCalibration);
         public const string Calibrated = nameof(Calibrated);
+        public const string Uncalibrated = nameof(Uncalibrated);
         public const string Unknown = nameof(Unknown);
 
         public static IEnumerable<string> GetCalibrationStatusTypes()

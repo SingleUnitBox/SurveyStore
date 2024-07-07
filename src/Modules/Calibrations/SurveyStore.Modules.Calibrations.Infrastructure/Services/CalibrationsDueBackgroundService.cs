@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SurveyStore.Modules.Calibrations.Application.Events;
 using SurveyStore.Modules.Calibrations.Infrastructure.EF;
+using SurveyStore.Shared.Abstractions.Kernel.Types;
 using SurveyStore.Shared.Abstractions.Messaging;
 using SurveyStore.Shared.Abstractions.Time;
 using SurveyStore.Shared.Abstractions.Types;
@@ -32,7 +33,7 @@ namespace SurveyStore.Modules.Calibrations.Infrastructure.Services
                 var dbContext = (CalibrationsDbContext)scope.ServiceProvider.GetRequiredService(typeof(CalibrationsDbContext));
 
                 var calibrations = await dbContext.Calibrations
-                    .Where(c => c.CalibrationDueDate.Value.Date <= _clock.Current().AddDays(7)
+                    ?.Where(c => c.CalibrationDueDate <= (Date)_clock.Current().AddDays(7)
                         && c.CalibrationStatus == CalibrationStatuses.Calibrated)
                     .ToListAsync();
 
@@ -41,7 +42,7 @@ namespace SurveyStore.Modules.Calibrations.Infrastructure.Services
                     var messageBroker = scope.ServiceProvider.GetRequiredService<IMessageBroker>();
                     foreach (var calibration in calibrations)
                     {
-                        calibration.ChangeCalibrationStatus(CalibrationStatuses.ToBeReturnForCalibration);
+                        //calibration.ChangeCalibrationStatus(CalibrationStatuses.ToBeReturnForCalibration);
                         dbContext.Calibrations.Update(calibration);
                         await dbContext.SaveChangesAsync();
 

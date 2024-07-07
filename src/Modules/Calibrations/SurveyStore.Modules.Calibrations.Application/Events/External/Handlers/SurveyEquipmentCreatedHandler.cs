@@ -1,7 +1,6 @@
 ﻿using SurveyStore.Modules.Calibrations.Domain.Entities;
 using SurveyStore.Modules.Calibrations.Domain.Repositories;
 using SurveyStore.Shared.Abstractions.Events;
-using SurveyStore.Shared.Abstractions.Messaging;
 using System;
 using System.Threading.Tasks;
 
@@ -27,11 +26,10 @@ namespace SurveyStore.Modules.Calibrations.Application.Events.External.Handlers
                 return;
             }
 
-            surveyEquipment = SurveyEquipment.Create(@event.Id, @event.Brand, @event.Model, @event.SerialNumber);
+            surveyEquipment = SurveyEquipment.Create(@event.SurveyEquipmentId, @event.Brand, @event.Model, @event.SerialNumber);
             await _surveyEquipmentRepository.AddAsync(surveyEquipment);
 
-            var calibrationId = Guid.NewGuid();
-            var calibration = Calibration.Create(calibrationId, surveyEquipment.Id);
+            var calibration = Calibration.Create(Guid.NewGuid(), @event.SurveyEquipmentId);
             await _calibrationsRepository.AddAsync(calibration);
         }
     }

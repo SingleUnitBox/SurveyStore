@@ -2,7 +2,6 @@
 using SurveyStore.Modules.Calibrations.Application.Exceptions;
 using SurveyStore.Modules.Calibrations.Domain.DomainServices;
 using SurveyStore.Modules.Calibrations.Domain.Repositories;
-using SurveyStore.Modules.Calibrations.Domain.Types;
 using SurveyStore.Shared.Abstractions.Commands;
 using SurveyStore.Shared.Abstractions.Messaging;
 using SurveyStore.Shared.Abstractions.Time;
@@ -36,13 +35,11 @@ namespace SurveyStore.Modules.Calibrations.Application.Commands.Handlers
                 throw new CalibrationNotFoundException(command.SerialNumber);
             }
 
-            calibration.ChangeCertificateNumber(command.CertificateNumber);
-            
-            var now = _clock.Current();
-            _calibrationService.ChangeCalibrationDetails(calibration, command.CalibrationDueDate, now);
+            calibration.ChangeCertificateNumber(command.CertificateNumber);          
+            calibration.ChangeCalibrationDueDate(command.CalibrationDueDate, _clock.Current());     
 
             await _calibrationsRepository.UpdateAsync(calibration);
-            await _messageBroker.PublishAsync(new CalibrationUpdated(calibration.SurveyEquipmentId));
+            //await _messageBroker.PublishAsync(new CalibrationUpdated(calibration.SurveyEquipmentId));
         }
     }
 }

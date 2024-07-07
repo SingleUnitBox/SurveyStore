@@ -20,7 +20,7 @@ namespace SurveyStore.Modules.Calibrations.Infrastructure.EF.Queries.Handlers
         public async Task<IReadOnlyCollection<CalibrationDto>> HandleAsync(BrowseCalibrations query)
             => await _calibrations
                 .AsNoTracking()
-                .Include(c => c.SurveyEquipment)
+                //.Include(c => c.SurveyEquipment)
                 .Select(c => c.AsDto())
                 .ToListAsync();
     }

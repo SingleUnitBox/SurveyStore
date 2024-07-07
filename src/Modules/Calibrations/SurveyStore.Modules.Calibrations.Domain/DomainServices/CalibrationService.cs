@@ -1,6 +1,5 @@
 ﻿using SurveyStore.Modules.Calibrations.Domain.Entities;
-using SurveyStore.Modules.Calibrations.Domain.Types;
-using SurveyStore.Shared.Abstractions.Time;
+using SurveyStore.Shared.Abstractions.Types;
 using System;
 
 namespace SurveyStore.Modules.Calibrations.Domain.DomainServices
@@ -10,15 +9,15 @@ namespace SurveyStore.Modules.Calibrations.Domain.DomainServices
         public void ChangeCalibrationDetails(Calibration calibration, DateTime calibrationDueDate, DateTime now)
         {
             var status = calibrationDueDate.Date <= now.Date
-                ? CalibrationStatus.Uncalibrated
-                : CalibrationStatus.Calibrated;
+                ? CalibrationStatuses.Uncalibrated
+                : CalibrationStatuses.Calibrated;
             if (calibrationDueDate.Date < now.AddDays(3).Date)
             {
-                status = CalibrationStatus.ToBeReturnForCalibration;
+                status = CalibrationStatuses.CalibrationDue;
             }
 
-            calibration.ChangeCalibrationDueDate(calibrationDueDate);
-            calibration.ChangeCalibrationStatus(status);
+            //calibration.ChangeCalibrationDueDate(calibrationDueDate);
+            //calibration.ChangeCalibrationStatus(status);
         }
     }
 }

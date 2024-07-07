@@ -12,6 +12,8 @@ namespace SurveyStore.Modules.Calibrations.Domain.ValueObjects
             {
                 throw new EmptyCertificateNumberException();
             }
+
+            Value = value;
         }
 
         public static implicit operator string(CertificateNumber certificateNumber) => certificateNumber.Value;
