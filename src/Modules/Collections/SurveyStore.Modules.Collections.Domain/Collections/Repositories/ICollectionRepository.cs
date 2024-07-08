@@ -12,7 +12,7 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Repositories
         Task UpdateAsync(Collection collection);
         Task DeleteAsync(Collection collection);
         Task<Collection> GetAsPredicateExpressionAsync(Specification<Collection> specification);
-        Task<IEnumerable<Collection>> BrowseCollectionsAsync(AggregateId surveyEquipmentId);
+        Task<IEnumerable<Collection>> BrowseCollectionsAsync(SurveyEquipmentId surveyEquipmentId);
         Task<IEnumerable<Collection>> BrowseOpenCollectionsBySurveyorIdAsync(SurveyorId surveyorId);
         Task<IEnumerable<Collection>> BrowseAsPredicateExpressionAsync(Specification<Collection> specification);
     }

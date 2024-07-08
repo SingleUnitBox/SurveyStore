@@ -17,7 +17,7 @@ namespace SurveyStore.Shared.Abstractions.Types
             var surveyEquipmentTypes = typeof(SurveyEquipmentTypes)
                 .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
                 .Where(field => field.IsLiteral && !field.IsInitOnly)
-                .Select(field => field.GetValue(null).ToString().ToLowerInvariant())
+                .Select(field => field.GetValue(null).ToString())
                 .ToList();
 
             return surveyEquipmentTypes;

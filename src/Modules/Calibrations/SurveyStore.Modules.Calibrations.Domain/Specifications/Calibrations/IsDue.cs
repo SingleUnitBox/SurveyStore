@@ -17,6 +17,7 @@ namespace SurveyStore.Modules.Calibrations.Domain.Specifications.Calibrations
         }
 
         public override Expression<Func<Date, bool>> AsPredicateExpression()
-            => isDue => _calibrationDueDate <= (Date)_now.Value.AddDays(7);
+            => isDue => _calibrationDueDate <= (Date)_now.Value.AddDays(7)
+                        && _calibrationDueDate > _now;
     }
 }

@@ -39,7 +39,7 @@ namespace SurveyStore.Modules.Calibrations.Application.Commands.Handlers
             calibration.ChangeCalibrationDueDate(command.CalibrationDueDate, _clock.Current());     
 
             await _calibrationsRepository.UpdateAsync(calibration);
-            //await _messageBroker.PublishAsync(new CalibrationUpdated(calibration.SurveyEquipmentId));
+            await _messageBroker.PublishAsync(new CalibrationUpdated(calibration.SurveyEquipmentId, calibration.CalibrationStatus));
         }
     }
 }

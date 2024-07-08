@@ -16,7 +16,7 @@ namespace SurveyStore.Modules.Calibrations.Infrastructure
             services.AddPostgres<CalibrationsDbContext>();
             services.AddScoped<ISurveyEquipmentRepository, PostgresSurveyEquipmentRepository>();
             services.AddScoped<ICalibrationsRepository, PostgresCalibrationsRepository>();
-            services.AddHostedService<CalibrationsDueBackgroundService>();
+            //services.AddHostedService<CalibrationsDueBackgroundService>();
 
             return services;
         }

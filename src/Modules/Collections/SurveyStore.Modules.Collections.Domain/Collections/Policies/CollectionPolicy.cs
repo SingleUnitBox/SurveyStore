@@ -1,17 +1,19 @@
 ﻿using SurveyStore.Modules.Collections.Domain.Collections.Entities;
+using SurveyStore.Shared.Abstractions.Types;
 
 namespace SurveyStore.Modules.Collections.Domain.Collections.Policies
 {
     public class CollectionPolicy : ICollectionPolicy
     {
-        public bool CanBeReturned(Collection collection, Surveyor surveyor)
+        public bool IsCalibrationDue(Collection collection, string CalibrationStatus)
         {
-            if (collection.Surveyor.Id != surveyor.Id)
+            if (CalibrationStatuses.CalibrationDue == CalibrationStatus
+                || CalibrationStatuses.Uncalibrated == CalibrationStatus)
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
     }
 }

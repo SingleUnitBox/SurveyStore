@@ -5,6 +5,6 @@ namespace SurveyStore.Modules.Collections.Domain.Collections.Policies
 {
     public interface ICollectionPolicy
     {
-        bool CanBeReturned(Collection collection, Surveyor surveyor);
+        bool IsCalibrationDue(Collection collection, string CalibrationStatus);
     }
 }

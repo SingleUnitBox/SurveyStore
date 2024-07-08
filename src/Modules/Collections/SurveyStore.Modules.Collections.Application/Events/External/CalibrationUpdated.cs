@@ -3,5 +3,5 @@ using System;
 
 namespace SurveyStore.Modules.Collections.Application.Events.External
 {
-    public record CalibrationUpdated(Guid SurveyEquipmentId) : IEvent;
+    public record CalibrationUpdated(Guid SurveyEquipmentId, string CalibrationStatus) : IEvent;
 }

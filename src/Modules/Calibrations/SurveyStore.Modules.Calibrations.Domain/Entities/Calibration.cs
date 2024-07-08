@@ -32,24 +32,28 @@ namespace SurveyStore.Modules.Calibrations.Domain.Entities
                 throw new InvalidCalibrationDateException(calibrationDueDate);
             }
 
-            if (new IsUncalibrated(calibrationDueDate, now).Check(calibrationDueDate))
+            var isDue = new IsDue(calibrationDueDate, now).Check(calibrationDueDate);
+            if (isDue)
+            {
+                ChangeCalibrationStatus(CalibrationStatuses.CalibrationDue);
+                goto SetCalibrationDate;
+            }
+
+            var IsUncalibrated = new IsUncalibrated(calibrationDueDate, now).Check(calibrationDueDate);
+            if (IsUncalibrated)
             {
                 ChangeCalibrationStatus(CalibrationStatuses.Uncalibrated);
+                goto SetCalibrationDate;
             }
-            else
-            {
-                if (new IsDue(calibrationDueDate, now).Check(calibrationDueDate))
-                {
-                    ChangeCalibrationStatus(CalibrationStatuses.CalibrationDue);
-                }
-            }
-            
 
-            if (new IsCalibrated(calibrationDueDate, now).Check(calibrationDueDate))
+            var isCalibrated = new IsCalibrated(calibrationDueDate, now).Check(calibrationDueDate);
+            if (isCalibrated)
             {
                 ChangeCalibrationStatus(CalibrationStatuses.Calibrated);
+                goto SetCalibrationDate;
             }
 
+            SetCalibrationDate: 
             CalibrationDueDate = calibrationDueDate;
             IncrementVersion();
         }

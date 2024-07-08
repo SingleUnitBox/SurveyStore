@@ -45,11 +45,11 @@ namespace SurveyStore.Modules.Collections.Application.Commands.Handlers
         public async Task HandleAsync(AssignStore command)
         {
             //should I check different module???
-            var calibration = await _calibrationsApiClient.GetCalibrationAsync(command.SurveyEquipmentId);
-            if (calibration?.CalibrationStatus.ToString() == "ToBeReturnForCalibration")
-            {
-                throw new SurveyEquipmentToBeCalibratedException(command.SurveyEquipmentId);
-            }
+            //var calibration = await _calibrationsApiClient.GetCalibrationAsync(command.SurveyEquipmentId);
+            //if (calibration?.CalibrationStatus.ToString() == "ToBeReturnForCalibration")
+            //{
+            //    throw new SurveyEquipmentToBeCalibratedException(command.SurveyEquipmentId);
+            //}
 
             var surveyEquipment = await _surveyEquipmentRepository.GetByIdAsync(command.SurveyEquipmentId);
             if (surveyEquipment is null)
