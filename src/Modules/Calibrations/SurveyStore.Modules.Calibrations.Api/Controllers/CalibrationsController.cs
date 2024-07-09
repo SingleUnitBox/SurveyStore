@@ -29,7 +29,7 @@ namespace SurveyStore.Modules.Calibrations.Api.Controllers
             => Ok(await _queryDispatcher.QueryAsync(new BrowseCurrentDueCalibrations()));
 
         [HttpPost("equipment/{serialNumber}/calibrate")]
-        public async Task<ActionResult> CalibrateAsync(string serialNumber, Calibrate command)
+        public async Task<ActionResult> CalibrateAsync(string serialNumber, ChangeCalibrationDetails command)
         {
             await _commandDispatcher.DispatchAsync(command with { SerialNumber = serialNumber });
             return NoContent();

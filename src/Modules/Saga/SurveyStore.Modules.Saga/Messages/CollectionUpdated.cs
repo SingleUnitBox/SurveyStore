@@ -1,8 +1,7 @@
 ﻿using SurveyStore.Shared.Abstractions.Events;
-using SurveyStore.Shared.Abstractions.Kernel.Types;
 using System;
 
-namespace SurveyStore.Modules.Collections.Application.Events
+namespace SurveyStore.Modules.Saga.Messages
 {
     public record CollectionUpdated(Guid SurveyEquipmentId, Guid StoreId) : IEvent;
 }

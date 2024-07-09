@@ -69,6 +69,12 @@ namespace SurveyStore.Modules.Calibrations.Domain.Entities
             IncrementVersion();
         }
 
+        public void Renew(DateTime now)
+        {
+            var calibrationRenewDate = now.AddYears(1);
+            ChangeCalibrationDueDate(calibrationRenewDate, now);
+        }
+
         public static Calibration Create(Guid id, Guid surveyEquipmentId)
         {
             var calibration = new Calibration(id, surveyEquipmentId);

@@ -111,6 +111,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Modules.Payment
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyStore.Modules.Payments.Api", "src\Modules\Payments\SurveyStore.Payments.Api\SurveyStore.Modules.Payments.Api.csproj", "{8A8CFEB4-6EDA-4105-9BBF-7EAFE5773BD4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Saga", "Saga", "{7AEB291C-22C2-482E-93F9-B3186AACCF22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyStore.Modules.Saga", "src\Modules\Saga\SurveyStore.Modules.Saga\SurveyStore.Modules.Saga.csproj", "{F423630F-AD47-44FB-AC5C-9334A38FDCCA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -269,6 +273,10 @@ Global
 		{8A8CFEB4-6EDA-4105-9BBF-7EAFE5773BD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A8CFEB4-6EDA-4105-9BBF-7EAFE5773BD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A8CFEB4-6EDA-4105-9BBF-7EAFE5773BD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F423630F-AD47-44FB-AC5C-9334A38FDCCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F423630F-AD47-44FB-AC5C-9334A38FDCCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F423630F-AD47-44FB-AC5C-9334A38FDCCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F423630F-AD47-44FB-AC5C-9334A38FDCCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -326,6 +334,8 @@ Global
 		{C25F39D9-6E62-47DA-91CD-B26967AFC462} = {1AE9DAA4-993B-4E81-B3AA-E12D8406F8D0}
 		{28BE36E5-BDE1-44A2-8612-C98193D2086F} = {1AE9DAA4-993B-4E81-B3AA-E12D8406F8D0}
 		{8A8CFEB4-6EDA-4105-9BBF-7EAFE5773BD4} = {1AE9DAA4-993B-4E81-B3AA-E12D8406F8D0}
+		{7AEB291C-22C2-482E-93F9-B3186AACCF22} = {FD42E17F-29F4-4A79-8DAE-490EBBE6A081}
+		{F423630F-AD47-44FB-AC5C-9334A38FDCCA} = {7AEB291C-22C2-482E-93F9-B3186AACCF22}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C381337B-40C7-45CC-8FB7-1F8E39A37BE8}

@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace SurveyStore.Modules.Calibrations.Application.Commands.Handlers
 {
-    public class CalibrateHandler : ICommandHandler<Calibrate>
+    public class ChangeCalibrationDetailsHandler : ICommandHandler<ChangeCalibrationDetails>
     {
         private readonly ICalibrationsRepository _calibrationsRepository;
         private readonly IMessageBroker _messageBroker;
         private readonly IClock _clock;
         private readonly ICalibrationService _calibrationService;
 
-        public CalibrateHandler(ICalibrationsRepository calibrationsRepository,
+        public ChangeCalibrationDetailsHandler(ICalibrationsRepository calibrationsRepository,
             IMessageBroker messageBroker,
             IClock clock,
             ICalibrationService calibrationService)
@@ -27,7 +27,7 @@ namespace SurveyStore.Modules.Calibrations.Application.Commands.Handlers
             _calibrationService = calibrationService;
         }
 
-        public async Task HandleAsync(Calibrate command)
+        public async Task HandleAsync(ChangeCalibrationDetails command)
         {
             var calibration = await _calibrationsRepository.GetBySerialNumberAsync(command.SerialNumber);
             if (calibration is null)
